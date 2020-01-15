@@ -14,7 +14,7 @@ export default class Navbar extends Component {
         <Link className="navbar link" to="/">
           Home Page
         </Link>
-        <Link className="navbar link" to="/games">
+        <Link className="navbar link" to="/game">
           Explore
         </Link>
         <Link className="navbar link" to={`/user/${userName}`}>

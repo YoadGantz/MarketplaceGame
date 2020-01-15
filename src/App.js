@@ -18,7 +18,7 @@ export default class App extends Component {
               <Navbar></Navbar>
               <Switch>
                  <Route component={HomePage} path="/" exact></Route>
-                 <Route component={Explore} path="/games" exact></Route>
+                 <Route component={Explore} path="/game" exact></Route>
                  <Route component={ProfilePage} path="/user/:id" exact></Route>
               </Switch>
            </Router>
