@@ -18,7 +18,7 @@ export default class Navbar extends Component {
             Explore
         </Link>
           <Link className="navbar link" to={`/user/${userName}`}>
-            profile
+            Profile
         </Link>
         </div>
       </div>

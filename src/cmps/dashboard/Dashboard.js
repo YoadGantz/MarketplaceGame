@@ -1,17 +1,10 @@
 
-import React,{ Component } from "react"
+import React, { Component } from "react"
 
-export default class PublisherDashboard extends Component{
-
-    render(){
-
-
-return(
-<div>PublisherDashboard</div>
-
-
-)
+export default class Dashboard extends Component {
+    render() {
+        return (
+            <div>Dashboard</div>
+        )
     }
-
-
 }
