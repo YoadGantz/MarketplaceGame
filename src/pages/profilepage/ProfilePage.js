@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Library from "./Library";
-import PublisherDashboard from "../cmps/PublisherDashboard";
+import Library from "../../cmps/library/Library";
+import PublisherDashboard from "../../cmps/dashboard/Dashboard";
 
 export default class ProfilePage extends Component {
   state = { pageMode: "Gamer" };
