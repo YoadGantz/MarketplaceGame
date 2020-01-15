@@ -1,0 +1,25 @@
+.game-main-thumbnail{
+    width: 600px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.game-choose-thumbnail{
+    width: 200px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+
+.game-choose-thumbnail-container{
+    max-width: 600px;
+    overflow-x: scroll;
+}
+
+.game-thumbnail-container{
+    margin: 10px;
+}
+
+// .game-description{
+//     width: 340px;
+// }
