@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {  Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import Navbar from './cmps/navbar/Navbar';
+
 import HomePage from './pages/homepage/HomePage';
 import Explore from './pages/explore/Explore';
+import ProfilePage from './pages/profile_page/ProfilePage';
+
+import Navbar from './cmps/navbar/Navbar';
 import './assets/styles/global.scss'
-import ProfilePage from './pages/profilepage/ProfilePage';
+import ProfilePage from './pages/profile_page/ProfilePage';
 import GameDetails from './pages/gamedetails/GameDetails';
 
 const history = createBrowserHistory();
