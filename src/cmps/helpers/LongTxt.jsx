@@ -19,7 +19,8 @@ export default class LongTxt extends React.Component {
 
     render() {
         return (
-            <span className="read-more" onClick={this.handleReadMore}>       {this.getText()}
+            <span className="read-more" onClick={this.handleReadMore}>       
+                {this.getText()}
                 {this.props.text.length >= this.props.shortLength &&
                     <span className="read-more-button">
                     {this.getButtonTxt()}
