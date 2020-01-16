@@ -1,10 +1,32 @@
-.navbar{
-    width: 100%;
-    height: 8vh;
-    background-color: cornflowerblue;
-    &.link{
-        text-decoration: none;
-        color: black;
-        margin-left: 10px;
-    }
+.navbar {
+  width: 100%;
+  height: 8vh;
+  background-color: cornflowerblue;
+  &.link {
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+  }
+  :first-child {
+      margin-left: 20px;
+  }
+  &.flex {
+    justify-content: space-between;
+  }
+}
+
+.menu-container {
+  :not(:first-child) {
+    margin-left: 20px;
+  }
+  :last-child {
+      margin-right: 20px;
+  }
+}
+
+// helper //
+
+.flex {
+  display: flex;
+  align-items: center;
 }
