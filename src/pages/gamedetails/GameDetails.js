@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import "antd/dist/antd.css";
+import { Button, notification } from "antd";
+
 import "./GameDetails.scss";
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
@@ -12,9 +15,15 @@ export default class GameDetails extends Component {
       "Grand Theft Auto V for PC offers players the option to explore the award-winning world of Los Santos and Blaine County in resolutions of up to 4k and beyond, as well as the chance to experience the game running at 60 frames per second.      ",
     publishedAt: "2013-09-17",
     publisher: { name: "Rockstar", _id: "u101" },
-    comments: [{ user: "minimal-user", text: "sadasd" }],
+    comments: [
+      {
+        user: "Boby",
+        text:
+          "the true meaning of open world. the game is so good that i've been playing it for years. great single player story-line, and great multiplayer. i just wish it wasn't banned in iran."
+      }
+    ],
     reviews: [
-      { user: { _id: "u101", userName: "boby" }, text: "text", rating: 9 }
+      { user: { _id: "u110", userName: "boby" }, text: "text", rating: 4.5 }
     ],
     mediaUrls: [
       "https://res.cloudinary.com/dfdvfunfj/video/upload/v1579108574/eu7d0h6m8uelu0wpictc.mp4",
@@ -26,6 +35,12 @@ export default class GameDetails extends Component {
     price: 25,
     tags: ["open-world", "fps", "third person"],
     currUrl: ""
+  };
+  openNotification = () => {
+    notification.info({
+      message: `Game has been added`,
+      description: "The game has been added to the cart"
+    });
   };
 
   componentDidMount = () => {
@@ -51,7 +66,13 @@ export default class GameDetails extends Component {
     } = this.state;
     let thumbnail;
     if (currUrl.includes("mp4")) {
-      thumbnail = (  <iframe  title="video" src={currUrl} className="game-main-thumbnail" />   );
+      thumbnail = (
+        <iframe
+          title="video"
+          src={`${currUrl}#t=0`}
+          className="game-main-thumbnail"
+        />
+      );
     } else {
       thumbnail = <img src={currUrl} alt="" className="game-main-thumbnail" />;
     }
@@ -60,26 +81,27 @@ export default class GameDetails extends Component {
       <div>
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <button>{price}$ Add to basket</button>
+          <Button type="primary" className='game-buy-button' onClick={this.openNotification}>
+            {price}$ Add to basket
+          </Button>
         </div>
         <div className="flex ">
           <div className="flex column game-thumbnail-container">
             {thumbnail}
             <div className="flex game-choose-thumbnail-container">
               {mediaUrls.map(url => {
-                if (url.includes('mp4')){
-                 return <div>
-                  <img
-                    key={url}
-                    onClick={this.onThumbNailPhotoClick}
-                    alt=""
-                    className="game-choose-thumbnail"
-                    src={url}
-                  ></img>
-                  </div>
+                if (url.includes("mp4")) {
+                  return (
+                    <video
+                      key={url}
+                      onClick={this.onThumbNailPhotoClick}
+                      alt=""
+                      className="game-choose-thumbnail"
+                      src={`${url}#t=34`}
+                    />
+                  );
                 }
                 return (
-                  <div>
                   <img
                     key={url}
                     onClick={this.onThumbNailPhotoClick}
@@ -87,7 +109,6 @@ export default class GameDetails extends Component {
                     className="game-choose-thumbnail"
                     src={url}
                   ></img>
-                  </div>
                 );
               })}
             </div>
