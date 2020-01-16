@@ -1,10 +1,12 @@
 
-import React, { Component } from "react"
+import React from "react"
 
-export default class Dashboard extends Component {
-    render() {
-        return (
-            <div>Dashboard</div>
-        )
-    }
+export default function (props) {
+    return (
+        <div>
+            <h1>Dashboard</h1>
+            <img alt="graph" width="50" src="https://www.statista.com/graphic/1/277229/facebooks-annual-revenue-and-net-income.jpg" />
+            <div publisher="publisher" games={props.games}>game list</div>
+        </div>
+    )
 }

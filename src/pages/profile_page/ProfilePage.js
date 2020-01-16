@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+import { Card, Icon, Avatar } from 'antd';
+
 import DynamicTabPrev from "../../cmps/DynamicTabPrev";
 import WishList from "../../cmps/WishList";
+
+import "./_profile-page.scss"
+
+const { Meta } = Card;
 
 export default class ProfilePage extends Component {
   state = {
@@ -10,9 +16,9 @@ export default class ProfilePage extends Component {
       "fullName": "Yoad Gantz",
       "userName": "NabCake",
       "password": "tinkerbell",
-      "about": "1234 is not the password",
+      "about": "Consequuntur inventore eaque modi. Commodi eos eum minus voluptas dignissimos. Saepe ...",
       "createdAt": 123879186123,
-      "imgUrl": "http://some-img",
+      "imgUrl": "http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg",
       //“acquiredGames” : [{minimal-game}],
       //“publishedGames” :[{minimal-game}],
       "desiredGames": [{ game: 'gta' }],
@@ -21,7 +27,7 @@ export default class ProfilePage extends Component {
 
   componentWillMount() {
     // this.setUser();
-    //getAquiredGames;
+    //getAcquiredGames;
     //getPublishedGames;
   }
 
@@ -37,22 +43,40 @@ export default class ProfilePage extends Component {
   render() {
     const { user } = this.state
     return (
-      <div>
-        <h1>Hi {user.fullName}</h1>
-        <p>Registered:{user.createdAt}</p>
-        <p>{user.about}</p>
-        <img src={user.imgUrl} alt="User" />
-        <button onClick={this.toggleModal}>My Wish List</button>
-        <label htmlFor="OwnedGames" >
-          <p>My Games</p>
-          <input name="tab" type="radio" onClick={this.updateMode}
-            checked={this.state.mode === "OwnedGames"} value="OwnedGames" />
-        </label>
-        <label htmlFor="Dashboard">
-          <p>Dashboard</p>
-          <input name="tab" type="radio" onClick={this.updateMode} value="Dashboard" />
-        </label>
-        <DynamicTabPrev mode={this.state.mode} />
+      <div className="container profile-container flex full">
+        <div className="tab-container flex full column align-center">
+          <div className="tab-nav flex">
+            <label htmlFor="OwnedGames">
+              <p>Games</p>
+              <input name="tab" type="radio" onChange={this.updateMode}
+                checked={this.state.mode === "OwnedGames"} value="OwnedGames" id="OwnedGames" />
+            </label>
+            <label htmlFor="Dashboard">
+              <p>Dashboard</p>
+              <input name="tab" type="radio" onChange={this.updateMode} value="Dashboard" id="Dashboard" />
+            </label>
+          </div>
+          <DynamicTabPrev mode={this.state.mode} />
+        </div>
+        <Card
+          style={{ width: 300 }}
+          cover={
+            <img className="user-img small"
+              alt="example"
+              src={user.imgUrl}
+            />
+          }
+          actions={[
+            <Icon title="Edit details" type="edit" key="edit" />,
+            <Icon onClick={this.toggleModal} title="My wishlist" type="heart" key="heart" />,
+          ]}
+        >
+          <Meta
+            title={user.userName}
+            avatar={'Dec 2013'}
+            description={user.about}
+          />
+        </Card>
       </div>
     )
   }

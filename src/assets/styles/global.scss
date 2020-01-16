@@ -1,3 +1,5 @@
-@import './basics/helpers';
+@import "./basics/base";
+@import "./basics/layout";
+@import "./basics/helpers";
 
-@import '../../cmps/navbar/NavBar.scss';
+@import "../../cmps/navbar/NavBar.scss";
