@@ -9,6 +9,6 @@ export default class Filter extends Component {
         this.setState({filterBy: value}, () => this.props.onFilterBy(this.state.filterBy))
     }    
     render() {
-        return <input type="text" placeholder="Search" onChange={this.onFilterBy}></input>
+        return <input className="search-input" type="text" placeholder="Search" onChange={this.onFilterBy}></input>
     }
 }
