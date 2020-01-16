@@ -1,6 +1,6 @@
 import GamePreview from '../game-preview/GamePreview'
 import React, { Component } from 'react'
-import './_GameList.scss'
+import './GameList.scss'
 
 export default function GameList(props) {
     const { games } = props;

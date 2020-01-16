@@ -4,7 +4,7 @@ import { Card, Icon} from 'antd';
 import DynamicTabPrev from "../../cmps/DynamicTabPrev";
 import WishList from "../../cmps/WishList";
 
-import "./_ProfilePage.scss"
+import "./_Profile-page.scss"
 
 const { Meta } = Card;
 

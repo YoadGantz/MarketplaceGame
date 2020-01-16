@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Button, notification } from "antd";
 
 import "antd/dist/antd.css";
+import { Button, notification } from "antd";
 
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
