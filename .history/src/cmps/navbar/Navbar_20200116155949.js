@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import "./_NavBar.scss"
 // update to use NavLink 
 export default class Navbar extends Component {
@@ -10,8 +9,8 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar flex align-center ">
         <Link className="navbar-item link" to="/">
-          <img alt="logo" src="../../assets/images/logo.png" />
-        </Link>
+          Company Name
+      </Link>
         <div className="menu-container flex align-center">
           <Link className="navbar-item link" to="/">
             Home Page

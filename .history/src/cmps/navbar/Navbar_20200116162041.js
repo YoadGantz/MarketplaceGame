@@ -10,8 +10,8 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar flex align-center ">
         <Link className="navbar-item link" to="/">
-          <img alt="logo" src="../../assets/images/logo.png" />
-        </Link>
+          <img alt=""src="../"></img>
+      </Link>
         <div className="menu-container flex align-center">
           <Link className="navbar-item link" to="/">
             Home Page

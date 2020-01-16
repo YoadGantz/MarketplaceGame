@@ -3,9 +3,9 @@ import {  Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import HomePage from './pages/homepage/HomePage';
-import Explore from './pages/explore-page/Explore';
+import Explore from './pages/explore/Explore';
 import ProfilePage from './pages/profile-page/ProfilePage';
-import GameDetails from './pages/game-details/GameDetails';
+import GameDetails from './pages/gamedetails/GameDetails';
 
 import Navbar from './cmps/navbar/Navbar';
 

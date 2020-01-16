@@ -1,0 +1,69 @@
+// Users //
+NabCake : "5e2075da14d2b52d217d07cc"
+Vanilla Ice : "5e2075da14d2b52d217d07cd"
+EA : "5e2075da14d2b52d217d07ce"
+Rockstar : "5e2075da14d2b52d217d07cf"
+bethesda : "5e2075da14d2b52d217d07d0"
+cdREd : "5e2075da14d2b52d217d07d1"
+Valve : "5e2075da14d2b52d217d07d2"
+// Games //
+"5e20721e14d2b52d217d07c7",
+"5e20721e14d2b52d217d07c8",
+"5e20721e14d2b52d217d07c9",
+"5e20721e14d2b52d217d07ca",
+"5e20721e14d2b52d217d07cb",
+{
+    "createdAt": 12387713723,
+    "orderBy": {
+        "_id": "5e2075da14d2b52d217d07cc",
+        "userName": "NabCake"
+    },
+    "gameIds": [
+        "5e20721e14d2b52d217d07c7",
+        "5e20721e14d2b52d217d07ca"
+    ]
+}
+{
+    "createdAt": 12387723765,
+    "orderBy": {
+        "_id": "5e2075da14d2b52d217d07cc",
+        "userName": "NabCake"
+    },
+    "gameIds": [
+        "5e20721e14d2b52d217d07c8",
+        "5e20721e14d2b52d217d07c7"
+    ]
+}
+{
+    "createdAt": 12387753735,
+    "orderBy": {
+        "_id": "5e2075da14d2b52d217d07cc",
+        "userName": "Rockstar"
+    },
+    "gameIds": [
+        "5e20721e14d2b52d217d07c8",
+        "5e20721e14d2b52d217d07c9",
+    ]
+}
+{
+    "createdAt": 12387523735,
+    "orderBy": {
+        "_id": "5e2075da14d2b52d217d07d0",
+        "userName": "bethesda"
+    },
+    "gameIds": [
+        "5e20721e14d2b52d217d07c8",
+        "5e20721e14d2b52d217d07c9",
+    ]
+}
+{
+    "createdAt": 12387758735,
+    "orderBy": {
+        "_id": "5e2075da14d2b52d217d07d0",
+        "userName": "bethesda"
+    },
+    "gameIds": [
+        "5e20721e14d2b52d217d07c8",
+        "5e20721e14d2b52d217d07c9",
+    ]
+}
