@@ -17,7 +17,7 @@ const history = createBrowserHistory();
 export default class App extends Component {
   render() {
      return (
-        <main>
+        <React.Fragment>
            <Router history={history}>
               <Navbar></Navbar>
               <Switch>
@@ -27,7 +27,7 @@ export default class App extends Component {
                  <Route component={ProfilePage} path="/user/:id" exact></Route>
               </Switch>
            </Router>
-        </main>
+        </React.Fragment>
      )
   }
 }

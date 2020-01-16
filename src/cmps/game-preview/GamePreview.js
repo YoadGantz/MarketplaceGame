@@ -4,7 +4,6 @@ import './GamePreview.scss'
 
 export default function GamePreview(props) {
     const { game } = props;
-    console.log(game._id);
 
     return (
         <React.Fragment>

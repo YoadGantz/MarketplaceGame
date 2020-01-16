@@ -7,11 +7,11 @@ export default class Navbar extends Component {
     const noLoggedinUser = false
     const userName = (!noLoggedinUser) ? 'guest' : ''
     return (
-      <nav className="navbar flex">
+      <nav className="navbar flex align-center ">
         <Link className="navbar-item link" to="/">
           Company Name
       </Link>
-        <div className="menu-container flex">
+        <div className="menu-container flex align-center">
           <Link className="navbar-item link" to="/">
             Home Page
         </Link>

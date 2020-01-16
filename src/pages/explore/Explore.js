@@ -12,16 +12,15 @@ class Explore extends Component {
     }
 
     onFilterBy = (filterBy) => {
-        console.log(filterBy);
         
         this.props.loadGames(filterBy)
     }
 
     render() {
-        return <React.Fragment>
+        return <div className="explore-container flex column container">
             <Filter onFilterBy={this.onFilterBy}></Filter>
             <GameList games={this.props.games}></GameList>
-        </React.Fragment>
+        </div>
     }
 }
 
