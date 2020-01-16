@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import './GamePreview.scss'
+import './GamePreview.scss'
 
 export default function GamePreview(props) {
     const { game } = props;
@@ -12,7 +12,7 @@ export default function GamePreview(props) {
                     <h3>{game.title}</h3>
                     <h5>{game.publisher.name}</h5>
                     <div className="img-container">
-                        <img className="thumbnail" width="200" src={game.thumbnail}></img>
+                        <img className="game-thumbnail" width="200" src={game.thumbnail}></img>
                     </div>
                     <p>${game.price}</p>
                 </div>

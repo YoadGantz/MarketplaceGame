@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Rate,Input, Button } from "antd";
+import { Rate, Input, Button } from "antd";
 
 const { TextArea } = Input;
 
@@ -7,8 +7,8 @@ export default class Review extends Component {
   state = { rating: 1, text: "" };
 
   inputChange = ev => {
-    if (!isNaN(ev)){
-    return  this.setState({rating:ev})
+    if (!isNaN(ev)) {
+      return this.setState({ rating: ev })
     }
     let fieldName = ev.target.name;
     this.setState({ [fieldName]: ev.target.value });

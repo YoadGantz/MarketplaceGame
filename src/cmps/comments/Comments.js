@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Comment, Avatar,Input, Button } from "antd";
+import { Comment, Avatar, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 
 const { TextArea } = Input;

@@ -5,10 +5,11 @@ import { createBrowserHistory } from 'history';
 import HomePage from './pages/homepage/HomePage';
 import Explore from './pages/explore/Explore';
 import ProfilePage from './pages/profile_page/ProfilePage';
+import GameDetails from './pages/gamedetails/GameDetails';
 
 import Navbar from './cmps/navbar/Navbar';
+
 import './assets/styles/global.scss'
-import GameDetails from './pages/gamedetails/GameDetails';
 
 const history = createBrowserHistory();
 

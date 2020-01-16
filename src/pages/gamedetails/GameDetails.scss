@@ -1,48 +1,55 @@
-.game-main-thumbnail{
-    width: 750px;
+@import "../../assets/styles/setup/mixins.scss";
+
+.game-main-thumbnail {
+  width: 750px;
   height: 400px;
   object-fit: cover;
   border: black;
 }
 
-.game-main-container{
-    width: 95%;
-    margin: auto;
-
+.game-main-container {
+  width: 95%;
+  margin: auto;
 }
 
-.game-choose-thumbnail{
-    width: 200px;
-    cursor: pointer;
-    border: 1px solid black;
-    height: 115px;
-    object-fit: cover;
+.game-choose-thumbnail {
+  width: 200px;
+  cursor: pointer;
+  border: 1px solid black;
+  height: 115px;
+  object-fit: cover;
 }
 
-.game-right-thumbnail{
-    height: 200px;
-    @include aspect-ratio(1, 1);
+.game-right-thumbnail {
+  height: 200px;
+  @include aspect-ratio(1, 1);
 }
 
-.game-buy-button{
-    margin-top: 5px;
+.game-buy-button {
+  margin-top: 5px;
 }
 
-.game-description{
-    max-width: 450px;
+.game-description {
+  margin-top: 10px;
+  max-width: 450px;
 }
 
-TextArea{
-    resize: none;
+textarea {
+  resize: none;
 }
 
-.game-choose-thumbnail-container{
-    max-width: 750px;
-    overflow-x: scroll;
+.game-choose-thumbnail-container {
+  max-width: 750px;
+  overflow-x: scroll;
 }
 
-.game-thumbnail-container{
-margin-right: 5px;
+.game-thumbnail-container {
+  margin: 10px;
+}
+
+.img-container {
+  width: 100%;
+  @include aspect-ratio(1.5, 1);
 }
 
 // .game-description{

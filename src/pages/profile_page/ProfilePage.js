@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Icon, Avatar } from 'antd';
+import { Card, Icon} from 'antd';
 
 import DynamicTabPrev from "../../cmps/DynamicTabPrev";
 import WishList from "../../cmps/WishList";
@@ -46,12 +46,12 @@ export default class ProfilePage extends Component {
       <div className="container profile-container flex full">
         <div className="tab-container flex full column align-center">
           <div className="tab-nav flex">
-            <label htmlFor="OwnedGames">
+            <label className="tab" htmlFor="OwnedGames">
               <p>Games</p>
               <input name="tab" type="radio" onChange={this.updateMode}
                 checked={this.state.mode === "OwnedGames"} value="OwnedGames" id="OwnedGames" />
             </label>
-            <label htmlFor="Dashboard">
+            <label className="tab" htmlFor="Dashboard">
               <p>Dashboard</p>
               <input name="tab" type="radio" onChange={this.updateMode} value="Dashboard" id="Dashboard" />
             </label>

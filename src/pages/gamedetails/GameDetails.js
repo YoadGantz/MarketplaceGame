@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "antd/dist/antd.css";
 import { Button, notification } from "antd";
 
+import "./GameDetails.scss";
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameService from "../../services/GameService";
@@ -10,21 +11,23 @@ import GameMedia from "../../cmps/game-media/GameMedia";
 
 export default class GameDetails extends Component {
   state = {
-    currUrl: "",
-    game:{}
-  }
+    currUrl: '',
+    game: {}
+  };
 
-  showNotification = () => {
+  componentDidMount = async () => {
+    const { id } = this.props.match.params
+    const game = await GameService.getById(id)
+    this.setState({ game, currUrl: game.mediaUrls[0] });
+  };
+
+  openNotification = () => {
     notification.info({
       message: `Game has been added`,
       description: "The game has been added to the cart"
     });
   };
 
-  componentDidMount = async () => {
-    const game = await GameService.getById(this.props.match.params.id);
-    this.setState({ game, currUrl: game.mediaUrls[0] });
-  };
 
   onThumbNailPhotoClick = ev => {
     this.setState({ currUrl: ev.target.src });
@@ -42,14 +45,14 @@ export default class GameDetails extends Component {
       );
     }
     return (
-      <div className="game-main-container">
+      <div className="container">
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <Button type="primary"  className="game-buy-button"onClick={this.showNotification} >
+          <Button type="primary" className='game-buy-button' onClick={this.openNotification}>
             {price}$ Add to basket
           </Button>
         </div>
-        <div className="flex">
+        <div className="flex ">
           <div className="flex column game-thumbnail-container">
             {mainMedia}
             <div className="flex game-choose-thumbnail-container">
@@ -57,8 +60,8 @@ export default class GameDetails extends Component {
             </div>
           </div>
           <div className="game-description">
-            <div className="game-right-thumbnail">
-              <img alt="" className="" src={thumbnail} />
+            <div className="img-container">
+              <img className="game-thumbnail" src={thumbnail}></img>
             </div>
             <p> {description}</p>
             <p> published at: {publishedAt}</p>
