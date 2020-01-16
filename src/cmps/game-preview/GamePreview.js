@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import './GamePreview.scss'
+import './GamePreview.scss'
 
 export default function GamePreview(props) {
     const { game } = props;

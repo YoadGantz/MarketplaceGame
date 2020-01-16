@@ -1,18 +1,42 @@
 import React, { Component } from "react";
-import { Icon } from 'antd';
+import { connect } from 'react-redux'
 
-export default class OwnedGames extends Component {
+import GameList from '../game-list/GameList';
+import Filter from "../../cmps/filter/Filter"
+
+import { loadGames } from "../../actions/gameActions";
+
+class OwnedGames extends Component {
+    componentDidMount() {
+        this.props.loadGames()
+    }
+
+    onFilterBy = (filterBy) => {
+        this.props.loadGames(filterBy)
+    }
+
     render() {
         return (
             <div>
                 <h1>Games</h1>
-                {/* <div className="search-area flex align-center">
-                    <Icon type="search" />
-                    <input className="search-input" type="search" name="search" id="search" placeholder="Search" />
-                    <Icon className="search-x" type="close" />
-                </div> */}
+                <Filter onFilterBy={this.onFilterBy}></Filter>
+                <GameList games={this.props.games}></GameList>
             </div>
         )
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        games: state.games
+    };
+};
+
+const mapDispatchToProps = {
+    loadGames
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(OwnedGames);

@@ -85,31 +85,20 @@ export default class GameDetails extends Component {
             {price}$ Add to basket
           </Button>
         </div>
-        <div className="flex ">
+        <div className="flex">
           <div className="flex column game-thumbnail-container">
             {thumbnail}
             <div className="flex game-choose-thumbnail-container">
               {mediaUrls.map(url => {
                 if (url.includes("mp4")) {
                   return (
-                    <video
-                      key={url}
-                      onClick={this.onThumbNailPhotoClick}
-                      alt=""
-                      className="game-choose-thumbnail"
-                      src={`${url}#t=34`}
-                    />
+                    <video key={url} onClick={this.onThumbNailPhotoClick} alt=""
+                      className="game-choose-thumbnail" src={`${url}#t=34`} />
                   );
                 }
                 return (
-                  <img
-                    key={url}
-                    onClick={this.onThumbNailPhotoClick}
-                    alt=""
-                    className="game-choose-thumbnail"
-                    src={url}
-                  ></img>
-                );
+                  <img key={url} onClick={this.onThumbNailPhotoClick} alt="" className="game-choose-thumbnail" src={url}
+                  ></img>);
               })}
             </div>
           </div>

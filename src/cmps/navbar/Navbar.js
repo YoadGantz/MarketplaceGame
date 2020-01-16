@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./_NavBar.scss"
 // update to use NavLink 
 export default class Navbar extends Component {
   render() {
@@ -18,7 +19,7 @@ export default class Navbar extends Component {
             Explore
         </Link>
           <Link className="navbar-item link" to={`/user/${userName}`}>
-            profile
+            Profile
         </Link>
         </div>
       </nav>

@@ -1,3 +1,4 @@
+@import "../../assets/styles/setup/mixins.scss";
 .game-card {
   background-color: lightgray;
   border: thin solid navy;
@@ -13,7 +14,7 @@ a {
 }
 
 .img-container {
-    width: 100%;
-    height: 100px;
-    @include aspect-ratio(1.5, 1);
+  width: 100%;
+  height: 100px;
+  @include aspect-ratio(1.5, 1);
 }
