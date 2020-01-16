@@ -47,6 +47,11 @@ textarea {
   margin: 10px;
 }
 
+.img-container {
+  width: 100%;
+  @include aspect-ratio(1.5, 1);
+}
+
 // .game-description{
 //     width: 340px;
 // }
