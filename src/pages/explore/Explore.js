@@ -12,7 +12,6 @@ class Explore extends Component {
     }
 
     onFilterBy = (filterBy) => {
-        console.log(filterBy);
         
         this.props.loadGames(filterBy)
     }

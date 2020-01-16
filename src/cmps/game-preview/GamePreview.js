@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 export default function GamePreview(props) {
     const { game } = props;
-    console.log(game._id);
 
     return (
         <React.Fragment>

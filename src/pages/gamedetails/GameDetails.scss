@@ -1,14 +1,27 @@
 .game-main-thumbnail{
-    width: 600px;
+    width: 750px;
   height: 400px;
   object-fit: cover;
+  border: black;
+}
+
+.game-main-container{
+    width: 95%;
+    margin: auto;
+
 }
 
 .game-choose-thumbnail{
     width: 200px;
-    background-color: black;
     cursor: pointer;
     border: 1px solid black;
+    height: 115px;
+    object-fit: cover;
+}
+
+.game-right-thumbnail{
+    height: 200px;
+    @include aspect-ratio(1, 1);
 }
 
 .game-buy-button{
@@ -17,6 +30,7 @@
 
 .game-description{
     margin-top: 10px;
+    max-width: 450px;
 }
 
 TextArea{
@@ -24,7 +38,7 @@ TextArea{
 }
 
 .game-choose-thumbnail-container{
-    max-width: 600px;
+    max-width: 750px;
     overflow-x: scroll;
 }
 
