@@ -6,6 +6,7 @@ import HomePage from './pages/homepage/HomePage';
 import Explore from './pages/explore/Explore';
 import './assets/styles/global.scss'
 import ProfilePage from './pages/profilepage/ProfilePage';
+import GameDetails from './pages/gamedetails/GameDetails';
 
 const history = createBrowserHistory();
 
