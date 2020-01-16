@@ -6,12 +6,15 @@ import { Button, notification } from "antd";
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameService from "../../services/GameService";
+import GameMedia from "../../cmps/game-media/GameMedia";
 
 export default class GameDetails extends Component {
   state = {
-    currUrl: ""
-  };
-  openNotification = () => {
+    currUrl: "",
+    game:{}
+  }
+
+  showNotification = () => {
     notification.info({
       message: `Game has been added`,
       description: "The game has been added to the cart"
@@ -20,7 +23,7 @@ export default class GameDetails extends Component {
 
   componentDidMount = async () => {
     const game = await GameService.getById(this.props.match.params.id);
-    this.setState({ ...game, currUrl: game.mediaUrls[0] });
+    this.setState({ game, currUrl: game.mediaUrls[0] });
   };
 
   onThumbNailPhotoClick = ev => {
@@ -29,72 +32,28 @@ export default class GameDetails extends Component {
 
   render() {
     if (!this.state.currUrl) return <h1>Loading</h1>;
-    const {
-      thumbnail,
-      title,
-      description,
-      publishedAt,
-      publisher,
-      comments,
-      reviews,
-      mediaUrls,
-      price,
-      tags,
-      currUrl
-    } = this.state;
-    let bigThumbnail;
-    if (currUrl.includes("mp4")) {
-      bigThumbnail = (
-        <iframe
-          title="video"
-          src={`${currUrl}#t=0`}
-          className="game-main-thumbnail"
-        />
+    const { currUrl,game:{thumbnail, title, description, publishedAt , 
+   publisher , comments, reviews , mediaUrls, price, tags }} = this.state;
+    let mainMedia;
+    if (currUrl.includes("mp4")) { mainMedia = ( <iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
       );
     } else {
-      bigThumbnail = (
-        <img src={currUrl} alt="" className="game-main-thumbnail" />
+      mainMedia = (  <img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
-
     return (
       <div className="game-main-container">
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <Button
-            type="primary"
-            className="game-buy-button"
-            onClick={this.openNotification}
-          >
+          <Button type="primary"  className="game-buy-button"onClick={this.showNotification} >
             {price}$ Add to basket
           </Button>
         </div>
         <div className="flex">
           <div className="flex column game-thumbnail-container">
-            {bigThumbnail}
+            {mainMedia}
             <div className="flex game-choose-thumbnail-container">
-              {mediaUrls.map(url => {
-                if (url.includes("mp4")) {
-                  return (
-                    <video
-                      key={url}
-                      onClick={this.onThumbNailPhotoClick}
-                      alt=""
-                      className="game-choose-thumbnail"
-                      src={`${url}#t=34`}
-                    />
-                  );
-                }
-                return (
-                  <img
-                    key={url}
-                    onClick={this.onThumbNailPhotoClick}
-                    alt=""
-                    className="game-choose-thumbnail"
-                    src={url}
-                  ></img>
-                );
-              })}
+            <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
             </div>
           </div>
           <div className="game-description">
