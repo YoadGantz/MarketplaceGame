@@ -1,3 +1,7 @@
-@import './basics/helpers';
+@import "./basics/helpers";
 
-@import '../../cmps/navbar/NavBar.scss';
+@import "./setup/mixins"; 
+
+
+@import "../../cmps/game-preview/GamePreview.scss";
+@import "../../cmps/navbar/NavBar.scss";

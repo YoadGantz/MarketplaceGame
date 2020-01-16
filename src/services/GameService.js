@@ -9,14 +9,12 @@ export default {
 const gGames = createGames();
 
 function query(filterBy = '') {
-  console.log(filterBy);
-    
   const filteredGames = gGames.filter(game => {
-    return game.title.includes(filterBy) 
-        || game.publisher.name.includes(filterBy) 
-        || game.tags.some(tag => tag.includes(filterBy))
+    let {title} = game
+    return title.toLowerCase().includes(filterBy.toLowerCase()) 
+        || game.publisher.name.toLowerCase().includes(filterBy.toLowerCase()) 
+        || game.tags.some(tag => tag.toLowerCase().includes(filterBy.toLowerCase()))
   });
-  console.log(filteredGames);
   return filteredGames
   // return HttpService.get('game');
 }
