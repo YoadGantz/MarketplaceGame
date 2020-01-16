@@ -8,7 +8,6 @@ import ProfilePage from './pages/profile_page/ProfilePage';
 
 import Navbar from './cmps/navbar/Navbar';
 import './assets/styles/global.scss'
-import ProfilePage from './pages/profile_page/ProfilePage';
 import GameDetails from './pages/gamedetails/GameDetails';
 
 const history = createBrowserHistory();
@@ -23,6 +22,7 @@ export default class App extends Component {
               <Switch>
                  <Route component={HomePage} path="/" exact></Route>
                  <Route component={Explore} path="/game" exact></Route>
+                 <Route component={GameDetails} path="/game/:id" exact></Route>
                  <Route component={ProfilePage} path="/user/:id" exact></Route>
               </Switch>
            </Router>
