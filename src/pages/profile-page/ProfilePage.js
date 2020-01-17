@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Card, Icon} from 'antd';
 
-import DynamicTabPrev from "../../cmps/DynamicTabPrev";
+import DynamicTabPrev from "../../cmps/dynamic-cmps/DynamicTabPrev";
 import WishList from "../../cmps/WishList";
 
-import "./_profile-page.scss"
+import "./_ProfilePage.scss"
 
 const { Meta } = Card;
 
@@ -25,7 +25,7 @@ export default class ProfilePage extends Component {
     }
   };
 
-  componentWillMount() {
+  componentDidMount() {
     // this.setUser();
     //getAcquiredGames;
     //getPublishedGames;

@@ -29,9 +29,9 @@ export default class Review extends Component {
           {reviews.map(review => {
             return (
               <div key={review.text}>
-                <p> User Name: {review.user.userName}</p>
-                <Rate allowHalf disabled defaultValue={review.rating} />
+                <p>{review.user.userName}</p>
                 <p> text: {review.text}</p>
+                <Rate allowHalf disabled defaultValue={review.rating} />
               </div>
             );
           })}

@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-
-import "antd/dist/antd.css";
 import { Button, notification } from "antd";
 
-import "./GameDetails.scss";
+import "antd/dist/antd.css";
+
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameService from "../../services/GameService";
 import GameMedia from "../../cmps/game-media/GameMedia";
 import SocketService from "../../services/SocketService";
+
+import "./_GameDetails.scss";
 
 export default class GameDetails extends Component {
   state = {
@@ -33,7 +34,6 @@ export default class GameDetails extends Component {
 
   
   addMsg = newMsg => {
-    console.log(newMsg)
     this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
   };
 
@@ -82,7 +82,7 @@ export default class GameDetails extends Component {
           </div>
           <div className="game-description">
             <div className="img-container">
-              <img className="game-thumbnail" alt='' src={thumbnail}></img>
+              <img  alt="" className="game-thumbnail" src={thumbnail}></img>
             </div>
             <p> {description}</p>
             <p> published at: {publishedAt}</p>

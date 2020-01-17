@@ -20,11 +20,11 @@ export default class Comments extends Component {
     const { text } = this.state;
     return (
       <div>
-        {comments.map(comment => {
+        {comments.map(comment => {          
           return (
             <Comment
-            key={comment.text+comment.user._id}
-              author={<Link to={`/user/${comment.user._id}`}>{comment.user}</Link>}
+            key={comment.text+comment.user.userName}
+              author={<Link to={`/user/${comment.user.userName}`}>{comment.user.userName}</Link>}
               avatar={
                 <Avatar
                   src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
