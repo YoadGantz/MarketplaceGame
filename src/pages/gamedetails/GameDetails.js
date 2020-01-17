@@ -65,6 +65,7 @@ export default class GameDetails extends Component {
       mainMedia = (  <img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
+    console.log(comments)
     return (
       <div className="container">
         <div className="flex justify-between">
