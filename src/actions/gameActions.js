@@ -11,7 +11,7 @@ function setGames(games) {
 export function loadGames(filterBy) {
     return async dispatch => {
         try {
-            
+
             const games = await GameService.query(filterBy);
             dispatch(setGames(games));
 

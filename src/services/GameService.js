@@ -125,7 +125,7 @@ function createGames() {
       comments: [{ user: "bobKiller123", text: "how do i kill the wild hunt" }],
       reviews: [
         {
-          user: { _id: "u101" },
+          user: { _id: "u101",userName:'bob' },
           text: "text",
           rating: 5
         }
@@ -148,14 +148,14 @@ function createGames() {
       "_id": "u105",
       "title": "The Elder Scrolls V: Skyrim",
       description:
-        "As war rages on throughout the Northern Realms, you take on the greatest contract of your life — tracking down the Child of Prophecy, a living weapon that can alter the shape of the world.",
-      publishedAt: "2015-05-18",
-      publisher: { name: "CD PROJEKT RED", _id: "u102" },
+        "Winner of more than 200 Game of the Year Awards, Skyrim Special Edition brings the epic fantasy to life in stunning detail. The Special Edition includes the critically acclaimed game and add-ons with all-new features like remastered art and effects, volumetric god rays, dynamic depth of field, screen-space",
+      publishedAt: "28-Oct-2016",
+      publisher: { name: "Bethesda", _id: "u102" },
       comments: [{ user: "bobKiller123", text: "how do i kill the wild hunt" }],
       reviews: [
         {
-          user: { _id: "u101" },
-          text: "text",
+          user: { _id: "u101",userName:"bob" },
+          text: "I've been playing ES series from Daggerfall release and if you want quality and immersive RPG game that let's you do whatever you want and with more stability than Skyrim LE look no further. As a modder im recommanding more SSE than Oldrim version just because of stability, steady framerate and more resiliance when installing alot of mods in your game",
           rating: 5
         }
       ],
@@ -164,14 +164,12 @@ function createGames() {
       mediaUrls: [
         "https://steamcdn-a.akamaihd.net/steam/apps/256672927/movie480.webm?t=1476991615.mp4",
         "https://steamcdn-a.akamaihd.net/steam/apps/489830/ss_73c1a0bb7e1720c8a1847186c3ddd837d3ca7a8d.600x338.jpg?t=1573759171",
-        "https://media.rawg.io/media/screenshots/1ac/1ac19f31974314855ad7be266adeb500.jpg",
-        "https://media.rawg.io/media/screenshots/6a0/6a08afca95261a2fe221ea9e01d28762.jpg",
-        "https://media.rawg.io/media/screenshots/cdd/cdd31b6b4a687425a87b5ce231ac89d7.jpg",
-        "https://media.rawg.io/media/screenshots/862/862397b153221a625922d3bb66337834.jpg",
-        "https://media.rawg.io/media/screenshots/f63/f6373ee614046d81503d63f167181803.jpg"
+        "https://steamcdn-a.akamaihd.net/steam/apps/489830/ss_921ccea650df936a0b14ebd5dd4ecc73c1d2a12d.600x338.jpg?t=1573759171",
+        "https://steamcdn-a.akamaihd.net/steam/apps/489830/ss_50c3da9e29e9b0368889379cdd03a71aba8d614c.600x338.jpg?t=1573759171",
+        "https://steamcdn-a.akamaihd.net/steam/apps/489830/ss_5d19c69d33abca6f6271d75f371d4241c0d6b2d1.600x338.jpg?t=1573759171"
       ],
       price: 30,
       tags: ["Open World","RPG","story rich"]
-    }
+    },
   ];
 }
