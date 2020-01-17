@@ -10,6 +10,7 @@ import GameDetails from './pages/gamedetails/GameDetails';
 import Navbar from './cmps/navbar/Navbar';
 
 import './assets/styles/global.scss'
+import EditGame from './cmps/edit-game/EditGame';
 
 const history = createBrowserHistory();
 
@@ -22,6 +23,7 @@ export default class App extends Component {
               <Navbar></Navbar>
               <Switch>
                  <Route component={HomePage} path="/" exact></Route>
+                 <Route component={EditGame} path="/edit" exact></Route>
                  <Route component={Explore} path="/game" exact></Route>
                  <Route component={GameDetails} path="/game/:id" exact></Route>
                  <Route component={ProfilePage} path="/user/:id" exact></Route>
