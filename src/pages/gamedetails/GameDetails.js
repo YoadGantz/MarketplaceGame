@@ -63,7 +63,7 @@ export default class GameDetails extends Component {
           </div>
           <div className="game-description">
             <div className="img-container">
-              <img className="game-thumbnail" src={thumbnail}></img>
+              <img className="game-thumbnail" alt='' src={thumbnail}></img>
             </div>
             <p> {description}</p>
             <p> published at: {publishedAt}</p>
