@@ -17,10 +17,12 @@ export default class Comments extends Component {
     return (
       <div>
         {comments.map(comment => {
+          {console.log(comment)}
+          
           return (
             <Comment
-            key={comment.text+comment.user._id}
-              author={<Link to={`/user/${comment.user._id}`}>{comment.user}</Link>}
+            key={comment.text+comment.user.userName}
+              author={<Link to={`/user/${comment.user.userName}`}>{comment.user.userName}</Link>}
               avatar={
                 <Avatar
                   src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
