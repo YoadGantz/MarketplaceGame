@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Icon} from 'antd';
 
-import DynamicTabPrev from "../../cmps/dynamic-cmps/DynamicTabPrev";
+import DynamicTabPrev from "../../cmps/dynamic-cmps/dynamic-tab/DynamicTabPrev";
 import WishList from "../../cmps/WishList";
 
 import "./_ProfilePage.scss"

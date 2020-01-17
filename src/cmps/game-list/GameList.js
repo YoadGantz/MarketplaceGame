@@ -1,5 +1,5 @@
 import GamePreview from '../game-preview/GamePreview'
-import React, { Component } from 'react'
+import React from 'react'
 import './_GameList.scss'
 
 export default function GameList(props) {
