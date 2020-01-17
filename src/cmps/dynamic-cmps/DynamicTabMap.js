@@ -1,5 +1,5 @@
 import Dashboard from "../dashboard/Dashboard";
-import OwnedGames from "../owned_games/OwnedGames";
+import OwnedGames from "../owned-games/OwnedGames";
 
 export default  {
     Dashboard,

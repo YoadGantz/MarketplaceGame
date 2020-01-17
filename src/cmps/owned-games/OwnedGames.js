@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 
 import GameList from '../game-list/GameList';
-import Filter from "../../cmps/filter/Filter"
+import Filter from "../filter/Filter"
 
 import { loadGames } from "../../actions/gameActions";
 
