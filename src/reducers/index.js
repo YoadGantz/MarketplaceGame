@@ -3,8 +3,8 @@ import gameReducer from './gameReducer'
 import UserReducer from './userReducer'
 
 const rootReducer = combineReducers({
-  game: gameReducer,
-  user: UserReducer
+  gameStore: gameReducer,
+  userStore: UserReducer
 })
 
 export default rootReducer;

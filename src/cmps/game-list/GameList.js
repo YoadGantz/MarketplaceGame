@@ -5,7 +5,7 @@ import './_GameList.scss'
 export default function GameList(props) {
     const { games } = props;
     return <ul className="games-container">
-        {games.map((game) => {
+        {games?.map((game) => {
             return <li key={game._id}>
                 <GamePreview game={game}></GamePreview>
             </li>
