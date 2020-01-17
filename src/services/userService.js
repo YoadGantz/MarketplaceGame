@@ -16,6 +16,11 @@ async function logout(){
   return loggedOutUSer
 }
 
+async function getById(id){
+  const  loggedOutUSer= await HttpService.get(`user/${id}`)
+  return loggedOutUSer
+}
+
 function remove(gameId) {
   return HttpService.delete(`user/${userId}`);
 }

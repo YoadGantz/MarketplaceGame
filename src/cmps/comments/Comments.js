@@ -11,6 +11,10 @@ export default class Comments extends Component {
     this.setState({ [fieldName]: ev.target.value });
   };
 
+  onAddMessage= ()=>{
+    this.props.sendMsg(this.state.text)
+  }
+
   render() {
     const { comments } = this.props;
     const { text } = this.state;
@@ -39,7 +43,7 @@ export default class Comments extends Component {
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <Button type='primary'>Add comment</Button>
+        <Button onClick={this.onAddMessage} type='primary'>Add comment</Button>
       </div>
     );
   }
