@@ -35,15 +35,17 @@ export default class GameDetails extends Component {
 
   render() {
     if (!this.state.currUrl) return <h1>Loading</h1>;
-    const { currUrl,game:{thumbnail, title, description, publishedAt , 
-   publisher , comments, reviews , mediaUrls, price, tags }} = this.state;
+    const { currUrl, game: { thumbnail, title, description, publishedAt,
+      publisher, comments, reviews, mediaUrls, price, tags } } = this.state;
     let mainMedia;
-    if (currUrl.includes("mp4")) { mainMedia = ( <iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
+    if (currUrl.includes("mp4")) {
+      mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
       );
     } else {
-      mainMedia = (  <img src={currUrl} alt="" className="game-main-thumbnail" />
+      mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
+
     return (
       <div className="container">
         <div className="flex justify-between">
@@ -56,7 +58,7 @@ export default class GameDetails extends Component {
           <div className="flex column game-thumbnail-container">
             {mainMedia}
             <div className="flex game-choose-thumbnail-container">
-            <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
+              <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
             </div>
           </div>
           <div className="game-description">
@@ -65,7 +67,7 @@ export default class GameDetails extends Component {
             </div>
             <p> {description}</p>
             <p> published at: {publishedAt}</p>
-            <p> publisher {publisher.name}</p>
+            <p> publisher {publisher.user.userName}</p>
           </div>
         </div>
         <h2>Tags:</h2>
