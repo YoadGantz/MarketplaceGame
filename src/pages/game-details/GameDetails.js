@@ -5,8 +5,8 @@ import "antd/dist/antd.css";
 
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
-import GameService from "../../services/GameService";
 import GameMedia from "../../cmps/game-media/GameMedia";
+import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
 
 import "./_GameDetails.scss";
