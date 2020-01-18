@@ -23,6 +23,8 @@ export default class Navbar extends Component {
           <Link className="navbar-item link" to={`/user/${userName}`}>
             Profile
         </Link>
+        <p onClick={this.props.togglePortal}>Wishlist</p>
+        <p onClick={this.props.togglePortal}>Shopping Cart</p>
         </div>
       </nav>
     )
