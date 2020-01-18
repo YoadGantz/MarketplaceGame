@@ -1,16 +1,17 @@
 const INITIAL_STATE = {
-    games: [],
-  };
-  
-  export default function gameReducer(state = INITIAL_STATE, action) {
-    switch (action.type) {
-      case "SET_GAMES":
-        return {
-          ...state,
-          games: action.games
-        };
-      default:
-        return state;
-    }
+  games: [], filterBy: { publisher: '' }
+};
+
+export default function gameReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case "SET_GAMES":
+      return {
+        ...state,
+        games: action.games
+      };
+    case 'SET_FILTER':
+      return { ...state, filterBy: { ...action.filterBy } }
+    default:
+      return state;
   }
-  
+}

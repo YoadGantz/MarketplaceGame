@@ -10,17 +10,17 @@ export default class Navbar extends Component {
     const userName = (!noLoggedinUser) ? 'guest' : ''
     return (
       <nav className="navbar flex align-center ">
-        <Link className="navbar-item link" to="/">
+        <Link className="link" to="/">
           <img alt="logo" src="/logo.png"/>
         </Link>
         <div className="menu-container flex align-center">
-          <Link className="navbar-item link" to="/">
+          <Link className="link" to="/">
             Home Page
         </Link>
-          <Link className="navbar-item link" to="/game">
+          <Link className="link" to="/game">
             Explore
         </Link>
-          <Link className="navbar-item link" to={`/user/${userName}`}>
+          <Link className="link" to={`/user/${userName}`}>
             Profile
         </Link>
         <p onClick={this.props.togglePortal}>Wishlist</p>
