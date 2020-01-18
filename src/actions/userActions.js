@@ -1,4 +1,4 @@
-import UserService from "../services/UserService";
+import UserService from "../services/userService";
 
 export function login(cred) {
     return async dispatch => {
