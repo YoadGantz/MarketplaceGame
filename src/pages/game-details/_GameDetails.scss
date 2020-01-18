@@ -1,10 +1,11 @@
 @import "../../assets/styles/setup/mixins.scss";
 
 .game-main-thumbnail {
-  width: 750px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border: black;
+  grid-area: main-media;
 }
 
 .game-main-container {
@@ -14,28 +15,28 @@
 
 .game-main-content-container{
   background-color: #f2f5fa;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 4fr 1fr;
+  gap: 5px;
+  grid-template-areas: 
+  " main-media thumbnail  "
+  " choose     desc   "
 }
 
 .game-choose-thumbnail {
-  width: 200px;
+  width: 22%;
   cursor: pointer;
   border: 1px solid black;
-  height: 115px;
   object-fit: cover;
 }
 
-.game-right-thumbnail {
-  height: 200px;
-  @include aspect-ratio(1, 1);
-}
 
 .game-buy-button {
   margin-top: 5px;
 }
 
 .game-description {
-  margin-top: 10px;
-  max-width: 450px;
+  grid-area: desc;
 }
 
 textarea {
@@ -43,9 +44,13 @@ textarea {
 }
 
 .game-choose-thumbnail-container {
-  max-width: 750px;
   overflow-x: scroll;
+  grid-area: choose;
 }
+.game-thumbnail{
+grid-area: thumbnail;
+}
+
 
 .game-thumbnail-container {
   margin: 10px;
@@ -56,6 +61,6 @@ textarea {
   @include aspect-ratio(1.5, 1);
 }
 
-// .game-description{
-//     width: 340px;
-// }
+.game-description{
+  grid-area: desc;
+}

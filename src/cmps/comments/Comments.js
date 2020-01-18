@@ -12,15 +12,17 @@ export default class Comments extends Component {
   };
 
   onAddMessage= ()=>{
-    this.props.sendMsg(this.state.text)
+    if (!this.state.text)return
+    this.props.sendComment(this.state.text)
   }
 
   render() {
     const { comments } = this.props;
     const { text } = this.state;
     return (
+    
       <div>
-        {comments.map(comment => {          
+        {comments.map(comment => {        
           return (
             <Comment
             key={comment.text+comment.user.userName}

@@ -3,7 +3,8 @@ import HttpService from "./HttpService";
 export default {
   // add,
   query,
-  getById
+  getById,
+  update
   // remove
 };
 
@@ -12,6 +13,12 @@ export default {
 function query(filterBy = "") {
   const games = HttpService.get('game', filterBy);
   return games
+}
+
+async function update(updatedGame){
+  const game = await HttpService.put(`game/${updatedGame._id}`, updatedGame);
+  return game
+  
 }
 
 // function remove(gameId) {

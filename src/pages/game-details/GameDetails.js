@@ -15,32 +15,49 @@ export default class GameDetails extends Component {
   state = {
     currUrl: '',
     game: {},
-    comments:[]
+    comments: []
   };
 
   componentDidMount = async () => {
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
-    this.setState({ game, currUrl: game.mediaUrls[0],comments:game.comments});
+    this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
     SocketService.setup()
     SocketService.emit('chat topic', game.title);
-    SocketService.on('chat addMsg',this.addMsg)
+    SocketService.on('chat addMsg', this.addComment)
   };
 
-  componentWillUnmount= ()=>{
+  componentWillUnmount = () => {
     SocketService.off()
     SocketService.terminate()
   }
 
-  
-  addMsg = newMsg => {
+
+  addComment = newMsg => {
     this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
+    this.updateGame('comment')
   };
 
-  sendMsg = text => {
-    SocketService.emit('chat newMsg', {text,user:'me'});
+
+  updateGame = (type) => {
+    let game = this.state.game
+    if (type === 'comment') {
+      game = { ...this.state.game }
+      game.comments = this.state.comments
+    }
+    GameService.update(game)
+  }
+
+  sendComment = text => {
+    SocketService.emit('chat newMsg', { user: { userName: 'me' }, text });
   };
 
+  addReview = (rating, text) => {
+    const game = { ...this.state.game }
+    game.reviews=[...game.reviews,{ user: { userName: 'bob' }, text, rating }]
+    this.setState({ game })
+    this.updateGame()
+  }
 
   openNotification = () => {
     notification.info({
@@ -49,20 +66,20 @@ export default class GameDetails extends Component {
     });
   };
 
-
   onThumbNailPhotoClick = ev => {
     this.setState({ currUrl: ev.target.src });
   };
 
   render() {
     if (!this.state.currUrl) return <h1>Loading</h1>;
-    const {comments, currUrl,game:{thumbnail, title, description, publishedAt , 
-   publisher , reviews , mediaUrls, price, tags }} = this.state;
+    const { comments, currUrl, game: { thumbnail, title, description, publishedAt,
+      publisher, reviews, mediaUrls, price, tags } } = this.state;
     let mainMedia;
-    if (currUrl.includes("mp4")) { mainMedia = ( <iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
+    if (currUrl.includes("mp4")) {
+      mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
       );
     } else {
-      mainMedia = (  <img src={currUrl} alt="" className="game-main-thumbnail" />
+      mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
     return (
@@ -73,20 +90,18 @@ export default class GameDetails extends Component {
             {price}$ Add to basket
           </Button>
         </div>
-        <div className="flex game-main-content-container ">
-          <div className="flex column game-thumbnail-container">
+        <div className="grid game-main-content-container ">
             {mainMedia}
             <div className="flex game-choose-thumbnail-container">
-            <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
-            </div>
+              <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
-          <div className="game-description">
-            <div className="img-container">
-              <img  alt="" className="game-thumbnail" src={thumbnail}></img>
-            </div>
+          <div >
+              <img alt="" className="game-thumbnail" src={thumbnail}></img>
+              <div className='game-description'>
             <p> {description}</p>
             <p> published at: {publishedAt}</p>
             <p> publisher {publisher.name}</p>
+            </div>
           </div>
         </div>
         <h2>Tags:</h2>
@@ -94,9 +109,9 @@ export default class GameDetails extends Component {
           return <span key={tag}>{tag} </span>;
         })}
         <h2>Reviews :</h2>
-        <Review reviews={reviews} />
+        <Review addReview={this.addReview} reviews={reviews} />
         <h2>Comments :</h2>
-        <Comments sendMsg={this.sendMsg} comments={comments} />
+        <Comments sendComment={this.sendComment} comments={comments} />
       </div>
     );
   }

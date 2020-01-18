@@ -14,9 +14,9 @@ export default class Review extends Component {
     this.setState({ [fieldName]: ev.target.value });
   };
 
-  //   onAddReview = ()=>{
-  //       addReview(this.state.rating,this.state.text)
-  //   }
+    onAddReview = ()=>{
+        this.props.addReview(this.state.rating,this.state.text)
+    }
 
 
   render() {
@@ -51,7 +51,7 @@ export default class Review extends Component {
           onChange={this.inputChange}
           allowHalf defaultValue={2.5}
         />
-        <Button type='primary'>Add Review</Button>
+        <Button onClick={this.onAddReview} type='primary'>Add Review</Button>
       </div>
     );
   }
