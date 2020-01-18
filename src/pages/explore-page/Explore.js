@@ -26,7 +26,7 @@ class Explore extends Component {
 
 const mapStateToProps = state => {
     return {
-        games: state.games
+        games: state.game.games
     };
 };
 

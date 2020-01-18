@@ -19,3 +19,13 @@ export function loadGames(filterBy) {
         }
     };
 }
+
+function setFilter(filterBy) {
+    return {
+        type: 'SET_FILTER',
+        filterBy
+    }
+}
+export function setFilterBy(filterBy) {
+    return (dispatch) => dispatch(setFilter(filterBy))
+}
