@@ -7,13 +7,13 @@ const BASE_URL = process.env.NODE_ENV === 'production'
     : '//localhost:3030/api/'
 
 
-var axios = Axios.create({
+let axios = Axios.create({
     withCredentials: true
 });
 
 export default {
-    get(endpoint, data){
-        return ajax(endpoint, 'GET', data)
+    get(endpoint, data, params){
+        return ajax(endpoint, 'GET', data, params)
     },
     post(endpoint, data){
         return ajax(endpoint, 'POST', data)
@@ -27,12 +27,13 @@ export default {
 }
 
 
-async function ajax(endpoint, method='get', data=null , dispatch) {
+async function ajax(endpoint, method='get', data=null ,params, dispatch) {
     try {
         const res = await axios({
             url: `${BASE_URL}${endpoint}`,
             method,
-            data
+            data,
+            params
         })
         return res.data;
     } catch (err) {
