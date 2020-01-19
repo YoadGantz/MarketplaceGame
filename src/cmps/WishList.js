@@ -1,27 +1,18 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
 
-import { loadWishedGames } from '../actions/gameActions'
+import { loadGames } from '../actions/gameActions'
 import GameList from "../cmps/game-list/GameList"
 
 class WishList extends Component {
     componentDidMount() {
-        if (this.props.user) {
-            const wishedIds = this.props.user.wishedGames.map(wishedGame => wishedGame)
-            let filterBy = { wishedIds }
-            console.log(filterBy);
-            
-            this.props.loadWishedGames(filterBy)
-        }
+        loadGames()
     }
     render() {
         if (this.props.user) {
-            console.log(this.props.games);
-            
-            let {games} = this.props
-            return <ul>
-                <GameList history={this.props.history} games={games}></GameList>
-            </ul>
+            const { games, user } = this.props
+            let wishedGames = games.filter(game => user.wishedGames.includes(game._id))
+            return <GameList history={this.props.history} user={user} games={wishedGames}></GameList>
         }
         return <p>Please Login to see your Wishlist</p>
     }
@@ -29,13 +20,13 @@ class WishList extends Component {
 
 const mapStateToProps = state => {
     return {
-        games: state.gameStore.wishedGames,
+        games: state.gameStore.games,
         user: state.userStore.loggedInUser
     };
 };
 
 const mapDispatchToProps = {
-    loadWishedGames
+    loadGames
 };
 
 export default connect(

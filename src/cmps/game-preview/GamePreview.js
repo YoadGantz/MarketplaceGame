@@ -1,15 +1,30 @@
 import React from 'react'
-import Axios from 'axios';
+
+import full_heart from '../../assets/icons/full_heart.svg'
+import empty_heart from '../../assets/icons/empty_heart.svg'
 
 import './_GamePreview.scss'
 
 export default function GamePreview(props) {
-    const { game } = props;
+    const { game, user } = props;
 
     function onOpenDetails(gameId) {
         props.history.push(`/game/${gameId}`)
     }
 
+    function toggleWishedGame(ev) {
+        ev.stopPropagation();
+
+        let wishedGames = user && user.wishedGames || []
+        let updatedUser
+        const idx = wishedGames.findIndex(id => id === game._id)
+        if (idx === -1) {
+            updatedUser = { ...user, wishedGames: [...wishedGames, game._id] }
+        } else {
+            updatedUser = { ...user, wishedGames: wishedGames.filter(wishedGame => wishedGame !== game._id) }
+        }
+        props.onUpdateUser(updatedUser)
+    }
     return (
         <React.Fragment>
             <div onClick={() => onOpenDetails(game._id)} className="game-card">
@@ -19,7 +34,8 @@ export default function GamePreview(props) {
                     <img alt="thumbnail" className="game-thumbnail" width="200" src={game.thumbnail}></img>
                 </div>
                 <p>${game.price}</p>
+                <img onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart}></img>
             </div>
-        </React.Fragment>
-    );
+        </React.Fragment >
+    )
 };
