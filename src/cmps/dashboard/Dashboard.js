@@ -54,7 +54,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     loadGames,
     setFilterBy
-    // loadUser
 };
 
 export default connect(
