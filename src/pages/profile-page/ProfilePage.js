@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Card, Icon} from 'antd';
+import { Card, Icon } from 'antd';
+import { connect } from 'react-redux'
 
 import DynamicTabPrev from "../../cmps/dynamic-cmps/DynamicTabPrev";
 import WishList from "../../cmps/WishList";
@@ -7,8 +8,7 @@ import WishList from "../../cmps/WishList";
 import "./_ProfilePage.scss"
 
 const { Meta } = Card;
-
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
   state = {
     mode: 'OwnedGames',
     user: {
@@ -26,6 +26,7 @@ export default class ProfilePage extends Component {
   };
 
   componentDidMount() {
+    if (this.props.loggedInUser) this.setState({ user: this.props.loggedInUser })
     // this.setUser();
     //getAcquiredGames;
     //getPublishedGames;
@@ -82,4 +83,16 @@ export default class ProfilePage extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+      loggedInUser: state.userStore.loggedInUser,
+  };
+};
 
+const mapDispatchToProps = {
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfilePage);

@@ -11,7 +11,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar flex align-center ">
         <Link className="link" to="/">
-          <img alt="logo" src="/logo.png"/>
+          <img width="150" alt="logo" src="/navbar-logo.png"/>
         </Link>
         <div className="menu-container flex align-center">
           <Link className="link" to="/">
