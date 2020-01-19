@@ -7,7 +7,6 @@ function setGames(games) {
     }
 }
 
-
 export function loadGames(filterBy) {
     return async dispatch => {
         try {

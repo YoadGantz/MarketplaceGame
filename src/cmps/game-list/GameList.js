@@ -4,6 +4,7 @@ import './_GameList.scss'
 
 export default function GameList(props) {
     const { games } = props;
+    console.log(games)
     
     return <ul className="games-container">
         {games?.map((game) => {

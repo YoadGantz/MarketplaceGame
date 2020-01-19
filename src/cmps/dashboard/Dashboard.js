@@ -27,9 +27,7 @@ class Dashboard extends Component {
             })
         } else {
             this.props.loadGames()
-        }
-
-        // const user = this.props.loadUser(this.props.loggedInUser).then((user)=>console.log(user))   
+        } 
     }
 
     render() {

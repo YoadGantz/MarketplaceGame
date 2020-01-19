@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 import './_GamePreview.scss'
 
 export default function GamePreview(props) {
@@ -7,7 +7,6 @@ export default function GamePreview(props) {
 
     return (
         <React.Fragment>
-            <Link to={`/game/${game._id}`}>
                 <div className="game-card">
                     <h3>{game.title}</h3>
                     <h5>{game.publisher.name}</h5>
@@ -16,7 +15,6 @@ export default function GamePreview(props) {
                     </div>
                     <p>${game.price}</p>
                 </div>
-            </Link>
         </React.Fragment>
     );
 };
