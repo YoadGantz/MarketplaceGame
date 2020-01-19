@@ -19,7 +19,7 @@ class Explore extends Component {
     render() {
         return <div className="explore-container flex column container">
             <Filter onFilterBy={this.onFilterBy}></Filter>
-            <GameList games={this.props.games}></GameList>
+            <GameList history={this.props.history} games={this.props.games}></GameList>
         </div>
     }
 }

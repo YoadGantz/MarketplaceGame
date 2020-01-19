@@ -20,11 +20,19 @@ const history = createBrowserHistory();
 
 export default class App extends Component {
    state = {
+      modalType: '',
       toggleModal: false
    }
 
-   togglePortal = () => {
-      this.setState(prevState => { return { toggleModal: !prevState.toggleModal } })
+   togglePortal = (modalType) => {
+      if (!this.state.toggleModal) {
+         this.setState({ modalType, toggleModal: true });
+      } else if (modalType === this.state.modalType) {
+         this.setState(prevState => { return { toggleModal: !prevState.toggleModal, modalType: '' } })
+      } else {
+         this.setState({ modalType })
+      }
+
    }
    render() {
       return (
@@ -35,14 +43,14 @@ export default class App extends Component {
                   <Route component={HomePage} path="/" exact></Route>
                   <Route component={Login} path="/login" exact />
                   <Route component={EditGame} path="/edit" exact></Route>
-                  <Route component={Explore} path="/game" exact></Route>
+                  <Route render={() => <Explore history={history}></Explore>} path="/game" exact></Route>
                   <Route component={GameDetails} path="/game/:id" exact></Route>
                   <Route component={ProfilePage} path="/user/:id" exact></Route>
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
-               <ShoppingCart />
-               <WishList />
+               {(this.state.modalType === 'wishlist') ? <WishList history={history} /> : <ShoppingCart />}
+
             </Modal>}
          </React.Fragment>
       )
