@@ -9,14 +9,12 @@ class WishList extends Component {
         if (this.props.user) {
             const wishedIds = this.props.user.wishedGames.map(wishedGame => wishedGame)
             let filterBy = { wishedIds }
-            console.log(filterBy);
             
             this.props.loadWishedGames(filterBy)
         }
     }
     render() {
         if (this.props.user) {
-            console.log(this.props.games);
             
             let {games} = this.props
             return <ul>

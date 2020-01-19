@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import { connect } from 'react-redux'
 import LineChart from "../charts/LineChart"
 
-import { loadGames, setFilterBy } from "../../actions/gameActions";
+import { loadGames} from "../../actions/gameActions";
 // import { loadUser } from "../../actions/userActions";
 
 import GameList from '../game-list/GameList'
@@ -44,14 +44,12 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
     return {
         games: state.gameStore.games,
-        loggedInUser: state.userStore.loggedInUser,
-        filterBy: state.gameStore.filterBy
+        loggedInUser: state.userStore.loggedInUser
     };
 };
 
 const mapDispatchToProps = {
-    loadGames,
-    setFilterBy
+    loadGames
 };
 
 export default connect(

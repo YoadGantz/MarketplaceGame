@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { loadGames, setFilterBy } from "../../actions/gameActions";
+import { loadGames } from "../../actions/gameActions";
 import CartService from '../../services/CartService'
 import GameList from '../../cmps/game-list/GameList'
 
@@ -38,14 +38,12 @@ class ShoppingCart extends Component {
 
 const mapStateToProps = state => {
     return {
-        games: state.gameStore.games,
-        filterBy: state.gameStore.filterBy
+        games: state.gameStore.games
     };
 };
 
 const mapDispatchToProps = {
-    loadGames,
-    setFilterBy
+    loadGames
 };
 
 export default connect(
