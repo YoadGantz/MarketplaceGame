@@ -23,6 +23,8 @@ export default class GameDetails extends Component {
   };
 
   componentDidMount = async () => {
+    console.log('cmp did mount details');
+    
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
     this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });

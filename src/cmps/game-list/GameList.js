@@ -9,7 +9,7 @@ export default function GameList(props) {
     return <ul className="games-container">
         {games?.map((game) => {
             return <li key={game._id}>
-                <GamePreview game={game}></GamePreview>
+                <GamePreview history={props.history} game={game}></GamePreview>
             </li>
         })
         }
