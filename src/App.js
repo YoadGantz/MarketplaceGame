@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { createBrowserHistory, createHashHistory } from 'history';
 
 import HomePage from './pages/homepage/HomePage';
 import Login from './pages/login/Login';
@@ -15,8 +15,7 @@ import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/WishList';
 
-const history = createBrowserHistory();
-
+const history = createHashHistory();
 
 export default class App extends Component {
    state = {
@@ -40,12 +39,12 @@ export default class App extends Component {
             <Router history={history}>
                <Navbar togglePortal={this.togglePortal} />
                <Switch>
-                  <Route component={HomePage} path="/" exact />
-                  <Route component={Login} path="/login" exact />
-                  <Route component={EditGame} path="/edit/:id?" exact />
-                  <Route component={GameDetails} path="/game/:id" exact />
-                  <Route render={() => <Explore history={history} />} path="/game" exact />
-                  <Route render={() => <ProfilePage history={history} />} path="/user/:id" exact></Route>
+                  <Route path="/" component={HomePage} exact />
+                  <Route path="/login" component={Login} exact />
+                  <Route path="/edit" component={EditGame} exact />
+                  <Route path="/game/:id" component={GameDetails} exact />
+                  <Route path="/game" render={() => <Explore history={history} />} exact />
+                  <Route path="/user/:id" render={() => <ProfilePage history={history} />} exact />
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>

@@ -1,28 +1,23 @@
 import React, { Component } from 'react'
-
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import UtilService from '../../services/UtilService'
-import UserService from '../../services/userService'
-
+import UserService from '../../services/UserService'
 import './_GamePreview.scss'
-
 export default class GamePreview extends Component {
     state = {
         publisherName: ''
     }
-
     async componentDidMount() {
         const { game } = this.props
         const publisher = await UserService.getById(game.publisher)
         const publisherName = publisher.userName
         this.setState({ publisherName })
     }
-
-    onOpenDetails(gameId) {
+    onOpenDetails = (gameId) => {
+        console.log(this.props)
         this.props.history.push(`/game/${gameId}`)
     }
-
     onRemoveFromCart = (ev) => {
         ev.stopPropagation();
         this.props.onRemoveFromCart(this.props.game._id)
@@ -35,7 +30,6 @@ export default class GamePreview extends Component {
     toggleWishedGame(ev) {
         const { user, game } = this.props
         ev.stopPropagation();
-
         let wishedGames = user && user.wishedGames || []
         let updatedUser
         const idx = wishedGames.findIndex(id => id === game._id)
@@ -56,7 +50,7 @@ export default class GamePreview extends Component {
                     </div>
                     <div className="flex">
                         <h3 className="full">{game.title}</h3>
-                        <p className="rating">{UtilService.getGameRating(game)} ({game.reviews.length} reviews)</p>
+                        <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
                     </div>
                     <h5>{this.state.publisherName && this.state.publisherName}</h5>
                     <div className="flex space-between">

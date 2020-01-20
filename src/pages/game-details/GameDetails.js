@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Button, notification } from "antd";
-import CartService from '../../services/CartService.js'
-
-// import { connect } from 'react-redux'
-// import { saveCartItem } from "../../actions/cartActions";
 
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameMedia from "../../cmps/game-media/GameMedia";
+import CartService from '../../services/CartService.js'
 import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
 import UtilService from "../../services/UtilService";
@@ -25,10 +22,7 @@ export default class GameDetails extends Component {
     publisherName: ''
   };
 
-
-
   componentDidMount = async () => {
-
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
     this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
@@ -45,12 +39,10 @@ export default class GameDetails extends Component {
     SocketService.terminate()
   }
 
-
   addComment = newMsg => {
     this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
     this.updateGame('comment')
   };
-
 
   updateGame = (type) => {
     let game = this.state.game

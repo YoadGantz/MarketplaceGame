@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import wishlistImg from "../../assets/icons/wishlist.svg"
 import shoppingCartImg from "../../assets/icons/shopping_cart.svg"
 import "./_NavBar.scss"
@@ -12,19 +12,19 @@ export default class Navbar extends Component {
     return (
       <nav className="nav-bar flex align-center">
         <div className="nav-logo full">
-          <Link to="/">
+          <NavLink to="/">
             <img alt="logo" src="/navbar-logo.png" />
-          </Link>
+          </NavLink>
         </div>
-        <Link className="nav-link flex align-center" to="/">
+        <NavLink to="/" className="nav-link flex align-center" activeClassName="active" >
           Homepage
-        </Link>
-        <Link className="nav-link flex align-center" to="/game">
+        </NavLink>
+        <NavLink to="/game" className="nav-link flex align-center" activeClassName="active" >
           Explore
-        </Link>
-        <Link className="nav-link flex align-center" to={`/user/${userName}`}>
+        </NavLink>
+        <NavLink to={`/user/${userName}`} className="nav-link flex align-center" activeClassName="active"  >
           Profile
-        </Link>
+        </NavLink>
         <img src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
         <img src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
       </nav>
