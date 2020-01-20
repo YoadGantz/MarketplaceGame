@@ -17,7 +17,7 @@ class Dashboard extends Component {
     state = {
         orders: '',
         filterBy: {
-            publisherName: '',
+            publisherId: '',
         }
     }
 
@@ -36,10 +36,9 @@ class Dashboard extends Component {
 
     componentDidMount =() =>{
         if (this.props.loggedInUser) {
-            const publisherName = this.props.loggedInUser.userName
+            const publisherId = this.props.loggedInUser._id
             this.setState({
                 filterBy: {
-                    publisherName,
                 }
             }, async ()=> {
               await  this.props.loadGames(this.state.filterBy)

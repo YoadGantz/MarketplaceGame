@@ -1,33 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import UtilService from '../../services/UtilService'
+import UserService from '../../services/UserService'
+
 import './_GamePreview.scss'
 
-export default function GamePreview(props) {
-    const { game, user } = props;
-
-    function onOpenDetails(gameId) {
-        props.history.push(`/game/${gameId}`)
+export default class GamePreview extends Component {
+    state = {
+        publisherName: ''
     }
 
-    function getGameRating() {
-        const { reviews } = game
-
-        let sumOfRating = reviews.reduce((acc, review) => {
-            return acc += review.rating;
-        }, 0)
-        const rating = +(sumOfRating / reviews.length).toFixed(2)
-        return rating
+    async componentDidMount() {
+        const { game } = this.props
+        const publisher = await UserService.getById(game.publisher)
+        const publisherName = publisher.userName
+        this.setState({ publisherName })
     }
 
-    function onRemoveFromCart(ev) {
+    onOpenDetails(gameId) {
+        this.props.history.push(`/game/${gameId}`)
+    }
+
+    onRemoveFromCart(ev) {
         ev.stopPropagation();
-        props.onRemoveFromCart(game._id)
+        this.props.onRemoveFromCart(this.props.game._id)
     }
 
-    function toggleWishedGame(ev) {
+    toggleWishedGame(ev) {
+        const { user, game } = this.props
         ev.stopPropagation();
 
         let wishedGames = user && user.wishedGames || []
@@ -38,27 +40,30 @@ export default function GamePreview(props) {
         } else {
             updatedUser = { ...user, wishedGames: wishedGames.filter(wishedGame => wishedGame !== game._id) }
         }
-        props.onUpdateUser(updatedUser)
+        this.props.onUpdateUser(updatedUser)
     }
-    return (
-        <React.Fragment>
-            <div onClick={() => onOpenDetails(game._id)} className="game-card">
-                <div className="img-container">
-                    <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
-                </div>
-                <div className="flex">
-                    <h3 className="full">{game.title}</h3>
-                    <p className="rating">{UtilService.getGameRating(game)} ({game.reviews.length} reviews)</p>
-                </div>
-                <h5>{game.publisher.user.userName}</h5>
-                <div className="flex space-between">
-                    <p className="price">${game.price}</p>
-                    {!props.isProfile &&
-                        <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
-                    {props.isCart && <img className="like-icon" onClick={onRemoveFromCart} />}
+    render() {
+        const { game, user } = this.props
+        return (
+            <React.Fragment>
+                <div onClick={() => this.onOpenDetails(game._id)} className="game-card">
+                    <div className="img-container">
+                        <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
+                    </div>
+                    <div className="flex">
+                        <h3 className="full">{game.title}</h3>
+                        <p className="rating">{UtilService.getGameRating(game)} ({game.reviews.length} reviews)</p>
+                    </div>
+                    <h5>{this.state.publisherName && this.state.publisherName}</h5>
+                    <div className="flex space-between">
+                        <p className="price">${game.price}</p>
+                        {!this.props.isProfile &&
+                            <img className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
+                        {this.props.isCart && <img className="like-icon" onClick={this.onRemoveFromCart} />}
 
+                    </div>
                 </div>
-            </div>
-        </React.Fragment >
-    )
+            </React.Fragment >
+        )
+    }
 };

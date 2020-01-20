@@ -10,9 +10,10 @@ import Comments from "../../cmps/comments/Comments";
 import GameMedia from "../../cmps/game-media/GameMedia";
 import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
+import UtilService from "../../services/UtilService";
+import UserService from '../../services/UserService';
 
 import "./_GameDetails.scss";
-import UtilService from "../../services/UtilService.js";
 
 export default class GameDetails extends Component {
   state = {
@@ -20,7 +21,8 @@ export default class GameDetails extends Component {
     game: {},
     comments: [],
     downloads: '',
-    rating: ''
+    rating: '',
+    publisherName: ''
   };
 
 
@@ -32,6 +34,7 @@ export default class GameDetails extends Component {
     this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
     this.setGameRating(game)
     this.setGameDownloads(game)
+    this.setPublisherName(game.publisher)
     SocketService.setup()
     SocketService.emit('chat topic', game.title);
     SocketService.on('chat addMsg', this.addComment)
@@ -56,6 +59,12 @@ export default class GameDetails extends Component {
       game.comments = this.state.comments
     }
     GameService.update(game)
+  }
+
+  setPublisherName = async (publisherId) => {
+    const publisher = await UserService.getById(publisherId)
+    const publisherName = publisher.userName
+    this.setState({ publisherName })
   }
 
   setGameDownloads = async (game) => {
@@ -102,7 +111,7 @@ export default class GameDetails extends Component {
 
   render() {
     if (!this.state.currUrl) return <h1>Loading</h1>;
-    const { downloads, comments, currUrl, rating, game: { thumbnail, title, description, publishedAt,
+    const { downloads, comments, currUrl, rating, publisherName, game: { thumbnail, title, description, publishedAt,
       publisher, reviews, mediaUrls, price, tags } } = this.state;
     let mainMedia;
     if (currUrl.includes("mp4")) {
@@ -132,7 +141,7 @@ export default class GameDetails extends Component {
             <div className='game-description'>
               <p > {description}</p>
               <p> Published at: {publishedAt}</p>
-              <p> Publisher {publisher.name}</p>
+              <p> Publisher: {publisherName}</p>
               <p> Rating: {rating}</p>
               <p> Downloads last month :{downloads}   </p>
             </div>
