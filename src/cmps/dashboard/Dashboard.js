@@ -10,19 +10,18 @@ import { loadGames } from "../../actions/gameActions";
 import GameList from '../game-list/GameList'
 import Graph from "../charts/LineChart";
 import PieCharts from "../charts/PieCharts";
-import orderUtils from "../../services/UtilService";
-import { Link } from "react-router-dom";
+import utilService from "../../services/UtilService";
 
 class Dashboard extends Component {
     state = {
         orders: '',
         filterBy: {
-            publisherName: '',
+            _id: '',
         }
     }
 
     getGraphsDetails = async () => {
-        const ordersBy = await orderUtils.getGraphsDetails(this.props.games)
+        const ordersBy = await utilService.getGraphsDetails(this.props.games)
         this.setState({ orders: ordersBy })
     }
     componentDidUpdate = (prevProps) => {
@@ -36,7 +35,7 @@ class Dashboard extends Component {
             const _id = this.props.loggedInUser._id
             this.setState({
                 filterBy: {
-                    _id,
+                    _id
                 }
             }, async () => {
                 await this.props.loadGames(this.state.filterBy)
