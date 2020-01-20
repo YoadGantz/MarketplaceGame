@@ -17,7 +17,6 @@ import WishList from './cmps/WishList';
 
 const history = createHashHistory();
 
-
 export default class App extends Component {
    state = {
       modalType: '',
