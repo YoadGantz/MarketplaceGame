@@ -8,8 +8,8 @@ export default function GameList(props) {
     return <ul className="cards-container clean-list container">
         {games?.map((game) => {
             return <li key={game._id}>
-                <GamePreview onRemoveFromCart={props.onRemoveFromCart} isCart={props.isCart} history={props.history}
-                isProfile={props.isProfile} user={user} onUpdateUser={props.onUpdateUser}
+                <GamePreview onRemoveFromCart={props.onRemoveFromCart} isCart={props.isCart} 
+                history={props.history} isProfile={props.isProfile} user={user} onUpdateUser={props.onUpdateUser}
                 game={game}></GamePreview>
             </li>
         })
