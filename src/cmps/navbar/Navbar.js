@@ -16,13 +16,13 @@ export default class Navbar extends Component {
             <img alt="logo" src="/navbar-logo.png" />
           </NavLink>
         </div>
-        <NavLink className="nav-link flex align-center" activeClassName="active" to="/" >
+        <NavLink to="/" className="nav-link flex align-center" activeClassName="active" >
           Homepage
         </NavLink>
-        <NavLink className="nav-link flex align-center" activeClassName="active" to="/game">
+        <NavLink to="/game" className="nav-link flex align-center" activeClassName="active" >
           Explore
         </NavLink>
-        <NavLink className="nav-link flex align-center" activeClassName="active"  to={`/user/${userName}`}>
+        <NavLink to={`/user/${userName}`} className="nav-link flex align-center" activeClassName="active"  >
           Profile
         </NavLink>
         <img src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />

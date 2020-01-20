@@ -44,7 +44,7 @@ export default class GamePreview extends Component {
                     </div>
                     <div className="flex">
                         <h3 className="full">{game.title}</h3>
-                        <p className="rating">{UtilService.getGameRating(game)} ({game.reviews.length} reviews)</p>
+                        <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
                     </div>
                     <h5>{this.state.publisherName && this.state.publisherName}</h5>
                     <div className="flex space-between">
