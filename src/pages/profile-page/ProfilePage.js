@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { Card, Icon} from 'antd';
+import { Card, Icon } from 'antd';
+import { connect } from 'react-redux'
 
 import DynamicTabPrev from "../../cmps/dynamic-cmps/DynamicTabPrev";
-import WishList from "../../cmps/WishList";
 
 import "./_ProfilePage.scss"
 
 const { Meta } = Card;
-
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
   state = {
     mode: 'OwnedGames',
     user: {
@@ -19,16 +18,12 @@ export default class ProfilePage extends Component {
       "about": "Consequuntur inventore eaque modi. Commodi eos eum minus voluptas dignissimos. Saepe ...",
       "createdAt": 123879186123,
       "imgUrl": "http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg",
-      //“acquiredGames” : [{minimal-game}],
-      //“publishedGames” :[{minimal-game}],
       "desiredGames": [{ game: 'gta' }],
     }
   };
 
   componentDidMount() {
-    // this.setUser();
-    //getAcquiredGames;
-    //getPublishedGames;
+    if (this.props.loggedInUser) this.setState({ user: this.props.loggedInUser })
   }
 
   updateMode = (ev) => {
@@ -36,50 +31,50 @@ export default class ProfilePage extends Component {
     this.setState({ mode })
   }
 
-  toggleModal = () => {
-    console.log('Opened Modal')
-  }
-
   render() {
     const { user } = this.state
     return (
-      <div className="container profile-container flex full">
-        <div className="tab-container flex full column align-center">
-          <div className="tab-nav flex">
-            <label className="tab" htmlFor="OwnedGames">
-              <p>Games</p>
-              <input name="tab" type="radio" onChange={this.updateMode}
-                checked={this.state.mode === "OwnedGames"} value="OwnedGames" id="OwnedGames" />
-            </label>
-            <label className="tab" htmlFor="Dashboard">
-              <p>Dashboard</p>
-              <input name="tab" type="radio" onChange={this.updateMode} value="Dashboard" id="Dashboard" />
-            </label>
-          </div>
-          <DynamicTabPrev mode={this.state.mode} />
+      <div className="profile-container">
+        <div className="tab-nav flex align-center">
+          <label className="inner-tab" htmlFor="OwnedGames">
+            <p>Games</p>
+            <input name="tab" type="radio" onChange={this.updateMode}
+              checked={this.state.mode === "OwnedGames"} value="OwnedGames" id="OwnedGames" />
+          </label>
+          <label className="inner-tab" htmlFor="Dashboard">
+            <p>Dashboard</p>
+            <input name="tab" type="radio" onChange={this.updateMode} value="Dashboard" id="Dashboard" />
+          </label>
         </div>
-        <Card
-          style={{ width: 300 }}
-          cover={
-            <img className="user-img small"
-              alt="example"
-              src={user.imgUrl}
-            />
-          }
-          actions={[
-            <Icon title="Edit details" type="edit" key="edit" />,
-            <Icon onClick={this.toggleModal} title="My wishlist" type="heart" key="heart" />,
-          ]}
-        >
-          <Meta
-            title={user.userName}
-            avatar={'Dec 2013'}
-            description={user.about}
-          />
-        </Card>
+        <div className="content-container container">
+          <DynamicTabPrev className="dynamic-prev" history={this.props.history} mode={this.state.mode} />
+          <Card className="user-card"
+            style={{ width: 300 }}
+            cover={<img className="user-img small" alt=""
+              src={user.imgUrl} />}
+            actions={[
+              <Icon title="Edit details" type="edit" key="edit" />,
+              <Icon title="My wishlist" type="heart" key="heart" />,
+            ]}>
+            <Meta title={user.userName} avatar={'Dec 2013'}
+              description={user.about} />
+          </Card>
+        </div>
       </div>
     )
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.userStore.loggedInUser,
+  };
+};
 
+const mapDispatchToProps = {
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfilePage);

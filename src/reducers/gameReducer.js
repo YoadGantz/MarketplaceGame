@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  games: [], filterBy: { publisher: '' }
+  games: [], filterBy: { publisher: '' }, wishedGames: []
 };
 
 export default function gameReducer(state = INITIAL_STATE, action) {
@@ -9,6 +9,11 @@ export default function gameReducer(state = INITIAL_STATE, action) {
         ...state,
         games: action.games
       };
+    case "SET_WISHED_GAMES":
+      return {
+        ...state,
+        wishedGames: action.games
+      }
     case 'SET_FILTER':
       return { ...state, filterBy: { ...action.filterBy } }
     default:

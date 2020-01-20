@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-
-import "antd/dist/antd.css";
 import { Button, notification } from "antd";
 
 import "./GameDetails.scss";

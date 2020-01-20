@@ -1,7 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from 'react-redux'
 
-export default function (props) {
-    return <ul>
-        <div games={props.games}>WishList</div>
-    </ul>
+import { loadGames } from '../actions/gameActions'
+import GameList from "../cmps/game-list/GameList"
+
+class WishList extends Component {
+    componentDidMount() {
+        loadGames()
+    }
+    render() {
+        if (this.props.user) {
+            const { games, user } = this.props
+            let wishedGames = games.filter(game => user.wishedGames.includes(game._id))
+            return <GameList history={this.props.history} user={user} games={wishedGames}></GameList>
+        }
+        return <p>Please Login to see your Wishlist</p>
+    }
 }
+
+const mapStateToProps = state => {
+    return {
+        games: state.gameStore.games,
+        user: state.userStore.loggedInUser
+    };
+};
+
+const mapDispatchToProps = {
+    loadGames
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(WishList);

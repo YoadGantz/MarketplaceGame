@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import OrderService from "../../services/OrderService";
 
 
-import { loadGames, setFilterBy } from "../../actions/gameActions";
+import { loadGames} from "../../actions/gameActions";
 // import { loadUser } from "../../actions/userActions";
 
 import GameList from '../game-list/GameList'
@@ -71,7 +71,6 @@ class Dashboard extends Component {
             this.props.loadGames()
         }
         this.getGraphsDetails()
-
         // const user = this.props.loadUser(this.props.loggedInUser).then((user)=>console.log(user))   
     }
 
@@ -91,15 +90,12 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
     return {
         games: state.gameStore.games,
-        loggedInUser: state.userStore.loggedInUser,
-        filterBy: state.gameStore.filterBy
+        loggedInUser: state.userStore.loggedInUser
     };
 };
 
 const mapDispatchToProps = {
-    loadGames,
-    setFilterBy
-    // loadUser
+    loadGames
 };
 
 export default connect(

@@ -1,4 +1,4 @@
-import UserService from "../services/userService";
+import UserService from "../services/UserService";
 
 export function login(cred) {
     return async dispatch => {
@@ -47,9 +47,26 @@ export function setUser(user) {
     };
 }
 
+export function updateUser(user) {
+    return async dispatch => {
+        try {
+            const updatedUser = await UserService.update(user);
+            dispatch(_updateUser(updatedUser));
+        } catch (err) {
+        }
+    };
+}
+function _updateUser(user) {
+    return {
+        type: 'UPDATE_USER',
+        user
+    }
+}
+
 function _removeUser(userId) {
     return {
         type: 'USER_REMOVE',
         userId
     };
 }
+

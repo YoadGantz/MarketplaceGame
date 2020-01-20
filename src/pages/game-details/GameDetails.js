@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Button, notification } from "antd";
+import CartService from '../../services/CartService.js'
 
-import "antd/dist/antd.css";
+// import { connect } from 'react-redux'
+// import { saveCartItem } from "../../actions/cartActions";
 
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
@@ -21,6 +23,7 @@ export default class GameDetails extends Component {
   
 
   componentDidMount = async () => {
+    
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
     this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
@@ -56,16 +59,25 @@ export default class GameDetails extends Component {
 
   addReview = (rating, text) => {
     const game = { ...this.state.game }
-    game.reviews=[...game.reviews,{ user: { userName: 'bob' }, text, rating }]
+    game.reviews = [...game.reviews, { user: { userName: 'bob' }, text, rating }]
     this.setState({ game })
     this.updateGame()
   }
 
-  openNotification = () => {
-    notification.info({
-      message: `Game has been added`,
-      description: "The game has been added to the cart"
-    });
+  addToCart = async () => {
+    try {
+      await CartService.addToCart(this.state.game._id)
+      notification.info({
+        message: `Game has been added`,
+        description: "The game has been added to the cart"
+      });
+    }
+    catch{
+      notification.info({
+        message: `The game is already in the cart`,
+        description: "You can add other games :)"
+      });
+    }
   };
 
   onThumbNailPhotoClick = ev => {
@@ -88,21 +100,21 @@ export default class GameDetails extends Component {
       <div className="container">
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <Button type="primary" className='game-buy-button' onClick={this.openNotification}>
-            {price}$ Add to basket
+          <Button type="primary" className='game-buy-button' onClick={this.addToCart}>
+            {price}$ Add to cart
           </Button>
         </div>
         <div className="grid game-main-content-container ">
-            {mainMedia}
-            <div className="flex game-choose-thumbnail-container">
-              <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
+          {mainMedia}
+          <div className="flex game-choose-thumbnail-container">
+            <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
           <div >
-              <img alt="" className="game-thumbnail" src={thumbnail}></img>
-              <div className='game-description'>
-            <p> {description}</p>
-            <p> published at: {publishedAt}</p>
-            <p> publisher {publisher.name}</p>
+            <img alt="" className="game-thumbnail" src={thumbnail}></img>
+            <div className='game-description'>
+              <p> {description}</p>
+              <p> published at: {publishedAt}</p>
+              <p> publisher {publisher.name}</p>
             </div>
           </div>
         </div>
@@ -118,5 +130,4 @@ export default class GameDetails extends Component {
     );
   }
 }
-
 

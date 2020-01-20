@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./_EditGame.scss";
-import uploadImg from "../../services/mediaUploadService";
+import uploadImg from "../../services/MediaUploadService";
 import { Button } from "antd";
 import TagList from "../tag-list/TagList";
 import MediaUrlsList from "../comments/media-url-list/MediaUrlList";

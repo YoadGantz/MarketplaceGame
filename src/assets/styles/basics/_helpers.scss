@@ -29,6 +29,10 @@
   > *.full {
     flex: 1;
   }
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
   &.column {
     flex-direction: column;
   }
@@ -41,13 +45,16 @@
   &.justify-between {
     justify-content: space-between;
   }
+  &.space-between{
+    justify-content: space-between;
+  }
 }
 
-.grid{
+.grid {
   display: grid;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 // Media helpers
@@ -93,4 +100,10 @@
   position: absolute;
   right: 15px;
   opacity: 0;
+}
+
+.clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }

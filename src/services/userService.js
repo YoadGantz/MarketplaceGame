@@ -6,7 +6,8 @@ export default {
   logout,
   add,
   remove,
-  getById
+  getById,
+  update
 }
 
 async function login(loginCred) {
@@ -22,6 +23,11 @@ async function signUp(signUpCred) {
 async function logout() {
   const loggedOutUser = await HttpService.post('auth/logout')
   return loggedOutUser
+}
+
+async function update(updatedUser) {
+  const user = await HttpService.put(`user/${updatedUser._id}`, updatedUser);
+  return user
 }
 
 function remove(userId) {

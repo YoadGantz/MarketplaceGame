@@ -3,12 +3,12 @@ import React from 'react'
 import './_GameList.scss'
 
 export default function GameList(props) {
-    const { games } = props;
-    
-    return <ul className="games-container">
+
+    const { games, user } = props;
+    return <ul className="cards-container clean-list container">
         {games?.map((game) => {
             return <li key={game._id}>
-                <GamePreview game={game}></GamePreview>
+                <GamePreview history={props.history} isProfile={props.isProfile} user={user} onUpdateUser={props.onUpdateUser} game={game}></GamePreview>
             </li>
         })
         }

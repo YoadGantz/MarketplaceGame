@@ -1,22 +1,53 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import full_heart from '../../assets/icons/full_heart.svg'
+import empty_heart from '../../assets/icons/empty_heart.svg'
+
 import './_GamePreview.scss'
 
 export default function GamePreview(props) {
-    const { game } = props;
+    const { game, user } = props;
 
+    function onOpenDetails(gameId) {
+        props.history.push(`/game/${gameId}`)
+    }
+
+    function gameRating() {
+        const { reviews } = game
+        let sumOfRating = reviews.reduce((acc, review) => {
+            return acc += review.rating;
+        }, 0)
+        return sumOfRating / reviews.length
+    }
+
+    function toggleWishedGame(ev) {
+        ev.stopPropagation();
+
+        let wishedGames = user && user.wishedGames || []
+        let updatedUser
+        const idx = wishedGames.findIndex(id => id === game._id)
+        if (idx === -1) {
+            updatedUser = { ...user, wishedGames: [...wishedGames, game._id] }
+        } else {
+            updatedUser = { ...user, wishedGames: wishedGames.filter(wishedGame => wishedGame !== game._id) }
+        }
+        props.onUpdateUser(updatedUser)
+    }
     return (
         <React.Fragment>
-            <Link to={`/game/${game._id}`}>
-                <div className="game-card">
-                    <h3>{game.title}</h3>
-                    <h5>{game.publisher.name}</h5>
-                    <div className="img-container">
-                        <img alt ="thumbnail" className="game-thumbnail" width="200" src={game.thumbnail}></img>
-                    </div>
-                    <p>${game.price}</p>
+            <div onClick={() => onOpenDetails(game._id)} className="game-card">
+                <div className="img-container">
+                    <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
                 </div>
-            </Link>
-        </React.Fragment>
-    );
+                <h3>{game.title}</h3>
+                <p className="rating">{gameRating()} ({game.reviews.length} reviews)</p>
+                <h5>{game.publisher.user.userName}</h5>
+                <div className="flex space-between">
+                    <p className="price">${game.price}</p>
+                    {!props.isProfile &&
+                        <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
+                </div>
+            </div>
+        </React.Fragment >
+    )
 };
