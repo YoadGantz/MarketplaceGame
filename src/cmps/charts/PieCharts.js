@@ -15,11 +15,12 @@ export default class PieCharts extends PureComponent {
   }
 
   setData = () => {
+    const colors=['#16578F','#5F89D3','#A45FC1','#E5EDF4','#4C96D7']
     const ordersSum = this.props.games.reduce((sum, game) => {
       return sum += this.props.orderedGames[game.title]
     }, 0)
-    const data = this.props.games.map((game) => {
-      return { name: game.title, value: Math.floor(((this.props.orderedGames[game.title]) / ordersSum) * 100) }
+    const data = this.props.games.map((game,i) => {
+      return {fill:colors[i] ,name: game.title, value: Math.floor(((this.props.orderedGames[game.title]) / ordersSum) * 100)}
     })
     this.setState({ data })
   }

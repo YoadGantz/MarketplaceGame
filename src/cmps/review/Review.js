@@ -7,9 +7,6 @@ export default class Review extends Component {
   state = { rating: 1, text: "" };
 
   inputChange = ev => {
-    if (!isNaN(ev)) {
-      return this.setState({ rating: ev })
-    }
     let fieldName = ev.target.name;
     this.setState({ [fieldName]: ev.target.value });
   };
@@ -30,28 +27,27 @@ export default class Review extends Component {
             return (
               <div key={review.text}>
                 <p>{review.user.userName}</p>
-                <p> text: {review.text}</p>
-                <Rate allowHalf disabled defaultValue={review.rating} />
+                <p>{review.text}</p>
+            <p> rating: {review.rating}</p>
               </div>
             );
           })}
         </ul>
         <h3>New review</h3>
-        <TextArea
+        <textarea
           type="text"
           name="text"
           value={text}
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <Rate
+        <input
           type="number"
           name="rating"
           value={rating}
           onChange={this.inputChange}
-          allowHalf defaultValue={2.5}
         />
-        <Button onClick={this.onAddReview} type='primary'>Add Review</Button>
+        <button onClick={this.onAddReview}>Add Review</button>
       </div>
     );
   }
