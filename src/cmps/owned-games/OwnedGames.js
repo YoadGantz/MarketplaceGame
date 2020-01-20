@@ -18,9 +18,9 @@ class OwnedGames extends Component {
     render() {
         return (
             <div>
-                <h1>Games</h1>
+                <h1>Your Games</h1>
                 <Filter onFilterBy={this.onFilterBy}></Filter>
-                <GameList games={this.props.games}></GameList>
+                <GameList history={this.props.history} games={this.props.games}></GameList>
             </div>
         )
     }

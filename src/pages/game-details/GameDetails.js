@@ -5,8 +5,6 @@ import CartService from '../../services/CartService.js'
 // import { connect } from 'react-redux'
 // import { saveCartItem } from "../../actions/cartActions";
 
-import "antd/dist/antd.css";
-
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameMedia from "../../cmps/game-media/GameMedia";
@@ -23,7 +21,6 @@ export default class GameDetails extends Component {
   };
 
   componentDidMount = async () => {
-    console.log('cmp did mount details');
     
     const { id } = this.props.match.params
     const game = await GameService.getById(id)

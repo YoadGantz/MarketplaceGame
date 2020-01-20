@@ -28,12 +28,12 @@ export default function GamePreview(props) {
     return (
         <React.Fragment>
             <div onClick={() => onOpenDetails(game._id)} className="game-card">
-                <h3>{game.title}</h3>
-                <h5>{game.publisher.name}</h5>
                 <div className="img-container">
-                    <img alt="thumbnail" className="game-thumbnail" width="200" src={game.thumbnail}></img>
+                    <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
                 </div>
-                <p>${game.price}</p>
+                <h3>{game.title}</h3>
+                <h5>{game.publisher.user.userName}</h5>
+                <p className="price">${game.price}</p>
                 <img onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart}></img>
             </div>
         </React.Fragment >

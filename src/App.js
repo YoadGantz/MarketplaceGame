@@ -43,9 +43,9 @@ export default class App extends Component {
                   <Route component={HomePage} path="/" exact></Route>
                   <Route component={Login} path="/login" exact />
                   <Route component={EditGame} path="/edit" exact></Route>
-                  <Route render={() => <Explore history={history}></Explore>} path="/game" exact></Route>
                   <Route component={GameDetails} path="/game/:id" exact></Route>
-                  <Route component={ProfilePage} path="/user/:id" exact></Route>
+                  <Route render={() => <Explore history={history}></Explore>} path="/game" exact></Route>
+                  <Route render={() => <ProfilePage history={history}></ProfilePage>} path="/user/:id" exact></Route>
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>

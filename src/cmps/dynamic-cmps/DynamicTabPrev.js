@@ -9,7 +9,7 @@ export default class DynamicTabPrev extends Component {
     render() {
         const Cmp = this.getComponent();
         return <React.Fragment>
-            <Cmp></Cmp>
+            <Cmp history={this.props.history}></Cmp>
         </React.Fragment>
     }
 }
