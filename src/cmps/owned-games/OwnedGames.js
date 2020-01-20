@@ -18,7 +18,6 @@ class OwnedGames extends Component {
     render() {
         return (
             <div>
-                <h1>Your Games</h1>
                 <Filter onFilterBy={this.onFilterBy}></Filter>
                 <GameList isProfile={true} history={this.props.history} games={this.props.games}></GameList>
             </div>

@@ -12,6 +12,16 @@ export default function GamePreview(props) {
         props.history.push(`/game/${gameId}`)
     }
 
+    function getGameRating() {
+        const { reviews } = game
+
+        let sumOfRating = reviews.reduce((acc, review) => {
+            return acc += review.rating;
+        }, 0)
+        const rating = +(sumOfRating / reviews.length).toFixed(2)
+        return rating
+    }
+
     function onRemoveFromCart(ev) {
         ev.stopPropagation();
         props.onRemoveFromCart(game._id)
