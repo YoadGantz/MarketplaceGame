@@ -13,10 +13,11 @@ export default function GamePreview(props) {
     }
 
     function gameRating() {
-        const {reviews} = game
-        return reviews.reduce((acc, review) => {
+        const { reviews } = game
+        let sumOfRating = reviews.reduce((acc, review) => {
             return acc += review.rating;
         }, 0)
+        return sumOfRating / reviews.length
     }
 
     function toggleWishedGame(ev) {
@@ -41,7 +42,7 @@ export default function GamePreview(props) {
                 <h3>{game.title}</h3>
                 <h5>{game.publisher.user.userName}</h5>
                 <p className="price">${game.price}</p>
-    <p className="rating">{gameRating()} (total of {game.reviews.length} reviews)</p>
+                <p className="rating">{gameRating()} ({game.reviews.length} reviews)</p>
                 <img onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart}></img>
             </div>
         </React.Fragment >
