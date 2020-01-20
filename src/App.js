@@ -42,7 +42,7 @@ export default class App extends Component {
                <Switch>
                   <Route component={HomePage} path="/" exact />
                   <Route component={Login} path="/login" exact />
-                  <Route component={EditGame} path="/edit" exact />
+                  <Route component={EditGame} path="/edit/:id?" exact />
                   <Route component={GameDetails} path="/game/:id" exact />
                   <Route render={() => <Explore history={history} />} path="/game" exact />
                   <Route render={() => <ProfilePage history={history} />} path="/user/:id" exact></Route>

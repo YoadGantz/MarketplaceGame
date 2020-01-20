@@ -1,5 +1,5 @@
 import OrderService from "./OrderService";
-export default { getGraphsDetails, getGameRating }
+export default { getGraphsDetails, getGameRating,objectIdByTime }
 
 function getGameRating(game) {
     const { reviews } = game
@@ -10,9 +10,11 @@ function getGameRating(game) {
     return rating
 }
 
-function _objectIdFromLastMonth() {
+function objectIdByTime(time) {
     let date = new Date()
-    date.setDate(date.getDate() - 30);
+    if (time){
+        date.setDate(date.getDate() - time);
+    }
     return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000"
 }
 
@@ -26,7 +28,7 @@ async function getGraphsDetails(games) {
     const gameByNameOrder = []
     games.forEach((game) => {
         prms.push(OrderService.query({
-            lastMonthId: _objectIdFromLastMonth(),
+            lastMonthId: objectIdByTime(30),
             gameIds: game._id
         }))
         gameByNameOrder.push(game.title)

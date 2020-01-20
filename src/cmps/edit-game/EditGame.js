@@ -4,19 +4,40 @@ import uploadImg from "../../services/MediaUploadService";
 import { Button } from "antd";
 import TagList from "../tag-list/TagList";
 import MediaUrlsList from "../comments/media-url-list/MediaUrlList";
-import TextArea from "antd/lib/input/TextArea";
+import { connect } from 'react-redux'
+import GameService from "../../services/GameService";
 
-export default class EditGame extends Component {
+class EditGame extends Component {
   state = {
     title: "",
-    descripiton: "",
+    description: "",
     thumbnail: "",
     mediaUrls: [],
     price: "",
-    tags: [],
-    currUrl: "",
-    currTag: ""
+    publishedAt: '',
+    tags: []
   };
+
+componentDidMount= async ()=>{
+  const params=this.props.match.params.id
+  if (params){
+    const game= await GameService.getById(params)
+    console.log(game)
+ this.setState({...game})
+  }
+}
+
+  onSubmit = () => {
+    const newGame = { ...this.state }
+    if(this.props.match.params.id){
+      GameService.update(newGame)
+    }
+    if (!this.props.loggedInUser) return
+    newGame.publisher = this.props.loggedInUser._id
+    newGame.comments = []
+    newGame.reviews = []
+    GameService.add(newGame)
+  }
 
   addMediaAndTags = async ev => {
     const fieldName = ev.target.name
@@ -37,8 +58,12 @@ export default class EditGame extends Component {
   };
 
   removeMediaAndTags = (fieldName, idx) => {
+    if (fieldName === 'thumbnail') {
+      return this.setState({ thumbnail: '' })
+    }
     let editedData = [...this.state[fieldName]];
     editedData.splice(idx, 1);
+    console.log(editedData)
     this.setState({
       [fieldName]: editedData
     });
@@ -50,8 +75,7 @@ export default class EditGame extends Component {
   };
 
   render() {
-
-    const { mediaUrls, tags, thumbnail } = this.state;
+    const { mediaUrls, tags, thumbnail,description,title,publishedAt,price } = this.state;
     let addedTags;
     let addedUrls;
     let addedThumbnail
@@ -64,21 +88,32 @@ export default class EditGame extends Component {
         <TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />
       )
     }
+
     if (thumbnail) {
       addedThumbnail = <div className='media-container'>
         <img src={thumbnail} alt='' />
+        <span
+          className="pointer"
+          onClick={() => this.removeMediaAndTags("thumbnail")}
+        >
+          X
+        </span>
       </div>
     }
+
     return (
       <div className='edit-container'>
-          <p> Title : </p>
-          <input  type="text" onChange={this.inputChange} placeholder="title"  name="title" />
+        <p> Title : </p>
+        <input type="text" onChange={this.inputChange} value={title} placeholder="title" name="title" />
+        <p>Publish Date</p>
+        <input type="date" onChange={this.inputChange} value={publishedAt} name="publishedAt"/>
         <p> Descripiton: </p>
-        <TextArea
+        <textarea
           type="text"
           onChange={this.inputChange}
-          placeholder="descripiton"
-          name="descripiton"
+          placeholder="description"
+          name="description"
+          value={description}
         />
         <p> Thumbnail Img: </p>
         <input
@@ -104,6 +139,7 @@ export default class EditGame extends Component {
           onChange={this.inputChange}
           placeholder="price"
           name="price"
+          value={price}
         />
         <p>Tags:</p>
         <input
@@ -116,8 +152,22 @@ export default class EditGame extends Component {
           Add Tag
           </button>
         <div className="flex">{addedTags}</div>
-        <Button>Submit</Button>
+        <Button onClick={this.onSubmit}>Submit</Button>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.userStore.loggedInUser,
+  };
+};
+
+const mapDispatchToProps = {
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditGame);

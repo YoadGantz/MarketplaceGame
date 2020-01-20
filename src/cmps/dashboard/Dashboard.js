@@ -10,6 +10,8 @@ import GameList from '../game-list/GameList'
 import Graph from "../charts/LineChart";
 import PieCharts from "../charts/PieCharts";
 import orderUtils from "../../services/UtilService";
+import EditGame from "../edit-game/EditGame";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
     state = {
@@ -56,6 +58,7 @@ class Dashboard extends Component {
             <Graph orderDates={orders} ></Graph>
             <PieCharts games={this.props.games} orderedGames={orders} />
             <div>game list</div>
+            <Link to='/edit'><button>Add a game</button></Link>
             <GameList isProfile={true} games={this.props.games}></GameList>
         </div>
         )
