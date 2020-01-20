@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import wishlistImg from "../../assets/icons/wishlist.svg"
+import shoppingCartImg from "../../assets/icons/shopping_cart.svg"
 import "./_NavBar.scss"
+
 // update to use NavLink 
 export default class Navbar extends Component {
   render() {
@@ -10,9 +12,9 @@ export default class Navbar extends Component {
     return (
       <nav className="nav-bar flex align-center">
         <div className="nav-logo full">
-          <a  to="/">
+          <Link to="/">
             <img alt="logo" src="/navbar-logo.png" />
-          </a>
+          </Link>
         </div>
         <Link className="nav-link flex align-center" to="/">
           Homepage
@@ -23,8 +25,8 @@ export default class Navbar extends Component {
         <Link className="nav-link flex align-center" to={`/user/${userName}`}>
           Profile
         </Link>
-        <p className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")}>Wishlist</p>
-        <p className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")}>Shopping Cart</p>
+        <img src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
+        <img src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
       </nav>
     )
   }

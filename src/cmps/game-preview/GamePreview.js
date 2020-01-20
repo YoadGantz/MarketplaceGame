@@ -14,7 +14,7 @@ export default function GamePreview(props) {
 
     function gameRating() {
         const { reviews } = game
-        
+
         let sumOfRating = reviews.reduce((acc, review) => {
             return acc += review.rating;
         }, 0)
