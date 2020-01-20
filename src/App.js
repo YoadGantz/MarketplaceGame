@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import { createBrowserHistory, createHashHistory } from 'history';
+import { Router, Switch, Route} from 'react-router';
+
+import history from './history';
 
 import HomePage from './pages/homepage/HomePage';
 import Login from './pages/login/Login';
@@ -14,8 +15,6 @@ import './assets/styles/global.scss'
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/WishList';
-
-const history = createHashHistory();
 
 export default class App extends Component {
    state = {

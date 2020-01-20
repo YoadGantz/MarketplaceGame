@@ -113,7 +113,6 @@ export default class GameDetails extends Component {
       mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
-    console.log('rating', rating);
 
     return (
       <div className="container">

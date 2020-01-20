@@ -1,17 +1,14 @@
 
 import React, { Component } from "react"
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 
-
-import { loadGames} from "../../actions/gameActions";
-// import { loadUser } from "../../actions/userActions";
+import UtilService from "../../services/UtilService";
+import { loadGames } from "../../actions/gameActions";
 
 import GameList from '../game-list/GameList'
 import Graph from "../charts/LineChart";
 import PieCharts from "../charts/PieCharts";
-import orderUtils from "../../services/UtilService";
-import EditGame from "../edit-game/EditGame";
-import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
     state = {
@@ -21,33 +18,30 @@ class Dashboard extends Component {
         }
     }
 
-    getGraphsDetails=async ()=>{
-     const   ordersBy=await orderUtils.getGraphsDetails(this.props.games)
+    getGraphsDetails = async () => {
+        const ordersBy = await UtilService.getGraphsDetails(this.props.games)
         this.setState({ orders: ordersBy })
     }
-    componentDidUpdate= (prevProps)=>{
-      if  (prevProps.games.length!==this.props.length){
-          this.getGraphsDetails()
-      }
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.games.length !== this.props.length) {
+            this.getGraphsDetails()
+        }
     }
 
-
-
-
-    componentDidMount =() =>{
+    componentDidMount() {
         if (this.props.loggedInUser) {
             const publisherId = this.props.loggedInUser._id
             this.setState({
                 filterBy: {
+                    publisherId
                 }
-            }, async ()=> {
-              await  this.props.loadGames(this.state.filterBy)
+            }, async () => {
+                await this.props.loadGames(this.state.filterBy)
             })
         } else {
             this.props.loadGames()
         }
         this.getGraphsDetails()
-        // const user = this.props.loadUser(this.props.loggedInUser).then((user)=>console.log(user))   
     }
 
     render() {
