@@ -3,9 +3,7 @@ import React, { Component } from "react"
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 
-
 import { loadGames } from "../../actions/gameActions";
-// import { loadUser } from "../../actions/userActions";
 
 import GameList from '../game-list/GameList'
 import Graph from "../charts/LineChart";
