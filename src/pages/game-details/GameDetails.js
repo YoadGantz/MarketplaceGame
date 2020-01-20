@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Button, notification } from "antd";
-import CartService from '../../services/CartService.js'
 
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameMedia from "../../cmps/game-media/GameMedia";
+import CartService from '../../services/CartService.js'
 import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
 import UtilService from "../../services/UtilService";
@@ -23,7 +23,6 @@ export default class GameDetails extends Component {
   };
 
   componentDidMount = async () => {
-
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
     this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
