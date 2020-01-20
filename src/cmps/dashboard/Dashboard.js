@@ -10,6 +10,7 @@ import { loadGames} from "../../actions/gameActions";
 import GameList from '../game-list/GameList'
 import Graph from "../charts/LineChart";
 import PieCharts from "../charts/PieCharts";
+import orderUtils from "../../services/UtilService";
 
 class Dashboard extends Component {
     state = {
@@ -18,38 +19,9 @@ class Dashboard extends Component {
             publisherName: '',
         }
     }
-    objectIdFromLastMonth = () => {
-        let date = new Date()
-        date.setDate(date.getDate() - 30);
-        return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000"
-    }
 
-    dateFromObjectId = (objectId) => {
-        return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).getDate();
-    };
-
-
-    getGraphsDetails = async () => {
-        const prms = []
-        const ordersBy = {}
-        const gameByNameOrder = []
-        this.props.games.forEach((game) => {
-            prms.push(OrderService.query({
-                lastMonthId: this.objectIdFromLastMonth(),
-                gameIds: game._id
-            }))
-            gameByNameOrder.push(game.title)
-        })
-        const gameOrders = await Promise.all(prms)
-        gameOrders.forEach((orders, i) => {
-            return orders.forEach((order, idx) => {
-                const currOrderDate = (this.dateFromObjectId(order._id))
-                let num = ordersBy[currOrderDate]
-                if (!num) return ordersBy[currOrderDate] = 1
-                ordersBy[gameByNameOrder[i]] = idx
-                return ordersBy[currOrderDate] = num + 1
-            })
-        })
+    getGraphsDetails=async ()=>{
+     const   ordersBy=await orderUtils.getGraphsDetails(this.props.games)
         this.setState({ orders: ordersBy })
     }
 
@@ -81,7 +53,7 @@ class Dashboard extends Component {
             <Graph orderDates={orders} ></Graph>
             <PieCharts games={this.props.games} orderedGames={orders} />
             <div>game list</div>
-            <GameList games={this.props.games}></GameList>
+            <GameList isProfile={true} games={this.props.games}></GameList>
         </div>
         )
     }

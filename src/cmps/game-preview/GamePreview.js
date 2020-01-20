@@ -12,7 +12,7 @@ export default function GamePreview(props) {
         props.history.push(`/game/${gameId}`)
     }
 
-    function gameRating() {
+    function getGameRating() {
         const { reviews } = game
 
         let sumOfRating = reviews.reduce((acc, review) => {
@@ -20,6 +20,11 @@ export default function GamePreview(props) {
         }, 0)
         const rating = +(sumOfRating / reviews.length).toFixed(2)
         return rating
+    }
+
+    function onRemoveFromCart(ev) {
+        ev.stopPropagation();
+        props.onRemoveFromCart(game._id)
     }
 
     function toggleWishedGame(ev) {
@@ -43,13 +48,15 @@ export default function GamePreview(props) {
                 </div>
                 <div className="flex">
                     <h3 className="full">{game.title}</h3>
-                    <p className="rating">{gameRating()} ({game.reviews.length} reviews)</p>
+                    <p className="rating">{getGameRating()} ({game.reviews.length} reviews)</p>
                 </div>
                 <h5>{game.publisher.user.userName}</h5>
                 <div className="flex space-between">
                     <p className="price">${game.price}</p>
                     {!props.isProfile &&
                         <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
+                    {props.isCart && <img className="like-icon" onClick={onRemoveFromCart} />}
+
                 </div>
             </div>
         </React.Fragment >

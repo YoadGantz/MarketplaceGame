@@ -20,16 +20,15 @@ export default class Graph extends PureComponent {
     for (let i = 1; i < 31; i++) {
       let price
       if (purcheses[i]) {
-        console.log(purcheses[i])
-        price = purcheses[i] * 20
+        price = purcheses[i] 
       } else if (!(i % 3)) {
-        price = 15 * i
+        price = i
       } else if (i < 5) {
-        price = i * 100
+        price = i 
       } else if (i > 25) {
-        price = i * 10
+        price = i 
       } else {
-        price = 20 * i
+        price =  i
       }
       data.push({ name: i, $: price })
     }
