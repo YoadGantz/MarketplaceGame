@@ -3,32 +3,43 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
 
-const data = [
-  {
-    name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-  },
-  {
-    name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-  },
-  {
-    name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-  },
-  {
-    name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-  },
-  {
-    name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-  },
-  {
-    name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-  },
-  {
-    name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-  },
-];
+export default class Graph extends PureComponent {
+  state = { data: [{ name: 0, $: 0 }] }
 
-export default class Example extends PureComponent {
+  componentDidUpdate(prevprops) {
+    if (prevprops.orderDates !== this.props.orderDates) {
+      this.setData(this.props.orderDates)
+    }
+  }
+
+
+
+
+  setData = (purcheses) => {
+    const data = []
+    for (let i = 1; i < 31; i++) {
+      let price
+      if (purcheses[i]) {
+        console.log(purcheses[i])
+        price = purcheses[i] * 20
+      } else if (!(i % 3)) {
+        price = 15 * i
+      } else if (i < 5) {
+        price = i * 100
+      } else if (i > 25) {
+        price = i * 10
+      } else {
+        price = 20 * i
+      }
+      data.push({ name: i, $: price })
+    }
+    this.setState({ data })
+  }
+
+
+
   render() {
+    const { data } = this.state
     return (
       <AreaChart
         width={500}
@@ -42,8 +53,9 @@ export default class Example extends PureComponent {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="$" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
   }
 }
+

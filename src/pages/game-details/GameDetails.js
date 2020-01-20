@@ -18,6 +18,8 @@ export default class GameDetails extends Component {
     comments: []
   };
 
+  
+
   componentDidMount = async () => {
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
@@ -116,3 +118,5 @@ export default class GameDetails extends Component {
     );
   }
 }
+
+
