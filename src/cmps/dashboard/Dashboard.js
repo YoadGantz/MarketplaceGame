@@ -1,14 +1,14 @@
 
-import React, { Component } from "react"
-import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import UtilService from "../../services/UtilService";
-import { loadGames } from "../../actions/gameActions";
+import UtilService from '../../services/UtilService';
+import { loadGames } from '../../actions/gameActions';
 
-import GameList from '../game-list/GameList'
-import Graph from "../charts/LineChart";
-import PieCharts from "../charts/PieCharts";
+import GameList from '../game-list/GameList';
+import Graph from '../charts/LineChart';
+import PieCharts from '../charts/PieCharts';
 
 class Dashboard extends Component {
     state = {
