@@ -12,6 +12,13 @@ export default function GamePreview(props) {
         props.history.push(`/game/${gameId}`)
     }
 
+    function gameRating() {
+        const {reviews} = game
+        return reviews.reduce((acc, review) => {
+            return acc += review.rating;
+        }, 0)
+    }
+
     function toggleWishedGame(ev) {
         ev.stopPropagation();
 
@@ -34,6 +41,7 @@ export default function GamePreview(props) {
                 <h3>{game.title}</h3>
                 <h5>{game.publisher.user.userName}</h5>
                 <p className="price">${game.price}</p>
+    <p className="rating">{gameRating()} (total of {game.reviews.length} reviews)</p>
                 <img onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart}></img>
             </div>
         </React.Fragment >
