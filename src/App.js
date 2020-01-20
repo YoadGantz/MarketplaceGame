@@ -38,14 +38,14 @@ export default class App extends Component {
       return (
          <React.Fragment>
             <Router history={history}>
-               <Navbar togglePortal={this.togglePortal}></Navbar>
+               <Navbar togglePortal={this.togglePortal} />
                <Switch>
-                  <Route component={HomePage} path="/" exact></Route>
+                  <Route component={HomePage} path="/" exact />
                   <Route component={Login} path="/login" exact />
-                  <Route component={EditGame} path="/edit" exact></Route>
-                  <Route render={() => <Explore history={history}></Explore>} path="/game" exact></Route>
-                  <Route component={GameDetails} path="/game/:id" exact></Route>
-                  <Route component={ProfilePage} path="/user/:id" exact></Route>
+                  <Route component={EditGame} path="/edit" exact />
+                  <Route render={() => <Explore history={history} />} path="/game" exact></Route>
+                  <Route component={GameDetails} path="/game/:id" exact />
+                  <Route component={ProfilePage} path="/user/:id" exact />
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
