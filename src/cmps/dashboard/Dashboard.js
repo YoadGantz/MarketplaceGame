@@ -81,7 +81,7 @@ class Dashboard extends Component {
             <Graph orderDates={orders} ></Graph>
             <PieCharts games={this.props.games} orderedGames={orders} />
             <div>game list</div>
-            <GameList games={this.props.games}></GameList>
+            <GameList isProfile={true} games={this.props.games}></GameList>
         </div>
         )
     }

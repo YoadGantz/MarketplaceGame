@@ -12,7 +12,7 @@ export default function GamePreview(props) {
         props.history.push(`/game/${gameId}`)
     }
 
-    function gameRating() {
+    function getGameRating() {
         const { reviews } = game
         
         let sumOfRating = reviews.reduce((acc, review) => {
@@ -48,7 +48,7 @@ export default function GamePreview(props) {
                 </div>
                 <div className="flex">
                     <h3 className="full">{game.title}</h3>
-                    <p className="rating">{gameRating()} ({game.reviews.length} reviews)</p>
+                    <p className="rating">{getGameRating()} ({game.reviews.length} reviews)</p>
                 </div>
                 <h5>{game.publisher.user.userName}</h5>
                 <div className="flex space-between">
