@@ -17,7 +17,7 @@ class Explore extends Component {
     }
 
     render() {
-        return <div className="explore-container flex column container">
+        return <div className="flex column container align-center">
             <Filter onFilterBy={this.onFilterBy}></Filter>
             <GameList history={this.props.history} games={this.props.games}></GameList>
         </div>

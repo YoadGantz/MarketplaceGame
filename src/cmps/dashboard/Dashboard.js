@@ -34,7 +34,6 @@ class Dashboard extends Component {
         return (<div>
             <h1>Dashboard</h1>
             <LineChart></LineChart>
-            <div>game list</div>
             <GameList games={this.props.games}></GameList>
         </div>
         )
