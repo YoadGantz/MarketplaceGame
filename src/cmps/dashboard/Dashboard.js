@@ -1,7 +1,6 @@
 
 import React, { Component } from "react"
 import { connect } from 'react-redux'
-import OrderService from "../../services/OrderService";
 
 
 import { loadGames} from "../../actions/gameActions";
@@ -24,20 +23,24 @@ class Dashboard extends Component {
      const   ordersBy=await orderUtils.getGraphsDetails(this.props.games)
         this.setState({ orders: ordersBy })
     }
+    componentDidUpdate= (prevProps)=>{
+      if  (prevProps.games.length!==this.props.length){
+          this.getGraphsDetails()
+      }
+    }
 
 
 
 
-    componentDidMount() {
+    componentDidMount =() =>{
         if (this.props.loggedInUser) {
             const publisherName = this.props.loggedInUser.userName
             this.setState({
                 filterBy: {
                     publisherName,
-                    lastMonthId: this.objectIdFromLastMonth()
                 }
-            }, () => {
-                this.props.loadGames(this.state.filterBy)
+            }, async ()=> {
+              await  this.props.loadGames(this.state.filterBy)
             })
         } else {
             this.props.loadGames()
