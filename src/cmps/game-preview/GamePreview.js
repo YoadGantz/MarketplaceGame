@@ -48,13 +48,13 @@ export default function GamePreview(props) {
                 </div>
                 <div className="flex">
                     <h3 className="full">{game.title}</h3>
-                    <p className="rating">{UtilService.getGameRating(game)} ({game.reviews.length} reviews)</p>
+                    <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
                 </div>
                 <h5>{game.publisher.user.userName}</h5>
                 <div className="flex space-between">
                     <p className="price">${game.price}</p>
                     {!props.isProfile &&
-                        <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
+                        <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
                     {props.isCart && <img className="like-icon" onClick={onRemoveFromCart} />}
 
                 </div>

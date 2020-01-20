@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import HomePage from './pages/homepage/HomePage';
@@ -45,7 +45,7 @@ export default class App extends Component {
                   <Route component={EditGame} path="/edit" exact />
                   <Route component={GameDetails} path="/game/:id" exact />
                   <Route render={() => <Explore history={history} />} path="/game" exact />
-                  <Route render={() => <ProfilePage history={history} />} path="/user/:id" exact></Route>
+                  <Route render={() => <ProfilePage history={history} />} path="/user/:id" exact />
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
