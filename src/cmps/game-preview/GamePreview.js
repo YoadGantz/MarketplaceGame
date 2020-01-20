@@ -14,14 +14,15 @@ export default class GamePreview extends Component {
         const publisherName = publisher.userName
         this.setState({ publisherName })
     }
-    onOpenDetails(gameId) {
+    onOpenDetails = (gameId) => {
+        console.log(this.props)
         this.props.history.push(`/game/${gameId}`)
     }
-    onRemoveFromCart(ev) {
+    onRemoveFromCart = (ev) => {
         ev.stopPropagation();
         this.props.onRemoveFromCart(this.props.game._id)
     }
-    toggleWishedGame(ev) {
+    toggleWishedGame = (ev) => {
         const { user, game } = this.props
         ev.stopPropagation();
         let wishedGames = user && user.wishedGames || []

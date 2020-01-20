@@ -13,7 +13,6 @@ class Explore extends Component {
     }
 
     onUpdateUser = async (updatedUser) => {
-        // debugger;
         // console.log('explore updatedUser', updatedUser);
         this.props.updateUser(updatedUser)
         // console.log(this.props.user);
