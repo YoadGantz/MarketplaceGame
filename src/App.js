@@ -40,12 +40,12 @@ export default class App extends Component {
             <Router history={history}>
                <Navbar togglePortal={this.togglePortal} />
                <Switch>
-                  <Route component={HomePage} path="/" exact />
-                  <Route component={Login} path="/login" exact />
-                  <Route component={EditGame} path="/edit/:id?" exact />
-                  <Route component={GameDetails} path="/game/:id" exact />
-                  <Route render={() => <Explore history={history} />} path="/game" exact />
-                  <Route render={() => <ProfilePage history={history} />} path="/user/:id" exact />
+                  <Route path="/" component={HomePage} exact />
+                  <Route path="/login" component={Login} exact />
+                  <Route path="/edit" component={EditGame} exact />
+                  <Route path="/game/:id" component={GameDetails} exact />
+                  <Route path="/game" render={() => <Explore history={history} />} exact />
+                  <Route path="/user/:id" render={() => <ProfilePage history={history} />} exact />
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
