@@ -1,52 +1,40 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
-import { loadGames } from "../../actions/gameActions";
 import CartService from '../../services/CartService'
 import GameList from '../../cmps/game-list/GameList'
+import GameService from '../../services/GameService';
 
-class ShoppingCart extends Component {
+export default class ShoppingCart extends Component {
     state = {
-        isEmpty: true,
-        filterBy: {
-            shoppingCartIds: ''
-        }
+        games: [],
+        gamesIds: []
     }
 
-    async componentDidMount() {
+    async loadGames() {
         const gamesIds = await CartService.query();
-        if (gamesIds.length) {
-            this.setState({
-                filterBy: {
-                    shoppingCartIds: gamesIds
-                },
-                isEmpty: false
-            }, () => {
-                this.props.loadGames(this.state.filterBy)
-            })
-        } else {
-            this.setState({ isEmpty: true })
+        let gamesToRender = []
+        if (gamesIds.length ) {
+            gamesToRender = await GameService.query({ shoppingCartIds: gamesIds })
         }
+        this.setState({ gamesIds, games: gamesToRender })
+    }
+
+    onRemoveFromCart = (gameId) => {
+        console.log(gameId);
+
+        CartService.removeItem(gameId)
+        this.loadGames()
+    }
+
+    componentDidMount() {
+        this.loadGames()
     }
     render() {
+
         return <div>
-            <h1>Testing The Shopping Cart</h1>
-            <GameList games={this.props.games} history={this.props.history}></GameList>
+            {(this.state.games.length) ? 
+            <GameList onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
+            : <h2>Your shopping cart is empty</h2>}
         </div>
     }
-};
-
-const mapStateToProps = state => {
-    return {
-        games: state.gameStore.games
-    };
-};
-
-const mapDispatchToProps = {
-    loadGames
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ShoppingCart);
+}

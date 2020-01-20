@@ -20,6 +20,11 @@ export default function GamePreview(props) {
         return sumOfRating / reviews.length
     }
 
+    function onRemoveFromCart(ev) {
+        ev.stopPropagation();
+        props.onRemoveFromCart(game._id)
+    }
+
     function toggleWishedGame(ev) {
         ev.stopPropagation();
 
@@ -46,6 +51,8 @@ export default function GamePreview(props) {
                     <p className="price">${game.price}</p>
                     {!props.isProfile &&
                         <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
+                    {props.isCart && <img className="like-icon" onClick={onRemoveFromCart} />}
+
                 </div>
             </div>
         </React.Fragment >
