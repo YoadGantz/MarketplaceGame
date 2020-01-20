@@ -31,7 +31,7 @@ class ShoppingCart extends Component {
     render() {
         return <div>
             <h1>Testing The Shopping Cart</h1>
-            <GameList games={this.props.games}></GameList>
+            <GameList games={this.props.games} history={this.props.history}></GameList>
         </div>
     }
 };
