@@ -38,18 +38,18 @@ export default class App extends Component {
       return (
          <React.Fragment>
             <Router history={history}>
-               <Navbar togglePortal={this.togglePortal}></Navbar>
+               <Navbar togglePortal={this.togglePortal} />
                <Switch>
-                  <Route component={HomePage} path="/" exact></Route>
+                  <Route component={HomePage} path="/" exact />
                   <Route component={Login} path="/login" exact />
-                  <Route component={EditGame} path="/edit" exact></Route>
-                  <Route component={GameDetails} path="/game/:id" exact></Route>
-                  <Route render={() => <Explore history={history}></Explore>} path="/game" exact></Route>
-                  <Route render={() => <ProfilePage history={history}></ProfilePage>} path="/user/:id" exact></Route>
+                  <Route component={EditGame} path="/edit" exact />
+                  <Route component={GameDetails} path="/game/:id" exact />
+                  <Route render={() => <Explore history={history} />} path="/game" exact />
+                  <Route render={() => <ProfilePage history={history} />} path="/user/:id" exact></Route>
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
-               {(this.state.modalType === 'wishlist') ? <WishList history={history} /> : <ShoppingCart />}
+               {(this.state.modalType === 'wishlist') ? <WishList history={history} /> : <ShoppingCart history={history} />}
 
             </Modal>}
          </React.Fragment>
