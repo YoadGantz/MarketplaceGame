@@ -8,7 +8,7 @@ import { loadGames } from '../../actions/gameActions';
 
 import GameList from '../game-list/GameList';
 import Graph from '../charts/LineChart';
-import PieCharts from '../charts/PieCharts';
+import PieChart from '../charts/PieChart';
 
 class Dashboard extends Component {
     state = {
@@ -49,7 +49,7 @@ class Dashboard extends Component {
         return (<div>
             <h1>Dashboard</h1>
             <Graph orderDates={orders} ></Graph>
-            <PieCharts games={this.props.games} orderedGames={orders} />
+            <PieChart games={this.props.games} orderedGames={orders} />
             <div>game list</div>
             <Link to='/edit'>Add a game</Link>
             <GameList isProfile={true} games={this.props.games}></GameList>
