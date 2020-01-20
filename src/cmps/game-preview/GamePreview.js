@@ -14,9 +14,10 @@ export default function GamePreview(props) {
 
     function gameRating() {
         const { reviews } = game
-        return reviews.reduce((acc, review) => {
+        let sumOfRating = reviews.reduce((acc, review) => {
             return acc += review.rating;
         }, 0)
+        return sumOfRating / reviews.length
     }
 
     function toggleWishedGame(ev) {
@@ -39,7 +40,7 @@ export default function GamePreview(props) {
                     <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
                 </div>
                 <h3>{game.title}</h3>
-                <p className="rating">{gameRating()} (total of {game.reviews.length} reviews)</p>
+                <p className="rating">{gameRating()} ({game.reviews.length} reviews)</p>
                 <h5>{game.publisher.user.userName}</h5>
                 <div className="flex space-between">
                     <p className="price">${game.price}</p>
