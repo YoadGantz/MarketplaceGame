@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 class PlayGame extends Component {
 
   componentDidMount() {
-      console.log(this.props.match)
   }
 
   updateMode = (ev) => {
@@ -13,7 +12,7 @@ class PlayGame extends Component {
   }
 
   render() {
-    return <div>Hello</div>
+    return <div><img src='https://media.tenor.com/images/349f91eff94b2786b2d89c0850d84d1c/tenor.gif'></img>Hello</div>
   }
 }
 

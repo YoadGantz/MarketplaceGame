@@ -45,7 +45,7 @@ export default class App extends Component {
                   <Route path="/game/:id" component={GameDetails} exact />
                   <Route path="/game" render={() => <Explore history={history} />} exact />
                   <Route path="/user/:id" render={() => <ProfilePage history={history} />} exact />
-                  <Route path="/play/:id" render={() => <PlayGame history={history} />} exact />
+                  <Route path="/play/:id" component={PlayGame} exact />
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
