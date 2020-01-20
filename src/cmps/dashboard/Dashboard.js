@@ -1,6 +1,7 @@
 
 import React, { Component } from "react"
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 
 
 import { loadGames } from "../../actions/gameActions";
@@ -44,7 +45,6 @@ class Dashboard extends Component {
             this.props.loadGames()
         }
         this.getGraphsDetails()
-        // const user = this.props.loadUser(this.props.loggedInUser).then((user)=>console.log(user))   
     }
 
     render() {
