@@ -40,5 +40,5 @@ async function add(user) {
 }
 
 async function getById(userId) {
-  return HttpService.get(`/${userId}`);
+  return HttpService.get(`user/${userId}`);
 }
