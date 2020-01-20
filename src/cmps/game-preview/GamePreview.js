@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import UtilService from '../../services/UtilService'
-import UserService from '../../services/UserService'
+import UserService from '../../services/userService'
 
 import './_GamePreview.scss'
 
@@ -23,9 +23,13 @@ export default class GamePreview extends Component {
         this.props.history.push(`/game/${gameId}`)
     }
 
-    onRemoveFromCart(ev) {
+    onRemoveFromCart = (ev) => {
         ev.stopPropagation();
         this.props.onRemoveFromCart(this.props.game._id)
+    }
+
+    onPlayClick= (ev)=>{
+        ev.stopPropagation()
     }
 
     toggleWishedGame(ev) {
@@ -60,7 +64,8 @@ export default class GamePreview extends Component {
                         {!this.props.isProfile &&
                             <img className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
                         {this.props.isCart && <img className="like-icon" onClick={this.onRemoveFromCart} />}
-
+                        {this.props.isProfile&&
+                        <button onClick={this.onPlayClick}>Play</button>}
                     </div>
                 </div>
             </React.Fragment >

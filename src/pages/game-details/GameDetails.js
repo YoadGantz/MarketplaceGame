@@ -11,7 +11,7 @@ import GameMedia from "../../cmps/game-media/GameMedia";
 import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
 import UtilService from "../../services/UtilService";
-import UserService from '../../services/UserService';
+import UserService from '../../services/userService';
 
 import "./_GameDetails.scss";
 
@@ -74,7 +74,6 @@ export default class GameDetails extends Component {
 
   setGameRating = (game) => {
     const rating = UtilService.getGameRating(game)
-    console.log(rating);
     this.setState({ rating })
   }
 
@@ -110,9 +109,9 @@ export default class GameDetails extends Component {
   };
 
   render() {
-    if (!this.state.currUrl) return <h1>Loading</h1>;
+    if (!this.state.game.title) return <h1>Loading</h1>;
     const { downloads, comments, currUrl, rating, publisherName, game: { thumbnail, title, description, publishedAt,
-      publisher, reviews, mediaUrls, price, tags } } = this.state;
+   reviews, mediaUrls, price, tags } } = this.state;
     let mainMedia;
     if (currUrl.includes("mp4")) {
       mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
@@ -121,15 +120,11 @@ export default class GameDetails extends Component {
       mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
-    console.log('rating', rating);
 
     return (
       <div className="container">
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <Button type="primary" className='game-buy-button' onClick={this.addToCart}>
-            {price}$ Add to cart
-          </Button>
         </div>
         <div className="grid game-main-content-container ">
           {mainMedia}
@@ -144,6 +139,9 @@ export default class GameDetails extends Component {
               <p> Publisher: {publisherName}</p>
               <p> Rating: {rating}</p>
               <p> Downloads last month :{downloads}   </p>
+              <button type="primary" className='game-buy-button' onClick={this.addToCart}>
+            {price}$ Add to cart
+          </button>
             </div>
           </div>
         </div>

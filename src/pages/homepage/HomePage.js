@@ -11,7 +11,6 @@ class HomePage extends Component {
  async componentDidMount () {
   const game= await this.props.loadGames()
  const mostDownloadedGames= await  UtilService.getGraphsDetails(this.props.games)
-    console.log(mostDownloadedGames)
 }
 
   render() {

@@ -15,7 +15,8 @@ class EditGame extends Component {
     mediaUrls: [],
     price: "",
     publishedAt: '',
-    tags: []
+    tags: [],
+    currTag:''
   };
 
 componentDidMount= async ()=>{
@@ -27,16 +28,23 @@ componentDidMount= async ()=>{
   }
 }
 
-  onSubmit = () => {
+  onSubmit = async () => {
     const newGame = { ...this.state }
+    if (!newGame.mediaUrls)return
+    if (!newGame.thumbnail)
     if(this.props.match.params.id){
-      GameService.update(newGame)
+      delete newGame.currTag
+    const game= await GameService.update(newGame)
+      return this.props.history.push(`/game/${game._id}`)
     }
     if (!this.props.loggedInUser) return
     newGame.publisher = this.props.loggedInUser._id
     newGame.comments = []
     newGame.reviews = []
-    GameService.add(newGame)
+    delete newGame.currTag
+    const game= await GameService.add(newGame)
+    return this.props.history.push(`/game/${game._id}`)
+
   }
 
   addMediaAndTags = async ev => {
@@ -63,7 +71,6 @@ componentDidMount= async ()=>{
     }
     let editedData = [...this.state[fieldName]];
     editedData.splice(idx, 1);
-    console.log(editedData)
     this.setState({
       [fieldName]: editedData
     });
