@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, notification } from "antd";
+import { notification } from "antd";
 
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
@@ -8,7 +8,7 @@ import CartService from '../../services/CartService.js'
 import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
 import UtilService from "../../services/UtilService";
-import UserService from '../../services/userService';
+import UserService from '../../services/UserService';
 
 import "./_GameDetails.scss";
 
