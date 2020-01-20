@@ -1,9 +1,13 @@
 .media-container{
-    width: 150px;
+    width: 200px;
+    object-fit: cover;
     border: 1px solid black;
     & img{
         width: 90%;
     } 
+    & iframe{
+        width: 200px;
+    }
     transition: 0.8s;
 }
 .tag-container{

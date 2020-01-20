@@ -10,8 +10,8 @@ import UtilService from "../../services/UtilService";
 class HomePage extends Component {
  async componentDidMount () {
   const game= await this.props.loadGames()
-  console.log(game)
-    // UtilService.getGraphsDetails(game)
+ const mostDownloadedGames= await  UtilService.getGraphsDetails(this.props.games)
+    console.log(mostDownloadedGames)
 }
 
   render() {
