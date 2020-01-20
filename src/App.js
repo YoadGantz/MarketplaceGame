@@ -15,6 +15,7 @@ import './assets/styles/global.scss'
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/WishList';
+import PlayGame from './pages/play-game/PlayGame';
 
 export default class App extends Component {
    state = {
@@ -40,10 +41,11 @@ export default class App extends Component {
                <Switch>
                   <Route path="/" component={HomePage} exact />
                   <Route path="/login" component={Login} exact />
-                  <Route path="/edit" component={EditGame} exact />
+                  <Route path="/edit/:id?" component={EditGame} exact />
                   <Route path="/game/:id" component={GameDetails} exact />
                   <Route path="/game" render={() => <Explore history={history} />} exact />
                   <Route path="/user/:id" render={() => <ProfilePage history={history} />} exact />
+                  <Route path="/play/:id" render={() => <PlayGame history={history} />} exact />
                </Switch>
             </Router>
             {this.state.toggleModal && <Modal>
