@@ -20,7 +20,7 @@ class OwnedGames extends Component {
             <div>
                 <h1>Your Games</h1>
                 <Filter onFilterBy={this.onFilterBy}></Filter>
-                <GameList history={this.props.history} games={this.props.games}></GameList>
+                <GameList isProfile={true} history={this.props.history} games={this.props.games}></GameList>
             </div>
         )
     }

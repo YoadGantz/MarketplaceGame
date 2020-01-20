@@ -33,8 +33,11 @@ export default function GamePreview(props) {
                 </div>
                 <h3>{game.title}</h3>
                 <h5>{game.publisher.user.userName}</h5>
+                <div className="flex space-between">
                 <p className="price">${game.price}</p>
-                <img onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart}></img>
+                {!props.isProfile &&
+                    <img className="like-icon" onClick={toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
+                </div>
             </div>
         </React.Fragment >
     )
