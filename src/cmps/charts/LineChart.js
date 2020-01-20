@@ -3,20 +3,43 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
 
-const data = [
-  {
-    name: '1 Jan', uv: 3300,
-  },
-  {
-    name: '2 Jan', uv: 3000,
-  },
-  {
-    name: '3 Jan', uv: 2000,
-  }
-];
+export default class Graph extends PureComponent {
+  state = { data: [{ name: 0, $: 0 }] }
 
-export default class Example extends PureComponent {
+  componentDidUpdate(prevprops) {
+    if (prevprops.orderDates !== this.props.orderDates) {
+      this.setData(this.props.orderDates)
+    }
+  }
+
+
+
+
+  setData = (purcheses) => {
+    const data = []
+    for (let i = 1; i < 31; i++) {
+      let price
+      if (purcheses[i]) {
+        console.log(purcheses[i])
+        price = purcheses[i] * 20
+      } else if (!(i % 3)) {
+        price = 15 * i
+      } else if (i < 5) {
+        price = i * 100
+      } else if (i > 25) {
+        price = i * 10
+      } else {
+        price = 20 * i
+      }
+      data.push({ name: i, $: price })
+    }
+    this.setState({ data })
+  }
+
+
+
   render() {
+    const { data } = this.state
     return (
       <AreaChart
         width={500}
@@ -30,8 +53,9 @@ export default class Example extends PureComponent {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="$" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
   }
 }
+

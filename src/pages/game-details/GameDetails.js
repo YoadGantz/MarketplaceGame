@@ -20,6 +20,8 @@ export default class GameDetails extends Component {
     comments: []
   };
 
+  
+
   componentDidMount = async () => {
     
     const { id } = this.props.match.params
@@ -129,16 +131,3 @@ export default class GameDetails extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//   };
-// };
-
-// const mapDispatchToProps = {
-//  saveCartItem
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Dashboard);
