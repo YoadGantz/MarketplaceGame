@@ -2,7 +2,7 @@ import React from 'react'
 
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
-
+import UtilService from '../../services/UtilService'
 import './_GamePreview.scss'
 
 export default function GamePreview(props) {
@@ -10,16 +10,6 @@ export default function GamePreview(props) {
 
     function onOpenDetails(gameId) {
         props.history.push(`/game/${gameId}`)
-    }
-
-    function getGameRating() {
-        const { reviews } = game
-        
-        let sumOfRating = reviews.reduce((acc, review) => {
-            return acc += review.rating;
-        }, 0)
-        const rating = +(sumOfRating / reviews.length).toFixed(2)
-        return rating
     }
 
     function onRemoveFromCart(ev) {
@@ -48,7 +38,7 @@ export default function GamePreview(props) {
                 </div>
                 <div className="flex">
                     <h3 className="full">{game.title}</h3>
-                    <p className="rating">{getGameRating()} ({game.reviews.length} reviews)</p>
+                    <p className="rating">{UtilService.getGameRating(game)} ({game.reviews.length} reviews)</p>
                 </div>
                 <h5>{game.publisher.user.userName}</h5>
                 <div className="flex space-between">

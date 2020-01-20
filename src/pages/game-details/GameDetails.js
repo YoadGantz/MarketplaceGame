@@ -12,24 +12,26 @@ import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
 
 import "./_GameDetails.scss";
-import orderUtils from "../../services/UtilService.js";
+import UtilService from "../../services/UtilService.js";
 
 export default class GameDetails extends Component {
   state = {
     currUrl: '',
     game: {},
     comments: [],
-    downloads:''
+    downloads: '',
+    rating: ''
   };
 
-  
+
 
   componentDidMount = async () => {
-    
+
     const { id } = this.props.match.params
     const game = await GameService.getById(id)
     this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
-    this.getGameDownloads(game)
+    this.setGameRating(game)
+    this.setGameDownloads(game)
     SocketService.setup()
     SocketService.emit('chat topic', game.title);
     SocketService.on('chat addMsg', this.addComment)
@@ -56,9 +58,15 @@ export default class GameDetails extends Component {
     GameService.update(game)
   }
 
-  getGameDownloads= async (game)=>{
-  const downloads= await orderUtils.getGraphsDetails([game])
-  this.setState({downloads:downloads[game.title]})
+  setGameDownloads = async (game) => {
+    const downloads = await UtilService.getGraphsDetails([game])
+    this.setState({ downloads: downloads[game.title] })
+  }
+
+  setGameRating = (game) => {
+    const rating = UtilService.getGameRating(game)
+    console.log(rating);
+    this.setState({ rating })
   }
 
   sendComment = text => {
@@ -94,7 +102,7 @@ export default class GameDetails extends Component {
 
   render() {
     if (!this.state.currUrl) return <h1>Loading</h1>;
-    const {downloads, comments, currUrl, game: { thumbnail, title, description, publishedAt,
+    const { downloads, comments, currUrl, rating, game: { thumbnail, title, description, publishedAt,
       publisher, reviews, mediaUrls, price, tags } } = this.state;
     let mainMedia;
     if (currUrl.includes("mp4")) {
@@ -104,6 +112,8 @@ export default class GameDetails extends Component {
       mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
+    console.log('rating', rating);
+
     return (
       <div className="container">
         <div className="flex justify-between">
@@ -121,8 +131,9 @@ export default class GameDetails extends Component {
             <img alt="" className="game-thumbnail" src={thumbnail}></img>
             <div className='game-description'>
               <p > {description}</p>
-              <p> published at: {publishedAt}</p>
-              <p> publisher {publisher.name}</p>
+              <p> Published at: {publishedAt}</p>
+              <p> Publisher {publisher.name}</p>
+              <p> Rating: {rating}</p>
               <p> Downloads last month :{downloads}   </p>
             </div>
           </div>
