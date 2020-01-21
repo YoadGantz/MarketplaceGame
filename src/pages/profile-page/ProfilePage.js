@@ -30,8 +30,6 @@ class ProfilePage extends Component {
   }
 
   render() {
-    console.log(this.props)
-
     const { user } = this.state
     return (
       <div className="profile-container">

@@ -7,26 +7,6 @@ function setGames(games) {
     }
 }
 
-// function setWishedGames(games) {
-//     return {
-//         type: 'SET_WISHED_GAMES',
-//         games
-//     }
-// }
-
-
-// export function loadWishedGames(filterBy) {
-//     return async dispatch => {
-//         try {
-//             const wishedGames = await GameService.query(filterBy);
-//             debugger;
-//             dispatch(setWishedGames(wishedGames));
-//         } catch (err) {
-            
-//         }
-//     }
-// }
-
 export function loadGames(filterBy) {
     return async dispatch => {
         try {

@@ -23,7 +23,7 @@ export function signUp(cred) {
 export function logout() {
     return async dispatch => {
         try {
-            const games = await UserService.logout();
+            await UserService.logout();
             dispatch('LOGOUT')
         } catch (err) {
         }
@@ -62,11 +62,3 @@ function _updateUser(user) {
         user
     }
 }
-
-function _removeUser(userId) {
-    return {
-        type: 'USER_REMOVE',
-        userId
-    };
-}
-
