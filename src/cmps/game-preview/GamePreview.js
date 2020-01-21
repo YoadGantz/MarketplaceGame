@@ -77,8 +77,9 @@ class GamePreview extends Component {
                     <div>
                         <button onClick={this.onPlayClick}>Play</button>
                         {this.props.isDashboard && <div>
-                            <button onClick={() => this.onOpenEdit(game._id)}>Edit</button></div>}
+                            <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
                             <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
+                        </div>}
                     </div>}
             </React.Fragment >
         )
