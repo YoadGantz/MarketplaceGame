@@ -1,4 +1,4 @@
-import OrderService from "./OrderService";
+import OrderService from './OrderService';
 export default { getGraphsDetails, getGameRating,objectIdByTime }
 
 function getGameRating(game) {

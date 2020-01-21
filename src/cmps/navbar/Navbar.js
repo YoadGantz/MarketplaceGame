@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { NavLink, Link } from "react-router-dom";
-import wishlistImg from "../../assets/icons/wishlist.svg"
-import shoppingCartImg from "../../assets/icons/shopping_cart.svg"
+import React, { Component } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import wishlistImg from '../../assets/icons/wishlist.svg'
+import shoppingCartImg from '../../assets/icons/shopping_cart.svg'
 import GamesCounter from '../games-counter/GamesCounter'
-import "./_NavBar.scss"
+import './_NavBar.scss'
 
 // update to use NavLink 
 export default class Navbar extends Component {
