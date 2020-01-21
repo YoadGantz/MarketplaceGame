@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import { Rate, Input, Button } from "antd";
-
-const { TextArea } = Input;
+import React, { Component } from 'react';
 
 export default class Review extends Component {
   state = { rating: 1, text: "" };
@@ -11,9 +8,9 @@ export default class Review extends Component {
     this.setState({ [fieldName]: ev.target.value });
   };
 
-    onAddReview = ()=>{
-        this.props.addReview(this.state.rating,this.state.text)
-    }
+  onAddReview = () => {
+    this.props.addReview(this.state.rating, this.state.text)
+  }
 
 
   render() {
@@ -28,7 +25,7 @@ export default class Review extends Component {
               <div key={review.text}>
                 <p>{review.user.userName}</p>
                 <p>{review.text}</p>
-            <p> rating: {review.rating}</p>
+                <p> rating: {review.rating}</p>
               </div>
             );
           })}

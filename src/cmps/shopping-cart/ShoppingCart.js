@@ -8,7 +8,9 @@ import GameService from '../../services/GameService';
 import UtilService from '../../services/UtilService';
 import OrderService from '../../services/OrderService';
 
- class ShoppingCart extends Component {
+import { clearCart } from '../../actions/cartActions';
+
+class ShoppingCart extends Component {
     state = {
         games: [],
         gamesIds: []
@@ -17,7 +19,7 @@ import OrderService from '../../services/OrderService';
     async loadGames() {
         const gamesIds = await CartService.query();
         let gamesToRender = []
-        if (gamesIds.length ) {
+        if (gamesIds.length) {
             gamesToRender = await GameService.query({ shoppingCartIds: gamesIds })
         }
         this.setState({ gamesIds, games: gamesToRender })
@@ -28,15 +30,17 @@ import OrderService from '../../services/OrderService';
         this.loadGames()
     }
 
-    onBuyClick= ()=>{
-        if(!this.props.loggedInUser)return
-      const  order={
-          createdAt:UtilService.objectIdByTime(),
-          orderBy:this.props.loggedInUser._id,
-          gameIds:this.state.gamesIds
-      }
-      console.log(UtilService.objectIdByTime())
-      OrderService.add(order)
+    onBuyClick = () => {
+        if (!this.props.loggedInUser) return
+
+        const order = {
+            createdAt: UtilService.objectIdByTime(),
+            orderBy: this.props.loggedInUser._id,
+            gameIds: this.state.gamesIds
+        }
+        OrderService.add(order)
+        this.props.clearCart()
+        this.loadGames()
     }
 
     componentDidMount() {
@@ -45,12 +49,12 @@ import OrderService from '../../services/OrderService';
     render() {
 
         return <div>
-            {(this.state.games.length) ? 
-            <div>
-            <GameList onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
-            <button onClick={this.onBuyClick}>Buy</button>
-            </div>
-            : <h2>Your shopping cart is empty</h2>}
+            {(this.state.games.length) ?
+                <div>
+                    <GameList onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
+                    <button onClick={this.onBuyClick}>Buy</button>
+                </div>
+                : <h2>Your shopping cart is empty</h2>}
         </div>
     }
 }
@@ -63,6 +67,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+    clearCart
 };
 
 export default connect(

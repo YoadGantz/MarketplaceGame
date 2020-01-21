@@ -27,9 +27,8 @@ export default class Navbar extends Component {
         <NavLink to={`/user/${userName}`} exact className="nav-link flex align-center" activeClassName="active"  >
           Profile
         </NavLink>
-        <img src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
-        <GamesCounter />
-        <img src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
+        <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
+        <img alt="" src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
       </nav>
     )
   }

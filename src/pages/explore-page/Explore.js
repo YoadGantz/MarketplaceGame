@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from 'react-redux';
 
-import { loadGames, loadWishedGames } from "../../actions/gameActions";
-import { updateUser } from "../../actions/userActions"
+import { loadGames} from '../../actions/gameActions';
+import { updateUser } from '../../actions/userActions';
 
-import Filter from "../../cmps/filter/Filter"
-import GameList from "../../cmps/game-list/GameList"
+import Filter from '../../cmps/filter/Filter';
+import GameList from '../../cmps/game-list/GameList';
 
 class Explore extends Component {
     componentDidMount() {

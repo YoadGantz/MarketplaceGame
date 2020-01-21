@@ -8,14 +8,15 @@ import Login from './pages/login/Login';
 import Explore from './pages/explore-page/Explore';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import GameDetails from './pages/game-details/GameDetails';
+import PlayGame from './pages/play-game/PlayGame';
 import Modal from './cmps/modal/Modal'
 import Navbar from './cmps/navbar/Navbar';
 
-import './assets/styles/global.scss'
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/WishList';
-import PlayGame from './pages/play-game/PlayGame';
+
+import './assets/styles/global.scss'
 
 export default class App extends Component {
    state = {

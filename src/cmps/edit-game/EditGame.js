@@ -136,6 +136,7 @@ componentDidMount= async ()=>{
             onChange={this.addMediaAndTags}
             placeholder="Put your image Urls here"
             name="mediaUrls"
+            multiple
           />
           <div className="flex wrap">{addedUrls}</div>
         </div>

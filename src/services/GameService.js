@@ -4,8 +4,8 @@ export default {
   add,
   query,
   getById,
-  update
-  // remove
+  update,
+  remove
 };
 
 // const gGames = createGames();
@@ -21,9 +21,10 @@ async function update(updatedGame){
   
 }
 
-// function remove(gameId) {
-//   return HttpService.delete(`game/${gameId}`);
-// }
+async function remove(gameId) {
+  return await HttpService.delete(`game/${gameId}`);
+}
+
 async function add(game) {
   const addedGame  = await HttpService.post(`game`, game);
   return  addedGame

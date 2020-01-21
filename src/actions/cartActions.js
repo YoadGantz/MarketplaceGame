@@ -1,4 +1,5 @@
 import CartService from '../services/CartService'
+import StorageService from '../services/StorageService'
 
 export function loadCart() {
     return async dispatch => {
@@ -9,6 +10,18 @@ export function loadCart() {
         } catch (err) {
         }
     };
+}
+
+export function clearCart() {
+    return async dispatch => {
+        try {
+            const cart = []
+            StorageService.saveToStorage('cart', cart)
+            dispatch(_setCart(cart))
+        } catch (err) {
+
+        }
+    }
 }
 
 export function removeGameFromCart(item) {
