@@ -23,9 +23,6 @@ export default class GamePreview extends Component {
         this.props.history.push(`/game/${gameId}`)
     }
     onOpenEdit = (gameId) => {
-        console.log('game Id in preview',gameId);
-        console.log('history in preview',this.props.history);
-        
         this.props.history.push(`/edit/${gameId}`)
     }
 
