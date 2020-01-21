@@ -1,14 +1,14 @@
 
-import React, { Component } from "react"
-import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { loadGames } from "../../actions/gameActions";
+import UtilService from '../../services/UtilService';
+import { loadGames } from '../../actions/gameActions';
 
-import GameList from '../game-list/GameList'
-import Graph from "../charts/LineChart";
-import PieCharts from "../charts/PieCharts";
-import utilService from "../../services/UtilService";
+import GameList from '../game-list/GameList';
+import Graph from '../charts/LineChart';
+import PieChart from '../charts/PieChart';
 
 class Dashboard extends Component {
     state = {
@@ -19,7 +19,7 @@ class Dashboard extends Component {
     }
 
     getGraphsDetails = async () => {
-        const ordersBy = await utilService.getGraphsDetails(this.props.games)
+        const ordersBy = await UtilService.getGraphsDetails(this.props.games)
         this.setState({ orders: ordersBy })
     }
     componentDidUpdate = (prevProps) => {
@@ -49,9 +49,9 @@ class Dashboard extends Component {
         return (<div>
             <h1>Dashboard</h1>
             <Graph orderDates={orders} ></Graph>
-            <PieCharts games={this.props.games} orderedGames={orders} />
+            <PieChart games={this.props.games} orderedGames={orders} />
             <div>game list</div>
-            <Link to='/edit'><button>Add a game</button></Link>
+            <Link to='/edit'>Add a game</Link>
             <GameList isProfile={true} games={this.props.games}></GameList>
         </div>
         )

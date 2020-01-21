@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import { notification } from "antd";
+import React, { Component } from 'react';
+import { notification } from 'antd';
 
-import Review from "../../cmps/review/Review";
-import Comments from "../../cmps/comments/Comments";
-import GameMedia from "../../cmps/game-media/GameMedia";
-import CartService from '../../services/CartService.js'
-import GameService from "../../services/GameService";
-import SocketService from "../../services/SocketService";
-import UtilService from "../../services/UtilService";
+import CartService from '../../services/CartService';
+import GameService from '../../services/GameService';
+import UtilService from '../../services/UtilService';
 import UserService from '../../services/UserService';
+import SocketService from '../../services/SocketService';
 
-import "./_GameDetails.scss";
+import GameMedia from '../../cmps/game-media/GameMedia';
+import Comments from '../../cmps/comments/Comments';
+import Review from '../../cmps/review/Review';
+
+import './_GameDetails.scss';
 
 export default class GameDetails extends Component {
   state = {
