@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import { removeGameFromCart } from '../../actions/cartActions'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
+
 import './_GamePreview.scss'
-export default class GamePreview extends Component {
+
+class GamePreview extends Component {
     state = {
         publisherName: ''
     }
@@ -20,6 +25,7 @@ export default class GamePreview extends Component {
     onRemoveFromCart = (ev) => {
         ev.stopPropagation();
         this.props.onRemoveFromCart(this.props.game._id)
+        this.props.removeGameFromCart(this.props.game._id)
     }
 
     onPlayClick= (ev)=>{
@@ -65,4 +71,19 @@ export default class GamePreview extends Component {
             </React.Fragment >
         )
     }
+}
+
+const mapStateToProps = state => {
+    return {
+        cart: state.cartStore.cart
+    };
 };
+
+const mapDispatchToProps = {
+    removeGameFromCart
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(GamePreview)

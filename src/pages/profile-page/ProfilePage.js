@@ -30,7 +30,6 @@ class ProfilePage extends Component {
   }
 
   render() {
-
     const { user } = this.state
     return (
       <div className="profile-container">

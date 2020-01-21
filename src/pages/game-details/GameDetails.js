@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import { notification } from 'antd';
+import React, { Component } from "react";
+import { Button, notification } from "antd";
+import { connect } from 'react-redux'
 
-import CartService from '../../services/CartService';
-import GameService from '../../services/GameService';
-import UtilService from '../../services/UtilService';
+import CartService from '../../services/CartService.js'
+import GameService from "../../services/GameService";
+import SocketService from "../../services/SocketService";
+import UtilService from "../../services/UtilService";
 import UserService from '../../services/UserService';
-import SocketService from '../../services/SocketService';
+
+import { addGameToCart } from '../../actions/cartActions'
 
 import GameMedia from '../../cmps/game-media/GameMedia';
 import Comments from '../../cmps/comments/Comments';
@@ -13,7 +16,7 @@ import Review from '../../cmps/review/Review';
 
 import './_GameDetails.scss';
 
-export default class GameDetails extends Component {
+class GameDetails extends Component {
   state = {
     currUrl: '',
     game: {},
@@ -83,9 +86,10 @@ export default class GameDetails extends Component {
     this.updateGame()
   }
 
-  addToCart = async () => {
+  onAddToCart = async () => {
     try {
       await CartService.addToCart(this.state.game._id)
+      this.props.addGameToCart(this.state.game._id)
       notification.info({
         message: `Game has been added`,
         description: "The game has been added to the cart"
@@ -115,11 +119,13 @@ export default class GameDetails extends Component {
       mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
-
     return (
       <div className="container">
         <div className="flex justify-between">
           <h1>{title}</h1>
+          <Button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
+            {price}$ Add to cart
+          </Button>
         </div>
         <div className="grid game-main-content-container ">
           {mainMedia}
@@ -135,7 +141,7 @@ export default class GameDetails extends Component {
               <p> Rating: {rating}</p>
               <p> Downloads last month :{downloads}   </p>
               <button type="primary" className='game-buy-button' onClick={this.addToCart}>
-            {price}$ Add to cart
+                {price}$ Add to cart
           </button>
             </div>
           </div>
@@ -152,4 +158,19 @@ export default class GameDetails extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    cart: state.cartStore.cart
+  };
+};
+
+const mapDispatchToProps = {
+  addGameToCart
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameDetails)
 
