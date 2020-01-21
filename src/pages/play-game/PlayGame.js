@@ -36,7 +36,7 @@ class PlayGame extends Component {
     render() {
         const { comments } = this.state
         let addedComents
-       const logInmsg= !this.props.loggedInUser? <h3>Buy the game to see more then this gif</h3> : ''
+       const logInmsg= !this.props.loggedInUser? <h3>Buy the game to see more then this gif and use the chat</h3> : ''
         addedComents = <Comments sendComment={this.sendComment} comments={comments} />
         return <div>
             {logInmsg}
