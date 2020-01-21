@@ -24,7 +24,6 @@ import OrderService from '../../services/OrderService';
     }
 
     onRemoveFromCart = (gameId) => {
-        console.log(gameId);
         CartService.removeItem(gameId)
         this.loadGames()
     }

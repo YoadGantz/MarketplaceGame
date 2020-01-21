@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  games: [], filterBy: { publisher: '' }, wishedGames: []
+  games: [], filterBy: { publisher: '' }
 };
 
 export default function gameReducer(state = INITIAL_STATE, action) {

@@ -13,14 +13,7 @@ class Explore extends Component {
     }
 
     onUpdateUser = async (updatedUser) => {
-        // console.log('explore updatedUser', updatedUser);
         this.props.updateUser(updatedUser)
-        // console.log(this.props.user);
-        // const wishedIds = updatedUser.wishedGames.map(wishedGame => wishedGame)
-        // let filterBy = { wishedIds: updatedUser.wishedGames }
-        console.log('updatedUser: ', updatedUser);
-
-        // this.props.loadWishedGames(filterBy)
     }
 
     onFilterBy = (filterBy) => {

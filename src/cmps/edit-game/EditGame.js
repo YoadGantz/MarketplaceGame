@@ -23,7 +23,6 @@ componentDidMount= async ()=>{
   const params=this.props.match.params.id
   if (params){
     const game= await GameService.getById(params)
-    console.log(game)
  this.setState({...game})
   }
 }

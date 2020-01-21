@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+import { loadGames } from "../../actions/gameActions";
+import { updateUser } from "../../actions/userActions"
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 
@@ -19,7 +23,8 @@ class HomePage extends Component {
         <div className="hero-text">
           <h1 className="main-heading">GAMEIN</h1>
           <p>The ultimate destination for buying, discussing, and playing games</p>
-          <Link to="/game" onClick={this.on} className="hero-btn">To the shop</Link>
+          <Link to="/game" onClick={this.on} className="hero-btn">To the shop, my noble steed</Link>
+          <div className='flex'></div>
         </div>
       </div>
     </div>;
