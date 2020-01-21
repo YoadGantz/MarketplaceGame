@@ -7,7 +7,6 @@ class PlayGame extends Component {
 
     componentDidMount() {
         if (!this.props.loggedInUser) return
-        console.log(this.props.loggedInUser)
         SocketService.setup()
         SocketService.emit('chat topic', this.props.match.params.id);
         SocketService.emit('user joined the game', { text: `${this.props.loggedInUser.userName} has joined the chat` });
@@ -36,7 +35,7 @@ class PlayGame extends Component {
     render() {
         const { comments } = this.state
         let addedComents
-       const logInmsg= !this.props.loggedInUser? <h3>Buy the game to see more then this gif and use the chat</h3> : ''
+        const logInmsg = !this.props.loggedInUser ? <h3>Buy the game to see more then this gif and use the chat</h3> : ''
         addedComents = <Comments sendComment={this.sendComment} comments={comments} />
         return <div>
             {logInmsg}
