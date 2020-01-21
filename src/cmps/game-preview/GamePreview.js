@@ -4,7 +4,6 @@ import empty_heart from '../../assets/icons/empty_heart.svg'
 import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
 import './_GamePreview.scss'
-import { Link } from 'react-router-dom'
 export default class GamePreview extends Component {
     state = {
         publisherName: ''
@@ -24,7 +23,10 @@ export default class GamePreview extends Component {
         this.props.onRemoveFromCart(this.props.game._id)
     }
 
-   
+    onPlayClick= (ev)=>{
+        ev.stopPropagation()
+        this.props.history.push(`/play/${this.props.game._id}`)
+    }
 
     toggleWishedGame(ev) {
         const { user, game } = this.props
@@ -58,8 +60,7 @@ export default class GamePreview extends Component {
                             <img className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />}
                         {this.props.isCart && <img className="like-icon" onClick={this.onRemoveFromCart} />}
                         {this.props.isProfile&&
-                       <Link> <button onClick={this.onPlayClick}>Play</button></Link>
-                       }
+                        <button onClick={this.onPlayClick}>Play</button>}
                     </div>
                 </div>
             </React.Fragment >

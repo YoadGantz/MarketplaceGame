@@ -1,33 +1,65 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import SocketService from "../../services/SocketService";
+import Comments from "../../cmps/comments/Comments";
 class PlayGame extends Component {
+    state = { comments: [] }
 
-  componentDidMount() {
-  }
+    componentDidMount() {
+        if (!this.props.loggedInUser) return
+        console.log(this.props.loggedInUser)
+        SocketService.setup()
+        SocketService.emit('chat topic', this.props.match.params.id);
+        SocketService.emit('user joined the game', { text: `${this.props.loggedInUser.userName} has joined the chat` });
+        SocketService.on('chat addMsg', this.addComment)
+        SocketService.on('user joined the game', this.addComment)
+    }
 
-  updateMode = (ev) => {
-    let mode = ev.target.value
-    this.setState({ mode })
-  }
+    componentWillUnmount = () => {
+        if (!this.props.loggedInUser) return
+        SocketService.off('chat addMsg')
+        SocketService.off('user joined the game')
+        SocketService.terminate()
+    }
 
-  render() {
-    return <div><img src='https://media.tenor.com/images/349f91eff94b2786b2d89c0850d84d1c/tenor.gif'></img>Hello</div>
-  }
+    sendComment = (text) => {
+        SocketService.emit('chat newMsg', { user: { userName: this.props.loggedInUser.userName }, text });
+    };
+
+    addComment = newMsg => {
+        if (!this.props.loggedInUser) return
+        this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
+    };
+
+
+
+    render() {
+        const { comments } = this.state
+        let addedComents
+       const logInmsg= !this.props.loggedInUser? <h3>Buy the game to see more then this gif</h3> : ''
+        addedComents = <Comments sendComment={this.sendComment} comments={comments} />
+        return <div>
+            {logInmsg}
+            <img src={`https://media0.giphy.com/media/yZEIja6oMZ3qg/giphy.gif?cid=790b76114ded6412318df27a5f16325837281f38fa06ad58&rid=giphy.gif`} />
+            <ul>
+                {addedComents}
+            </ul>
+        </div>
+    }
 }
 
 
 
 const mapStateToProps = state => {
     return {
-      loggedInUser: state.userStore.loggedInUser,
+        loggedInUser: state.userStore.loggedInUser,
     };
-  };
-  
-  const mapDispatchToProps = {
-  };
-  
-  export default connect(
+};
+
+const mapDispatchToProps = {
+};
+
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(PlayGame);
+)(PlayGame);

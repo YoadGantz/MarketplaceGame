@@ -35,13 +35,17 @@ export default class GameDetails extends Component {
   };
 
   componentWillUnmount = () => {
-    SocketService.off()
+    SocketService.off('chat addMsg')
     SocketService.terminate()
   }
 
   addComment = newMsg => {
     this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
     this.updateGame('comment')
+  };
+
+  sendComment = text => {
+    SocketService.emit('chat newMsg', { user: { userName: 'me' }, text });
   };
 
   updateGame = (type) => {
@@ -69,9 +73,7 @@ export default class GameDetails extends Component {
     this.setState({ rating })
   }
 
-  sendComment = text => {
-    SocketService.emit('chat newMsg', { user: { userName: 'me' }, text });
-  };
+
 
   addReview = (rating, text) => {
     const game = { ...this.state.game }
@@ -103,7 +105,7 @@ export default class GameDetails extends Component {
   render() {
     if (!this.state.game.title) return <h1>Loading</h1>;
     const { downloads, comments, currUrl, rating, publisherName, game: { thumbnail, title, description, publishedAt,
-   reviews, mediaUrls, price, tags } } = this.state;
+      reviews, mediaUrls, price, tags } } = this.state;
     let mainMedia;
     if (currUrl.includes("mp4")) {
       mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
