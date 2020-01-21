@@ -39,7 +39,7 @@ class GamePreview extends Component {
         this.props.history.push(`/play/${this.props.game._id}`)
     }
 
-    toggleWishedGame(ev) {
+    toggleWishedGame = (ev) => {
         const { user, game } = this.props
         ev.stopPropagation();
         let wishedGames = (user && user.wishedGames) || []
