@@ -35,6 +35,7 @@ import OrderService from '../../services/OrderService';
           orderBy:this.props.loggedInUser._id,
           gameIds:this.state.gamesIds
       }
+      console.log(UtilService.objectIdByTime())
       OrderService.add(order)
     }
 

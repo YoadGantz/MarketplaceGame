@@ -8,12 +8,13 @@ import './_HomePage.scss'
 import UtilService from "../../services/UtilService";
 
 class HomePage extends Component {
-  async componentDidMount() {
-    const games = await this.props.loadGames()
-    const mostDownloadedGames = await UtilService.getGraphsDetails(this.props.games)
-    console.log(mostDownloadedGames)
-  }
+ async componentDidMount () {
+  await this.props.loadGames()
+ const gameDownloads= await  UtilService.getGraphsDetails(this.props.games)
+this.props.games.forEach((game)=>{
 
+})
+}
   render() {
     return <div className="homepage-container">
       <div className="hero-image">
