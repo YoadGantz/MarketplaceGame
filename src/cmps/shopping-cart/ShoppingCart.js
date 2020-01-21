@@ -24,7 +24,6 @@ import OrderService from '../../services/OrderService';
     }
 
     onRemoveFromCart = (gameId) => {
-        console.log(gameId);
         CartService.removeItem(gameId)
         this.loadGames()
     }
@@ -36,6 +35,7 @@ import OrderService from '../../services/OrderService';
           orderBy:this.props.loggedInUser._id,
           gameIds:this.state.gamesIds
       }
+      console.log(UtilService.objectIdByTime())
       OrderService.add(order)
     }
 

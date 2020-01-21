@@ -12,12 +12,12 @@ import Comments from '../../cmps/comments/Comments';
 import Review from '../../cmps/review/Review';
 
 import './_GameDetails.scss';
+import GameDesc from '../../cmps/game-desc/GameDesc';
 
 export default class GameDetails extends Component {
   state = {
     currUrl: '',
     game: {},
-    comments: [],
     downloads: '',
     rating: '',
     publisherName: ''
@@ -41,19 +41,18 @@ export default class GameDetails extends Component {
   }
 
   addComment = newMsg => {
-    this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
-    this.updateGame('comment')
+    this.updateGame('comment', newMsg)
   };
 
   sendComment = text => {
     SocketService.emit('chat newMsg', { user: { userName: 'me' }, text });
   };
 
-  updateGame = (type) => {
+  updateGame = (type, newMsg) => {
     let game = this.state.game
     if (type === 'comment') {
       game = { ...this.state.game }
-      game.comments = this.state.comments
+      game.comments = [...game.comments, newMsg]
     }
     GameService.update(game)
   }
@@ -126,19 +125,8 @@ export default class GameDetails extends Component {
           <div className="flex game-choose-thumbnail-container">
             <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
-          <div >
-            <img alt="" className="game-thumbnail" src={thumbnail}></img>
-            <div className='game-description'>
-              <p > {description}</p>
-              <p> Published at: {publishedAt}</p>
-              <p> Publisher: {publisherName}</p>
-              <p> Rating: {rating}</p>
-              <p> Downloads last month :{downloads}   </p>
-              <button type="primary" className='game-buy-button' onClick={this.addToCart}>
-            {price}$ Add to cart
-          </button>
-            </div>
-          </div>
+          <GameDesc addToCart={this.addToCart} downloads={downloads} description={description} publisherName={publisherName}
+            publishedAt={publishedAt} rating={rating} price={price} thumbnail={thumbnail} />
         </div>
         <h2>Tags:</h2>
         {tags.map(tag => {
