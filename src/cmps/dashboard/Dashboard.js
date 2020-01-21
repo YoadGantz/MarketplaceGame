@@ -52,7 +52,7 @@ class Dashboard extends Component {
             <PieChart games={this.props.games} orderedGames={orders} />
             <div>game list</div>
             <Link to='/edit'>Add a game</Link>
-            <GameList isProfile={true} games={this.props.games}></GameList>
+            <GameList isDashboard={true} isProfile={true} games={this.props.games}></GameList>
         </div>
         )
     }
