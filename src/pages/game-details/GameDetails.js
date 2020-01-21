@@ -122,16 +122,13 @@ class GameDetails extends Component {
       <div className="container">
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <Button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
-            {price}$ Add to cart
-          </Button>
         </div>
         <div className="grid game-main-content-container ">
           {mainMedia}
           <div className="flex game-choose-thumbnail-container">
             <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
-          <GameDesc addToCart={this.addToCart} downloads={downloads} description={description} publisherName={publisherName}
+          <GameDesc addToCart={this.onAddToCart} downloads={downloads} description={description} publisherName={publisherName}
             publishedAt={publishedAt} rating={rating} price={price} thumbnail={thumbnail} />
         </div>
         <h2>Tags:</h2>

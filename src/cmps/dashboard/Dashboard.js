@@ -44,7 +44,6 @@ class Dashboard extends Component {
         if (prevProps.games.length !== this.props.games.length) {
             this.getGraphsDetails()
         }
-        this.props.loadGames()
     }
 
     componentDidMount = () => {
@@ -75,6 +74,7 @@ class Dashboard extends Component {
     removeGame = async () => {
         this.setState(prevState => { return { toggleModal: !prevState.toggleModal, modalType: '' } })
         await GameService.remove(this.state.currGameId)
+        this.props.loadGames()
     }
 
     render() {

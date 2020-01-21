@@ -16,24 +16,25 @@ class EditGame extends Component {
     price: "",
     publishedAt: '',
     tags: [],
-    currTag:''
+    currTag: ''
   };
 
-componentDidMount= async ()=>{
-  const params=this.props.match.params.id
-  if (params){
-    const game= await GameService.getById(params)
- this.setState({...game})
+  componentDidMount = async () => {
+    const params = this.props.match.params.id
+    if (params) {
+      const game = await GameService.getById(params)
+      this.setState({ ...game })
+    }
   }
-}
 
   onSubmit = async () => {
+
     const newGame = { ...this.state }
-    if (!newGame.mediaUrls)return
-    if (!newGame.thumbnail)
-    if(this.props.match.params.id){
+    if (!newGame.mediaUrls) return
+    if (!newGame.thumbnail) return
+    if (this.props.match.params.id) {
       delete newGame.currTag
-    const game= await GameService.update(newGame)
+      const game = await GameService.update(newGame)
       return this.props.history.push(`/game/${game._id}`)
     }
     if (!this.props.loggedInUser) return
@@ -41,7 +42,7 @@ componentDidMount= async ()=>{
     newGame.comments = []
     newGame.reviews = []
     delete newGame.currTag
-    const game= await GameService.add(newGame)
+    const game = await GameService.add(newGame)
     return this.props.history.push(`/game/${game._id}`)
 
   }
@@ -59,9 +60,12 @@ componentDidMount= async ()=>{
       }));
     }
     if (!this.state.currTag) return
+    console.log('got here');
+
     this.setState(prevState => ({
       tags: [...prevState.tags, this.state.currTag]
-    }));
+    }), () => console.log(this.state.tags)
+    );
   };
 
   removeMediaAndTags = (fieldName, idx) => {
@@ -81,7 +85,7 @@ componentDidMount= async ()=>{
   };
 
   render() {
-    const { mediaUrls, tags, thumbnail,description,title,publishedAt,price } = this.state;
+    const { mediaUrls, tags, thumbnail, description, title, publishedAt, price } = this.state;
     let addedTags;
     let addedUrls;
     let addedThumbnail
@@ -112,7 +116,7 @@ componentDidMount= async ()=>{
         <p> Title : </p>
         <input type="text" onChange={this.inputChange} value={title} placeholder="title" name="title" />
         <p>Publish Date</p>
-        <input type="date" onChange={this.inputChange} value={publishedAt} name="publishedAt"/>
+        <input type="date" onChange={this.inputChange} value={publishedAt} name="publishedAt" />
         <p> Descripiton: </p>
         <textarea
           type="text"
