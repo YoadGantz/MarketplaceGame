@@ -1,29 +1,24 @@
 const INITIAL_STATE = {
-  cartItems: [],
-  currItem: null
+  cart: []
 };
 
 export default function cartReducer(state = INITIAL_STATE, action) {
-  const { cartItems } = state;
   switch (action.type) {
     case "SET_CART":
       return {
         ...state,
-        cartItems: [...cartItems, { ...action.item }]
+        cart: action.cart
       };
-    case "SET_CURR_ITEM":
+    case "ADD_TO_CART":
       return {
         ...state,
-        currItem: action.item
-      };
+        cart: [...state.cart, action.item]
+      }
     case "REMOVE_FROM_CART":
-      const { id } = action;
-      const idx = cartItems.findIndex(item => item._id === id);
       return {
         ...state,
-        cartItems: [...cartItems.slice(0, idx), ...cartItems.slice(idx + 1)]
-      };
-
+        cart: [...state.cart.filter(item => item !== action.item)]
+      }
     default:
       return state;
   }

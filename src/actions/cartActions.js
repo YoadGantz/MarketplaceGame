@@ -1,28 +1,55 @@
-import CartService from '../../services/CartService.js'
+import CartService from '../services/CartService'
 
-export const saveCart = cart => {
+export function loadCart() {
     return async dispatch => {
-        return await CartService.saveCart(cart)
-            (() => dispatch(setCart(cart)))
+        try {
+            const cart = await CartService.query();
+            dispatch(_setCart(cart));
+
+        } catch (err) {
+        }
+    };
+}
+
+export function removeGameFromCart(item) {
+    return async dispatch => {
+        try {
+            dispatch(_removeFromCart(item));
+        } catch (err) {
+
+        }
     }
 }
 
-function setCart(cart) {
+export function addGameToCart(item) {
+    return async dispatch => {
+        try {
+            dispatch(_addToCart(item));
+        } catch (err) {
+
+        }
+    }
+}
+
+function _setCart(cart) {
     return {
         type: 'SET_CART',
         cart
     }
 }
 
-// const addToCart = item => {
-//     return {
-//         type: 'ADD_TO_CART',
-//         item
-//     }
-// }
-// export const removeFromCart = id => {
-//     return {
-//         type: 'REMOVE_FROM_CART',
-//         id
-//     }
-// }
+
+
+function _addToCart(item) {
+    return {
+        type: 'ADD_TO_CART',
+        item
+    }
+}
+
+function _removeFromCart(item) {
+    return {
+        type: 'REMOVE_FROM_CART',
+        item
+    }
+}

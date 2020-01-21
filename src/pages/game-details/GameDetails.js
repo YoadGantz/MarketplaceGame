@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Button, notification } from "antd";
+import { connect } from 'react-redux'
 
-// import { connect } from 'react-redux'
 // import { saveCartItem } from "../../actions/cartActions";
-
+import { addGameToCart } from '../../actions/cartActions'
 import Review from "../../cmps/review/Review";
 import Comments from "../../cmps/comments/Comments";
 import GameMedia from "../../cmps/game-media/GameMedia";
@@ -15,7 +15,7 @@ import UserService from '../../services/UserService';
 
 import "./_GameDetails.scss";
 
-export default class GameDetails extends Component {
+class GameDetails extends Component {
   state = {
     currUrl: '',
     game: {},
@@ -73,7 +73,6 @@ export default class GameDetails extends Component {
 
   setGameRating = (game) => {
     const rating = UtilService.getGameRating(game)
-    console.log(rating);
     this.setState({ rating })
   }
 
@@ -88,9 +87,10 @@ export default class GameDetails extends Component {
     this.updateGame()
   }
 
-  addToCart = async () => {
+  onAddToCart = async () => {
     try {
       await CartService.addToCart(this.state.game._id)
+      this.props.addGameToCart(this.state.game._id)
       notification.info({
         message: `Game has been added`,
         description: "The game has been added to the cart"
@@ -120,13 +120,11 @@ export default class GameDetails extends Component {
       mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
       );
     }
-    console.log('rating', rating);
-
     return (
       <div className="container">
         <div className="flex justify-between">
           <h1>{title}</h1>
-          <Button type="primary" className='game-buy-button' onClick={this.addToCart}>
+          <Button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
             {price}$ Add to cart
           </Button>
         </div>
@@ -158,4 +156,19 @@ export default class GameDetails extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    cart: state.cartStore.cart
+  };
+};
+
+const mapDispatchToProps = {
+  addGameToCart
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameDetails)
 
