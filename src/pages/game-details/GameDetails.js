@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, notification } from 'antd';
+import { notification } from 'antd';
 import { connect } from 'react-redux'
 
 import CartService from '../../services/CartService.js'

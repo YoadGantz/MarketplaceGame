@@ -6,9 +6,9 @@ export function login(cred) {
             const user = await UserService.login(cred);
             dispatch(setUser(user));
             return;
-        } catch (error) {
-            console.log(error);
-            throw 'err';
+        } catch (err) {
+            console.log(err);
+            throw err;
         }
     };
 }
@@ -21,7 +21,7 @@ export function logout() {
             return;
         } catch (err) {
             console.log('Had issues in logging out', err)
-            throw 'err';
+            throw err;
         }
     };
 }
@@ -31,8 +31,10 @@ export function signUp(cred) {
         try {
             const user = await UserService.signup(cred);
             dispatch(setUser(user));
+            return;
         } catch (err) {
             console.log('Had issues in signing up', err)
+            throw err;
         }
     };
 }
@@ -43,8 +45,10 @@ export function loadUser(userId) {
         try {
             const user = await UserService.query(userId);
             dispatch(setUser(user));
+            return;
         } catch (err) {
             console.log('Had issues in getting user', err)
+            throw err;
         }
     };
 }
@@ -54,8 +58,10 @@ export function updateUser(user) {
         try {
             const updatedUser = await UserService.update(user);
             dispatch(_updateUser(updatedUser));
+            return;
         } catch (err) {
             console.log('Had issues in updating user', err)
+            throw err;
         }
     };
 }

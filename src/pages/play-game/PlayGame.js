@@ -39,7 +39,7 @@ class PlayGame extends Component {
         addedComents = <Comments sendComment={this.sendComment} comments={comments} />
         return <div>
             {logInmsg}
-            <iframe src="https://www.gameflare.com/embed/cartoon-strike/" frameborder="0" scrolling="no" width="1000" height="635" allowfullscreen></iframe>
+            <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameborder="0" scrolling="no" width="1000" height="635" allowfullscreen></iframe>
             <ul>
                 {addedComents}
             </ul>
