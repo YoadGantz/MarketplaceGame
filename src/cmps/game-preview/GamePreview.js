@@ -10,6 +10,7 @@ import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.png'
 
 import './_GamePreview.scss'
+
 class GamePreview extends Component {
     state = {
         publisherName: '',
@@ -92,7 +93,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    removeGameFromCart
+    removeGameFromCart,
 };
 
 export default connect(

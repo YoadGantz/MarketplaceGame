@@ -1,41 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SocketService from "../../services/SocketService";
-import Comments from "../../cmps/comments/Comments";
+import Comments from "../../cmps/comments/Comment";
 class PlayGame extends Component {
-    state = { comments: [] }
+    state = { comments: null }
 
     componentDidMount() {
-        if (!this.props.loggedInUser) return
+        let userName = 'Guest'
+        if (this.props.loggedInUser) userName = this.props.loggedInUser.userName
         SocketService.setup()
         SocketService.emit('chat topic', this.props.match.params.id);
-        SocketService.emit('user joined the game', { text: `${this.props.loggedInUser.userName} has joined the chat` });
-        SocketService.on('chat addMsg', this.addComment)
-        SocketService.on('user joined the game', this.addComment)
+        SocketService.emit('user joined', { text: `${userName} has joined the chat` });
+        SocketService.on('chat newComment', this.addComment)
+        SocketService.on('user joined', this.addComment)
     }
 
     componentWillUnmount = () => {
-        if (!this.props.loggedInUser) return
-        SocketService.off('chat addMsg')
-        SocketService.off('user joined the game')
         SocketService.terminate()
     }
 
     sendComment = (text) => {
-        SocketService.emit('chat newMsg', { user: { userName: this.props.loggedInUser.userName }, text });
+        let userName = 'Guest'
+        if (this.props.loggedInUser) {
+            userName = this.props.loggedInUser.userName
+        }
+        SocketService.emit('chat newComment', { user: { userName }, text });
     };
 
-    addComment = newMsg => {
-        if (!this.props.loggedInUser) return
-        this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
+    addComment = newComment => {
+        if (!this.state.comments) return this.setState({ comments: [newComment] })
+        this.setState(prevState => ({ comments: [...prevState.comments, newComment] }));
     };
-
-
 
     render() {
         const { comments } = this.state
         let addedComents
-        const logInmsg = !this.props.loggedInUser ? <h3>Buy the game to see more then this gif and use the chat</h3> : ''
+        const logInmsg = !this.props.loggedInUser ? <h3>Buy the game to see more then this gif</h3> : ''
         addedComents = <Comments sendComment={this.sendComment} comments={comments} />
         return <div>
             {logInmsg}
@@ -46,8 +46,6 @@ class PlayGame extends Component {
         </div>
     }
 }
-
-
 
 const mapStateToProps = state => {
     return {

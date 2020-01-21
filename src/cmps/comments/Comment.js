@@ -17,6 +17,7 @@ export default class Comments extends Component {
   render() {
     const { comments } = this.props;
     const { text } = this.state;
+    if (!comments) return ''
     const commentMap = comments.map(comment => {
       if (!comment.user) {
         return <p key={comment.text}>{comment.text}</p>

@@ -1,88 +1,61 @@
 import React, { Component } from "react";
-import { Button, notification } from "antd";
+import { notification } from "antd";
 import { connect } from 'react-redux'
 
 import CartService from '../../services/CartService.js'
-import GameService from "../../services/GameService";
 import SocketService from "../../services/SocketService";
-import UtilService from "../../services/UtilService";
-import UserService from '../../services/UserService';
-
+import GameDesc from '../../cmps/game-desc/GameDesc';
+import { loadGame, updateGame } from "../../actions/gameActions.js";
 import { addGameToCart } from '../../actions/cartActions'
 
 import GameMedia from '../../cmps/game-media/GameMedia';
-import Comments from '../../cmps/comments/Comments';
+import Comments from '../../cmps/comments/Comment';
 import Review from '../../cmps/review/Review';
 
 import './_GameDetails.scss';
-import GameDesc from '../../cmps/game-desc/GameDesc';
 
 class GameDetails extends Component {
   state = {
     currUrl: '',
-    game: {},
-    downloads: '',
-    rating: '',
-    publisherName: ''
   };
 
   componentDidMount = async () => {
     const { id } = this.props.match.params
-    const game = await GameService.getById(id)
-    this.setState({ game, currUrl: game.mediaUrls[0], comments: game.comments });
-    this.setGameRating(game)
-    this.setGameDownloads(game)
-    this.setPublisherName(game.publisher)
+    await this.props.loadGame(id)
+  }
+
+  getDetails = () => {
+    this.setState({ currUrl: this.props.game.mediaUrls[0] });
+    this.initiateSockets()
+  }
+
+  initiateSockets = () => {
     SocketService.setup()
-    SocketService.emit('chat topic', game.title);
-    SocketService.on('chat addMsg', this.addComment)
-  };
+    SocketService.emit('chat topic', this.props.game.title);
+    SocketService.on('chat newComment', this.addComment)
+  }
 
   componentWillUnmount = () => {
-    SocketService.off('chat addMsg')
     SocketService.terminate()
   }
 
-  addComment = newMsg => {
-    this.updateGame('comment', newMsg)
-  };
-
-  sendComment = text => {
-    SocketService.emit('chat newMsg', { user: { userName: 'me' }, text });
-  };
-
-  updateGame = (type, newMsg) => {
-    let game = this.state.game
-    if (type === 'comment') {
-      game = { ...this.state.game }
-      game.comments = [...game.comments, newMsg]
-    }
-    GameService.update(game)
+  addComment = newComment => {
+    const newGame = { ...this.props.game }
+    newGame.comments = [...newGame.comments, newComment]
+    this.props.updateGame(newGame)
   }
-
-  setPublisherName = async (publisherId) => {
-    const publisher = await UserService.getById(publisherId)
-    const publisherName = publisher.userName
-    this.setState({ publisherName })
-  }
-
-  setGameDownloads = async (game) => {
-    const downloads = await UtilService.getGraphsDetails([game])
-    this.setState({ downloads: downloads[game.title] })
-  }
-
-  setGameRating = (game) => {
-    const rating = UtilService.getGameRating(game)
-    this.setState({ rating })
-  }
-
-
 
   addReview = (rating, text) => {
-    const game = { ...this.state.game }
-    game.reviews = [...game.reviews, { user: { userName: 'bob' }, text, rating }]
-    this.setState({ game })
-    this.updateGame()
+    if (this.props.loggedInUser) return
+    const newGame = { ...this.props.game }
+    newGame.reviews = [...newGame.reviews, { user: { userName: this.props.loggedInUser.userName }, text, rating }]
+    this.props.updateGame(newGame)
+  }
+
+  sendComment = text => {
+    let userName = 'Guest'
+    if (this.props.loggedInUser) userName = this.props.loggedInUser.userName
+    SocketService.emit('chat newComment', { user: { userName }, text });
   }
 
   onAddToCart = async () => {
@@ -107,9 +80,14 @@ class GameDetails extends Component {
   };
 
   render() {
-    if (!this.state.game.title) return <h1>Loading</h1>;
-    const { downloads, comments, currUrl, rating, publisherName, game: { thumbnail, title, description, publishedAt,
-      reviews, mediaUrls, price, tags } } = this.state;
+    if (!this.props.game) return <h1>Loading</h1>;
+    const { currUrl } = this.state
+    const { title,
+      reviews, mediaUrls, tags, comments } = this.props.game;
+    if (!currUrl) {
+      this.getDetails()
+      return <h1>Loading</h1>
+    }
     let mainMedia;
     if (currUrl.includes("mp4")) {
       mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
@@ -128,8 +106,7 @@ class GameDetails extends Component {
           <div className="flex game-choose-thumbnail-container">
             <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
-          <GameDesc addToCart={this.onAddToCart} downloads={downloads} description={description} publisherName={publisherName}
-            publishedAt={publishedAt} rating={rating} price={price} thumbnail={thumbnail} />
+          <GameDesc addToCart={this.onAddToCart} game={this.props.game} />
         </div>
         <h2>Tags:</h2>
         {tags.map(tag => {
@@ -146,16 +123,18 @@ class GameDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cartStore.cart
+    cart: state.cartStore.cart,
+    game: state.gameStore.game,
+    user: state.userStore.loggedInUser
   };
 };
-
 const mapDispatchToProps = {
-  addGameToCart
+  addGameToCart,
+  loadGame,
+  updateGame
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(GameDetails)
-
