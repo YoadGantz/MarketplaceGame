@@ -15,7 +15,6 @@ export default class GamePreview extends Component {
         this.setState({ publisherName })
     }
     onOpenDetails = (gameId) => {
-        console.log(this.props)
         this.props.history.push(`/game/${gameId}`)
     }
     onRemoveFromCart = (ev) => {
