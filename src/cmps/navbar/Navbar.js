@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import wishlistImg from "../../assets/icons/wishlist.svg"
 import shoppingCartImg from "../../assets/icons/shopping_cart.svg"
+import GamesCounter from '../games-counter/GamesCounter'
 import "./_NavBar.scss"
 
 // update to use NavLink 
 export default class Navbar extends Component {
+
   render() {
     const noLoggedinUser = false
     const userName = (!noLoggedinUser) ? 'guest' : ''
@@ -13,7 +15,7 @@ export default class Navbar extends Component {
       <nav className="nav-bar flex align-center">
         <div className="nav-logo full">
           <Link to="/">
-            <img alt="logo"  src="/navbar-logo.png" />
+            <img alt="logo" src="/navbar-logo.png" />
           </Link>
         </div>
         <NavLink to="/" exact className="nav-link flex align-center" activeClassName="active" >
@@ -26,6 +28,7 @@ export default class Navbar extends Component {
           Profile
         </NavLink>
         <img src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
+        <GamesCounter />
         <img src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
       </nav>
     )
