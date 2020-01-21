@@ -19,6 +19,11 @@ export default function cartReducer(state = INITIAL_STATE, action) {
         ...state,
         cart: [...state.cart.filter(item => item !== action.item)]
       }
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: []
+      }
     default:
       return state;
   }
