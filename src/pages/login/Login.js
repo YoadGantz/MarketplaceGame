@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import history from '../../history';
+
 import {
   // removeUser,
   login, logout, signUp
@@ -19,6 +21,10 @@ class Login extends Component {
       username: ''
     }
   };
+
+  componentDidUpdate = () => {
+    if (this.props.loggedInUser) history.push('/')
+  }
 
   loginHandleChange = ev => {
     const { name, value } = ev.target;
@@ -82,7 +88,7 @@ class Login extends Component {
     // );
     const loginSection = (
       <form onSubmit={this.doLogin}>
-         <input type="text" name="email" value={this.state.loginCred.email}
+        <input type="text" name="email" value={this.state.loginCred.email}
           onChange={this.loginHandleChange} placeholder="Email" />
         <br />
         <input type="password" name="password" value={this.state.loginCred.password}
