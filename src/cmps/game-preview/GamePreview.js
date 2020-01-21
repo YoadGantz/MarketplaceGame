@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 
 import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
-
-import './_GamePreview.scss'
 import { removeGameFromCart } from '../../actions/cartActions'
+
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
+import remove_from_cart from '../../assets/icons/remove_from_cart.png'
 
+import './_GamePreview.scss'
 class GamePreview extends Component {
     state = {
         publisherName: '',

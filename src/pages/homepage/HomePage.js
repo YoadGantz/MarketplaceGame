@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
-import { loadGames } from "../../actions/gameActions";
-import { updateUser } from "../../actions/userActions"
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
 
+import UtilService from '../../services/UtilService';
 import { loadGames } from '../../actions/gameActions';
 import { updateUser } from '../../actions/userActions'
-import UtilService from '../../services/UtilService';
 
 import './_HomePage.scss'
 class HomePage extends Component {
