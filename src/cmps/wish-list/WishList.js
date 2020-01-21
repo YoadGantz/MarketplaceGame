@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import { loadGames } from '../../actions/gameActions'
-import GameList from "../game-list/GameList"
+import GameList from '../game-list/GameList'
 
 class WishList extends Component {
     componentDidMount() {

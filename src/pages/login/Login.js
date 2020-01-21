@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 
 import history from '../../history';
 
-import {
-  // removeUser,
-  login, logout, signUp
-} from '../../actions/userActions';
+import { login, signUp } from '../../actions/userActions';
 
 class Login extends Component {
   state = {
@@ -21,10 +18,6 @@ class Login extends Component {
       username: ''
     }
   };
-
-  componentDidUpdate = () => {
-    if (this.props.loggedInUser) history.push('/')
-  }
 
   loginHandleChange = ev => {
     const { name, value } = ev.target;
@@ -53,8 +46,13 @@ class Login extends Component {
       return this.setState({ msg: 'Please enter user/password' });
     }
     const userCreds = { email, password };
-    this.props.login(userCreds);
-    this.setState({ loginCred: { email: '', password: '' } });
+
+    try {
+      await this.props.login(userCreds);
+      this.setState({ loginCred: { email: '', password: '' } }, () => history.push('/'));
+    } catch (err) {
+      console.log('bad login')
+    }
   };
 
   // doSignup = async ev => {
@@ -101,16 +99,12 @@ class Login extends Component {
     const { loggedInUser } = this.props;
     return (
       <div className="test">
-        <h1>
-          This is a testing page for working with the Production Ready Server
-        </h1>
         {loggedInUser && (
           <div>
             <h2>Welcome: {loggedInUser.userName} </h2>
-            <button onClick={this.props.logout}>Logout</button>
+            <button onClick={this.doLogout}>Logout</button>
           </div>
         )}
-        <h2>Login</h2>
         {!loggedInUser && loginSection}
         {/* {!loggedInUser && signupSection} */}
         {/* <h2>Signup</h2> */}
@@ -125,11 +119,13 @@ const mapStateToProps = state => {
     loggedInUser: state.userStore.loggedInUser
   };
 };
+
 const mapDispatchToProps = {
   login,
-  logout,
-  signUp,
-  // removeUser,
+  signUp
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

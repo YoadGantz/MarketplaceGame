@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Icon } from 'antd';
 
-import DynamicTabPrev from "../../cmps/dynamic-cmps/DynamicTabPrev";
+import DynamicTabPrev from '../../cmps/dynamic-cmps/DynamicTabPrev';
 
-import "./_ProfilePage.scss"
+import './_ProfilePage.scss'
 class ProfilePage extends Component {
   state = {
     mode: 'OwnedGames',

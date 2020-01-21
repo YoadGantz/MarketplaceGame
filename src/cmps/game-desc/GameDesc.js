@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function GameDesc(props){
     const  {thumbnail,description,publishedAt,publisherName,rating,downloads,addToCart,price}=props

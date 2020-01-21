@@ -1,11 +1,27 @@
-import UserService from "../services/UserService";
+import UserService from '../services/UserService';
 
 export function login(cred) {
     return async dispatch => {
         try {
             const user = await UserService.login(cred);
             dispatch(setUser(user));
+            return;
+        } catch (error) {
+            console.log(error);
+            throw 'err';
+        }
+    };
+}
+
+export function logout() {
+    return async dispatch => {
+        try {
+            await UserService.logout();
+            dispatch(setUser(null))
+            return;
         } catch (err) {
+            console.log('Had issues in logging out', err)
+            throw 'err';
         }
     };
 }
@@ -16,19 +32,11 @@ export function signUp(cred) {
             const user = await UserService.signup(cred);
             dispatch(setUser(user));
         } catch (err) {
+            console.log('Had issues in signing up', err)
         }
     };
 }
 
-export function logout() {
-    return async dispatch => {
-        try {
-            const games = await UserService.logout();
-            dispatch('LOGOUT')
-        } catch (err) {
-        }
-    };
-}
 
 export function loadUser(userId) {
     return async dispatch => {
@@ -36,6 +44,18 @@ export function loadUser(userId) {
             const user = await UserService.query(userId);
             dispatch(setUser(user));
         } catch (err) {
+            console.log('Had issues in getting user', err)
+        }
+    };
+}
+
+export function updateUser(user) {
+    return async dispatch => {
+        try {
+            const updatedUser = await UserService.update(user);
+            dispatch(_updateUser(updatedUser));
+        } catch (err) {
+            console.log('Had issues in updating user', err)
         }
     };
 }
@@ -47,26 +67,9 @@ export function setUser(user) {
     };
 }
 
-export function updateUser(user) {
-    return async dispatch => {
-        try {
-            const updatedUser = await UserService.update(user);
-            dispatch(_updateUser(updatedUser));
-        } catch (err) {
-        }
-    };
-}
 function _updateUser(user) {
     return {
         type: 'UPDATE_USER',
         user
     }
 }
-
-function _removeUser(userId) {
-    return {
-        type: 'USER_REMOVE',
-        userId
-    };
-}
-

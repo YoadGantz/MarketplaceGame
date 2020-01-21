@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-
+import React, { Component } from 'react';
 
 export default class Comments extends Component {
   state = { text: "" };

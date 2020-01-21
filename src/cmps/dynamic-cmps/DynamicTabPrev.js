@@ -1,5 +1,6 @@
-import DynamicTabMap from "./DynamicTabMap.js"
 import React, { Component } from 'react';
+
+import DynamicTabMap from './DynamicTabMap.js'
 
 export default class DynamicTabPrev extends Component {
     getComponent() {

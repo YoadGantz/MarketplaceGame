@@ -1,10 +1,10 @@
 function loadFromStorage(key) {
-    var val = sessionStorage.getItem(key)
+    var val = localStorage.getItem(key)
     return (val)? JSON.parse(val) : [];
 }
 
 function saveToStorage(key, val) {
-    sessionStorage[key] = JSON.stringify(val);
+    localStorage[key] = JSON.stringify(val);
 }
 
 export default {

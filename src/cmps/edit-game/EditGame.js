@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import "./_EditGame.scss";
-import uploadImg from "../../services/MediaUploadService";
-import { Button } from "antd";
-import TagList from "../tag-list/TagList";
-import MediaUrlsList from "../comments/media-url-list/MediaUrlList";
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import GameService from "../../services/GameService";
+import { Button } from 'antd';
 
+import GameService from '../../services/GameService';
+import uploadImg from '../../services/MediaUploadService';
+import MediaUrlsList from './media-url-list/MediaUrlList';
+import TagList from '../tag-list/TagList';
+
+import './_EditGame.scss';
 class EditGame extends Component {
   state = {
     title: "",

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Button, notification } from "antd";
+import React, { Component } from 'react';
+import { Button, notification } from 'antd';
 import { connect } from 'react-redux'
 
 import CartService from '../../services/CartService.js'
-import GameService from "../../services/GameService";
-import SocketService from "../../services/SocketService";
-import UtilService from "../../services/UtilService";
+import GameService from '../../services/GameService';
+import SocketService from '../../services/SocketService';
+import UtilService from '../../services/UtilService';
 import UserService from '../../services/UserService';
 
 import { addGameToCart } from '../../actions/cartActions'

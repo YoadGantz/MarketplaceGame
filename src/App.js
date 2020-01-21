@@ -9,9 +9,9 @@ import Explore from './pages/explore-page/Explore';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import GameDetails from './pages/game-details/GameDetails';
 import PlayGame from './pages/play-game/PlayGame';
-import Modal from './cmps/modal/Modal'
-import Navbar from './cmps/navbar/Navbar';
 
+import Modal from './cmps/modal/Modal'
+import NavBar from './cmps/nav-bar/NavBar';
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/wish-list/WishList';
@@ -37,7 +37,7 @@ export default class App extends Component {
       return (
          <React.Fragment>
             <Router history={history}>
-               <Navbar togglePortal={this.togglePortal} />
+               <NavBar togglePortal={this.togglePortal} />
                <Switch>
                   <Route path="/" component={HomePage} exact />
                   <Route path="/login" component={Login} exact />
