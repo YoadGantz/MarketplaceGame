@@ -14,7 +14,7 @@ import Navbar from './cmps/navbar/Navbar';
 
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
-import WishList from './cmps/WishList';
+import WishList from './cmps/wish-list/WishList';
 
 import './assets/styles/global.scss'
 
