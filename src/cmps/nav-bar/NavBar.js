@@ -25,7 +25,7 @@ class NavBar extends Component {
 
   render() {
     const { loggedInUser } = this.props
-    const userName = (!loggedInUser) ? 'guest' : ''
+    const userName = (!loggedInUser) ? 'guest' : loggedInUser.userName ;
     return (
       <nav className="nav-bar flex align-center">
         <div className="nav-logo full">
@@ -42,7 +42,7 @@ class NavBar extends Component {
         <NavLink to={`/user/${userName}`} exact className="nav-link flex align-center" activeClassName="active"  >
           Profile
         </NavLink>
-        {(!loggedInUser) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active"  >Login</NavLink>
+        {(!loggedInUser) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
           : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="active" >Logout</NavLink>}
         <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
         <GamesCounter />
