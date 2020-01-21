@@ -21,12 +21,10 @@ export default class PieCharts extends PureComponent {
     if   (!this.props.orderedGames[game.title]) return sum
       return sum += this.props.orderedGames[game.title]
     }, 0)
-    console.log(ordersSum)
      this.props.games.forEach((game,i) => {
     if (!this.props.orderedGames[game.title])return
       data.push({fill:colors[i] ,name: game.title, value: Math.floor(((this.props.orderedGames[game.title]) / ordersSum) * 100)})
     })
-    console.log(this.props.orderedGames)
     this.setState({ data })
   }
 
