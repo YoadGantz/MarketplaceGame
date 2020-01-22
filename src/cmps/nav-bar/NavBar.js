@@ -18,7 +18,7 @@ class NavBar extends Component {
       await this.props.logout();
       history.push('/')
     } catch (err) {
-      console.log('had issues while logging out ', err)
+      console.log('Had issues while logging out ', err)
     }
   }
 
@@ -41,7 +41,7 @@ class NavBar extends Component {
         <NavLink to={`/user/${userName}`} exact className="nav-link flex align-center" activeClassName="active"  >
           Profile
         </NavLink>
-        {(!loggedInUser) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
+        {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
           : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="active" >Logout</NavLink>}
         <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")} />
         <GameCounter />

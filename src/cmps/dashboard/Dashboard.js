@@ -15,7 +15,7 @@ import PieChart from '../charts/PieChart';
 import ConfirmDelete from '../helpers/ConfirmDelete'
 class Dashboard extends Component {
     state = {
-        orders: '',
+        orders: null,
         filterBy: {
             _id: '',
         },
@@ -62,11 +62,10 @@ class Dashboard extends Component {
     }
 
     onRemoveGame = async (gameId) => {
-        console.log(gameId)
         this.setState({
             toggleModal: true,
             currGameId: gameId
-        }, console.log(this.state))
+        })
         this.onToggleModal('confirmDelete')
     }
 

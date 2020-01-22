@@ -8,8 +8,11 @@ export default class Comments extends Component {
   };
 
   onAddMessage = () => {
-    if (!this.state.text) return
-    this.props.sendComment(this.state.text)
+    const { text } = this.state
+    if (!text) return
+    let user = 'Guest'
+    if (this.props.user) user = this.props.user
+    this.props.onAddCommentOrReview({ text, user }, true)
     this.setState({ text: '' })
   }
 
@@ -36,7 +39,7 @@ export default class Comments extends Component {
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <button onClick={this.onAddMessage} type='primary'>Add comment</button>
+        <button onClick={this.onAddCommentOrReview} type='primary'>Add comment</button>
       </div>
     );
   }

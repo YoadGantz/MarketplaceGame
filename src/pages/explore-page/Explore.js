@@ -23,7 +23,7 @@ class Explore extends Component {
     render() {
         return <div className="flex column container align-center">
             <Filter onFilterBy={this.onFilterBy}></Filter>
-            <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} wishedGames={this.props.wishedGames} games={this.props.games}></GameList>
+            <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={this.props.games}></GameList>
         </div>
     }
 }
@@ -31,14 +31,12 @@ class Explore extends Component {
 const mapStateToProps = state => {
     return {
         games: state.gameStore.games,
-        // wishedGames: state.gameStore.wishedGames,
         user: state.userStore.loggedInUser
     };
 };
 
 const mapDispatchToProps = {
     loadGames,
-    // loadWishedGames,
     updateUser
 };
 
