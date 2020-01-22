@@ -9,21 +9,17 @@ export default class PieCharts extends PureComponent {
   state = { data: [] }
 
   componentDidUpdate(prevprops) {
-    if (prevprops.orderedGames !== this.props.orderedGames) {
-      this.setData(this.props.orderedGames)
+    if (prevprops.sumOfGames !== this.props.sumOfGames) {
+      this.setData(this.props.sumOfGames)
     }
   }
 
-  setData = () => {
+  setData = (sum) => {
     const colors=['#16578F','#5F89D3','#A45FC1','#E5EDF4','#4C96D7','blue','lightblue']
     const data=[]
-    const ordersSum = this.props.games.reduce((sum, game) => {
-    if   (!this.props.orderedGames[game.title]) return sum
-      return sum += this.props.orderedGames[game.title]
-    }, 0)
      this.props.games.forEach((game,i) => {
-    if (!this.props.orderedGames[game.title])return
-      data.push({fill:colors[i] ,name: game.title, value: Math.floor(((this.props.orderedGames[game.title]) / ordersSum) * 100)})
+    if (!sum[i])return
+      data.push({fill:colors[i] ,name: game.title, value: sum[i]})
     })
     this.setState({ data })
   }

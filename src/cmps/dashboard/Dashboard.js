@@ -21,7 +21,9 @@ class Dashboard extends Component {
         },
         modalType: '',
         toggleModal: false,
-        currGameId: ''
+        currGameId: '',
+        sumOfGames:[],
+        moneySum:null
     }
 
     onToggleModal = (modalType) => {
@@ -39,13 +41,21 @@ class Dashboard extends Component {
         this.setState({ orders: ordersBy })
     }
 
+    moneySum= async()=>{
+    const sumOfGames=    await UtilService.getSum(this.props.games)
+    const moneySum= sumOfGames.reduce((acc,gameSum)=>{
+      return  acc+=gameSum
+    },0)
+    this.setState({sumOfGames,moneySum})
+    }
+
     componentDidUpdate = (prevProps) => {
         if (prevProps.games.length !== this.props.games.length) {
             this.getGraphsDetails()
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = async() => {
         if (this.props.loggedInUser) {
             const _id = this.props.loggedInUser._id
             this.setState({
@@ -58,7 +68,9 @@ class Dashboard extends Component {
         } else {
             this.props.loadGames()
         }
-        this.getGraphsDetails()
+       await this.getGraphsDetails()
+        this.moneySum()
+
     }
 
     onRemoveGame = async (gameId) => {
@@ -76,11 +88,12 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { orders } = this.state
+        const { orders,sumOfGames,moneySum } = this.state
         return (<div>
             <h1>Dashboard</h1>
+        <p>{moneySum}$</p>
             <AreaChart orderDates={orders} />
-            <PieChart games={this.props.games} orderedGames={orders} />
+            <PieChart games={this.props.games} sumOfGames={sumOfGames} />
             <div>game list</div>
             <Link to='/edit'>Add a game</Link>
             <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />

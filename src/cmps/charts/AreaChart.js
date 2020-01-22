@@ -12,29 +12,17 @@ export default class Graph extends PureComponent {
     }
   }
 
-
-
-
   setData = (purcheses) => {
     const data = []
     for (let i = 1; i < 31; i++) {
       let price
       if (purcheses[i]) {
         price = purcheses[i]
-      } else if (!(i % 3)) {
-        price = i
-      } else if (i < 5) {
-        price = i 
-      } else if (i > 25) {
-        price = i 
-      } else {
-        price =  i
-      }
+      } 
       data.push({ name: i, $: price })
     }
     this.setState({ data })
   }
-
 
   render() {
     const { data } = this.state
