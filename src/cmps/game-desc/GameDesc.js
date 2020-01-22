@@ -33,8 +33,9 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { addToCart, game: { thumbnail, description, publishedAt, price } } = this.props
+    const { onAddToCart, game: { thumbnail, description, publishedAt, price } } = this.props
     const { publisherName, rating, orderCount } = this.state
+    console.log(this.props)
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
@@ -44,7 +45,7 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
-          <button type="primary" className='game-buy-button' onClick={addToCart}>
+          <button type="primary" className='game-buy-button' onClick={onAddToCart}>
             {price}$ Add to cart
           </button>
         </div>
