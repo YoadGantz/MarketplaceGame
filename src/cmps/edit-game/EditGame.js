@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button } from 'antd';
 
 import GameService from '../../services/GameService';
-import uploadImg from '../../services/MediaUploadService';
+import uploadImg from '../../services/mediaUploadService';
 import MediaUrlsList from './media-url-list/MediaUrlList';
 import TagList from '../tag-list/TagList';
 
@@ -13,10 +13,10 @@ class EditGame extends Component {
     title: "",
     description: "",
     thumbnail: "",
-    mediaUrls: [],
+    mediaUrls: null,
     price: "",
     publishedAt: '',
-    tags: [],
+    tags: null,
     currTag: ''
   };
 
@@ -84,11 +84,11 @@ class EditGame extends Component {
     let addedTags;
     let addedUrls;
     let addedThumbnail
-    if (mediaUrls.length)
+    if (mediaUrls && mediaUrls.length)
       addedUrls = (
         <MediaUrlsList removeMediaAndTags={this.removeMediaAndTags} mediaUrls={mediaUrls} />
       );
-    if (tags.length) {
+    if (tags && tags.length) {
       addedTags = (
         <TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />
       )

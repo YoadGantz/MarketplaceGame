@@ -17,6 +17,10 @@ export default class GameDesc extends Component {
     this.setState({ orderCount: orderCount[game.title] })
   }
 
+  onAddToCart = () => {
+    this.props.onAddToCart(this.props.game._id)
+  }
+
   setGameRating = (game) => {
     const rating = UtilService.getGameRating(game)
     this.setState({ rating })

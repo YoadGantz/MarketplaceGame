@@ -52,10 +52,9 @@ class GameDetails extends Component {
     return this.props.updateGame(newGame)
   }
 
-  onAddToCart = async () => {
+  onAddToCart = async (gameId) => {
     try {
-      await CartService.addToCart(this.state.game._id)
-      this.props.addGameToCart(this.state.game._id)
+      this.props.addGameToCart(gameId)
       notification.info({
         message: `Game has been added`,
         description: "The game has been added to the cart"
@@ -100,7 +99,7 @@ class GameDetails extends Component {
           <div className="flex game-choose-thumbnail-container">
             <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
-          <GameDesc addToCart={this.onAddToCart} game={this.props.game} />
+          <GameDesc onAddToCart={this.onAddToCart} game={this.props.game} />
         </div>
         <h2>Tags:</h2>
         {tags.map(tag => {

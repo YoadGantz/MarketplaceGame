@@ -4,7 +4,6 @@ import React from 'react'
 import './_GameList.scss'
 
 export default function GameList(props) {
-
     const { games, user } = props;
     return <ul className="cards-container clean-list container">
         {games?.map((game) => {

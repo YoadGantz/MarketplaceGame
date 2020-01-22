@@ -15,7 +15,8 @@ export default async function uploadImg(files) {
           )
     }
     catch (err) {
-        throw err
+        console.log('Had issues uploading to cloudinary', err);
+        
     }
 
  }
