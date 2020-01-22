@@ -4,7 +4,7 @@ import {
 } from 'recharts';
 
 export default class Graph extends PureComponent {
-  state = { data: [{ name: 0, $: 0 }] }
+  state = { data: [{ name: 0, purcheses: 0 }] }
 
   componentDidUpdate(prevprops) {
     if (prevprops.orderDates !== this.props.orderDates) {
@@ -18,8 +18,10 @@ export default class Graph extends PureComponent {
       let price
       if (purcheses[i]) {
         price = purcheses[i]
-      } 
-      data.push({ name: i, $: price })
+      }else{
+        price=0
+      }
+      data.push({ name: i, purcheses: price })
     }
     this.setState({ data })
   }
@@ -35,11 +37,10 @@ export default class Graph extends PureComponent {
           top: 10, right: 30, left: 0, bottom: 0,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="$" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="purcheses" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
   }

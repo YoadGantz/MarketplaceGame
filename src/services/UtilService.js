@@ -23,7 +23,7 @@ const downloadsByGame= await getGraphsDetails(games,'games')
 const sum=games.map((currGame,idx)=>{
 return downloadsByGame[idx]*currGame.price
 })
-return sum
+return {sum,downloadsByGame}
 }
 
 async function sortByDownloads(games, isAscending) {
@@ -55,14 +55,14 @@ function _dateFromObjectId(objectId) {
 };
 
 
-async function getGraphsDetails(games, type) {
+async function getGraphsDetails(games, type,date=30) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
     const ordersByGame = []
     games.forEach((game) => {
         prms.push(OrderService.query({
-            lastMonthId: objectIdByTime(30),
+            lastMonthId: objectIdByTime(date),
             gameIds: game._id
         }))
         gameByNameOrder.push(game.title)
