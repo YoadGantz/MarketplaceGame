@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import UserService from "../../services/UserService";
 import UtilService from "../../services/UtilService";
+import UserService from "../../services/UserService";
+
 export default class GameDesc extends Component {
   state = { orderCount: '', rating: '', publisherName: '' }
 
@@ -28,9 +29,8 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { thumbnail, description, publishedAt, addToCart, price } = this.props.game
+    const { addToCart, game: { thumbnail, description, publishedAt, price } } = this.props
     const { publisherName, rating, orderCount } = this.state
-    console.log(this.props)
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
@@ -40,7 +40,7 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
-          <button type="primary" className='game-buy-button' onClick={this.props.addToCart}>
+          <button type="primary" className='game-buy-button' onClick={addToCart}>
             {price}$ Add to cart
           </button>
         </div>

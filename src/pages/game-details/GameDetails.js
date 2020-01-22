@@ -5,7 +5,7 @@ import { notification } from "antd";
 import CartService from '../../services/CartService.js'
 import SocketService from "../../services/SocketService";
 
-import { loadGame, updateGame } from "../../actions/gameActions.js";
+import { loadGame, updateGame, updateComments } from "../../actions/gameActions.js";
 import { addGameToCart } from '../../actions/cartActions'
 
 import GameDesc from '../../cmps/game-desc/GameDesc';
@@ -33,30 +33,23 @@ class GameDetails extends Component {
   initiateSockets = () => {
     SocketService.setup()
     SocketService.emit('chat topic', this.props.game.title);
-    SocketService.on('chat newComment', this.addComment)
+    SocketService.on('chat newComment', this.onAddCommentOrReview)
   }
 
   componentWillUnmount = () => {
     SocketService.terminate()
   }
 
-  addComment = newComment => {
+  onAddCommentOrReview = (newText, isSent = false, name = 'comments') => {
     const newGame = { ...this.props.game }
-    newGame.comments = [...newGame.comments, newComment]
-    this.props.updateGame(newGame)
-  }
-
-  addReview = (rating, text) => {
-    if (this.props.loggedInUser) return
-    const newGame = { ...this.props.game }
-    newGame.reviews = [...newGame.reviews, { user: { userName: this.props.loggedInUser.userName }, text, rating }]
-    this.props.updateGame(newGame)
-  }
-
-  sendComment = text => {
-    let userName = 'Guest'
-    if (this.props.loggedInUser) userName = this.props.loggedInUser.userName
-    SocketService.emit('chat newComment', { user: { userName }, text });
+    newGame[name] = [...newGame[name], newText]
+    if (!isSent) {
+      return this.props.updateComments(newGame)
+    }
+    if (name === 'comments') {
+      SocketService.emit('chat newComment', newText);
+    }
+    return this.props.updateGame(newGame)
   }
 
   onAddToCart = async () => {
@@ -83,8 +76,8 @@ class GameDetails extends Component {
   render() {
     if (!this.props.game) return <h1>Loading</h1>;
     const { currUrl } = this.state
-    const { title,
-      reviews, mediaUrls, tags, comments } = this.props.game;
+    const { loggedInUser, game: { title,
+      reviews, mediaUrls, tags, comments } } = this.props;
     if (!currUrl) {
       this.getDetails()
       return <h1>Loading</h1>
@@ -114,9 +107,9 @@ class GameDetails extends Component {
           return <span key={tag}>{tag} </span>;
         })}
         <h2>Reviews :</h2>
-        <Review addReview={this.addReview} reviews={reviews} />
+        <Review user={this.props.loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
         <h2>Comments :</h2>
-        <Comments sendComment={this.sendComment} comments={comments} />
+        <Comments user={loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
       </div>
     );
   }
@@ -126,13 +119,14 @@ const mapStateToProps = state => {
   return {
     cart: state.cartStore.cart,
     game: state.gameStore.game,
-    user: state.userStore.loggedInUser
+    loggedInUser: state.userStore.loggedInUser,
   };
 };
 const mapDispatchToProps = {
   addGameToCart,
   loadGame,
-  updateGame
+  updateGame,
+  updateComments
 };
 
 export default connect(

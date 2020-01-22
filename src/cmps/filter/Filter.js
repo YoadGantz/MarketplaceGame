@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 
 export default class Filter extends Component {
     state = {
-        title:''
+        title:'',
+        tag:'' ,
+        rating:''
     }
     onFilterBy = (ev) => {
         const value = ev.target.value;

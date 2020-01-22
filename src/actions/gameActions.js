@@ -16,6 +16,7 @@ function setGame(game) {
 
 
 
+
 export function loadGames(filterBy) {
     return async dispatch => {
         try {
@@ -43,6 +44,15 @@ export function updateGame(newGame) {
             const game = await GameService.update(newGame);
             dispatch(setGame(newGame));
             return game
+        } catch (err) {
+        }
+    };
+}
+export function updateComments(newGame) {
+    return  dispatch => {
+        try {
+            dispatch(setGame(newGame));
+            return newGame
         } catch (err) {
         }
     };
