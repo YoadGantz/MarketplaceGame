@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 import history from '../../history';
 
 import { logout } from '../../actions/userActions';
-import GamesCounter from '../games-counter/GamesCounter'
+import GameCounter from '../game-counter/GameCounter'
 
 import './_NavBar.scss'
 import wishlistImg from '../../assets/icons/wishlist.svg'
 import shoppingCartImg from '../../assets/icons/shopping_cart.svg'
-
-// update to use NavLink 
+ 
 class NavBar extends Component {
 
   doLogOut = async () => {
@@ -19,13 +18,13 @@ class NavBar extends Component {
       await this.props.logout();
       history.push('/')
     } catch (err) {
-      console.log('had issues while logging out ')
+      console.log('had issues while logging out ', err)
     }
   }
 
   render() {
     const { loggedInUser } = this.props
-    const userName = (!loggedInUser) ? 'guest' : loggedInUser.userName ;
+    const userName = (!loggedInUser) ? 'guest' : loggedInUser.userName;
     return (
       <nav className="nav-bar flex align-center">
         <div className="nav-logo full">
@@ -45,7 +44,7 @@ class NavBar extends Component {
         {(!loggedInUser) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
           : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="active" >Logout</NavLink>}
         <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
-        <GamesCounter />
+        <GameCounter />
         <img alt="" src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
       </nav >
     )

@@ -17,39 +17,43 @@ import './_GameDetails.scss';
 
 class GameDetails extends Component {
   state = {
-    currUrl: '',
+    currMediaUrl: ''
   };
 
   componentDidMount = async () => {
     const { id } = this.props.match.params
     await this.props.loadGame(id)
-  }
-
-  getDetails = () => {
-    this.setState({ currUrl: this.props.game.mediaUrls[0] });
+    this.setState({ currMediaUrl: this.props.game.mediaUrls[0] });
     this.initiateSockets()
   }
 
   initiateSockets = () => {
     SocketService.setup()
     SocketService.emit('chat topic', this.props.game.title);
-    SocketService.on('chat newComment', this.addComment)
+    SocketService.on('chat newComment', this.onAddComment)
   }
 
   componentWillUnmount = () => {
     SocketService.terminate()
   }
 
-  addComment = newComment => {
+  onAddComment = newComment => {
     const newGame = { ...this.props.game }
     newGame.comments = [...newGame.comments, newComment]
     this.props.updateGame(newGame)
   }
 
-  addReview = (rating, text) => {
-    if (this.props.loggedInUser) return
+  onAddReview = (rating, text) => {
+    if (!this.props.loggedInUser) {
+      console.log('you have to login if you want to add a review')
+      return
+    }
     const newGame = { ...this.props.game }
-    newGame.reviews = [...newGame.reviews, { user: { userName: this.props.loggedInUser.userName }, text, rating }]
+    newGame.reviews = [...newGame.reviews,
+    { user: { userName: this.props.loggedInUser.userName },
+      text,
+      rating
+    }]
     this.props.updateGame(newGame)
   }
 
@@ -77,28 +81,20 @@ class GameDetails extends Component {
   };
 
   onThumbNailPhotoClick = ev => {
-    this.setState({ currUrl: ev.target.src });
+    this.setState({ currMediaUrl: ev.target.src });
   };
 
   render() {
     if (!this.props.game) return <h1>Loading</h1>;
-    const { currUrl } = this.state
-    const { title,
-      reviews, mediaUrls, tags, comments } = this.props.game;
-    if (!currUrl) {
-      this.getDetails()
-      return <h1>Loading</h1>
-    }
+    const { currMediaUrl } = this.state
+    const { title, reviews, mediaUrls, tags, comments } = this.props.game;
     let mainMedia;
-    if (currUrl.includes("mp4")) {
-      mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
-      );
-    } else {
-      mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
-      );
-    }
+    if (!currMediaUrl) { return <h1>Loading</h1> }
+    currMediaUrl.includes("mp4") ?
+      mainMedia = <iframe title="video" src={`${currMediaUrl}#t=0`} className="game-main-thumbnail" />
+      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
-      <div className="container">
+      <div className="container" >
         <div className="flex justify-between">
           <h1>{title}</h1>
         </div>
@@ -110,14 +106,12 @@ class GameDetails extends Component {
           <GameDesc addToCart={this.onAddToCart} game={this.props.game} />
         </div>
         <h2>Tags:</h2>
-        {tags.map(tag => {
-          return <span key={tag}>{tag} </span>;
-        })}
+        {tags.map(tag => { return <span key={tag}>{tag} </span>; })}
         <h2>Reviews :</h2>
-        <Review addReview={this.addReview} reviews={reviews} />
+        <Review addReview={this.onAddReview} reviews={reviews} />
         <h2>Comments :</h2>
         <Comments sendComment={this.sendComment} comments={comments} />
-      </div>
+      </div >
     );
   }
 }

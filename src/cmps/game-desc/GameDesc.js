@@ -28,7 +28,7 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { thumbnail, description, publishedAt, addToCart, price } = this.props.game
+    const { thumbnail, description, publishedAt, price } = this.props.game
     const { publisherName, rating, orderCount } = this.state
     console.log(this.props)
     return (
