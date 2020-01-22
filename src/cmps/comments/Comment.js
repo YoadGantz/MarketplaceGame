@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Comments extends Component {
+export default class Comment extends Component {
   state = { text: "" };
   inputChange = ev => {
     let fieldName = ev.target.name;
