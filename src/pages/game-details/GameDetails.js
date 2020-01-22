@@ -87,7 +87,6 @@ class GameDetails extends Component {
 
   onAddToCart = async () => {
     try {
-      await CartService.addToCart(this.state.game._id)
       this.props.addGameToCart(this.state.game._id)
       notification.info({
         message: `Game has been added`,

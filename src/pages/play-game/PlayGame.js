@@ -39,7 +39,8 @@ class PlayGame extends Component {
         addedComents = <Comments sendComment={this.sendComment} comments={comments} />
         return <div>
             {logInmsg}
-            <img src={`https://media0.giphy.com/media/yZEIja6oMZ3qg/giphy.gif?cid=790b76114ded6412318df27a5f16325837281f38fa06ad58&rid=giphy.gif`} />
+            <iframe src="https://www.gameflare.com/embed/cartoon-strike/" frameborder="0" scrolling="no" width="1000" height="635" allowfullscreen></iframe>
+            {/* <img src={`https://media0.giphy.com/media/yZEIja6oMZ3qg/giphy.gif?cid=790b76114ded6412318df27a5f16325837281f38fa06ad58&rid=giphy.gif`} /> */}
             <ul>
                 {addedComents}
             </ul>

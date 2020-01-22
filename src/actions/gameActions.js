@@ -15,6 +15,7 @@ export function loadGames(filterBy) {
             dispatch(setGames(games));
 
         } catch (err) {
+            console.log('Had issues getting games', err);
         }
     };
 }

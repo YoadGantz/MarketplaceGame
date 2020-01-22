@@ -13,6 +13,7 @@ export default async function uploadImg(ev) {
         return await url.data
     }
     catch (err) {
-        throw err
+        console.log('Had issues uploading to cloudinary', err);
+        
     }
 }

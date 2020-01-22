@@ -12,12 +12,12 @@ import { clearCart } from '../../actions/cartActions';
 
 class ShoppingCart extends Component {
     state = {
-        games: [],
-        gamesIds: []
+        games: null,
+        gamesIds: null
     }
 
     async loadGames() {
-        const gamesIds = await CartService.query();
+        const gamesIds = CartService.query();
         let gamesToRender = []
         if (gamesIds.length) {
             gamesToRender = await GameService.query({ shoppingCartIds: gamesIds })
@@ -26,7 +26,7 @@ class ShoppingCart extends Component {
     }
 
     onRemoveFromCart = (gameId) => {
-        CartService.removeItem(gameId)
+        CartService.removeFromCart(gameId)
         this.loadGames()
     }
 
@@ -49,7 +49,7 @@ class ShoppingCart extends Component {
     render() {
 
         return <div>
-            {(this.state.games.length) ?
+            {(this.state.games && this.state.games.length) ?
                 <div>
                     <GameList onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
                     <button onClick={this.onBuyClick}>Buy</button>
