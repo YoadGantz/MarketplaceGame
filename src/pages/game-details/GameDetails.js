@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { notification } from "antd";
 
-import CartService from '../../services/CartService.js'
 import SocketService from "../../services/SocketService";
 
 import { loadGame, updateGame, updateComments } from "../../actions/gameActions.js";
@@ -53,6 +52,7 @@ class GameDetails extends Component {
   }
 
   onAddToCart = async (gameId) => {
+    console.log()
     try {
       this.props.addGameToCart(gameId)
       notification.info({

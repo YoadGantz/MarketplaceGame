@@ -18,6 +18,7 @@ export default class GameDesc extends Component {
   }
 
   onAddToCart = () => {
+    console.log(this.props.game)
     this.props.onAddToCart(this.props.game._id)
   }
 
@@ -33,7 +34,7 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { onAddToCart, game: { thumbnail, description, publishedAt, price } } = this.props
+    const { game: { thumbnail, description, publishedAt, price } } = this.props
     const { publisherName, rating, orderCount } = this.state
     console.log(this.props)
     return (
@@ -45,7 +46,7 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
-          <button type="primary" className='game-buy-button' onClick={onAddToCart}>
+          <button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
             {price}$ Add to cart
           </button>
         </div>
