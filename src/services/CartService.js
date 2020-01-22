@@ -12,7 +12,6 @@ function query() {
 }
 
 function addToCart(item) {
-    
     const cartItems = StorageService.loadFromStorage('cart')
     if (!cartItems.find((currItem) => item === currItem)) {
         cartItems.push(item)

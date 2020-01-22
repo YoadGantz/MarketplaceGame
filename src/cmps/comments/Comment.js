@@ -7,7 +7,7 @@ export default class Comment extends Component {
     this.setState({ [fieldName]: ev.target.value });
   };
 
-  onAddMessage = () => {
+  onAddComment = () => {
     const { text } = this.state
     if (!text) return
     let user = {userName:'Guest'}
@@ -40,7 +40,7 @@ export default class Comment extends Component {
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <button onClick={this.onAddCommentOrReview} type='primary'>Add comment</button>
+        <button onClick={this.onAddComment} type='primary'>Add comment</button>
       </div>
     );
   }
