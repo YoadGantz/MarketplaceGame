@@ -11,7 +11,6 @@ export default class Comments extends Component {
     const { text } = this.state
     if (!text) return
     let user = {userName:'Guest'}
-    console.log(!this.props.user)
     if (this.props.user) user = this.props.user
     this.props.onAddCommentOrReview({ text, user }, true)
     this.setState({ text: '' })

@@ -52,7 +52,6 @@ class GameDetails extends Component {
   }
 
   onAddToCart = async (gameId) => {
-    console.log()
     try {
       this.props.addGameToCart(gameId)
       notification.info({

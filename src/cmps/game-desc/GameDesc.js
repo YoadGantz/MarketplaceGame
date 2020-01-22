@@ -18,7 +18,6 @@ export default class GameDesc extends Component {
   }
 
   onAddToCart = () => {
-    console.log(this.props.game)
     this.props.onAddToCart(this.props.game._id)
   }
 
@@ -36,7 +35,6 @@ export default class GameDesc extends Component {
   render() {
     const { game: { thumbnail, description, publishedAt, price } } = this.props
     const { publisherName, rating, orderCount } = this.state
-    console.log(this.props)
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
