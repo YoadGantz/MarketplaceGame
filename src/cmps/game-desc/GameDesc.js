@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import UserService from "../../services/UserService";
 import UtilService from "../../services/UtilService";
+import UserService from "../../services/UserService";
+
 export default class GameDesc extends Component {
   state = { orderCount: '', rating: '', publisherName: '' }
 
@@ -32,7 +33,7 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { thumbnail, description, publishedAt, price } = this.props.game
+    const { game: { thumbnail, description, publishedAt, price } } = this.props
     const { publisherName, rating, orderCount } = this.state
     return (
       <div>

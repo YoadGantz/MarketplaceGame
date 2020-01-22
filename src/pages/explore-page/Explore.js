@@ -1,29 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { loadGames} from '../../actions/gameActions';
+import { loadGames } from '../../actions/gameActions';
 import { updateUser } from '../../actions/userActions';
 
 import Filter from '../../cmps/filter/Filter';
 import GameList from '../../cmps/game-list/GameList';
+import UtilService from '../../services/UtilService';
 
 class Explore extends Component {
-    componentDidMount() {
-        this.props.loadGames()
+    state = { games: null, isAscending: false }
+
+    componentDidMount = async () => {
+        this.onFilterBy()
     }
 
     onUpdateUser = async (updatedUser) => {
         this.props.updateUser(updatedUser)
     }
 
-    onFilterBy = (filterBy) => {
-        this.props.loadGames(filterBy)
+    onFilterBy = async (filterBy) => {
+       await this.props.loadGames(filterBy)
+       this.setState({ games: this.props.games })
+    }
+
+    sortByDownloads = async () => {
+        let games = [...this.props.games]
+        games = await UtilService.sortByDownloads(games, this.state.isAscending)
+        this.setState((prevState) => ({ games, isAscending: !prevState.isAscending }))
+    }
+    sortByPrice = () => {
+        let games = [...this.props.games]
+        games = UtilService.sortByPrice(games, this.state.isAscending)
+        this.setState((prevState) => ({ games, isAscending: !prevState.isAscending }))
     }
 
     render() {
+        const { games } = this.state
         return <div className="flex column container align-center">
-            <Filter onFilterBy={this.onFilterBy}></Filter>
-            <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={this.props.games}></GameList>
+            <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy} />
+            <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
         </div>
     }
 }

@@ -9,7 +9,7 @@ class PlayGame extends Component {
         let userName = 'Guest'
         if (this.props.loggedInUser) userName = this.props.loggedInUser.userName
         SocketService.setup()
-        SocketService.emit('chat topic', this.props.match.params.id);
+        SocketService.emit('chat room', this.props.match.params.id);
         SocketService.emit('user joined', { text: `${userName} has joined the chat` });
         SocketService.on('chat newComment', this.addComment)
         SocketService.on('user joined', this.addComment)
@@ -19,12 +19,8 @@ class PlayGame extends Component {
         SocketService.terminate()
     }
 
-    sendComment = (text) => {
-        let userName = 'Guest'
-        if (this.props.loggedInUser) {
-            userName = this.props.loggedInUser.userName
-        }
-        SocketService.emit('chat newComment', { user: { userName }, text });
+    sendComment = (newComment) => {
+        SocketService.emit('chat newComment', newComment);
     };
 
     addComment = newComment => {
@@ -36,7 +32,7 @@ class PlayGame extends Component {
         const { comments } = this.state
         let addedComments
         const logInMsg = !this.props.loggedInUser ? 'Buy the game to see more then this gif' : '';
-        addedComments = <Comments sendComment={this.sendComment} comments={comments} />
+        addedComments = <Comments onAddCommentOrReview={this.sendComment} comments={comments} />
         return <div>
             <h3>{logInMsg}</h3>
             <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameBorder="0" scrolling="no" width="1000" height="635" allowFullScreen></iframe>

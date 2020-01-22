@@ -24,7 +24,7 @@ export default class App extends Component {
       toggleModal: false
    }
 
-   togglePortal = (modalType) => {
+   toggleModal = (modalType) => {
       if (!this.state.toggleModal) {
          this.setState({ modalType, toggleModal: true });
       } else if (modalType === this.state.modalType) {
@@ -37,9 +37,9 @@ export default class App extends Component {
       return (
          <React.Fragment>
             <Router history={history}>
-               <NavBar togglePortal={this.togglePortal} />
+               <NavBar toggleModal={this.toggleModal} />
                <Switch>
-                  <Route path="/" component={HomePage} exact />
+                   <Route path="/"  render={()=><HomePage history={history}/>} exact />
                   <Route path="/login" component={Login} exact />
                   <Route path="/edit/:id?" component={EditGame} exact />
                   <Route path="/game/:id" component={GameDetails} exact />
@@ -50,7 +50,6 @@ export default class App extends Component {
             </Router>
             {this.state.toggleModal && <Modal>
                {(this.state.modalType === 'wishlist') ? <WishList history={history} /> : <ShoppingCart history={history} />}
-
             </Modal>}
          </React.Fragment>
       )

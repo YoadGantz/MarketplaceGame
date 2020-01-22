@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { Button } from 'antd';
 
 import GameService from '../../services/GameService';
-import uploadImg from '../../services/MediaUploadService';
 import MediaUrlsList from './media-url-list/MediaUrlList';
+import MediaUploadService from '../../services/MediaUploadService';
+
 import TagList from '../tag-list/TagList';
 
 import './_EditGame.scss';
@@ -29,7 +30,6 @@ class EditGame extends Component {
   }
 
   onSubmit = async () => {
-
     const newGame = { ...this.state }
     if (!newGame.mediaUrls) return
     if (!newGame.thumbnail) return
@@ -51,28 +51,23 @@ class EditGame extends Component {
   addMediaAndTags = async ev => {
     const fieldName = ev.target.name
     if (fieldName !== "tags") {
-      const res = await uploadImg(ev);
-      const url = await res.url
+      const urls = await MediaUploadService(ev.target.files);
       if (fieldName === 'thumbnail') {
-        return this.setState({ thumbnail: url })
+        return this.setState({ thumbnail: urls[0] })
       }
       return this.setState(prevState => ({
-        mediaUrls: [...prevState.mediaUrls, url]
+        mediaUrls: [...prevState.mediaUrls, ...urls]
       }));
     }
     if (!this.state.currTag) return
-    console.log('got here');
-
     this.setState(prevState => ({
       tags: [...prevState.tags, this.state.currTag]
-    }), () => console.log(this.state.tags)
-    );
-  };
+    }))
+  }
 
   removeMediaAndTags = (fieldName, idx) => {
     if (fieldName === 'thumbnail') {
-      return this.setState({ thumbnail: '' })
-    }
+      return this.setState({ thumbnail: '' })}
     let editedData = [...this.state[fieldName]];
     editedData.splice(idx, 1);
     this.setState({
@@ -99,7 +94,6 @@ class EditGame extends Component {
         <TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />
       )
     }
-
     if (thumbnail) {
       addedThumbnail = <div className='media-container'>
         <img src={thumbnail} alt='' />
@@ -119,55 +113,26 @@ class EditGame extends Component {
         <p>Publish Date</p>
         <input type="date" onChange={this.inputChange} value={publishedAt} name="publishedAt" />
         <p> Descripiton: </p>
-        <textarea
-          type="text"
-          onChange={this.inputChange}
-          placeholder="description"
-          name="description"
-          value={description}
-        />
+        <textarea type="text" onChange={this.inputChange} placeholder="description" name="description" value={description} />
         <p> Thumbnail Img: </p>
-        <input
-          type="file"
-          onChange={this.addMediaAndTags}
-          placeholder="thumbnail"
-          name="thumbnail"
-        />
+        <input type="file" onChange={this.addMediaAndTags} placeholder="thumbnail" name="thumbnail" />
         {addedThumbnail}
         <p> Img Url: </p>
         <div>
-          <input
-            type="file"
-            onChange={this.addMediaAndTags}
-            placeholder="Put your image Urls here"
-            name="mediaUrls"
-            multiple
-          />
+          <input type="file" onChange={this.addMediaAndTags} placeholder="Put your image Urls here" name="mediaUrls" multiple />
           <div className="flex wrap">{addedUrls}</div>
         </div>
         <p>Price: </p>
-        <input
-          type="number"
-          onChange={this.inputChange}
-          placeholder="price"
-          name="price"
-          value={price}
-        />
+        <input type="number" onChange={this.inputChange} placeholder="price" name="price" value={price} />
         <p>Tags:</p>
-        <input
-          type="tags"
-          onChange={this.inputChange}
-          placeholder="tags"
-          name="currTag"
-        />
+        <input type="tags" onChange={this.inputChange} placeholder="tags" name="currTag" />
         <button name="tags" onClick={this.addMediaAndTags}>
           Add Tag
           </button>
         <div className="flex">{addedTags}</div>
         <Button onClick={this.onSubmit}>Submit</Button>
       </div>
-    );
-  }
+    );}
 }
 
 const mapStateToProps = state => {

@@ -23,8 +23,14 @@ export function removeGameFromCart(item) {
 
 export function addGameToCart(item) {
     return dispatch => {
-        CartService.addToCart(item)
-        dispatch(_addToCart(item));
+        try {
+            CartService.addToCart(item)
+            dispatch(_addToCart(item))
+            return;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 }
 

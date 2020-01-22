@@ -20,7 +20,7 @@ export default class Graph extends PureComponent {
     for (let i = 1; i < 31; i++) {
       let price
       if (purcheses[i]) {
-        price = purcheses[i] 
+        price = purcheses[i]
       } else if (!(i % 3)) {
         price = i
       } else if (i < 5) {
@@ -34,7 +34,6 @@ export default class Graph extends PureComponent {
     }
     this.setState({ data })
   }
-
 
 
   render() {

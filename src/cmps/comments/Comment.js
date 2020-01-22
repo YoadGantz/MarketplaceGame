@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 
-export default class Comments extends Component {
+export default class Comment extends Component {
   state = { text: "" };
   inputChange = ev => {
     let fieldName = ev.target.name;
     this.setState({ [fieldName]: ev.target.value });
   };
 
-  onAddMessage = () => {
-    if (!this.state.text) return
-    this.props.sendComment(this.state.text)
+  onAddComment = () => {
+    const { text } = this.state
+    if (!text) return
+    let user = {userName:'Guest'}
+    if (this.props.user) user = this.props.user
+    this.props.onAddCommentOrReview({ text, user }, true)
     this.setState({ text: '' })
   }
 
@@ -36,7 +39,7 @@ export default class Comments extends Component {
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <button onClick={this.onAddMessage} type='primary'>Add comment</button>
+        <button onClick={this.onAddComment} type='primary'>Add comment</button>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadCart } from '../../actions/cartActions'
 
-class GamesCounter extends Component {
+class GameCounter extends Component {
     componentDidMount() {
         this.props.loadCart()
     }
@@ -25,4 +25,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(GamesCounter)
+)(GameCounter)
