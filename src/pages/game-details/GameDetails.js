@@ -110,7 +110,7 @@ class GameDetails extends Component {
         </div>
         <h2>Tags:</h2>
         {tags.map(tag => {
-          return <span key={tag}>{tag} </span>;
+          return <span className="tag" key={tag}>{tag} </span>;
         })}
         <h2>Reviews :</h2>
         <Review addReview={this.addReview} reviews={reviews} />

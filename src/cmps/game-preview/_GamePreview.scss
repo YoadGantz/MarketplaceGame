@@ -2,19 +2,40 @@
 @import "../../assets/styles/setup/variables.scss";
 
 .game-card {
+  color: black;
+  border-radius: 10px 10px 0 0;
   max-width: 300px;
-  > *:not(:last-child) {
-    margin-block-end: 5px;
-  }
   .img-container {
-    border-radius: 3px;
+    border-radius: 10px 10px 0 0;
     width: 100%;
     height: 140px;
     @include aspect-ratio(1.5, 1);
   }
-
+  .content-container {
+    background-image: url("../../assets/images/background_spotlight.jpg");
+    filter: brightness(2);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .price {
     font-weight: bold;
+  }
+  strong {
+    font-family: montserrat-bold, sans-serif;
+    font-weight: normal;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &.publisher {
+      font-family: montserrat, sans-serif;
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 8px;
+    }
   }
 }
 

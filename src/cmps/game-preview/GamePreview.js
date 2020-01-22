@@ -5,6 +5,8 @@ import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
 import { removeGameFromCart } from '../../actions/cartActions'
 
+
+import spotlightImg from '../../assets/images/background_spotlight.jpg'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.png'
@@ -54,35 +56,36 @@ class GamePreview extends Component {
         this.props.onUpdateUser(updatedUser)
     }
     render() {
-        const { game, user } = this.props
+        const { game, user, isProfile, isDashboard, isCart } = this.props
         return (
-            <React.Fragment>
-                <div onClick={() => this.onOpenDetails(game._id)} className="game-card">
-                    <div className="img-container">
-                        <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
-                    </div>
+            <li className="game-card" onClick={() => this.onOpenDetails(game._id)}>
+                {/* <img className="spotlight-img" src={spotlightImg} alt="background spotlight"></img> */}
+                <div className="img-container">
+                    <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
+                </div>
+                <section className="content-container">
                     <div className="flex">
-                        <h3 className="full">{game.title}</h3>
+                        <strong className="full">{game.title}</strong>
                         <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
                     </div>
-                    <h5>{this.state.publisherName}</h5>
+                    <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
                         <p className="price">${game.price}</p>
-                    </div>
-                </div>
-                {!this.props.isProfile &&
-                    <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-                        full_heart : empty_heart} />}
-                {this.props.isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
-                {this.props.isProfile &&
-                    <div>
-                        <button onClick={this.onPlayClick}>Play</button>
-                        {this.props.isDashboard && <div>
-                            <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
-                            <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
+                    </div >
+                    {!isProfile &&
+                        <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+                            full_heart : empty_heart} />}
+                    {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
+                    {isProfile &&
+                        <div>
+                            <button onClick={this.onPlayClick}>Play</button>
+                            {isDashboard && <div>
+                                <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
+                                <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
+                            </div>}
                         </div>}
-                    </div>}
-            </React.Fragment >
+                </section>
+            </li>
         )
     }
 }
