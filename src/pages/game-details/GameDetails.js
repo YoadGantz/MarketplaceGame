@@ -95,7 +95,9 @@ class GameDetails extends Component {
           <GameDesc onAddToCart={this.onAddToCart} game={this.props.game} />
         </div>
         <h2>Tags:</h2>
-        {tags.map(tag => { return <span key={tag}>{tag} </span>; })}
+        {tags.map(tag => {
+          return <span className="tag" key={tag}>{tag} </span>;
+        })}
         <h2>Reviews :</h2>
         <Review user={this.props.loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
         <h2>Comments :</h2>

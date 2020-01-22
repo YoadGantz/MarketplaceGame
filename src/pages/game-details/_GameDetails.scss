@@ -15,17 +15,19 @@
   margin: auto;
 }
 
-
-.game-main-content-container{
+.game-main-content-container {
+  background-image: url("../../assets/images/background_spotlight.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 3fr 1fr;
   max-height: 100vh;
   padding: 10px;
   gap: 5px;
-  grid-template-areas: 
-  " thumbnail desc"
-  " main-media  main-meida "
-  " choose  choose"
+  grid-template-areas:
+    " thumbnail desc"
+    " main-media  main-meida "
+    " choose  choose";
 }
 
 .game-choose-thumbnail {
@@ -34,7 +36,6 @@
   border: 1px solid black;
   object-fit: cover;
 }
-
 
 .game-buy-button {
   margin-top: 5px;
@@ -52,10 +53,9 @@ textarea {
   overflow-x: scroll;
   grid-area: choose;
 }
-.game-thumbnail{
-grid-area: thumbnail;
+.game-thumbnail {
+  grid-area: thumbnail;
 }
-
 
 .game-thumbnail-container {
   margin: 10px;
@@ -66,36 +66,50 @@ grid-area: thumbnail;
   @include aspect-ratio(1.5, 1);
 }
 
-.game-description{
+.game-description {
   grid-area: desc;
   font-size: 0.9rem;
 }
 
-  
 @include for-narrow-layout {
-  .game-main-content-container{
+  .game-main-content-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 1fr;
     max-height: 100vh;
     gap: 5px;
-    grid-template-areas: 
-    " thumbnail desc"
-    " main-media  main-meida "
-    " choose  choose"
+    grid-template-areas:
+      " thumbnail desc"
+      " main-media  main-meida "
+      " choose  choose";
   }
 }
 
+.tag {
+  display: inline-block;
+  line-height: 19px;
+  padding: 5px 10px;
+  background-color: rgba(103, 193, 245, 0.2);
+  box-shadow: none;
+  margin-right: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @include for-normal-layout {
-  .game-main-content-container{
+  .game-main-content-container {
     background-color: #f2f5fa;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 4fr 1fr;
     gap: 5px;
-    grid-template-areas: 
-    " main-media thumbnail  "
-    " choose     desc   "
+    grid-template-areas:
+      " main-media thumbnail  "
+      " choose     desc   ";
   }
 }
 @include for-wide-layout {
-
 }
