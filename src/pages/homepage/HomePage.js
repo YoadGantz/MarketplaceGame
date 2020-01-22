@@ -9,12 +9,19 @@ import GameList from '../../cmps/game-list/GameList'
 
 import './_HomePage.scss'
 class HomePage extends Component {
-  state = { games: [] }
+  state = {
+    games: []
+  }
 
   async componentDidMount() {
     await this.props.loadGames()
     this.setGames()
 
+
+  }
+
+  onUpdateUser = async (updatedUser) => {
+    this.props.updateUser(updatedUser)
   }
 
   setGames = async (num = 3) => {
@@ -40,7 +47,7 @@ class HomePage extends Component {
           <div className="flex"></div>
         </div>
       </div>
-      <GameList games={games} />
+      <GameList user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
     </div>;
   }
 }

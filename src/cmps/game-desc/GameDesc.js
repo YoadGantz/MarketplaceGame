@@ -16,6 +16,10 @@ export default class GameDesc extends Component {
     this.setState({ orderCount: orderCount[game.title] })
   }
 
+  onAddToCart = () => {
+    this.props.onAddToCart(this.props.game._id)
+  }
+
   setGameRating = (game) => {
     const rating = UtilService.getGameRating(game)
     this.setState({ rating })
@@ -28,9 +32,8 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { thumbnail, description, publishedAt, addToCart, price } = this.props.game
+    const { thumbnail, description, publishedAt, price } = this.props.game
     const { publisherName, rating, orderCount } = this.state
-    console.log(this.props)
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
@@ -40,7 +43,7 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
-          <button type="primary" className='game-buy-button' onClick={this.props.addToCart}>
+          <button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
             {price}$ Add to cart
           </button>
         </div>
