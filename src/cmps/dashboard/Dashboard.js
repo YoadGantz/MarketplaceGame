@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import './_DashBoard.scss'
 import UtilService from '../../services/UtilService';
 import GameService from '../../services/GameService'
 import { loadGames } from '../../actions/gameActions';
@@ -11,6 +12,7 @@ import GameList from '../game-list/GameList';
 import Modal from '../modal/Modal'
 import AreaChart from '../charts/AreaChart';
 import PieChart from '../charts/PieChart';
+import InfoCard from '../infocard/InfoCard';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
 class Dashboard extends Component {
@@ -21,7 +23,11 @@ class Dashboard extends Component {
         },
         modalType: '',
         toggleModal: false,
-        currGameId: ''
+        currGameId: '',
+        sumOfGames: [],
+        monthMoneySum: null,
+        downloadsByMonth: null,
+        downloadsByWeek: null
     }
 
     onToggleModal = (modalType) => {
@@ -39,13 +45,34 @@ class Dashboard extends Component {
         this.setState({ orders: ordersBy })
     }
 
+    getWeekInfo = async () => {
+        const downloadsSum = await UtilService.getGraphsDetails(this.props.games, 'games', 7)
+        const downloadsByWeek = downloadsSum.reduce((acc, gameSum) => {
+            return acc += gameSum
+        }, 0)
+        this.setState({ downloadsByWeek })
+    }
+
+    getMonthInfo = async () => {
+        const sumOfGames = await UtilService.getSum(this.props.games)
+        const monthMoneySum = sumOfGames.sum.reduce((acc, gameSum) => {
+            return acc += gameSum
+        }, 0)
+        const downloadsByMonth = sumOfGames.downloadsByGame.reduce((acc, gameSum) => {
+            return acc += gameSum
+        }, 0)
+        this.setState({ sumOfGames: sumOfGames.sum, monthMoneySum, downloadsByMonth })
+    }
+
     componentDidUpdate = (prevProps) => {
         if (prevProps.games.length !== this.props.games.length) {
             this.getGraphsDetails()
+            this.getWeekInfo()
+            this.getMonthInfo()
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
         if (this.props.loggedInUser) {
             const _id = this.props.loggedInUser._id
             this.setState({
@@ -58,7 +85,9 @@ class Dashboard extends Component {
         } else {
             this.props.loadGames()
         }
-        this.getGraphsDetails()
+        await this.getGraphsDetails()
+        this.getWeekInfo()
+        this.getMonthInfo()
     }
 
     onRemoveGame = async (gameId) => {
@@ -76,11 +105,16 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { orders } = this.state
+        const { orders, sumOfGames, monthMoneySum, downloadsByMonth, downloadsByWeek } = this.state
         return (<div className="content-container container">
             <h1>Dashboard</h1>
+            <div className='flex space-evenly'>
+                <InfoCard> Money Earned This Month: {monthMoneySum}</InfoCard>
+                <InfoCard>Downloads By Month : {downloadsByMonth}</InfoCard>
+                <InfoCard> Downloads By Week : {downloadsByWeek}</InfoCard>
+            </div>
             <AreaChart orderDates={orders} />
-            <PieChart games={this.props.games} orderedGames={orders} />
+            <PieChart games={this.props.games} sumOfGames={sumOfGames} />
             <div>game list</div>
             <Link to='/edit'>Add a game</Link>
             <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
