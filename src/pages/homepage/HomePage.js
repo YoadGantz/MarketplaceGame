@@ -26,16 +26,12 @@ class HomePage extends Component {
 
   setGames = async (num = 3) => {
     const games = [...this.props.games]
-    const gameDownloads = await UtilService.getGraphsDetails(this.props.games, 'games')
-    for (let i = gameDownloads.length; i > num; i--) {
-      const minNum = Math.min(...gameDownloads)
-      const idx = gameDownloads.indexOf(minNum)
-      games.splice(idx, 1)
-      gameDownloads.splice(idx, 1)
+   const sortedGames=await UtilService.sortByDownloads(games)
+   sortedGames.splice(num,games.length)
+   this.setState({ games:sortedGames })
     }
-    this.setState({ games })
+    
 
-  }
   render() {
     const { games } = this.state
     return <div className="homepage-container">
