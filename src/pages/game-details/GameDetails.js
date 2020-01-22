@@ -31,7 +31,7 @@ class GameDetails extends Component {
 
   initiateSockets = () => {
     SocketService.setup()
-    SocketService.emit('chat topic', this.props.game.title);
+    SocketService.emit('chat room', this.props.game.title);
     SocketService.on('chat newComment', this.onAddCommentOrReview)
   }
 

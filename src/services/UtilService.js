@@ -1,5 +1,5 @@
 import OrderService from './OrderService';
-export default { sortByDownloads, getGraphsDetails, getGameRating, objectIdByTime }
+export default { sortByDownloads, getGraphsDetails, getGameRating, objectIdByTime, sortByPrice }
 
 function getGameRating(game) {
     const { reviews } = game
@@ -18,20 +18,26 @@ function objectIdByTime(time) {
     return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000"
 }
 
-async function sortByDownloads(games) {
+async function sortByDownloads(games, isAscending) {
     const downloadNumbers = await getGraphsDetails(games, 'games')
     games.forEach((game, idx) => {
-        game.downloads = downloadNumbers[idx]
-    })
+        game.downloadsCount = downloadNumbers[idx]
+    });
     const sortedGames = games.sort((game1, game2) => {
-        return game1.downloads > game2.downloads? -1 : game1.downloads<game2.downloads? 0 : 1
+        if (isAscending) {
+            return game1.downloadsCount < game2.downloadsCount ? -1 : game1.downloadsCount > game2.downloadsCount ? 0 : 1
+        }
+        return game1.downloadsCount > game2.downloadsCount ? -1 : game1.downloadsCount < game2.downloadsCount ? 0 : 1
     })
     return sortedGames
 }
 
-function sortByPrice(games) {
+function sortByPrice(games, isAscending) {
     const sortedGames = games.sort((game1, game2) => {
-        return (game2.price - game1.price) ? game2.price - game1.price : ''
+        if (isAscending) {
+            return game2.price > game1.price ? -1 : game2.price < game1.price ? 0 : 1
+        }
+        return game2.price < game1.price ? -1 : game2.price > game1.price ? 0 : 1
     })
     return sortedGames
 }
