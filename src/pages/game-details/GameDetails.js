@@ -1,31 +1,31 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { notification } from "antd";
 
 import SocketService from "../../services/SocketService";
 
 import { loadGame, updateGame, updateComments } from "../../actions/gameActions.js";
 import { addGameToCart } from '../../actions/cartActions'
 
-import GameDesc from '../../cmps/game-desc/GameDesc';
+import Notification from '../../cmps/helpers/Notification'
 import GameMedia from '../../cmps/game-media/GameMedia';
+import GameDesc from '../../cmps/game-desc/GameDesc';
 import Comments from '../../cmps/comments/Comment';
 import Review from '../../cmps/review/Review';
+import Modal from '../../cmps/modal/Modal'
 
 import './_GameDetails.scss';
 
 class GameDetails extends Component {
   state = {
-    currUrl: '',
+    currMediaUrl: '',
+    toggleModal: false,
+    modalTxt: ''
   };
 
   componentDidMount = async () => {
     const { id } = this.props.match.params
     await this.props.loadGame(id)
-  }
-
-  getDetails = () => {
-    this.setState({ currUrl: this.props.game.mediaUrls[0] });
+    this.setState({ currMediaUrl: this.props.game.mediaUrls[0] });
     this.initiateSockets()
   }
 
@@ -42,54 +42,48 @@ class GameDetails extends Component {
   onAddCommentOrReview = (newText, isSent = false, name = 'comments') => {
     const newGame = { ...this.props.game }
     newGame[name] = [...newGame[name], newText]
-    if (!isSent) {
-      return this.props.updateComments(newGame)
-    }
-    if (name === 'comments') {
-      SocketService.emit('chat newComment', newText);
-    }
+    if (!isSent) { return this.props.updateComments(newGame) }
+    if (name === 'comments') { SocketService.emit('chat newComment', newText); }
     return this.props.updateGame(newGame)
   }
 
-  onAddToCart = async (gameId) => {
+  onAddToCart = (gameId) => {
     try {
       this.props.addGameToCart(gameId)
-      notification.info({
-        message: `Game has been added`,
-        description: "The game has been added to the cart"
-      });
-    }
-    catch{
-      notification.info({
-        message: `The game is already in the cart`,
-        description: "You can add other games :)"
-      });
+      this.setState({
+        modalTxt: 'Game has been added to the cart',
+        toggleModal: true
+      }, this.onToggleModal())
+    } catch {
+      this.setState({
+        modalTxt: 'Game is already in the cart',
+        toggleModal: true
+      }, this.onToggleModal())
     }
   };
 
+  onToggleModal = () => {
+    setTimeout(() => {
+      this.setState((prevState) => this.state.toggleModal = !prevState)
+    }, 2000)
+  }
+
   onThumbNailPhotoClick = ev => {
-    this.setState({ currUrl: ev.target.src });
+    this.setState({ currMediaUrl: ev.target.src });
   };
 
   render() {
     if (!this.props.game) return <h1>Loading</h1>;
-    const { currUrl } = this.state
-    const { loggedInUser, game: { title,
-      reviews, mediaUrls, tags, comments } } = this.props;
-    if (!currUrl) {
-      this.getDetails()
-      return <h1>Loading</h1>
-    }
+    const { currMediaUrl } = this.state
+    const { title, reviews, mediaUrls, tags, comments } = this.props.game;
     let mainMedia;
-    if (currUrl.includes("mp4")) {
-      mainMedia = (<iframe title="video" src={`${currUrl}#t=0`} className="game-main-thumbnail" />
-      );
-    } else {
-      mainMedia = (<img src={currUrl} alt="" className="game-main-thumbnail" />
-      );
-    }
+    if (!currMediaUrl) { return <h1>Loading</h1> }
+    currMediaUrl.includes("mp4") ?
+      mainMedia = <iframe title="video" src={`${currMediaUrl}#t=0`} className="game-main-thumbnail" />
+      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
-      <div className="container">
+      <div className="container" >
+        {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}
         <div className="flex justify-between">
           <h1>{title}</h1>
         </div>
@@ -101,13 +95,11 @@ class GameDetails extends Component {
           <GameDesc onAddToCart={this.onAddToCart} game={this.props.game} />
         </div>
         <h2>Tags:</h2>
-        {tags.map(tag => {
-          return <span key={tag}>{tag} </span>;
-        })}
+        {tags.map(tag => { return <span key={tag}>{tag} </span>; })}
         <h2>Reviews :</h2>
         <Review user={this.props.loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
         <h2>Comments :</h2>
-        <Comments user={loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
+        <Comments user={this.props.loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
       </div>
     );
   }

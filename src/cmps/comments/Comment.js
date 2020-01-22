@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export default class Comments extends Component {
+export default class Comment extends Component {
   state = { text: "" };
   inputChange = ev => {
     let fieldName = ev.target.name;
     this.setState({ [fieldName]: ev.target.value });
   };
 
-  onAddMessage = () => {
+  onAddComment = () => {
     const { text } = this.state
     if (!text) return
     let user = {userName:'Guest'}
@@ -39,7 +39,7 @@ export default class Comments extends Component {
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <button onClick={this.onAddMessage} type='primary'>Add comment</button>
+        <button onClick={this.onAddComment} type='primary'>Add comment</button>
       </div>
     );
   }

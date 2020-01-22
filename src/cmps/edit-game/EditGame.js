@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button } from 'antd';
 
 import GameService from '../../services/GameService';
-import uploadImg from '../../services/mediaUploadService';
+import uploadImg from '../../services/MediaUploadService';
 import MediaUrlsList from './media-url-list/MediaUrlList';
 import TagList from '../tag-list/TagList';
 

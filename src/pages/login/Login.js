@@ -51,7 +51,7 @@ class Login extends Component {
       await this.props.login(userCreds);
       this.setState({ loginCred: { email: '', password: '' } }, () => history.push('/'));
     } catch (err) {
-      console.log('bad login')
+      console.log('Had issues while logging in ')
     }
   };
 
