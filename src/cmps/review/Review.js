@@ -40,6 +40,8 @@ export default class Review extends Component {
         />
         <input
           type="number"
+          min={0}
+          max={10}
           name="rating"
           value={rating}
           onChange={this.inputChange}

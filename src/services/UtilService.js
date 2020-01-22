@@ -1,4 +1,4 @@
-import OrderService from "./OrderService";
+import OrderService from './OrderService';
 export default { getGraphsDetails, getGameRating,objectIdByTime }
 
 function getGameRating(game) {
@@ -22,26 +22,33 @@ function _dateFromObjectId(objectId) {
     return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).getDate();
 };
 
-async function getGraphsDetails(games) {
+async function getGraphsDetails(games,type) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
+    const  ordersByGame  =[]
+
     games.forEach((game) => {
         prms.push(OrderService.query({
             lastMonthId: objectIdByTime(30),
             gameIds: game._id
         }))
         gameByNameOrder.push(game.title)
+        ordersByGame.push(0)
     })
     const gameOrders = await Promise.all(prms)
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
             const currOrderDate = _dateFromObjectId(order._id)
+            if (type==='games'){
+                return ordersByGame[i]+=1
+            }
             let num = ordersBy[currOrderDate]
             if (!num) return ordersBy[currOrderDate] = 1
             ordersBy[gameByNameOrder[i]] = idx
             return ordersBy[currOrderDate] = num + 1
         })
     })
+    if (type==='games')return ordersByGame
     return ordersBy
 }

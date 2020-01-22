@@ -1,58 +1,53 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SocketService from "../../services/SocketService";
-import Comments from "../../cmps/comments/Comments";
+import Comments from "../../cmps/comments/Comment";
 class PlayGame extends Component {
-    state = { comments: [] }
+    state = { comments: null }
 
     componentDidMount() {
-        if (!this.props.loggedInUser) return
+        let userName = 'Guest'
+        if (this.props.loggedInUser) userName = this.props.loggedInUser.userName
         SocketService.setup()
         SocketService.emit('chat topic', this.props.match.params.id);
-        SocketService.emit('user joined the game', { text: `${this.props.loggedInUser.userName} has joined the chat` });
-        SocketService.on('chat addMsg', this.addComment)
-        SocketService.on('user joined the game', this.addComment)
+        SocketService.emit('user joined', { text: `${userName} has joined the chat` });
+        SocketService.on('chat newComment', this.addComment)
+        SocketService.on('user joined', this.addComment)
     }
 
     componentWillUnmount = () => {
-        if (!this.props.loggedInUser) return
-        SocketService.off('chat addMsg')
-        SocketService.off('user joined the game')
         SocketService.terminate()
     }
 
     sendComment = (text) => {
-        SocketService.emit('chat newMsg', { user: { userName: this.props.loggedInUser.userName }, text });
+        let userName = 'Guest'
+        if (this.props.loggedInUser) {
+            userName = this.props.loggedInUser.userName
+        }
+        SocketService.emit('chat newComment', { user: { userName }, text });
     };
 
-    addComment = newMsg => {
-        if (!this.props.loggedInUser) return
-        this.setState(prevState => ({ comments: [...prevState.comments, newMsg] }));
+    addComment = newComment => {
+        if (!this.state.comments) return this.setState({ comments: [newComment] })
+        this.setState(prevState => ({ comments: [...prevState.comments, newComment] }));
     };
-
-
 
     render() {
         const { comments } = this.state
-        let addedComents
-        const logInmsg = !this.props.loggedInUser ? <h3>Buy the game to see more then this gif and use the chat</h3> : ''
-        addedComents = <Comments sendComment={this.sendComment} comments={comments} />
+        let addedComments
+        const logInMsg = !this.props.loggedInUser ? 'Buy the game to see more then this gif' : '';
+        addedComments = <Comments sendComment={this.sendComment} comments={comments} />
         return <div>
-            {logInmsg}
-            <iframe src="https://www.gameflare.com/embed/cartoon-strike/" frameborder="0" scrolling="no" width="1000" height="635" allowfullscreen></iframe>
-            {/* <img src={`https://media0.giphy.com/media/yZEIja6oMZ3qg/giphy.gif?cid=790b76114ded6412318df27a5f16325837281f38fa06ad58&rid=giphy.gif`} /> */}
-            <ul>
-                {addedComents}
-            </ul>
+            <h3>{logInMsg}</h3>
+            <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameBorder="0" scrolling="no" width="1000" height="635" allowFullScreen></iframe>
+            <ul>{addedComments}</ul>
         </div>
     }
 }
 
-
-
 const mapStateToProps = state => {
     return {
-        loggedInUser: state.userStore.loggedInUser,
+        loggedInUser: state.userStore.loggedInUser
     };
 };
 

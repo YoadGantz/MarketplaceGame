@@ -19,7 +19,7 @@ class ShoppingCart extends Component {
     async loadGames() {
         const gamesIds = CartService.query();
         let gamesToRender = []
-        if (gamesIds.length) {
+        if (gamesIds.length){
             gamesToRender = await GameService.query({ shoppingCartIds: gamesIds })
         }
         this.setState({ gamesIds, games: gamesToRender })
@@ -46,8 +46,8 @@ class ShoppingCart extends Component {
     componentDidMount() {
         this.loadGames()
     }
-    render() {
 
+    render() {
         return <div>
             {(this.state.games && this.state.games.length) ?
                 <div>

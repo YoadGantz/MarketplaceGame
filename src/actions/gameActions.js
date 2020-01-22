@@ -7,15 +7,44 @@ function setGames(games) {
     }
 }
 
+function setGame(game) {
+    return {
+        type: 'SET_GAME',
+        game
+    }
+}
+
+
+
 export function loadGames(filterBy) {
     return async dispatch => {
         try {
-
             const games = await GameService.query(filterBy);
             dispatch(setGames(games));
 
         } catch (err) {
             console.log('Had issues getting games', err);
+        }
+    };
+}
+
+export function loadGame(id) {
+    return async dispatch => {
+        try {
+            const game = await GameService.getById(id);
+            dispatch(setGame(game));
+            return game
+        } catch (err) {
+        }
+    };
+}
+export function updateGame(newGame) {
+    return async dispatch => {
+        try {
+            const game = await GameService.update(newGame);
+            dispatch(setGame(newGame));
+            return game
+        } catch (err) {
         }
     };
 }
