@@ -11,7 +11,7 @@ export default class Review extends Component {
   onAddReview = () => {
     if (!this.props.user) return
     const { rating, text } = this.state
-    this.props.onAddCommentOrReview({ user: { userName: this.props.user.userName }, rating, text }, false, 'reviews')
+    this.props.onAddCommentOrReview({ user: { userName: this.props.user.userName }, rating, text }, true, 'reviews')
   }
 
 
