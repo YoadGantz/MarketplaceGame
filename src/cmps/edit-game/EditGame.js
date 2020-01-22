@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { Button } from 'antd';
 
 import GameService from '../../services/GameService';
-import uploadImg from '../../services/MediaUploadService';
 import MediaUrlsList from './media-url-list/MediaUrlList';
+import MediaUploadService from '../../services/MediaUploadService';
+
 import TagList from '../tag-list/TagList';
 
 import './_EditGame.scss';
@@ -50,7 +51,7 @@ class EditGame extends Component {
   addMediaAndTags = async ev => {
     const fieldName = ev.target.name
     if (fieldName !== "tags") {
-      const urls = await uploadImg(ev.target.files);
+      const urls = await MediaUploadService(ev.target.files);
       if (fieldName === 'thumbnail') {
         return this.setState({ thumbnail: urls[0] })
       }
