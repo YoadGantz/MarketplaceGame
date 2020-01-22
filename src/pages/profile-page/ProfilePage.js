@@ -33,10 +33,10 @@ class ProfilePage extends Component {
     const { user } = this.state
     return (
       <div className="profile-container">
-        <div className="user-card flex container">
+        <div className="user-card flex align-center container">
           <img className="user-img small" alt="" src={user.imgUrl} />
           <div className="user-details">
-            <h4>{user.userName}</h4>
+            <strong>{user.userName}</strong>
             <small>Dec 2013</small>
             <p>{user.about}</p>
           </div>
@@ -53,9 +53,7 @@ class ProfilePage extends Component {
             <input name="tab" type="radio" onChange={this.updateMode} value="Dashboard" id="Dashboard" />
           </label>
         </div>
-        <div className="content-container">
-          <DynamicTabPrev className="dynamic-prev" history={this.props.history} mode={this.state.mode} />
-        </div>
+        <DynamicTabPrev className="dynamic-prev" history={this.props.history} mode={this.state.mode} />
       </div>
     )
   }

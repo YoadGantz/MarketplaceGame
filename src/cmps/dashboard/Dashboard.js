@@ -77,7 +77,7 @@ class Dashboard extends Component {
 
     render() {
         const { orders } = this.state
-        return (<div>
+        return (<div className="content-container container">
             <h1>Dashboard</h1>
             <AreaChart orderDates={orders} />
             <PieChart games={this.props.games} orderedGames={orders} />

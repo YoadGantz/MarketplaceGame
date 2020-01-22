@@ -45,7 +45,7 @@
   &.justify-between {
     justify-content: space-between;
   }
-  &.space-between{
+  &.space-between {
     justify-content: space-between;
   }
 }
@@ -63,15 +63,6 @@
 //     @include aspect-ratio(1, 1);
 // }
 
-//user img helper
-
-.user-img {
-  &.small {
-    max-width: 95px;
-    border-radius: 3px;
-  }
-}
-
 //radio-helpers
 
 #OwnedGames,
@@ -81,32 +72,32 @@
 
 //search helpers
 
-.search-input {
-  flex: 1;
-  border: none;
-  padding: 0;
-  margin-inline-start: 9px;
-  margin-inline-end: 5px;
-  min-height: 50px;
-  background-color: inherit;
-  &:focus + .search-x {
-    opacity: 1;
-  }
-}
-
-.search-x {
-  height: 15px;
-  width: 12px;
-  position: absolute;
-  right: 15px;
-  opacity: 0;
-}
-
 .clean-list {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
-.hidden{
+.hidden {
   display: none;
+}
+
+input {
+  color: black;
+  font-size: 1rem;
+  flex: 1;
+  border: none;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-height: 40px;
+  margin: 20px 0;
+  margin-right: 20px;
+  background-color: #2e88ca;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
 }

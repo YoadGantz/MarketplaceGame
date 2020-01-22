@@ -20,9 +20,9 @@ export default class Filter extends Component {
 
     render() {
         const { sortByPrice, sortByDownloads } = this.props
-        return <div>
-            <input className="search-input" name='title' type="text" placeholder="Search" onChange={this.onFilterBy} />
-            <input type='text' placeholder='Search by Tags' name='tag' onChange={this.onFilterBy} />
+        return <div className="search-container">
+            <input className="search-input" name='title' type="search" placeholder="Search" onChange={this.onFilterBy} />
+            <input className="search-input" name='tag' type='text' placeholder='Search by Tags' onChange={this.onFilterBy} />
             <select onChange={this.onFilterBy} name='tag' >
                 <option value=''>All</option>
                 <option value='RPG'>RPG</option>

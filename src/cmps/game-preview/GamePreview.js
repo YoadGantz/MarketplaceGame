@@ -71,21 +71,19 @@ class GamePreview extends Component {
                     <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
                         <p className="price">${game.price}</p>
-                    </div >
-                    {!isProfile &&
-                        <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-                            full_heart : empty_heart} />}
-                    {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
-                    {isProfile &&
-                        <div>
-                            <button onClick={this.onPlayClick}>Play</button>
-                            {isDashboard && <div>
-                                <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
-                                <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
-                            </div>}
+                        {!isProfile &&
+                            <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+                                full_heart : empty_heart} />}
+                        {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
+                        {isProfile && !isDashboard &&
+                            <button onClick={this.onPlayClick}>Play</button>}
+                        {isProfile && isDashboard && <div>
+                            <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
+                            <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
                         </div>}
-                </section>
-            </li>
+                    </div>
+                </section >
+            </li >
         )
     }
 }

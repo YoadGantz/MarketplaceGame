@@ -5,6 +5,8 @@ import history from '../../history';
 
 import { login, signUp } from '../../actions/userActions';
 
+import './_Login.scss'
+
 class Login extends Component {
   state = {
     msg: '',
@@ -85,20 +87,19 @@ class Login extends Component {
     //   </form>
     // );
     const loginSection = (
-      <form onSubmit={this.doLogin}>
-        <input type="text" name="email" value={this.state.loginCred.email}
-          onChange={this.loginHandleChange} placeholder="Email" />
-        <br />
+      <form className="flex column justify-center align-center" onSubmit={this.doLogin}>
+        <input className="input" type="text" name="email" value={this.state.loginCred.email}
+          onChange={this.loginHandleChange} placeholder="User name" />
         <input type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
-        <br />
         <button>Login</button>
       </form>
     );
 
     const { loggedInUser } = this.props;
     return (
-      <div className="test">
+      <div className="login-container flex column justify-center align-center container">
+        <img className="login-image" alt="logo" src="/logo.png" width="100px"/>
         {loggedInUser && (
           <div>
             <h2>Welcome: {loggedInUser.userName} </h2>
@@ -108,7 +109,6 @@ class Login extends Component {
         {!loggedInUser && loginSection}
         {/* {!loggedInUser && signupSection} */}
         {/* <h2>Signup</h2> */}
-        <hr />
       </div>
     );
   }
