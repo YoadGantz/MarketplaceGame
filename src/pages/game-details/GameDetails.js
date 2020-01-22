@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { notification } from "antd";
 
 import CartService from '../../services/CartService.js'
 import SocketService from "../../services/SocketService";
@@ -12,12 +11,16 @@ import GameDesc from '../../cmps/game-desc/GameDesc';
 import GameMedia from '../../cmps/game-media/GameMedia';
 import Comments from '../../cmps/comments/Comment';
 import Review from '../../cmps/review/Review';
+import Modal from '../../cmps/modal/Modal'
+import Notification from '../../cmps/helpers/Notification'
 
 import './_GameDetails.scss';
 
 class GameDetails extends Component {
   state = {
-    currMediaUrl: ''
+    currMediaUrl: '',
+    toggleModal: false,
+    modalTxt: ''
   };
 
   componentDidMount = async () => {
@@ -50,7 +53,8 @@ class GameDetails extends Component {
     }
     const newGame = { ...this.props.game }
     newGame.reviews = [...newGame.reviews,
-    { user: { userName: this.props.loggedInUser.userName },
+    {
+      user: { userName: this.props.loggedInUser.userName },
       text,
       rating
     }]
@@ -67,18 +71,18 @@ class GameDetails extends Component {
     try {
       await CartService.addToCart(this.state.game._id)
       this.props.addGameToCart(this.state.game._id)
-      notification.info({
-        message: `Game has been added`,
-        description: "The game has been added to the cart"
-      });
+      this.setState({ modalTxt: 'Game has been added to the cart', toggleModal: true }, this.onToggleModal())
     }
     catch{
-      notification.info({
-        message: `The game is already in the cart`,
-        description: "You can add other games :)"
-      });
+      this.setState({ modalTxt: 'Game is already in the cart', toggleModal: true }, this.onToggleModal())
     }
   };
+
+  onToggleModal = () => {
+    setTimeout(() => { 
+      this.setState((prevState) => this.state.toggleModal = !prevState) 
+    }, 2000)
+  }
 
   onThumbNailPhotoClick = ev => {
     this.setState({ currMediaUrl: ev.target.src });
@@ -93,8 +97,10 @@ class GameDetails extends Component {
     currMediaUrl.includes("mp4") ?
       mainMedia = <iframe title="video" src={`${currMediaUrl}#t=0`} className="game-main-thumbnail" />
       : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
+    console.log(this.state.toggleModal)
     return (
       <div className="container" >
+        {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}
         <div className="flex justify-between">
           <h1>{title}</h1>
         </div>

@@ -9,7 +9,7 @@ import { loadGames } from '../../actions/gameActions';
 
 import GameList from '../game-list/GameList';
 import Modal from '../modal/Modal'
-import Graph from '../charts/LineChart';
+import AreaChart from '../charts/AreaChart';
 import PieChart from '../charts/PieChart';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
@@ -24,8 +24,7 @@ class Dashboard extends Component {
         currGameId: ''
     }
 
-    togglePortal = (modalType) => {
-        console.log(modalType);
+    onToggleModal = (modalType) => {
         if (!this.state.toggleModal) {
             this.setState({ modalType, toggleModal: true });
         } else if (modalType === this.state.modalType) {
@@ -68,7 +67,7 @@ class Dashboard extends Component {
             toggleModal: true,
             currGameId: gameId
         }, console.log(this.state))
-        this.togglePortal('confirmDelete')
+        this.onToggleModal('confirmDelete')
     }
 
     removeGame = async () => {
@@ -81,13 +80,13 @@ class Dashboard extends Component {
         const { orders } = this.state
         return (<div>
             <h1>Dashboard</h1>
-            <Graph orderDates={orders} ></Graph>
+            <AreaChart orderDates={orders} />
             <PieChart games={this.props.games} orderedGames={orders} />
             <div>game list</div>
             <Link to='/edit'>Add a game</Link>
-            <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games}></GameList>
+            <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
             {this.state.modalType === 'confirmDelete' && <Modal >
-                <ConfirmDelete modalAction={this.removeGame} togglePortal={this.togglePortal}></ConfirmDelete>
+                <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
             </Modal>}
         </div>
         )

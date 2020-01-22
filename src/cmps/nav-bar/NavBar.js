@@ -43,9 +43,9 @@ class NavBar extends Component {
         </NavLink>
         {(!loggedInUser) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
           : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="active" >Logout</NavLink>}
-        <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("wishlist")} />
+        <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")} />
         <GameCounter />
-        <img alt="" src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.togglePortal("shoppingCart")} />
+        <img alt="" src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")} />
       </nav >
     )
   }
