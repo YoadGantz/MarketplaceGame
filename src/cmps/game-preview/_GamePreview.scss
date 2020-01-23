@@ -4,10 +4,9 @@
 .game-card {
   cursor: pointer;
   color: black;
-  border-radius: 10px 10px 0 0;
-  max-width: 300px;
+  border-radius: 10px 10px 0 10px;
+  overflow: hidden;
   .img-container {
-    border-radius: 10px 10px 0 0;
     width: 100%;
     height: 140px;
     @include aspect-ratio(1.5, 1);

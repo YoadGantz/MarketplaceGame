@@ -8,6 +8,8 @@ import Filter from '../../cmps/filter/Filter';
 import GameList from '../../cmps/game-list/GameList';
 import UtilService from '../../services/UtilService';
 
+import './Explore.scss'
+
 class Explore extends Component {
     state = { games: null, isAscending: false }
 
@@ -37,7 +39,7 @@ class Explore extends Component {
 
     render() {
         const { games } = this.state
-        return <div className="flex column container align-center">
+        return <div className="content-container flex column container align-center">
             <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy} />
             <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
         </div>

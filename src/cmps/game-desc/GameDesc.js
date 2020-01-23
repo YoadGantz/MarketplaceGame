@@ -56,12 +56,14 @@ export default class GameDesc extends Component {
     const { publisherName, rating, orderCount, isOwned } = this.state
     const priceOrPlay = isOwned ? <button>Play</button> :
       <button type="primary" className='game-buy-button' onClick={this.onAddToCart}> {price}$ Add to cart </button>
+    const date = new Date(publishedAt/1)
+    const publishedDate = UtilService.formatDate(date)
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
         <div className='game-description'>
           <p > {description}</p>
-          <p> Published at: {publishedAt}</p>
+          <p> Published at: {publishedDate}</p>
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>

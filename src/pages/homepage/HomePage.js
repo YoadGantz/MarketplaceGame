@@ -20,8 +20,6 @@ class HomePage extends Component {
     this.setGames('mostDownloadGames')
     this.setGames('mostRecentGames')
     this.setGames('highestRatingGames')
-
-
   }
 
   onUpdateUser = async (updatedUser) => {
