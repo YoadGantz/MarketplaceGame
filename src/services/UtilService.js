@@ -1,5 +1,12 @@
 import OrderService from './OrderService';
-export default { sortByDownloads, getGraphsDetails, getGameRating, objectIdByTime }
+export default {
+    sortByDownloads,
+    getGraphsDetails,
+    getGameRating,
+    objectIdByTime,
+    dateFromObjectId,
+    formatDate
+}
 
 function getGameRating(game) {
     const { reviews } = game
@@ -24,7 +31,7 @@ async function sortByDownloads(games) {
         game.downloads = downloadNumbers[idx]
     })
     const sortedGames = games.sort((game1, game2) => {
-        return game1.downloads > game2.downloads? -1 : game1.downloads<game2.downloads? 0 : 1
+        return game1.downloads > game2.downloads ? -1 : game1.downloads < game2.downloads ? 0 : 1
     })
     return sortedGames
 }
@@ -36,10 +43,21 @@ function sortByPrice(games) {
     return sortedGames
 }
 
-function _dateFromObjectId(objectId) {
-    return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).getDate();
+function dateFromObjectId(objectId) {
+    const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000)
+    return date
 };
 
+function formatDate(date) {
+    const year = date.getFullYear()
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr",
+        "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"];
+    let month = monthNames[date.getMonth()]
+    const fullDate = month + ' ' + year
+    return fullDate
+}
 
 async function getGraphsDetails(games, type) {
     const prms = []
@@ -57,7 +75,7 @@ async function getGraphsDetails(games, type) {
     const gameOrders = await Promise.all(prms)
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
-            const currOrderDate = _dateFromObjectId(order._id)
+            const currOrderDate = dateFromObjectId(order._id)
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }

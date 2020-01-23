@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Icon } from 'antd';
 
+import UtilService from '../../services/UtilService'
 import DynamicTabPrev from '../../cmps/dynamic-cmps/DynamicTabPrev';
 
 import './_ProfilePage.scss'
@@ -9,7 +10,7 @@ class ProfilePage extends Component {
   state = {
     mode: 'OwnedGames',
     user: {
-      "_id": "u101",
+      "_id": "null",
       "fullName": "Yoad Gantz",
       "userName": "NabCake",
       "password": "tinkerbell",
@@ -31,13 +32,15 @@ class ProfilePage extends Component {
 
   render() {
     const { user } = this.state
+    if (user._id !== 'null') user.createdAt = UtilService.formatDate(UtilService.dateFromObjectId(user._id))
+    else user.createdAt = 'Dec 2013'
     return (
       <div className="profile-container">
         <div className="user-card flex container">
           <img className="user-img small" alt="" src={user.imgUrl} />
           <div className="user-details">
             <h4>{user.userName}</h4>
-            <small>Dec 2013</small>
+            <small>{user.createdAt}</small>
             <p>{user.about}</p>
           </div>
           <Icon title="Edit details" type="edit" key="edit" />

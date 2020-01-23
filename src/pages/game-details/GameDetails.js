@@ -64,7 +64,7 @@ class GameDetails extends Component {
 
   onToggleModal = () => {
     setTimeout(() => {
-      this.setState((prevState) => this.state.toggleModal = !prevState)
+      this.setState(prevState => ({ toggleModal: !prevState.toggleModal }))
     }, 2000)
   }
 
