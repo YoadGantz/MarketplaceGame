@@ -4,15 +4,17 @@ import UserService from "../../services/UserService";
 
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
+import OrderService from "../../services/OrderService";
 
 export default class GameDesc extends Component {
-  state = { orderCount: '', rating: '', publisherName: '' }
+  state = { orderCount: '', rating: '', publisherName: '', isOwned: false }
 
   componentDidMount = () => {
     const { game } = this.props
     this.setOrderCount(game)
     this.setGameRating(game)
     this.setPublisherName(game.publisher)
+    this.purchaseCheck()
   }
 
   setOrderCount = async (game) => {
@@ -35,10 +37,25 @@ export default class GameDesc extends Component {
     this.setState({ publisherName })
   }
 
+  purchaseCheck = async () => {
+    let isPurchesed = []
+    if (this.props.user) {
+      isPurchesed = await OrderService.query({ orderBy: this.props.user._id, gameId: this.props.game._id })
+    }
+    if (isPurchesed.length) {
+      return this.setState({ isOwned: true })
+    }
+  }
+
+  
+
+
   render() {
     const { game, user } = this.props
     const { thumbnail, description, publishedAt, price } = game
-    const { publisherName, rating, orderCount } = this.state
+    const { publisherName, rating, orderCount, isOwned } = this.state
+    const priceOrPlay = isOwned ? <button>Play</button> :
+      <button type="primary" className='game-buy-button' onClick={this.onAddToCart}> {price}$ Add to cart </button>
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
@@ -48,9 +65,7 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
-          <button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
-            {price}$ Add to cart
-          </button>
+          {priceOrPlay}
           <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
             full_heart : empty_heart} />
         </div>

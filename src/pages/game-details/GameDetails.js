@@ -68,8 +68,6 @@ class GameDetails extends Component {
   };
 
   toggleWishedGame = (ev) => {
-    console.log('got here');
-    
     const { user, game } = this.props
     ev.stopPropagation();
     let wishedGames = (user && user.wishedGames) || []
@@ -89,6 +87,7 @@ class GameDetails extends Component {
     }, 2000)
   }
 
+
   onThumbNailPhotoClick = ev => {
     this.setState({ currMediaUrl: ev.target.src });
   };
@@ -100,8 +99,8 @@ class GameDetails extends Component {
     let mainMedia;
     if (!currMediaUrl) { return <h1>Loading</h1> }
     currMediaUrl.includes(".mp4") ?
-      mainMedia = <iframe title="video" src={`${currMediaUrl}#t=0`} className="game-main-thumbnail" />
-      : mainMedia = <img  src={currMediaUrl} alt="" className="game-main-thumbnail" />
+      mainMedia = <iframe title="video" src={`${currMediaUrl}?#t=0&#autoplay=1&mute=1`} volume={0}  className="game-main-thumbnail" />
+      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
       <div className="container" >
         {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}

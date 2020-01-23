@@ -51,7 +51,6 @@ async function _sortByRecency(games) {
     const sortedGames =games.sort((game1, game2) => {
         return game2.createdAt - game1.createdAt
     })
-    console.log('sorted by recency',sortedGames);
     return sortedGames
 }
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
+  AreaChart, Area, XAxis, YAxis , Tooltip,
 } from 'recharts';
 
 export default class Graph extends PureComponent {

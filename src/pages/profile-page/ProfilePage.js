@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Icon } from 'antd';
 
+import LongText from '../../cmps/helpers/LongTxt'
 import UtilService from '../../services/UtilService'
 import DynamicTabPrev from '../../cmps/dynamic-cmps/DynamicTabPrev';
 
@@ -11,10 +12,9 @@ class ProfilePage extends Component {
     mode: 'OwnedGames',
     user: {
       "_id": "null",
-      "fullName": "Yoad Gantz",
-      "userName": "NabCake",
-      "password": "tinkerbell",
-      "about": "Consequuntur inventore eaque modi. Commodi eos eum minus voluptas dignissimos. Saepe ...",
+      "fullName": "Guest",
+      "userName": "Guest",
+      "about": "Guest",
       "createdAt": 123879186123,
       "imgUrl": "http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg",
       "desiredGames": [{ game: 'gta' }],
@@ -41,7 +41,9 @@ class ProfilePage extends Component {
           <div className="user-details">
             <strong>{user.userName}</strong>
             <small>{user.createdAt}</small>
-            <p>{user.about}</p>
+            <div>
+            <LongText shortLength={100} isLongTxtShown={false} text={user.about}/>
+            </div>
           </div>
           <Icon title="Edit details" type="edit" key="edit" />
         </div>
