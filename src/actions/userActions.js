@@ -1,7 +1,6 @@
 import UserService from '../services/UserService';
 
 export function login(cred) {
-    console.log('cred', cred )
     return async dispatch => {
         try {
             const user = await UserService.login(cred);
