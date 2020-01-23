@@ -2,7 +2,9 @@
 
 .nav-bar {
   z-index: 1;
-  background-color: black;
+  background-color:  rgba(0, 0, 0, 0.74);
+  position: fixed; 
+  width: 100%; 
   .nav-logo {
     margin-inline-start: 20px;
     img {
