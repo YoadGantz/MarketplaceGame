@@ -45,7 +45,7 @@ class Login extends Component {
     const { loggedInUser } = this.props
     const loginSection = (
       <form className="flex column justify-center align-center" onSubmit={this.doLogin}>
-        <input className="input" type="text" name="email" value={this.state.loginCred.userName}
+        <input className="input" type="text" name="userName" value={this.state.loginCred.userName}
           onChange={this.loginHandleChange} placeholder="User name" />
         <input type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
