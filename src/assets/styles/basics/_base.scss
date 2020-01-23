@@ -8,11 +8,17 @@ html {
   font-family: montserrat, sans-serif;
   line-height: 1.6;
   color: white;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, #0e0e0d 56%, #3d3838 84%, #474649 100%);
 }
 
 body {
   margin: 0;
-  background-color: #141313;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../../assets/images/caspar-camille-rubin-HUBNTCzE-R8-unsplash.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 img {
@@ -60,32 +66,32 @@ button {
 element.style {
 }
 html.responsive {
-    height: 100%;
+  height: 100%;
 }
 :root {
-    --main-text-color: #9b414f;
-    --main-light-blue-background: #93c899;
-    --main-text-on-light-blue: rgb(209, 209, 209);
-    --main-top-image-bg: #1f2126;
-    --main-editor-bg-color: #363a43;
-    --main-editor-text-color: #e6e7e8;
-    --main-editor-input-bg-color: #30333b;
-    --main-editor-section-title-color: #a3a3a3;
+  --main-text-color: #9b414f;
+  --main-light-blue-background: #93c899;
+  --main-text-on-light-blue: rgb(209, 209, 209);
+  --main-top-image-bg: #1f2126;
+  --main-editor-bg-color: #363a43;
+  --main-editor-text-color: #e6e7e8;
+  --main-editor-input-bg-color: #30333b;
+  --main-editor-section-title-color: #a3a3a3;
 }
 html {
-    height: 100%;
+  height: 100%;
 }
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 ::-webkit-scrollbar {
-    height: 12px;
-    width: 14px;
-    background: transparent;
-    z-index: 12;
-    overflow: visible;
+  height: 12px;
+  width: 14px;
+  background: transparent;
+  z-index: 12;
+  overflow: visible;
 }
 ::-webkit-scrollbar-thumb {
   width: 10px;

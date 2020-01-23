@@ -16,8 +16,6 @@ class HomePage extends Component {
   async componentDidMount() {
     await this.props.loadGames()
     this.setGames()
-
-
   }
 
   onUpdateUser = async (updatedUser) => {
@@ -26,11 +24,10 @@ class HomePage extends Component {
 
   setGames = async (num = 3) => {
     const games = [...this.props.games]
-   const sortedGames=await UtilService.sortByDownloads(games)
-   sortedGames.splice(num,games.length)
-   this.setState({ games:sortedGames })
-    }
-    
+    const sortedGames = await UtilService.sortByDownloads(games)
+    sortedGames.splice(num, games.length)
+    this.setState({ games: sortedGames })
+  }
 
   render() {
     const { games } = this.state
