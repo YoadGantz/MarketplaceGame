@@ -33,4 +33,5 @@ function removeFromCart(item) {
 
 function clear() {
     StorageService.saveToStorage('cart', [])
+    return [];
 }

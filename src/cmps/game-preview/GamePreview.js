@@ -26,8 +26,9 @@ class GamePreview extends Component {
     onOpenDetails = (gameId) => {
         this.props.history.push(`/game/${gameId}`)
     }
-    onOpenEdit = (gameId) => {
-        this.props.history.push(`/edit/${gameId}`)
+    onOpenEdit = (ev) => {
+        ev.stopPropagation()
+        this.props.history.push(`/edit/${this.props.game._id}`)
     }
 
     onRemoveFromCart = (ev) => {
@@ -77,8 +78,8 @@ class GamePreview extends Component {
                         {isProfile && !isDashboard &&
                             <button className="preview-btn" onClick={this.onPlayClick}>Play</button>}
                         {isProfile && isDashboard && <div>
-                            <button className="preview-btn" onClick={() => this.onOpenEdit(game._id)}>Edit</button>
-                            <button className="preview-btn" onClick={() => this.props.onRemoveGame(game._id)}>X</button>
+                            <button onClick={this.onOpenEdit}>Edit</button>
+                            <button onClick={this.onRemoveGame}>X</button>
                         </div>}
                     </div>
                 </section >

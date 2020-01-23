@@ -14,7 +14,7 @@ class EditGame extends Component {
     title: "",
     description: "",
     thumbnail: "",
-    mediaUrls: null,
+    mediaUrls: [],
     price: "",
     publishedAt: '',
     tags: null,
@@ -85,10 +85,10 @@ class EditGame extends Component {
     let addedTags;
     let addedUrls;
     let addedThumbnail
-    if (mediaUrls && mediaUrls.length)
+    if (mediaUrls && mediaUrls.length){
       addedUrls = (
         <MediaUrlsList removeMediaAndTags={this.removeMediaAndTags} mediaUrls={mediaUrls} />
-      );
+      )}
     if (tags && tags.length) {
       addedTags = (<TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />)
     }
