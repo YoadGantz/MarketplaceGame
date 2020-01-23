@@ -88,11 +88,11 @@ class Login extends Component {
     // );
     const loginSection = (
       <form className="flex column justify-center align-center" onSubmit={this.doLogin}>
-        <input className="input" type="text" name="email" value={this.state.loginCred.email}
+        <input className="login-input input" type="text" name="email" value={this.state.loginCred.email}
           onChange={this.loginHandleChange} placeholder="User name" />
-        <input type="password" name="password" value={this.state.loginCred.password}
+        <input className="login-input input" type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
-        <button>Login</button>
+        <button className="btn">Login</button>
       </form>
     );
 

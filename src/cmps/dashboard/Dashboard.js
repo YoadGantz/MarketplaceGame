@@ -113,8 +113,10 @@ class Dashboard extends Component {
                 <InfoCard>Downloads By Month : {downloadsByMonth}</InfoCard>
                 <InfoCard> Downloads By Week : {downloadsByWeek}</InfoCard>
             </div>
-            <AreaChart orderDates={orders} />
-            <PieChart games={this.props.games} sumOfGames={sumOfGames} />
+            <div className="charts-container flex">
+                <AreaChart orderDates={orders} />
+                <PieChart games={this.props.games} sumOfGames={sumOfGames} />
+            </div>
             <div>game list</div>
             <Link to='/edit'>Add a game</Link>
             <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />

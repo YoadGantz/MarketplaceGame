@@ -6,7 +6,6 @@ import UserService from '../../services/UserService'
 import { removeGameFromCart } from '../../actions/cartActions'
 
 
-import spotlightImg from '../../assets/images/background_spotlight.jpg'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.png'
@@ -76,10 +75,10 @@ class GamePreview extends Component {
                                 full_heart : empty_heart} />}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
-                            <button onClick={this.onPlayClick}>Play</button>}
+                            <button className="preview-btn" onClick={this.onPlayClick}>Play</button>}
                         {isProfile && isDashboard && <div>
-                            <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
-                            <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
+                            <button className="preview-btn" onClick={() => this.onOpenEdit(game._id)}>Edit</button>
+                            <button className="preview-btn" onClick={() => this.props.onRemoveGame(game._id)}>X</button>
                         </div>}
                     </div>
                 </section >
