@@ -6,7 +6,6 @@ import UserService from '../../services/UserService'
 import { removeGameFromCart } from '../../actions/cartActions'
 
 
-import spotlightImg from '../../assets/images/background_spotlight.jpg'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.png'
@@ -27,8 +26,9 @@ class GamePreview extends Component {
     onOpenDetails = (gameId) => {
         this.props.history.push(`/game/${gameId}`)
     }
-    onOpenEdit = (gameId) => {
-        this.props.history.push(`/edit/${gameId}`)
+    onOpenEdit = (ev) => {
+        ev.stopPropagation()
+        this.props.history.push(`/edit/${this.props.game._id}`)
     }
 
     onRemoveFromCart = (ev) => {
@@ -78,8 +78,8 @@ class GamePreview extends Component {
                         {isProfile && !isDashboard &&
                             <button onClick={this.onPlayClick}>Play</button>}
                         {isProfile && isDashboard && <div>
-                            <button onClick={() => this.onOpenEdit(game._id)}>Edit</button>
-                            <button onClick={() => this.props.onRemoveGame(game._id)}>X</button>
+                            <button onClick={this.onOpenEdit}>Edit</button>
+                            <button onClick={this.onRemoveGame}>X</button>
                         </div>}
                     </div>
                 </section >

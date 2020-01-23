@@ -14,14 +14,16 @@ export default class Graph extends PureComponent {
 
   setData = (purcheses) => {
     const data = []
-    for (let i = 1; i < 31; i++) {
+    for (let i = 30; i >=0; i--) {
+  let date=new Date()
+  date.setDate(date.getDate()-i)
       let price
-      if (purcheses[i]) {
-        price = purcheses[i]
+      if (purcheses[date.getDate()]) {
+        price = purcheses[date.getDate()]
       }else{
         price=0
       }
-      data.push({ name: i, purcheses: price })
+      data.push({ name: date.getDate(), purcheses: price })
     }
     this.setState({ data })
   }

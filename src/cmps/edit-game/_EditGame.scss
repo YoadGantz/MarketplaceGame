@@ -1,4 +1,17 @@
-.media-container{
+
+
+.edit-container{
+    background-image: url("../../assets/images/background_spotlight.jpg");
+   background-color:  #f2f5fa;
+   background-repeat: no-repeat;
+   background-size: cover;
+   width: 80%;
+   margin: auto;
+   & textarea{
+       width: 50%;
+   }
+
+   & .media-container{
     width: 200px;
     object-fit: cover;
     border: 1px solid black;
@@ -9,9 +22,8 @@
         width: 200px;
     }
     transition: 0.8s;
-}
-.tag-container{
-
+   }
+   & .tag-container{
     display: inline-block;
     line-height: 19px;
     padding: 0 7px;
@@ -25,15 +37,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-  
-
-
-.edit-container{
-   background-color:  #f2f5fa;
-   width: 80%;
-   margin: auto;
-   & textarea{
-       width: 50%;
+    
    }
 }
