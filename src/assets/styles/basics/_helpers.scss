@@ -75,16 +75,7 @@
 
 //search helpers
 
-.clean-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-.hidden {
-  display: none;
-}
-
-input {
+.input {
   color: black;
   font-size: 1rem;
   flex: 1;
@@ -93,8 +84,6 @@ input {
   padding-left: 1rem;
   padding-right: 1rem;
   min-height: 40px;
-  margin: 20px 0;
-  margin-right: 20px;
   background-color: #2e88ca;
   &:focus {
     outline: none;
@@ -103,4 +92,13 @@ input {
     color: white;
     opacity: 0.5;
   }
+}
+
+.clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.hidden {
+  display: none;
 }

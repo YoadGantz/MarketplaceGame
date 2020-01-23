@@ -13,12 +13,16 @@ function query() {
 
 function addToCart(item) {
     const cartItems = StorageService.loadFromStorage('cart')
-    if (!cartItems.find((currItem) => item === currItem)) {
-        cartItems.push(item)
-        StorageService.saveToStorage('cart', cartItems)
-        return 'success'
+    try {
+        if (!cartItems.find((currItem) => item === currItem)) {
+            cartItems.push(item)
+            StorageService.saveToStorage('cart', cartItems)
+            return 'success'
+        }
+    } catch (err) {
+        console.log('Already in the cart')
+        throw err
     }
-    throw 'Already in cart'
 }
 
 function removeFromCart(item) {

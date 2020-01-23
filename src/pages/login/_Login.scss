@@ -1,3 +1,20 @@
+@import "../../assets/styles/setup/variables.scss";
+
 .login-image {
-    width: 150px;
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.login-input {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #83519b;
+  font-family: inherit;
+  font-size: 1.1rem;
+  color: $clr6;
+  position: relative;
+  padding: 10px 20px;
+  border: 1px $clr6 solid;
 }

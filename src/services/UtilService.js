@@ -1,5 +1,14 @@
 import OrderService from './OrderService';
-export default { sortByDownloads, getGraphsDetails, getGameRating, objectIdByTime, sortByPrice,getSum }
+export default {
+    sortByDownloads,
+    getGraphsDetails,
+    getGameRating,
+    objectIdByTime,
+    dateFromObjectId,
+    formatDate,
+    getSum,
+    sortByPrice
+}
 
 function getGameRating(game) {
     const { reviews } = game
@@ -50,10 +59,21 @@ function sortByPrice(games, isAscending) {
     return sortedGames
 }
 
-function _dateFromObjectId(objectId) {
-    return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+function dateFromObjectId(objectId) {
+    const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000)
+    return date
 };
 
+function formatDate(date) {
+    const year = date.getFullYear()
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr",
+        "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"];
+    let month = monthNames[date.getMonth()]
+    const fullDate = month + ' ' + year
+    return fullDate
+}
 
 async function getGraphsDetails(games, type,date=30) {
     const prms = []
@@ -71,7 +91,7 @@ async function getGraphsDetails(games, type,date=30) {
     const gameOrders = await Promise.all(prms)
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
-            const currOrderDate = _dateFromObjectId(order._id).getDate()
+            const currOrderDate = dateFromObjectId(order._id).getDate()
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }

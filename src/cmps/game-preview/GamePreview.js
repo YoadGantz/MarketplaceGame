@@ -76,7 +76,7 @@ class GamePreview extends Component {
                                 full_heart : empty_heart} />}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
-                            <button onClick={this.onPlayClick}>Play</button>}
+                            <button className="preview-btn" onClick={this.onPlayClick}>Play</button>}
                         {isProfile && isDashboard && <div>
                             <button onClick={this.onOpenEdit}>Edit</button>
                             <button onClick={this.onRemoveGame}>X</button>

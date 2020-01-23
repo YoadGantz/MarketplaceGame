@@ -29,7 +29,7 @@ export function logout() {
 export function signUp(cred) {
     return async dispatch => {
         try {
-            const user = await UserService.signup(cred);
+            const user = await UserService.signUp(cred);
             dispatch(setUser(user));
             return;
         } catch (err) {
