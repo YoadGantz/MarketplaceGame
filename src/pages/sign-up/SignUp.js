@@ -19,7 +19,7 @@ class SignUp extends Component {
 
   addMediaAndTags = async ev => {
     const imgUrl = await MediaUploadService(ev.target.files);
-    return this.setState({ imgUrl })
+    return this.setState({ imgUrl:imgUrl[0] })
   }
 
   signUpHandleChange = ev => {

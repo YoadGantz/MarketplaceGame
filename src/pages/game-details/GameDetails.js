@@ -78,9 +78,9 @@ class GameDetails extends Component {
     const { title, reviews, mediaUrls, tags, comments } = this.props.game;
     let mainMedia;
     if (!currMediaUrl) { return <h1>Loading</h1> }
-    currMediaUrl.includes("mp4") ?
+    currMediaUrl.includes(".mp4") ?
       mainMedia = <iframe title="video" src={`${currMediaUrl}#t=0`} className="game-main-thumbnail" />
-      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
+      : mainMedia = <img  src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
       <div className="container" >
         {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}

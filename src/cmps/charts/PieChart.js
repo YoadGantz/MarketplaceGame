@@ -6,7 +6,9 @@ import {
 
 
 export default class PieCharts extends PureComponent {
-  state = { data: [], colors: ['#16578F', '#5F89D3', '#A45FC1', '#E5EDF4', '#4C96D7', 'blue', 'lightblue'], gameTitles: null }
+  state = { data: [], gameTitles: null,colors: ['#16578F', '#5F89D3', '#A45FC1',
+   '#E5EDF4', '#4C96D7', 'blue', 'lightblue','red','#023436','#FFC09F',
+   '#ADF7B6','#D10000','#65AFFF','#274060'] }
 
   componentDidUpdate(prevprops) {
     if (prevprops.sumOfGames !== this.props.sumOfGames) {
