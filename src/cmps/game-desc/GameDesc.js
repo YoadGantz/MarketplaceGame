@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import UtilService from "../../services/UtilService";
 import UserService from "../../services/UserService";
 
+import full_heart from '../../assets/icons/full_heart.svg'
+import empty_heart from '../../assets/icons/empty_heart.svg'
+
 export default class GameDesc extends Component {
   state = { orderCount: '', rating: '', publisherName: '' }
 
   componentDidMount = () => {
-    const game = this.props.game
+    const { game } = this.props
     this.setOrderCount(game)
     this.setGameRating(game)
     this.setPublisherName(game.publisher)
@@ -33,7 +36,8 @@ export default class GameDesc extends Component {
   }
 
   render() {
-    const { game: { thumbnail, description, publishedAt, price } } = this.props
+    const { game, user } = this.props
+    const { thumbnail, description, publishedAt, price } = game
     const { publisherName, rating, orderCount } = this.state
     return (
       <div>
@@ -47,6 +51,8 @@ export default class GameDesc extends Component {
           <button type="primary" className='game-buy-button' onClick={this.onAddToCart}>
             {price}$ Add to cart
           </button>
+          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+            full_heart : empty_heart} />
         </div>
       </div>)
   }

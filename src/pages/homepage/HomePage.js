@@ -10,27 +10,33 @@ import GameList from '../../cmps/game-list/GameList'
 import './_HomePage.scss'
 class HomePage extends Component {
   state = {
-    games: []
+    mostDownloadGames: [],
+    mostRecentGames: [],
+    highestRatingGames: []
   }
 
   async componentDidMount() {
     await this.props.loadGames()
-    this.setGames()
+    this.setGames('mostDownloadGames')
+    this.setGames('mostRecentGames')
+    this.setGames('highestRatingGames')
   }
 
   onUpdateUser = async (updatedUser) => {
     this.props.updateUser(updatedUser)
   }
 
-  setGames = async (num = 3) => {
+  setGames = async (sortBy, num = 3) => {
     const games = [...this.props.games]
-    const sortedGames = await UtilService.sortByDownloads(games)
+    console.log(this.props.games);
+    const sortedGames = await UtilService.sortGames(games, sortBy)
     sortedGames.splice(num, games.length)
-    this.setState({ games: sortedGames })
+    this.setState({ [sortBy]: sortedGames })
   }
 
+
   render() {
-    const { games } = this.state
+    const { mostDownloadGames, mostRecentGames, highestRatingGames } = this.state
     return <div className="homepage-container">
       <div className="hero-image">
         <div className="hero-text">
@@ -40,7 +46,12 @@ class HomePage extends Component {
           <div className="flex"></div>
         </div>
       </div>
-      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
+      Most Popular
+      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostDownloadGames} />
+      Recent Released
+      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostRecentGames} />
+      Highest Rating
+      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={highestRatingGames} />
     </div>;
   }
 }

@@ -1,5 +1,6 @@
 import OrderService from './OrderService';
 export default {
+    sortGames,
     sortByDownloads,
     getGraphsDetails,
     getGameRating,
@@ -27,12 +28,39 @@ function objectIdByTime(time) {
     return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000"
 }
 
-async function getSum(games){
-const downloadsByGame= await getGraphsDetails(games,'games')
-const sum=games.map((currGame,idx)=>{
-return downloadsByGame[idx]*currGame.price
-})
-return {sum,downloadsByGame}
+async function getSum(games) {
+    const downloadsByGame = await getGraphsDetails(games, 'games')
+    const sum = games.map((currGame, idx) => {
+        return downloadsByGame[idx] * currGame.price
+    })
+    return { sum, downloadsByGame }
+}
+
+async function sortGames(games, sortBy) {
+    if (sortBy === 'mostDownloadGames') {
+        return sortByDownloads(games)
+    } else if (sortBy === 'mostRecentGames') {
+        return _sortByRecency(games)
+    } else {
+        return _sortByRating(games)
+    }
+
+}
+
+async function _sortByRecency(games) {
+    const sortedGames =games.sort((game1, game2) => {
+        return game2.createdAt - game1.createdAt
+    })
+    console.log('sorted by recency',sortedGames);
+    return sortedGames
+}
+
+async function _sortByRating(games) {
+    games.forEach(game => game.totalRating = getGameRating(game))
+    const sortedGames = games.sort((game1, game2) => {
+        return game2.totalRating - game1.totalRating
+    })
+    return sortedGames
 }
 
 async function sortByDownloads(games, isAscending) {
@@ -75,7 +103,7 @@ function formatDate(date) {
     return fullDate
 }
 
-async function getGraphsDetails(games, type,date=30) {
+async function getGraphsDetails(games, type, date = 30) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
@@ -89,9 +117,10 @@ async function getGraphsDetails(games, type,date=30) {
         ordersByGame.push(0)
     })
     const gameOrders = await Promise.all(prms)
+
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
-            const currOrderDate = dateFromObjectId(order._id).getDate()
+            const currOrderDate = dateFromObjectId(order.createdAt).getDate()
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }

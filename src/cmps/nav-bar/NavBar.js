@@ -8,7 +8,6 @@ import { logout } from '../../actions/userActions';
 import GameCounter from '../game-counter/GameCounter'
 
 
-// import svgService from '../../services/svgService'
 import './_NavBar.scss'
 import wishlistImg from '../../assets/icons/wishlist.svg'
 import shoppingCartImg from '../../assets/icons/shopping_cart.svg'
@@ -44,7 +43,7 @@ class NavBar extends Component {
           Profile
         </NavLink>
         {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
-          : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="active" >Logout</NavLink>}
+          : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="">Logout</NavLink>}
         <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")} />
         <GameCounter />
         <img alt="" src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")} />

@@ -3,8 +3,13 @@ import { connect } from 'react-redux'
 
 import SocketService from "../../services/SocketService";
 
-import { loadGame, updateGame, updateComments } from "../../actions/gameActions.js";
-import { addGameToCart } from '../../actions/cartActions'
+import { loadGame, updateGame, updateComments } from "../../actions/gameActions";
+import { updateUser } from '../../actions/userActions';
+import { addGameToCart } from '../../actions/cartActions';
+
+
+import full_heart from '../../assets/icons/full_heart.svg'
+import empty_heart from '../../assets/icons/empty_heart.svg'
 
 import Notification from '../../cmps/helpers/Notification'
 import GameMedia from '../../cmps/game-media/GameMedia';
@@ -62,6 +67,22 @@ class GameDetails extends Component {
     }
   };
 
+  toggleWishedGame = (ev) => {
+    console.log('got here');
+    
+    const { user, game } = this.props
+    ev.stopPropagation();
+    let wishedGames = (user && user.wishedGames) || []
+    let updatedUser
+    const idx = wishedGames.findIndex(id => id === game._id)
+    if (idx === -1) {
+      updatedUser = { ...user, wishedGames: [...wishedGames, game._id] }
+    } else {
+      updatedUser = { ...user, wishedGames: wishedGames.filter(wishedGame => wishedGame !== game._id) }
+    }
+    this.props.updateUser(updatedUser)
+  }
+
   onToggleModal = () => {
     setTimeout(() => {
       this.setState(prevState => ({ toggleModal: !prevState.toggleModal }))
@@ -78,9 +99,9 @@ class GameDetails extends Component {
     const { title, reviews, mediaUrls, tags, comments } = this.props.game;
     let mainMedia;
     if (!currMediaUrl) { return <h1>Loading</h1> }
-    currMediaUrl.includes("mp4") ?
+    currMediaUrl.includes(".mp4") ?
       mainMedia = <iframe title="video" src={`${currMediaUrl}#t=0`} className="game-main-thumbnail" />
-      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
+      : mainMedia = <img  src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
       <div className="container" >
         {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}
@@ -92,16 +113,16 @@ class GameDetails extends Component {
           <div className="flex game-choose-thumbnail-container">
             <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
           </div>
-          <GameDesc onAddToCart={this.onAddToCart} game={this.props.game} />
+          <GameDesc user={this.props.user} onToggleWishedGame={this.toggleWishedGame} onAddToCart={this.onAddToCart} game={this.props.game} />
         </div>
         <h2>Tags:</h2>
         {tags.map(tag => {
           return <span className="tag" key={tag}>{tag} </span>;
         })}
         <h2>Reviews :</h2>
-        <Review user={this.props.loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
+        <Review user={this.props.user} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
         <h2>Comments :</h2>
-        <Comments user={this.props.loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
+        <Comments user={this.props.user} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
       </div>
     );
   }
@@ -111,14 +132,15 @@ const mapStateToProps = state => {
   return {
     cart: state.cartStore.cart,
     game: state.gameStore.game,
-    loggedInUser: state.userStore.loggedInUser,
+    user: state.userStore.loggedInUser,
   };
 };
 const mapDispatchToProps = {
   addGameToCart,
   loadGame,
   updateGame,
-  updateComments
+  updateComments,
+  updateUser
 };
 
 export default connect(
