@@ -43,7 +43,7 @@ class HomePage extends Component {
           <div className="flex"></div>
         </div>
       </div>
-      <GameList user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
+      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
     </div>;
   }
 }

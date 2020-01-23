@@ -5,7 +5,9 @@ export default {
     getGameRating,
     objectIdByTime,
     dateFromObjectId,
-    formatDate
+    formatDate,
+    getSum,
+    sortByPrice
 }
 
 function getGameRating(game) {
@@ -25,20 +27,34 @@ function objectIdByTime(time) {
     return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000"
 }
 
-async function sortByDownloads(games) {
+async function getSum(games){
+const downloadsByGame= await getGraphsDetails(games,'games')
+const sum=games.map((currGame,idx)=>{
+return downloadsByGame[idx]*currGame.price
+})
+return {sum,downloadsByGame}
+}
+
+async function sortByDownloads(games, isAscending) {
     const downloadNumbers = await getGraphsDetails(games, 'games')
     games.forEach((game, idx) => {
-        game.downloads = downloadNumbers[idx]
-    })
+        game.downloadsCount = downloadNumbers[idx]
+    });
     const sortedGames = games.sort((game1, game2) => {
-        return game1.downloads > game2.downloads ? -1 : game1.downloads < game2.downloads ? 0 : 1
+        if (isAscending) {
+            return game1.downloadsCount < game2.downloadsCount ? -1 : game1.downloadsCount > game2.downloadsCount ? 0 : 1
+        }
+        return game1.downloadsCount > game2.downloadsCount ? -1 : game1.downloadsCount < game2.downloadsCount ? 0 : 1
     })
     return sortedGames
 }
 
-function sortByPrice(games) {
+function sortByPrice(games, isAscending) {
     const sortedGames = games.sort((game1, game2) => {
-        return (game2.price - game1.price) ? game2.price - game1.price : ''
+        if (isAscending) {
+            return game2.price > game1.price ? -1 : game2.price < game1.price ? 0 : 1
+        }
+        return game2.price < game1.price ? -1 : game2.price > game1.price ? 0 : 1
     })
     return sortedGames
 }
@@ -59,14 +75,14 @@ function formatDate(date) {
     return fullDate
 }
 
-async function getGraphsDetails(games, type) {
+async function getGraphsDetails(games, type,date=30) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
     const ordersByGame = []
     games.forEach((game) => {
         prms.push(OrderService.query({
-            lastMonthId: objectIdByTime(30),
+            lastMonthId: objectIdByTime(date),
             gameIds: game._id
         }))
         gameByNameOrder.push(game.title)
@@ -75,7 +91,7 @@ async function getGraphsDetails(games, type) {
     const gameOrders = await Promise.all(prms)
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
-            const currOrderDate = dateFromObjectId(order._id)
+            const currOrderDate = dateFromObjectId(order._id).getDate()
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }

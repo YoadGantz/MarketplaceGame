@@ -1,14 +1,31 @@
 @import "../../assets/styles/setup/variables.scss";
+
 .user-card {
   padding-block-start: 20px;
   padding-block-end: 20px;
   > *:not(:last-child) {
     margin-inline-end: 10px;
   }
+  .user-img {
+      max-width: 95px;
+      max-height: 95px;
+      border-radius: 10px;
+  }
+  .user-details {
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-grow: 1;
+    strong {
+      display: block;
+      font-family: monsserat-bold, sans-serif;
+      font-weight: normal;
+      font-size: 1.3rem;
+    }
+  }
 }
 
 .tab-nav {
-  box-shadow: inset 0 -3px 0 $clr2;
+  box-shadow: inset 0 -3px 0 $clr3;
   > *:not(:last-child) {
     margin-inline-end: 10px;
   }
@@ -17,16 +34,16 @@
 .inner-tab {
   background-color: $clr1;
   border-radius: 3px;
-  color: $clr2;
+  color: $clr6;
   height: 100%;
   padding: 10px 15px;
   cursor: pointer;
   transition: color, 0.2s;
-  box-shadow: inset 0 -3px 0 $clr2;
+  box-shadow: inset 0 -3px 0 $clr3;
   &:hover {
-    color: $clr2;
+    color: $clr6;
   }
   &.active {
-    box-shadow: inset -3px 0 0 $clr2, inset 3px 0 0 $clr2, inset 0 3px 0 $clr2;
+    box-shadow: inset -3px 0 0 $clr3, inset 3px 0 0 $clr3, inset 0 3px 0 $clr3;
   }
 }

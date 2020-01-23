@@ -5,6 +5,8 @@ import history from '../../history';
 
 import { login } from '../../actions/userActions';
 
+import './_Login.scss'
+
 class Login extends Component {
   state = {
     loginCred: {
@@ -42,21 +44,26 @@ class Login extends Component {
   render() {
     const { loggedInUser } = this.props
     const loginSection = (
-      <form onSubmit={this.doLogin}>
-        <input type="text" name="userName" value={this.state.loginCred.userName}
-          onChange={this.loginHandleChange} placeholder="userName" />
-        <br />
+      <form className="flex column justify-center align-center" onSubmit={this.doLogin}>
+        <input className="input" type="text" name="email" value={this.state.loginCred.userName}
+          onChange={this.loginHandleChange} placeholder="User name" />
         <input type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
-        <br />
         <button>Login</button>
       </form>
     );
 
     return (
-      <div className="login-form">
+      <div className="login-container flex column justify-center align-center container">
+        <img className="login-image" alt="logo" src="/logo.png" width="100px"/>
+        {loggedInUser && (
+          <div>
+            <h2>Welcome: {loggedInUser.userName} </h2>
+            <button onClick={this.doLogout}>Logout</button>
+          </div>
+        )}
         {(!loggedInUser || !loggedInUser.userName) && loginSection}
-        <p>Don't have a user yet ? </p>
+        <p>Not with us yet ? </p>
         <button onClick={() => history.push('/sign-up')}>Join</button>
       </div>
     );
