@@ -1,53 +1,101 @@
-@import '../setup/variables.scss';
+@import "../setup/variables.scss";
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: montserrat, sans-serif;
-    line-height: 1.6;
-    color: white;
+  font-family: montserrat, sans-serif;
+  line-height: 1.6;
+  color: white;
 }
 
 body {
-    margin: 0;
-    background-color: #141313;
+  margin: 0;
+  background-color: #141313;
 }
 
 img {
-    width: 100%;
+  width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  margin: 0;
 }
 
 p {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    max-width: 60ch;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  max-width: 60ch;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
-    cursor: pointer;
-    margin-inline-end: 10px;
-    opacity: 0;
-    z-index: 1;
+  cursor: pointer;
+  margin-inline-end: 10px;
+  opacity: 0;
+  z-index: 1;
 }
 
 button {
-    background: none;
-    border: none;
-    color: $clr6;
-    cursor: pointer;
-    outline: none;
-    padding:0;
+  background: none;
+  border: none;
+  color: $clr6;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+element.style {
+}
+html.responsive {
+    height: 100%;
+}
+:root {
+    --main-text-color: #9b414f;
+    --main-light-blue-background: #93c899;
+    --main-text-on-light-blue: rgb(209, 209, 209);
+    --main-top-image-bg: #1f2126;
+    --main-editor-bg-color: #363a43;
+    --main-editor-text-color: #e6e7e8;
+    --main-editor-input-bg-color: #30333b;
+    --main-editor-section-title-color: #a3a3a3;
+}
+html {
+    height: 100%;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 14px;
+    background: transparent;
+    z-index: 12;
+    overflow: visible;
+}
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: darken($clr2, 20%);
+  border-radius: 10px;
+  z-index: 12;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  transition: background-color 0.32s ease-in-out;
+  margin: 4px;
+  min-height: 32px;
+  min-width: 32px;
 }
