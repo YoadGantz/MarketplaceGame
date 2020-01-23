@@ -90,24 +90,18 @@ class EditGame extends Component {
         <MediaUrlsList removeMediaAndTags={this.removeMediaAndTags} mediaUrls={mediaUrls} />
       );
     if (tags && tags.length) {
-      addedTags = (
-        <TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />
-      )
+      addedTags = (<TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />)
     }
     if (thumbnail) {
-      addedThumbnail = <div className='media-container'>
-        <img src={thumbnail} alt='' />
-        <span
-          className="pointer"
-          onClick={() => this.removeMediaAndTags("thumbnail")}
-        >
-          X
-        </span>
+      addedThumbnail = <div className="media-container">
+        <img src={thumbnail} alt="" />
+        <span className="pointer"
+          onClick={() => this.removeMediaAndTags("thumbnail")}>X</span>
       </div>
     }
 
     return (
-      <div className='edit-container'>
+      <div className="edit-container">
         <p> Title : </p>
         <input type="text" onChange={this.inputChange} value={title} placeholder="title" name="title" />
         <p>Publish Date</p>
@@ -117,7 +111,7 @@ class EditGame extends Component {
         <p> Thumbnail Img: </p>
         <input type="file" onChange={this.addMediaAndTags} placeholder="thumbnail" name="thumbnail" />
         {addedThumbnail}
-        <p> Img Url: </p>
+        <p> Media: </p>
         <div>
           <input type="file" onChange={this.addMediaAndTags} placeholder="Put your image Urls here" name="mediaUrls" multiple />
           <div className="flex wrap">{addedUrls}</div>

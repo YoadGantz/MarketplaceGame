@@ -5,6 +5,7 @@ import history from './history';
 
 import HomePage from './pages/homepage/HomePage';
 import Login from './pages/login/Login';
+import SignUp from './pages/sign-up/SignUp';
 import Explore from './pages/explore-page/Explore';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import GameDetails from './pages/game-details/GameDetails';
@@ -41,6 +42,7 @@ export default class App extends Component {
                <Switch>
                    <Route path="/"  render={()=><HomePage history={history}/>} exact />
                   <Route path="/login" component={Login} exact />
+                  <Route path="/sign-up" component={SignUp} exact />
                   <Route path="/edit/:id?" component={EditGame} exact />
                   <Route path="/game/:id" component={GameDetails} exact />
                   <Route path="/game" render={() => <Explore history={history} />} exact />
