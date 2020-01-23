@@ -66,14 +66,14 @@ class GamePreview extends Component {
                 <section className="content-container">
                     <div className="flex">
                         <strong className="full">{game.title}</strong>
-                        <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
+                        {!isProfile &&
+                            <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+                        full_heart : empty_heart} />}
                     </div>
                     <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
                         <p className="price">${game.price}</p>
-                        {!isProfile &&
-                            <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-                                full_heart : empty_heart} />}
+                        <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
                             <button className="preview-btn" onClick={this.onPlayClick}>Play</button>}

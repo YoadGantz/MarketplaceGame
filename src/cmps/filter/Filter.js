@@ -27,9 +27,11 @@ export default class Filter extends Component {
             <input className="search-input input" name='tag' type='text' placeholder='Search by Tags' onChange={this.onFilterBy} />
             <select onChange={this.onFilterBy} name='tag' >
                 <option value=''>All</option>
-                <option value='RPG'>RPG</option>
-                <option value='FPS' >FPS</option>
-                <option value='OPEN-World'>Open-World</option>
+                <option value='rpg'>RPG</option>
+                <option value='action'>Action</option>
+                <option value='simulator'>Simulator</option>
+                <option value='third-person'>Third Person</option>
+                <option value='open-world'>Open-World</option>
             </select>
             <span>Sort by</span>
             <button onClick={sortByDownloads}>By Downloads </button>
