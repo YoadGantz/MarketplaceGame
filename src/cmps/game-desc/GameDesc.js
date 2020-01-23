@@ -38,13 +38,15 @@ export default class GameDesc extends Component {
   render() {
     const { game, user } = this.props
     const { thumbnail, description, publishedAt, price } = game
+    const date = new Date(publishedAt/1)
+    const publishedDate = UtilService.formatDate(date)
     const { publisherName, rating, orderCount } = this.state
     return (
       <div>
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
         <div className='game-description'>
           <p > {description}</p>
-          <p> Published at: {publishedAt}</p>
+          <p> Published at: {publishedDate}</p>
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
