@@ -79,8 +79,16 @@
 }
 
 .game-buy-button {
-  margin-top: 5px;
+  background: #0f9c14;
+  border-radius: 10px;
+  height: 30px;
+  width: 100px;
+  transition: 0.5s;
+  &:hover {
+    background: #00ba06;
 }
+}
+
 
 .game-description {
   grid-area: desc;

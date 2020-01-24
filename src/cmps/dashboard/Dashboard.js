@@ -126,8 +126,8 @@ class Dashboard extends Component {
                 <InfoCard> Downloads By Week : {downloadsByWeek}</InfoCard>
             </div>
             <div className="charts-container flex">
-                <AreaChart orderDates={orders} />
-                <PieChart games={this.props.games} sumOfGames={sumOfGames} />
+                <AreaChart games={this.props.games} orderDates={orders} />
+                <PieChart user={this.props.loggedInUser} games={this.props.games} sumOfGames={sumOfGames} />
             </div>
             {gameList}
         </div>

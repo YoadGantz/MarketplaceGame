@@ -12,13 +12,14 @@ export default class Review extends Component {
     if (!this.props.user) return
     const { rating, text } = this.state
     this.props.onAddCommentOrReview({ user: { userName: this.props.user.userName }, rating, text }, true, 'reviews')
+    this.setState({ text: '' })
   }
 
 
   render() {
 
     const { reviews } = this.props;
-    const { rating, text } = this.state;
+    const { text } = this.state;
     return (
       <div className='review-container' >
         <ul className='social-content-container '>
@@ -43,11 +44,11 @@ export default class Review extends Component {
           placeholder="write your text"
         />
         <input className='hidden' type='radio' value='like' onChange={this.inputChange} name='rating' id='like' checked />
-        <label className='like-img' htmlFor='like' name='rating'>
+        <label className='like-img pointer' htmlFor='like' name='rating'>
           <img alt='like' src="https://img.icons8.com/ultraviolet/40/000000/good-quality.png" />
         </label>
         <input className='hidden' type='radio' onChange={this.inputChange} value='dislike' name='rating' id='dislike' />
-        <label htmlFor='dislike' className='dislike-img' name='rating'>
+        <label htmlFor='dislike' className='dislike-img pointer' name='rating'>
           <img alt='dislike' src="https://img.icons8.com/ultraviolet/40/000000/poor-quality.png" />
         </label>
         <button onClick={this.onAddReview}>Add Review</button>

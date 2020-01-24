@@ -54,7 +54,7 @@ async function sortGames(games, sortBy) {
 
 async function _sortByRecency(games) {
     const sortedGames = games.sort((game1, game2) => {
-        return game2.createdAt - game1.createdAt
+        return game2.publishedAt - game1.publishedAt
     })
     return sortedGames
 }
@@ -67,7 +67,7 @@ async function _sortByRating(games) {
     return sortedGames
 }
 
-async function sortByDownloads(games, isAscending=false) {
+async function sortByDownloads(games, isAscending = false) {
     const downloadNumbers = await getGraphsDetails(games)
     games.forEach((game) => {
         game.downloadsCount = downloadNumbers[game.title]
@@ -107,7 +107,7 @@ function formatDate(date) {
     return fullDate
 }
 
-async function getGraphsDetails(games, type, date = 30) {
+async function getGraphsDetails(games, type, date = 31) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
