@@ -19,7 +19,6 @@ export default class Review extends Component {
 
     const { reviews } = this.props;
     const { rating, text } = this.state;
-    console.log(rating)
     return (
       <div className='review-container' >
         <ul className='social-content-container '>
