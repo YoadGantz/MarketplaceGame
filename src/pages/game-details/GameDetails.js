@@ -11,14 +11,8 @@ import { addGameToCart } from '../../actions/cartActions';
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 
-import Notification from '../../cmps/helpers/Notification'
-import GameMedia from '../../cmps/game-media/GameMedia';
-import GameDesc from '../../cmps/game-desc/GameDesc';
-import Comments from '../../cmps/comments/Comment';
-import Review from '../../cmps/review/Review';
-import Modal from '../../cmps/modal/Modal'
-
 import './_GameDetails.scss';
+import GameDetailsPage from "./game-details-page/GameDetailsPage";
 
 class GameDetails extends Component {
   state = {
@@ -29,7 +23,7 @@ class GameDetails extends Component {
 
   componentDidMount = async () => {
     const { id } = this.props.match.params
-    await this.props.loadGame(id)
+    const game = await this.props.loadGame(id)
     this.setState({ currMediaUrl: this.props.game.mediaUrls[0] });
     this.initiateSockets()
   }
@@ -93,37 +87,12 @@ class GameDetails extends Component {
   };
 
   render() {
-    if (!this.props.game) return <h1>Loading</h1>;
-    const { currMediaUrl } = this.state
-    const { title, reviews, mediaUrls, tags, comments } = this.props.game;
-    let mainMedia;
-    if (!currMediaUrl) { return <h1>Loading</h1> }
-    currMediaUrl.includes(".mp4") ?
-      mainMedia = <iframe title="video" src={`${currMediaUrl}?#t=0&#autoplay=1&mute=1`} volume={0}  className="game-main-thumbnail" />
-      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
-      <div className="container" >
-        {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}
-        <div className="flex justify-between">
-          <h1>{title}</h1>
-        </div>
-        <div className="grid game-main-content-container ">
-          {mainMedia}
-          <div className="flex game-choose-thumbnail-container">
-            <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
-          </div>
-          <GameDesc user={this.props.user} onToggleWishedGame={this.toggleWishedGame} onAddToCart={this.onAddToCart} game={this.props.game} />
-        </div>
-        <h2>Tags:</h2>
-        {tags.map(tag => {
-          return <span className="tag" key={tag}>{tag} </span>;
-        })}
-        <h2>Reviews :</h2>
-        <Review user={this.props.user} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
-        <h2>Comments :</h2>
-        <Comments user={this.props.user} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
-      </div>
-    );
+      <GameDetailsPage onThumbNailPhotoClick={this.onThumbNailPhotoClick}
+        onToggleModal={this.onToggleModal} toggleWishedGame={this.toggleWishedGame}
+        game={this.props.game} currMediaUrl={this.state.currMediaUrl} modalTxt={this.state.modalTxt}
+        onAddToCart={this.onAddToCart} onAddCommentOrReview={this.onAddCommentOrReview} user={this.props.user} />
+    )
   }
 }
 

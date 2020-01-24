@@ -5,7 +5,7 @@ export default function MediaUrlsList(props) {
     if (url.includes(".mp4")) {
       return (
         <div className="media-container flex" key={url}>
-          <iframe src={url} title='video' alt={url} />
+          <iframe src={url} allowFullScreen='allowfullscreen' title='video' alt={url} />
           <span
             className="pointer"
             onClick={() => props.removeMediaAndTags("mediaUrls", idx)}
