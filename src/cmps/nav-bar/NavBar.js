@@ -7,7 +7,6 @@ import history from '../../history';
 import { logout } from '../../actions/userActions';
 import GameCounter from '../game-counter/GameCounter'
 
-
 import './_NavBar.scss'
 import wishlistImg from '../../assets/icons/wishlist.svg'
 import shoppingCartImg from '../../assets/icons/shopping_cart.svg'

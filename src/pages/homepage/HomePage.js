@@ -37,22 +37,20 @@ class HomePage extends Component {
 
   render() {
     const { mostDownloadGames, mostRecentGames, highestRatingGames } = this.state
-    return <div className="homepage-container">
-      <div className="hero-image">
-        <div className="hero-text">
-          <h1 className="main-heading">GAMEIN</h1>
+    return (
+      <div className="homepage-container container">
+        <div className="hero-text flex column totally-center">
+          <h1 className="main-heading">Gamein</h1>
           <p>The ultimate destination for buying, discussing, and playing games</p>
           <Link to="/game" onClick={this.on} className="hero-btn">To the shop</Link>
-          <div className="flex"></div>
         </div>
-      </div>
-      Most Popular
+        Most Popular
       <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostDownloadGames} />
-      Recent Released
+        Recent Released
       <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostRecentGames} />
-      Highest Rating
+        Highest Rating
       <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={highestRatingGames} />
-    </div>;
+      </div>)
   }
 }
 

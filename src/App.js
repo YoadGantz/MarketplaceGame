@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route} from 'react-router';
+import { Router, Switch, Route } from 'react-router';
 
 import history from './history';
 
@@ -16,6 +16,7 @@ import NavBar from './cmps/nav-bar/NavBar';
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/wish-list/WishList';
+// import Footer from './cmps/footer/Footer';
 
 import './assets/styles/global.scss'
 
@@ -37,10 +38,10 @@ export default class App extends Component {
    render() {
       return (
          <React.Fragment>
-            <Router history={history}>
+            <Router className="flex column" history={history}>
                <NavBar toggleModal={this.toggleModal} />
-               <Switch>
-                   <Route path="/"  render={()=><HomePage history={history}/>} exact />
+               <Switch className="full">
+                  <Route path="/" render={() => <HomePage history={history} />} exact />
                   <Route path="/login" component={Login} exact />
                   <Route path="/sign-up" component={SignUp} exact />
                   <Route path="/edit/:id?" component={EditGame} exact />
@@ -49,6 +50,7 @@ export default class App extends Component {
                   <Route path="/user/:id" render={() => <ProfilePage history={history} />} exact />
                   <Route path="/play/:id" component={PlayGame} exact />
                </Switch>
+               {/* <Footer></Footer> */}
             </Router>
             {this.state.toggleModal && <Modal>
                {(this.state.modalType === 'wishlist') ? <WishList history={history} /> : <ShoppingCart history={history} />}

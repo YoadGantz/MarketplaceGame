@@ -1,46 +1,39 @@
 @import "../../assets/styles/setup/variables.scss";
 
 .homepage-container {
-  .hero-image {
-    height: 50vh;
-    position: relative;
-    margin-block-end: 45px;
-
-    .hero-text {
-      text-align: center;
-      position: absolute;
-      cursor:default;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: $clr6;
-      .main-heading {
-        font-family: audioWide;
-        color: $clr1;
-        font-size: 2.5rem;
-      }
-      > *:not(:last-child) {
-        margin-block-end: 20px;
-      }
+  padding-block-start: 60px;
+  .hero-text {
+    text-align: center;
+    color: $clr6;
+    margin-block-end: 50px;
+    margin-block-start: 50px;
+    .main-heading {
+      font-family: audioWide;
+      color: $clr1;
+      font-size: 2.5rem;
+      text-transform: uppercase;
     }
+    > *:not(:last-child) {
+      margin-block-end: 20px;
+    }
+  }
 
-    .hero-btn {
-      font-family: inherit;
-      font-size: 1.1rem;
-      color: $clr6;
-      position: relative;
-      padding: 10px 20px;
-      border: 1px $clr6 solid;
-      transition: padding-inline-end, 0.5s;
-      &:hover {
-        padding-inline-end: 40px;
-        &::after {
-          content: "  →";
-          position: absolute;
-          right: 12px;
-          bottom: 0px;
-          font-size: 1.7rem;
-        }
+  .hero-btn {
+    font-family: inherit;
+    font-size: 1.1rem;
+    color: $clr6;
+    position: relative;
+    padding: 10px 20px;
+    border: 1px $clr6 solid;
+    transition: padding-inline-end, 0.5s;
+    &:hover {
+      padding-inline-end: 40px;
+      &::after {
+        content: "  →";
+        position: absolute;
+        right: 12px;
+        bottom: 0px;
+        font-size: 1.7rem;
       }
     }
   }
