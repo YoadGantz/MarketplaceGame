@@ -106,6 +106,16 @@ class Dashboard extends Component {
 
     render() {
         const { orders, sumOfGames, monthMoneySum, downloadsByMonth, downloadsByWeek } = this.state
+        let gameList
+        if (this.props.loggedInUser){
+              gameList=( <> <Link to='/edit'>Add a game</Link>
+              <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
+              {this.state.modalType === 'confirmDelete' && <Modal >
+                  <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
+              </Modal>}</>
+  
+              )
+          }
         return (<div className="content-container container">
             <h1>Dashboard</h1>
             <div className='flex space-evenly'>
@@ -118,11 +128,7 @@ class Dashboard extends Component {
                 <PieChart games={this.props.games} sumOfGames={sumOfGames} />
             </div>
             <div>game list</div>
-            <Link to='/edit'>Add a game</Link>
-            <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
-            {this.state.modalType === 'confirmDelete' && <Modal >
-                <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
-            </Modal>}
+            {gameList}
         </div>
         )
     }

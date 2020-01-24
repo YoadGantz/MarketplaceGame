@@ -22,6 +22,7 @@ export function loadGames(filterBy) {
         try {
             const games = await GameService.query(filterBy);
             dispatch(setGames(games));
+            return games
 
         } catch (err) {
             console.log('Had issues getting games', err);

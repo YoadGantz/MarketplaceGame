@@ -28,7 +28,6 @@ class HomePage extends Component {
 
   setGames = async (sortBy, num = 3) => {
     const games = [...this.props.games]
-    console.log(this.props.games);
     const sortedGames = await UtilService.sortGames(games, sortBy)
     sortedGames.splice(num, games.length)
     this.setState({ [sortBy]: sortedGames })

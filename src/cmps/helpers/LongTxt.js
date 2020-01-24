@@ -1,4 +1,9 @@
-export default class LongTxt extends React.Component {
+import React,{ Component } from "react";
+
+
+
+
+export default class LongTxt extends Component {
 
     state = {
         isLongTxtShown: this.props.isLongTxtShown
@@ -13,7 +18,7 @@ export default class LongTxt extends React.Component {
     }
 
     getButtonTxt() {
-        return this.state.isLongTxtShown ? <img height="20px" src="../../imgs/icons/minimize.svg"/> : '...'
+        return this.state.isLongTxtShown ? '': '...'
     }
 
 
