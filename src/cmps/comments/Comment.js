@@ -10,7 +10,7 @@ export default class Comment extends Component {
   onAddComment = () => {
     const { text } = this.state
     if (!text) return
-    let user = {userName:'Guest'}
+    let user = { userName: 'Guest' }
     if (this.props.user) user = this.props.user
     this.props.onAddCommentOrReview({ text, user }, true)
     this.setState({ text: '' })
@@ -30,7 +30,9 @@ export default class Comment extends Component {
     })
     return (
       <div>
-        {commentMap}
+        <div className='social-content-container'>
+          {commentMap}
+        </div>
         <h3>New Comment</h3>
         <textarea
           type="text"

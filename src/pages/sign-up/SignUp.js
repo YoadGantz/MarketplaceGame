@@ -19,7 +19,7 @@ class SignUp extends Component {
 
   addMediaAndTags = async ev => {
     const imgUrl = await MediaUploadService(ev.target.files);
-    return this.setState({ imgUrl:imgUrl[0] })
+    return this.setState({ imgUrl: imgUrl[0] })
   }
 
   signUpHandleChange = ev => {
@@ -54,7 +54,7 @@ class SignUp extends Component {
   render() {
     const { imgUrl } = this.state
     const { loggedInUser } = this.props
-    let imgPreview =''
+    let imgPreview = ''
     if (imgUrl) {
       imgPreview = <div className="media-container">
         <img src={imgUrl} alt="" />
@@ -85,7 +85,7 @@ class SignUp extends Component {
     );
 
     return (
-      <div>
+      <div className='content-container'>
         {(!loggedInUser || !loggedInUser.userName) && signUpSection}
       </div>
     )

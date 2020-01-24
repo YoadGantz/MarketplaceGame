@@ -27,7 +27,7 @@ export default class GameDesc extends Component {
   }
 
   setGameRating = (game) => {
-    const rating = UtilService.getGameRating(game)
+    const rating = UtilService.formatGameRating((UtilService.getGameRating(game)))
     this.setState({ rating })
   }
 

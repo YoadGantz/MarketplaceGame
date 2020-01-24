@@ -23,7 +23,7 @@ class GameDetails extends Component {
 
   componentDidMount = async () => {
     const { id } = this.props.match.params
-    const game = await this.props.loadGame(id)
+    await this.props.loadGame(id)
     this.setState({ currMediaUrl: this.props.game.mediaUrls[0] });
     this.initiateSockets()
   }

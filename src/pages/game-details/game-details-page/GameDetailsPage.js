@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Notification from '../../../cmps/helpers/Notification'
 import GameMedia from '../../../cmps/game-media/GameMedia';

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import SocketService from "../../services/SocketService";
 import Comments from "../../cmps/comments/Comment";
+import './_PlayGame.scss'
 class PlayGame extends Component {
     state = { comments: null }
 
@@ -31,12 +32,14 @@ class PlayGame extends Component {
     render() {
         const { comments } = this.state
         let addedComments
-        const logInMsg = !this.props.loggedInUser ? 'Buy the game to see more then this gif' : '';
+        const logInMsg = !this.props.loggedInUser ? 'Buy the game to enjoy the game fully' : '';
         addedComments = <Comments onAddCommentOrReview={this.sendComment} comments={comments} />
-        return <div>
+        return <div className='content-container'>
             <h3>{logInMsg}</h3>
-            <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameBorder="0" scrolling="no" width="1000" height="635" allowFullScreen></iframe>
-            <ul>{addedComments}</ul>
+            <div className='flex'>
+                <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameBorder="0" scrolling="no" width="1000" height="635" allowFullScreen></iframe>
+                <ul>{addedComments}</ul>
+            </div>
         </div>
     }
 }
