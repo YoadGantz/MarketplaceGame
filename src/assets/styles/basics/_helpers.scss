@@ -48,9 +48,15 @@
   &.space-between {
     justify-content: space-between;
   }
-  &.space-evenly{
+  &.space-evenly {
     justify-content: space-evenly;
   }
+}
+
+.totally-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid {

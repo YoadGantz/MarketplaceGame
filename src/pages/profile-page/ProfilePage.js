@@ -22,7 +22,7 @@ class ProfilePage extends Component {
   };
 
   componentDidMount() {
-    if (this.props.loggedInUser) this.setState({ user: this.props.loggedInUser })
+    if (this.props.loggedInUser && this.props.loggedInUser.userName) this.setState({ user: this.props.loggedInUser })
   }
 
   updateMode = (ev) => {

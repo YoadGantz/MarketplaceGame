@@ -7,7 +7,6 @@ import history from '../../history';
 import { logout } from '../../actions/userActions';
 import GameCounter from '../game-counter/GameCounter'
 
-
 import './_NavBar.scss'
 import wishlistImg from '../../assets/icons/wishlist.svg'
 import shoppingCartImg from '../../assets/icons/shopping_cart.svg'
@@ -39,7 +38,7 @@ class NavBar extends Component {
         <NavLink to="/game" exact className="nav-link flex align-center" activeClassName="active" >
           Explore
         </NavLink>
-        <NavLink to={`/user/${userName}`} exact className="nav-link flex align-center" activeClassName="active"  >
+        <NavLink to={`/user/${userName || 'guest'}`} exact className="nav-link flex align-center" activeClassName="active"  >
           Profile
         </NavLink>
         {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
