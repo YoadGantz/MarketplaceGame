@@ -4,7 +4,7 @@ import {
 } from 'recharts';
 
 export default class Graph extends PureComponent {
-  state = { data: [{ name: 0, purcheses: 0 }] }
+  state = { data: [{ name: '0', purcheses: 0 }] }
 
   componentDidUpdate(prevprops) {
     if (prevprops.orderDates !== this.props.orderDates) {
@@ -24,7 +24,7 @@ export default class Graph extends PureComponent {
       }else{
         price=0
       }
-      data.push({ name: date.getDate(), purcheses: price })
+      data.push({ name: date.getDate()+'/'+(date.getMonth()+1), purcheses: price })
     }
     this.setState({ data })
   }
