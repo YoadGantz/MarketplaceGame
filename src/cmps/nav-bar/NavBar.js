@@ -6,11 +6,10 @@ import history from '../../history';
 
 import { logout } from '../../actions/userActions';
 import GameCounter from '../game-counter/GameCounter'
-
 import './_NavBar.scss'
 import wishlistImg from '../../assets/icons/wishlist.svg'
 import shoppingCartImg from '../../assets/icons/shopping_cart.svg'
- 
+
 class NavBar extends Component {
 
   doLogOut = async () => {
@@ -32,21 +31,32 @@ class NavBar extends Component {
             <img alt="logo" src="/navbar-logo.png" />
           </Link>
         </div>
-        <NavLink to="/" exact className="nav-link flex align-center" activeClassName="active" >
-          Homepage
+        <input type='checkbox' className='hidden' id='menu' />
+        <label className='nav-bar-hamburger' htmlFor='menu'>
+          ☰
+          </label>
+        <div className=' nav-bar-menu'>
+          <NavLink to="/" exact className="nav-link flex align-center" activeClassName="active" >
+            Homepage
         </NavLink>
-        <NavLink to="/game" exact className="nav-link flex align-center" activeClassName="active" >
-          Explore
+          <NavLink to="/game" exact className="nav-link flex align-center" activeClassName="active" >
+            Explore
         </NavLink>
-        <NavLink to={`/user/${userName || 'guest'}`} exact className="nav-link flex align-center" activeClassName="active"  >
-          Profile
+          <NavLink to={`/user/${userName || 'guest'}`} exact className="nav-link flex align-center" activeClassName="active"  >
+            Profile
         </NavLink>
-        {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
-          : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="">Logout</NavLink>}
-        <img alt="" src={wishlistImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")} />
-        <GameCounter />
-        <img alt="" src={shoppingCartImg} className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")} />
+          {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
+            : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="">Logout</NavLink>}
+          <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")}>
+            <img alt="" src={wishlistImg} />
+          </div>
+          <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")}>
+            <GameCounter />
+            <img alt="" src={shoppingCartImg} />
+          </div>
+        </div>
       </nav >
+
     )
   }
 }
