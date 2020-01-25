@@ -115,7 +115,6 @@ class Dashboard extends Component {
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
                 </Modal>}</>
-
             )
         }
         return (<div className="container">

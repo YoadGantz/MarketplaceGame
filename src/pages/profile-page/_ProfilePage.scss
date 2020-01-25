@@ -35,20 +35,22 @@
 
 .inner-tab {
   border-radius: 1px;
-  color: $clr6;
+  color: rgb(204, 198, 198);
   height: 100%;
   padding: 10px 15px;
   cursor: pointer;
   transition: color, 0.2s;
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #2e88ca;
+  background-color: #4a5e6d;
 
   &:hover {
     color: $clr6;
+    background-color: #3878a7;
   }
   &.active {
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.5), inset 1px 0 0 rgba(255, 255, 255, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    background-color: #2e88ca;
+    background-color: #3878a7;
+    color: $clr6;
   }
 }
