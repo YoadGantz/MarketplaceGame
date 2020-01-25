@@ -16,6 +16,15 @@ export default class GameDesc extends Component {
     this.setPublisherName(game.publisher)
     this.purchaseCheck()
   }
+  componentDidUpdate= (prevProps)=>{
+    const { game } = this.props
+    if (game.title!==prevProps.game.title){
+      this.setOrderCount(game)
+      this.setGameRating(game)
+      this.setPublisherName(game.publisher)
+      this.purchaseCheck()
+    }
+  }
 
   setOrderCount = async (game) => {
     const orderCount = await UtilService.getGraphsDetails([game])

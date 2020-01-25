@@ -56,7 +56,7 @@ export default class PieCharts extends PureComponent {
             outerRadius={100}
             fill="#8884d8"
             labelLine={false}
-            label = {this.renderCustomizedLabel}/>
+            label={this.renderCustomizedLabel} />
           <Tooltip />
         </PieChart>
         <table>

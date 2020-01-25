@@ -1,3 +1,5 @@
+@import "../setup/mixins.scss";
+
 // Font Sizes
 .fs12 {
   font-size: rem(12px);
@@ -112,13 +114,17 @@
 .modal {
   z-index: 500;
   position: fixed;
-  top: 60px;
-  right: 10px;
   height: 50%;
   max-height: 100%;
   width: 340px;
   max-width: 100%;
   background-color: #1f2335c7;
+  right: 150px;
+  top: 59px;
+  @include for-normal-layout {
+    top: 60px;
+    right: 10px;
+  }
 }
 
 .modal-content {
