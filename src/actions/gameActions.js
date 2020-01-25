@@ -37,6 +37,7 @@ export function loadGame(id) {
             dispatch(setGame(game));
             return game
         } catch (err) {
+            console.log(err)
         }
     };
 }

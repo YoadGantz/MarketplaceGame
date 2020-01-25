@@ -118,6 +118,8 @@ class Dashboard extends Component {
             )
         }
         return (<div className="content-container dashboard container">
+            {!this.props.games.length && <h1>Publish games to see more</h1>}
+            {!this.props.loggedInUser && <h3>This is a demo of the publisher page login to see your data</h3>}
             <div className='flex space-evenly'>
                 <InfoCard data={monthMoneySum}>Money earned this month:</InfoCard>
                 <InfoCard data={downloadsByMonth}>Downloads this month:</InfoCard>
