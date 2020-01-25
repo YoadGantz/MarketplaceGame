@@ -8,15 +8,20 @@ export default {
     dateFromObjectId,
     formatDate,
     getSum,
-    sortByPrice
+    sortByPrice,
+    formatGameRating
 }
 
 function getGameRating(game) {
     const { reviews } = game
     let sumOfRating = reviews.reduce((acc, review) => {
-        return acc += review.rating;
+        if (review.rating === 'like') {
+            return acc += 1
+        } else {
+            return acc -= 1
+        }
     }, 0)
-    const rating = +(sumOfRating / reviews.length).toFixed(2)
+    const rating = +(sumOfRating / reviews.length) * 100
     return rating
 }
 
@@ -48,8 +53,8 @@ async function sortGames(games, sortBy) {
 }
 
 async function _sortByRecency(games) {
-    const sortedGames =games.sort((game1, game2) => {
-        return game2.createdAt - game1.createdAt
+    const sortedGames = games.sort((game1, game2) => {
+        return game2.publishedAt - game1.publishedAt
     })
     return sortedGames
 }
@@ -62,10 +67,10 @@ async function _sortByRating(games) {
     return sortedGames
 }
 
-async function sortByDownloads(games, isAscending) {
-    const downloadNumbers = await getGraphsDetails(games, 'games')
-    games.forEach((game, idx) => {
-        game.downloadsCount = downloadNumbers[idx]
+async function sortByDownloads(games, isAscending = false) {
+    const downloadNumbers = await getGraphsDetails(games)
+    games.forEach((game) => {
+        game.downloadsCount = downloadNumbers[game.title]
     });
     const sortedGames = games.sort((game1, game2) => {
         if (isAscending) {
@@ -102,7 +107,7 @@ function formatDate(date) {
     return fullDate
 }
 
-async function getGraphsDetails(games, type, date = 30) {
+async function getGraphsDetails(games, type, date = 31) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
@@ -132,3 +137,18 @@ async function getGraphsDetails(games, type, date = 30) {
     if (type === 'games') return ordersByGame
     return ordersBy
 }
+
+function formatGameRating(rating) {
+    if (rating > 50) {
+        return 'Really positive'
+    } else if (rating > 10) {
+        return 'Positive'
+    } else if (rating > -10) {
+        return 'Mixed'
+    } else if (rating > -50) {
+        return 'Negetive'
+    } else {
+        return 'Really negetive'
+    }
+}
+

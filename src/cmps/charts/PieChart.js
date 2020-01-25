@@ -6,9 +6,11 @@ import {
 
 
 export default class PieCharts extends PureComponent {
-  state = { data: [], gameTitles: null,colors: ['#16578F', '#5F89D3', '#A45FC1',
-   '#E5EDF4', '#4C96D7', 'lightblue','red','#023436','#FFC09F',
-   '#ADF7B6','#D10000','#65AFFF','#274060'] }
+  state = {
+    data: [{ fill: '#16578F', name: 'publish Games', value: 1 }], gameTitles: null, colors: ['#16578F', '#5F89D3', '#A45FC1',
+      '#4C96D7', 'lightblue', 'red', '#023436', '#FFC09F',
+      '#ADF7B6', '#D10000', '#65AFFF', '#274060']
+  }
 
   componentDidUpdate(prevprops) {
     if (prevprops.sumOfGames !== this.props.sumOfGames) {
@@ -22,6 +24,7 @@ export default class PieCharts extends PureComponent {
     const gameTitles = []
     this.props.games.forEach((game, i) => {
       if (!sum[i]) return
+      if (!this.props.user && i > 3) return
       gameTitles.push(game.title)
       data.push({ fill: colors[i], name: game.title, value: sum[i] })
     })
