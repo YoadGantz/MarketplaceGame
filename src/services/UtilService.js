@@ -125,10 +125,11 @@ async function getGraphsDetails(games, type, date = 31) {
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
             const currOrderDate = dateFromObjectId(order.createdAt).getDate()
+            let num = ordersBy[currOrderDate]
+            if (num && idx===0)return
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }
-            let num = ordersBy[currOrderDate]
             if (!num) return ordersBy[currOrderDate] = 1
             ordersBy[gameByNameOrder[i]] = idx
             return ordersBy[currOrderDate] = num + 1
