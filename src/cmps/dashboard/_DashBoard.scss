@@ -38,11 +38,11 @@
       font-family: montserrat;
       font-size: 1rem;
       align-self: flex-end;
-      transition: background-color 0.6s;
+      transition: background-color 0.4s;
       margin-inline-end: 20px;
 
       &:hover {
-        background-color: $clr3;
+        background-color: darken($clr2, 10%);
       }
     }
   }
