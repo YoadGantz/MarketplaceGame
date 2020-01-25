@@ -1,8 +1,6 @@
 import GamePreview from '../game-preview/GamePreview'
 import React from 'react'
 
-import './_GameList.scss'
-
 export default function GameList(props) {
     const { games, user } = props;
     return <ul className="cards-container clean-list container">

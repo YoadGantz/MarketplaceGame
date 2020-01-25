@@ -2,15 +2,19 @@
 
 .info-card {
   height: 100px;
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: #a0d8ff;
-  color: $clr2;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+  margin-inline-end: 10px;
+  margin-inline-start: 10px;
+  max-width: 254px;
+  background-color: lighten($clr2, 20%);
+  color: $clr6;
   justify-content: space-around;
   border: 2px solid $clr6;
+  border-radius: 10px;
   .data {
     font-weight: bold;
     font-size: 1.5rem;
-    color: $clr2;
+    color: $clr6;
   }
 }

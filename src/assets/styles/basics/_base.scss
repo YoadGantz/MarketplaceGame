@@ -9,7 +9,9 @@ html {
   font-family: montserrat, sans-serif;
   line-height: 1.6;
   color: white;
-  background: linear-gradient(180deg, rgba(0,0,0,1) 0%,  #1f2335 25%);
+  background: rgba(48,54,78,1);
+  background: linear-gradient(180deg, black 0vh, #1f2335 50vh, #30364e 100vh);
+  background-attachment: fixed;
 }
 
 body {
@@ -17,7 +19,8 @@ body {
   margin: 0;
   background: linear-gradient(rgba(0, 0, 50, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../../assets/images/caspar-camille-rubin-HUBNTCzE-R8-unsplash.jpg");
-  background-position:fixed;
+  background-attachment: fixed;
+  background-position-y: -46px;
   background-repeat: no-repeat;
   background-size: 100%;
 }
