@@ -2,17 +2,37 @@
 @import "../../assets/styles/setup/variables.scss";
 @import "../../assets/styles/basics/helpers";
 
-.game-main-thumbnail {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: black;
-  grid-area: main-media;
-}
-
 .game-main-container {
   width: 95%;
   margin: auto;
+}
+
+.social-content-container {
+  max-height: 300px;
+  overflow: overlay;
+  & img {
+    width: auto;
+  }
+}
+
+.review-container {
+  & img {
+    width: auto;
+  }
+}
+.like-img {
+  filter: grayscale(1);
+}
+.dislike-img {
+  filter: grayscale(1);
+}
+
+#like:checked ~ .like-img {
+  filter: none;
+}
+
+#dislike:checked ~ .dislike-img {
+  filter: none;
 }
 
 .game-main-content-container {
@@ -26,39 +46,53 @@
   gap: 5px;
   grid-template-areas:
     " thumbnail desc"
-    " main-media  main-meida "
+    " main-media  main-media "
     " choose  choose";
-}
 
-.game-choose-thumbnail {
-  width: 31%;
-  cursor: pointer;
-  border: 1px solid black;
-  object-fit: cover;
+  & .game-main-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: black;
+    grid-area: main-media;
+  }
+
+  & .game-choose-thumbnail {
+    width: 31%;
+    cursor: pointer;
+    border: 1px solid black;
+    object-fit: cover;
+  }
+
+  & .game-choose-thumbnail-container {
+    overflow-x: scroll;
+    grid-area: choose;
+  }
+
+  & .game-thumbnail {
+    grid-area: thumbnail;
+  }
+
+  & .game-thumbnail-container {
+    margin: 10px;
+  }
 }
 
 .game-buy-button {
-  margin-top: 5px;
+  background: #0f9c14;
+  border-radius: 10px;
+  height: 30px;
+  width: 100px;
+  transition: 0.5s;
+  &:hover {
+    background: #00ba06;
 }
+}
+
 
 .game-description {
   grid-area: desc;
-}
-
-textarea {
-  resize: none;
-}
-
-.game-choose-thumbnail-container {
-  overflow-x: scroll;
-  grid-area: choose;
-}
-.game-thumbnail {
-  grid-area: thumbnail;
-}
-
-.game-thumbnail-container {
-  margin: 10px;
+  flex-grow: 1
 }
 
 .img-container {

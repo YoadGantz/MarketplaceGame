@@ -11,12 +11,12 @@ import ProfilePage from './pages/profile-page/ProfilePage';
 import GameDetails from './pages/game-details/GameDetails';
 import PlayGame from './pages/play-game/PlayGame';
 
-import Modal from './cmps/modal/Modal'
 import NavBar from './cmps/nav-bar/NavBar';
+import Modal from './cmps/modal/Modal'
 import EditGame from './cmps/edit-game/EditGame';
 import ShoppingCart from './cmps/shopping-cart/ShoppingCart';
 import WishList from './cmps/wish-list/WishList';
-// import Footer from './cmps/footer/Footer';
+import Footer from './cmps/footer/Footer';
 
 import './assets/styles/global.scss'
 
@@ -35,12 +35,13 @@ export default class App extends Component {
          this.setState({ modalType })
       }
    }
+
    render() {
       return (
          <React.Fragment>
-            <Router className="flex column" history={history}>
+            <Router history={history} className="App Site">
                <NavBar toggleModal={this.toggleModal} />
-               <Switch className="full">
+               <Switch className="Site-content">
                   <Route path="/" render={() => <HomePage history={history} />} exact />
                   <Route path="/login" component={Login} exact />
                   <Route path="/sign-up" component={SignUp} exact />
@@ -50,7 +51,7 @@ export default class App extends Component {
                   <Route path="/user/:id" render={() => <ProfilePage history={history} />} exact />
                   <Route path="/play/:id" component={PlayGame} exact />
                </Switch>
-               {/* <Footer></Footer> */}
+               <Footer></Footer>
             </Router>
             {this.state.toggleModal && <Modal>
                {(this.state.modalType === 'wishlist') ? <WishList history={history} /> : <ShoppingCart history={history} />}

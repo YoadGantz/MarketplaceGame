@@ -108,7 +108,9 @@ class Dashboard extends Component {
         const { orders, sumOfGames, monthMoneySum, downloadsByMonth, downloadsByWeek } = this.state
         let gameList
         if (this.props.loggedInUser) {
-            gameList = (<> <Link to='/edit'>Add a game</Link>
+            gameList = (<>
+                <div>game list</div>
+                <Link to='/edit'>Add a game</Link>
                 <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
@@ -124,10 +126,9 @@ class Dashboard extends Component {
                 <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
             </div>
             <div className="charts-container flex">
-                <AreaChart orderDates={orders} />
-                <PieChart games={this.props.games} sumOfGames={sumOfGames} />
+                <AreaChart games={this.props.games} orderDates={orders} />
+                <PieChart user={this.props.loggedInUser} games={this.props.games} sumOfGames={sumOfGames} />
             </div>
-            <div>game list</div>
             {gameList}
         </div>
         )

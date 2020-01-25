@@ -57,13 +57,14 @@ class GamePreview extends Component {
     }
     render() {
         const { game, user, isProfile, isDashboard, isCart } = this.props
+      const  review=UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
             <li className="game-card" onClick={() => this.onOpenDetails(game._id)}>
                 {/* <img className="spotlight-img" src={spotlightImg} alt="background spotlight"></img> */}
                 <div className="img-container">
                     <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
                 </div>
-                <section className="content-container">
+                <section className="details-container">
                     <div className="flex">
                         <strong className="full">{game.title}</strong>
                         {!isProfile &&
@@ -73,7 +74,7 @@ class GamePreview extends Component {
                     <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
                         <p className="price">${game.price}</p>
-                        <p className="rating">{UtilService.getGameRating(game)} ( {game.reviews.length} )</p>
+                            <p className="rating">{review}( {game.reviews.length} )</p>
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
                             <button className="preview-btn" onClick={this.onPlayClick}>Play</button>}

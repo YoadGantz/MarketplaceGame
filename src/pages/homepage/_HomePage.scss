@@ -1,12 +1,11 @@
 @import "../../assets/styles/setup/variables.scss";
 
 .homepage-container {
-  padding-block-start: 60px;
   .hero-text {
     text-align: center;
     color: $clr6;
-    margin-block-end: 50px;
-    margin-block-start: 50px;
+    margin-block-end: 40px;
+    margin-block-start: 40px;
     .main-heading {
       font-family: audioWide;
       color: $clr1;
@@ -32,7 +31,7 @@
         content: "  →";
         position: absolute;
         right: 12px;
-        bottom: 0px;
+        bottom: 2px;
         font-size: 1.7rem;
       }
     }

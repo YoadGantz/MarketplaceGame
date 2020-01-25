@@ -11,7 +11,7 @@
     height: 140px;
     @include aspect-ratio(1.5, 1);
   }
-  .content-container {
+  .details-container {
     background-image: url("../../assets/images/background_spotlight.jpg");
     filter: brightness(2);
     background-repeat: no-repeat;

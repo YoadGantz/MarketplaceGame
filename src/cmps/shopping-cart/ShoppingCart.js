@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import history from '../../history'
 
 
 import CartService from '../../services/CartService'
@@ -40,7 +41,7 @@ class ShoppingCart extends Component {
     }
 
     onBuyClick = () => {
-        if (!this.props.user) return
+        if (!this.props.user) {history.push('/login'); return}
 
         const order = {
             createdAt: UtilService.objectIdByTime(),
@@ -53,13 +54,13 @@ class ShoppingCart extends Component {
     }
 
     render() {
-        return <div>
+        return <div className="modal totally-center">
             {(this.state.games && this.state.games.length) ?
-                <div>
+                <div className="modal-content">
                     <GameList user={this.props.user} onUpdateUser={this.onUpdateUser} onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
-                    <button onClick={this.onBuyClick} >Buy</button>
+                    <button className="cla-btn flex" onClick={this.onBuyClick}>Checkout</button>
                 </div>
-                : <h2>Your shopping cart is empty</h2>}
+                : <h3 className="flex column totally-center">Your shopping cart is empty</h3>}
         </div>
     }
 }

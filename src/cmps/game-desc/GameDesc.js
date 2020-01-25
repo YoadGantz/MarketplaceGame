@@ -27,7 +27,7 @@ export default class GameDesc extends Component {
   }
 
   setGameRating = (game) => {
-    const rating = UtilService.getGameRating(game)
+    const rating = UtilService.formatGameRating((UtilService.getGameRating(game)))
     this.setState({ rating })
   }
 
@@ -47,7 +47,7 @@ export default class GameDesc extends Component {
     }
   }
 
-  
+
 
 
   render() {
@@ -56,10 +56,10 @@ export default class GameDesc extends Component {
     const { publisherName, rating, orderCount, isOwned } = this.state
     const priceOrPlay = isOwned ? <button>Play</button> :
       <button type="primary" className='game-buy-button' onClick={this.onAddToCart}> {price}$ Add to cart </button>
-    const date = new Date(publishedAt/1)
+    const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)
     return (
-      <div className="desc">
+      <div className="desc flex column">
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
         <div className='game-description'>
           <p > {description}</p>
@@ -67,6 +67,8 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
+        </div>
+        <div className="flex space-between">
           <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
             full_heart : empty_heart} />
           {priceOrPlay}

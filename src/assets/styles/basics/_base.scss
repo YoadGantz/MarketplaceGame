@@ -5,19 +5,21 @@
 }
 
 html {
+  height: 100%;
   font-family: montserrat, sans-serif;
   line-height: 1.6;
   color: white;
-  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%,  #1f2335 25%);
 }
 
 body {
+  height: 100%;
   margin: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  background: linear-gradient(rgba(0, 0, 50, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../../assets/images/caspar-camille-rubin-HUBNTCzE-R8-unsplash.jpg");
-  background-position: 0 -260px;
+  background-position:fixed;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
 }
 
 img {
@@ -62,44 +64,20 @@ button {
   padding: 0;
 }
 
-element.style {
-}
-html.responsive {
-  height: 100%;
-}
-:root {
-  --main-text-color: #9b414f;
-  --main-light-blue-background: #93c899;
-  --main-text-on-light-blue: rgb(209, 209, 209);
-  --main-top-image-bg: #1f2126;
-  --main-editor-bg-color: #363a43;
-  --main-editor-text-color: #e6e7e8;
-  --main-editor-input-bg-color: #30333b;
-  --main-editor-section-title-color: #a3a3a3;
-}
-html {
-  height: 100%;
-}
-* {
-  padding: 0;
-  margin: 0;
-}
-
 ::-webkit-scrollbar {
   height: 12px;
   width: 14px;
-  background: transparent;
   z-index: 12;
   overflow: visible;
+  background-color: rgb(5, 5, 5);
 }
 ::-webkit-scrollbar-thumb {
   width: 10px;
-  background-color: darken($clr2, 20%);
+  background-color: darken($clr2, 10%);
   border-radius: 10px;
   z-index: 12;
   border: 4px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
-  transition: background-color 0.32s ease-in-out;
   margin: 4px;
   min-height: 32px;
   min-width: 32px;

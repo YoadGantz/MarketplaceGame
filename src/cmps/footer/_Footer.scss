@@ -1,6 +1,13 @@
 .footer-container {
-  height: 400px;
+  height: 250px;
+  > *:not(:last-child) {
+    margin-block-end: 10px;
+  }
   .logo-footer {
-    height: 40px;
+    height: 100px;
+    width: 100px;
+  }
+  .name {
+    text-transform: uppercase;
   }
 }

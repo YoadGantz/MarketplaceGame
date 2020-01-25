@@ -16,16 +16,16 @@
     cursor: pointer;
     margin-inline-end: 20px;
     min-height: 60px;
-    color: $clr1;
+    color: #71beff;
     transition: color, 0.2s;
     &:hover {
       color: $clr6;
-      box-shadow: inset 0 -3px 0 $clr1;
+      box-shadow: inset 0 -3px 0 #71beff;
     }
   }
   .active {
     color: $clr6;
-    box-shadow: inset 0 -3px 0 $clr1;
+    box-shadow: inset 0 -3px 0 #71beff;
   }
 
   img {

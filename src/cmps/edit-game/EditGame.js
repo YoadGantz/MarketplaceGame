@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button } from 'antd';
 
 import GameService from '../../services/GameService';
-import MediaUrlsList from './media-url-list/MediaUrlList';
 import MediaUploadService from '../../services/MediaUploadService';
 
-import TagList from '../tag-list/TagList';
-
 import './_EditGame.scss';
+import InputForm from './inputForm/InputForm';
 class EditGame extends Component {
   state = {
     title: "",
@@ -25,12 +22,23 @@ class EditGame extends Component {
     const params = this.props.match.params.id
     if (params) {
       const game = await GameService.getById(params)
-      this.setState({ ...game })
+      const publishedAt = this.getDateInput(game.publishedAt)
+      this.setState({ ...game, publishedAt })
     }
+  }
+
+  getDateInput = (publishDate) => {
+    const publishedAt = new Date(publishDate / 1)
+    const day = ("0" + publishedAt.getDate()).slice(-2);
+    const month = ("0" + (publishedAt.getMonth() + 1)).slice(-2);
+    const date = publishedAt.getFullYear() + "-" + (month) + "-" + (day)
+    return date
   }
 
   onSubmit = async () => {
     const newGame = { ...this.state }
+    newGame.publishedAt = new Date(newGame.publishedAt).getTime()
+    console.log(newGame)
     if (!newGame.mediaUrls) return
     if (!newGame.thumbnail) return
     if (this.props.match.params.id) {
@@ -45,7 +53,6 @@ class EditGame extends Component {
     delete newGame.currTag
     const game = await GameService.add(newGame)
     return this.props.history.push(`/game/${game._id}`)
-
   }
 
   addMediaAndTags = async ev => {
@@ -67,7 +74,8 @@ class EditGame extends Component {
 
   removeMediaAndTags = (fieldName, idx) => {
     if (fieldName === 'thumbnail') {
-      return this.setState({ thumbnail: '' })}
+      return this.setState({ thumbnail: '' })
+    }
     let editedData = [...this.state[fieldName]];
     editedData.splice(idx, 1);
     this.setState({
@@ -81,52 +89,9 @@ class EditGame extends Component {
   };
 
   render() {
-    const { mediaUrls, tags, thumbnail, description, title, publishedAt, price } = this.state;
-    let addedTags;
-    let addedUrls;
-    let addedThumbnail
-    if (mediaUrls && mediaUrls.length){
-      addedUrls = (
-        <MediaUrlsList removeMediaAndTags={this.removeMediaAndTags} mediaUrls={mediaUrls} />
-      )}
-    if (tags && tags.length) {
-      addedTags = (<TagList removeMediaAndTags={this.removeMediaAndTags} tags={tags} />)
-    }
-    if (thumbnail) {
-      addedThumbnail = <div className="media-container">
-        <img src={thumbnail} alt="" />
-        <span className="pointer"
-          onClick={() => this.removeMediaAndTags("thumbnail")}>X</span>
-      </div>
-    }
-
-    return (
-      <div className="edit-container">
-        <p> Title : </p>
-        <input type="text" onChange={this.inputChange} value={title} placeholder="title" name="title" />
-        <p>Publish Date</p>
-        <input type="date" onChange={this.inputChange} value={publishedAt} name="publishedAt" />
-        <p> Descripiton: </p>
-        <textarea type="text" onChange={this.inputChange} placeholder="description" name="description" value={description} />
-        <p> Thumbnail Img: </p>
-        <input type="file" onChange={this.addMediaAndTags} placeholder="thumbnail" name="thumbnail" />
-        {addedThumbnail}
-        <p> Media: </p>
-        <div>
-          <input type="file" onChange={this.addMediaAndTags} placeholder="Put your image Urls here" name="mediaUrls" multiple />
-          <div className="flex wrap">{addedUrls}</div>
-        </div>
-        <p>Price: </p>
-        <input type="number" onChange={this.inputChange} placeholder="price" name="price" value={price} />
-        <p>Tags:</p>
-        <input type="tags" onChange={this.inputChange} placeholder="tags" name="currTag" />
-        <button name="tags" onClick={this.addMediaAndTags}>
-          Add Tag
-          </button>
-        <div className="flex">{addedTags}</div>
-        <Button onClick={this.onSubmit}>Submit</Button>
-      </div>
-    );}
+    return <InputForm removeMediaAndTags={this.removeMediaAndTags} inputChange={this.inputChange}
+      onSubmit={this.onSubmit} addMediaAndTags={this.addMediaAndTags} form={this.state} />
+  }
 }
 
 const mapStateToProps = state => {
