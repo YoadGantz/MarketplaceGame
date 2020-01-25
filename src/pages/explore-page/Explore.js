@@ -8,7 +8,7 @@ import Filter from '../../cmps/filter/Filter';
 import GameList from '../../cmps/game-list/GameList';
 import UtilService from '../../services/UtilService';
 
-import './Explore.scss'
+import './_Explore.scss'
 
 class Explore extends Component {
     state = { games: null, isAscending: false }

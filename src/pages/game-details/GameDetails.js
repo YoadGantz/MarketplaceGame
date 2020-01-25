@@ -99,10 +99,10 @@ class GameDetails extends Component {
     let mainMedia;
     if (!currMediaUrl) { return <h1>Loading</h1> }
     currMediaUrl.includes(".mp4") ?
-      mainMedia = <iframe title="video" src={`${currMediaUrl}?#t=0&#autoplay=1&mute=1`} volume={0}  className="game-main-thumbnail" />
+      mainMedia = <iframe title="video" src={`${currMediaUrl}?#t=0&#autoplay=1&mute=1`} muted className="game-main-thumbnail" />
       : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
-      <div className="container" >
+      <div className="container content-container" >
         {this.state.toggleModal && <Modal><Notification modalTxt={this.state.modalTxt} toggleModal={this.onToggleModal} /></Modal>}
         <div className="flex justify-between">
           <h1>{title}</h1>

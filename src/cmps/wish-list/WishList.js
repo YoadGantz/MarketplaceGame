@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import history from '../../history'
 
 
 import { updateUser } from '../../actions/userActions'
 import { loadGames } from '../../actions/gameActions'
 import GameList from '../game-list/GameList'
+
+import './_WishList.scss'
 
 class WishList extends Component {
     componentDidMount() {
@@ -19,9 +22,13 @@ class WishList extends Component {
         if (this.props.user) {
             const { games, user } = this.props
             let wishedGames = games.filter(game => user.wishedGames.includes(game._id))
-            return <GameList history={this.props.history} user={user} onUpdateUser={this.onUpdateUser} games={wishedGames}></GameList>
+            return <div className="modal">
+                <div className="modal-content">
+                    <GameList history={this.props.history} user={user} onUpdateUser={this.onUpdateUser} games={wishedGames}></GameList>
+                </div>
+            </div>
         }
-        return <p>Please Login to see your Wishlist</p>
+        return <div className="modal"><h3 className="modal-content empty-wishlist flex align-center">Please Login to see your wishlist</h3></div>
     }
 }
 

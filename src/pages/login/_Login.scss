@@ -1,23 +1,22 @@
 @import "../../assets/styles/setup/variables.scss";
 
-.login-container{
-  padding-block-start: 60px;
-}
-.login-image {
-  width: 150px;
-  margin-bottom: 20px;
-}
-
-.login-input {
-  margin-bottom: 20px;
-}
-
-.btn {
-  background-color: #83519b;
-  font-family: inherit;
-  font-size: 1.1rem;
-  color: $clr6;
-  position: relative;
-  padding: 10px 20px;
-  border: 1px $clr6 solid;
+.login-container {
+  .login-logo {
+    width: 150px;
+    margin-block-end: 20px;
+  }
+  .login-form {
+    > *:not(:last-child) {
+      margin-block-end: 20px;
+    }
+    .btn {
+      background-color: #83519b;
+      font-family: inherit;
+      font-size: 1.1rem;
+      color: $clr6;
+      position: relative;
+      padding: 10px 20px;
+      border: 1px $clr6 solid;
+    }
+  }
 }

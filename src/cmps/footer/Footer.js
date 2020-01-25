@@ -5,11 +5,11 @@ import './_Footer.scss'
 
 export default function Footer(props) {
     return (
-        <div className="footer-container">
+        <div className="footer-container totally-center flex column">
             <img className="logo-footer" width="10"alt="logo" src="/logo.png" />
-            <small className="rights">© 2020, GameIn, Inc. All rights reserved</small>
+            <small className="rights">© 2020, <span className="name">GameIn</span> Inc. All rights reserved</small>
             <div>
-                <Link>About</Link>
+                <Link to="/about">About us</Link>
             </div>
         </div>
     )

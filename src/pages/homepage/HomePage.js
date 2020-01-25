@@ -37,7 +37,7 @@ class HomePage extends Component {
   render() {
     const { mostDownloadGames, mostRecentGames, highestRatingGames } = this.state
     return (
-      <div className="homepage-container container">
+      <div className="homepage-container content-container container full">
         <div className="hero-text flex column totally-center">
           <h1 className="main-heading">Gamein</h1>
           <p>The ultimate destination for buying, discussing, and playing games</p>

@@ -44,27 +44,21 @@ class Login extends Component {
   render() {
     const { loggedInUser } = this.props
     const loginSection = (
-      <form className="flex column justify-center align-center" onSubmit={this.doLogin}>
+      <form className="login-form flex column justify-center align-center" onSubmit={this.doLogin}>
         <input className="login-input input" type="text" name="userName" value={this.state.loginCred.userName}
           onChange={this.loginHandleChange} placeholder="User name" />
         <input className="login-input input" type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
         <button className="btn">Login</button>
+        <p>Not with us yet ?</p>
+        <button className="join-btn" onClick={() => history.push('/sign-up')}>Join</button>
       </form>
     );
 
     return (
-      <div className="login-container flex column justify-center align-center container">
-        <img className="login-image" alt="logo" src="/logo.png" width="100px"/>
-        {loggedInUser && (
-          <div>
-            <h2>Welcome: {loggedInUser.userName} </h2>
-            <button onClick={this.doLogout}>Logout</button>
-          </div>
-        )}
+      <div className="login-container content-container flex column justify-center align-center container">
+        <img className="login-logo" alt="logo" src="/logo.png" width="100px"/>
         {(!loggedInUser || !loggedInUser.userName) && loginSection}
-        <p>Not with us yet ? </p>
-        <button onClick={() => history.push('/sign-up')}>Join</button>
       </div>
     );
   }
