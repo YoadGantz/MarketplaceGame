@@ -109,8 +109,10 @@ class Dashboard extends Component {
         let gameList
         if (this.props.loggedInUser) {
             gameList = (<>
+                <div className='add-button-container'>
+                    <Link to='/edit'>Add a game</Link>
+                </div>
                 <div>game list</div>
-                <Link to='/edit'>Add a game</Link>
                 <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
