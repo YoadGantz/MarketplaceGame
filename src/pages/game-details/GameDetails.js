@@ -62,15 +62,15 @@ class GameDetails extends Component {
   };
 
   toggleWishedGame = (ev) => {
-    const { user, game } = this.props
+    const { loggedInUser, game } = this.props
     ev.stopPropagation();
-    let wishedGames = (user && user.wishedGames) || []
+    let wishedGames = (loggedInUser && loggedInUser.wishedGames) || []
     let updatedUser
     const idx = wishedGames.findIndex(id => id === game._id)
     if (idx === -1) {
-      updatedUser = { ...user, wishedGames: [...wishedGames, game._id] }
+      updatedUser = { ...loggedInUser, wishedGames: [...wishedGames, game._id] }
     } else {
-      updatedUser = { ...user, wishedGames: wishedGames.filter(wishedGame => wishedGame !== game._id) }
+      updatedUser = { ...loggedInUser, wishedGames: wishedGames.filter(wishedGame => wishedGame !== game._id) }
     }
     this.props.updateUser(updatedUser)
   }
@@ -91,7 +91,7 @@ class GameDetails extends Component {
       <GameDetailsPage onThumbNailPhotoClick={this.onThumbNailPhotoClick}
         onToggleModal={this.onToggleModal} toggleWishedGame={this.toggleWishedGame}
         game={this.props.game} currMediaUrl={this.state.currMediaUrl} modalTxt={this.state.modalTxt}
-        onAddToCart={this.onAddToCart} onAddCommentOrReview={this.onAddCommentOrReview} user={this.props.user} />
+        onAddToCart={this.onAddToCart} onAddCommentOrReview={this.onAddCommentOrReview} user={this.props.loggedInUser} />
     )
   }
 }
@@ -100,7 +100,7 @@ const mapStateToProps = state => {
   return {
     cart: state.cartStore.cart,
     game: state.gameStore.game,
-    user: state.userStore.loggedInUser,
+    loggedInUser: state.userStore.loggedInUser,
   };
 };
 const mapDispatchToProps = {

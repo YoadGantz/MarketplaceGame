@@ -14,7 +14,7 @@ export default class Graph extends PureComponent {
 
   setData = (purcheses) => {
     const data = []
-    if (!this.props.games.length)return
+    if (!this.props.games.length)return 
     for (let i = 30; i >=0; i--) {
   let date=new Date()
   date.setDate(date.getDate()-i)
