@@ -66,7 +66,7 @@ textarea {
   @include aspect-ratio(1.5, 1);
 }
 
-.game-description {
+.desc {
   grid-area: desc;
   font-size: 0.9rem;
 }
@@ -78,7 +78,7 @@ textarea {
     max-height: 100vh;
     gap: 5px;
     grid-template-areas:
-      " thumbnail desc"
+      " desc desc"
       " main-media  main-meida "
       " choose  choose";
   }
@@ -105,9 +105,9 @@ textarea {
     background-color: #f2f5fa;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 4fr 1fr;
-    gap: 5px;
+    gap: 15px;
     grid-template-areas:
-      " main-media thumbnail  "
+      " main-media desc  "
       " choose     desc   ";
   }
 }

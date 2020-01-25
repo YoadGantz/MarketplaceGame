@@ -1,13 +1,4 @@
-.dash-board-container{
-
-
-    
-    & .money-card-container{
-        width: 100px;
-        height: 100px;
-        background-color: #2b9bd9;
-        color: white;
-    }
-
-
+.dashboard {
+    background-color: rgba($color: #ffffff, $alpha: 0.7);
+    color: black;
 }

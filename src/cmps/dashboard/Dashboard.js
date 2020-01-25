@@ -49,7 +49,7 @@ class Dashboard extends Component {
         const downloadsSum = await UtilService.getGraphsDetails(this.props.games, 'games', 7)
         const downloadsByWeek = downloadsSum.reduce((acc, gameSum) => {
             return acc += gameSum
-        }, 0)
+        }, 0).toLocaleString()
         this.setState({ downloadsByWeek })
     }
 
@@ -57,10 +57,10 @@ class Dashboard extends Component {
         const sumOfGames = await UtilService.getSum(this.props.games)
         const monthMoneySum = sumOfGames.sum.reduce((acc, gameSum) => {
             return acc += gameSum
-        }, 0)
+        }, 0).toLocaleString()
         const downloadsByMonth = sumOfGames.downloadsByGame.reduce((acc, gameSum) => {
             return acc += gameSum
-        }, 0)
+        }, 0).toLocaleString()
         this.setState({ sumOfGames: sumOfGames.sum, monthMoneySum, downloadsByMonth })
     }
 
@@ -107,21 +107,21 @@ class Dashboard extends Component {
     render() {
         const { orders, sumOfGames, monthMoneySum, downloadsByMonth, downloadsByWeek } = this.state
         let gameList
-        if (this.props.loggedInUser){
-              gameList=( <> <Link to='/edit'>Add a game</Link>
-              <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
-              {this.state.modalType === 'confirmDelete' && <Modal >
-                  <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
-              </Modal>}</>
-  
-              )
-          }
-        return (<div className="content-container container">
+        if (this.props.loggedInUser) {
+            gameList = (<> <Link to='/edit'>Add a game</Link>
+                <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
+                {this.state.modalType === 'confirmDelete' && <Modal >
+                    <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
+                </Modal>}</>
+
+            )
+        }
+        return (<div className="content-container dashboard container">
             <h1>Dashboard</h1>
             <div className='flex space-evenly'>
-                <InfoCard> Money Earned This Month: {monthMoneySum}</InfoCard>
-                <InfoCard>Downloads By Month : {downloadsByMonth}</InfoCard>
-                <InfoCard> Downloads By Week : {downloadsByWeek}</InfoCard>
+                <InfoCard data={monthMoneySum}>Money earned this Month:</InfoCard>
+                <InfoCard data={downloadsByMonth}>Downloads this Month:</InfoCard>
+                <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
             </div>
             <div className="charts-container flex">
                 <AreaChart orderDates={orders} />

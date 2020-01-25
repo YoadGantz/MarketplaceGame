@@ -7,10 +7,6 @@ import { loadGame, updateGame, updateComments } from "../../actions/gameActions"
 import { updateUser } from '../../actions/userActions';
 import { addGameToCart } from '../../actions/cartActions';
 
-
-import full_heart from '../../assets/icons/full_heart.svg'
-import empty_heart from '../../assets/icons/empty_heart.svg'
-
 import Notification from '../../cmps/helpers/Notification'
 import GameMedia from '../../cmps/game-media/GameMedia';
 import GameDesc from '../../cmps/game-desc/GameDesc';
