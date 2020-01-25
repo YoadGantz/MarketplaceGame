@@ -7,13 +7,6 @@ import { loadGame, updateGame, updateComments } from "../../actions/gameActions"
 import { updateUser } from '../../actions/userActions';
 import { addGameToCart } from '../../actions/cartActions';
 
-import Notification from '../../cmps/helpers/Notification'
-import GameMedia from '../../cmps/game-media/GameMedia';
-import GameDesc from '../../cmps/game-desc/GameDesc';
-import Comments from '../../cmps/comments/Comment';
-import Review from '../../cmps/review/Review';
-import Modal from '../../cmps/modal/Modal'
-
 import './_GameDetails.scss';
 import GameDetailsPage from "./game-details-page/GameDetailsPage";
 

@@ -4,7 +4,7 @@ import {
 } from 'recharts';
 
 export default class Graph extends PureComponent {
-  state = { data: [{ name: 0, purcheses: 0 }] }
+  state = { data: [{ name: '0', purcheses: 0 }] }
 
   componentDidUpdate(prevprops) {
     if (prevprops.orderDates !== this.props.orderDates) {
@@ -12,19 +12,19 @@ export default class Graph extends PureComponent {
     }
   }
 
-  setData = (purcheses) => {
+  setData = (purchases) => {
     const data = []
     if (!this.props.games.length)return 
     for (let i = 30; i >=0; i--) {
   let date=new Date()
   date.setDate(date.getDate()-i)
       let price
-      if (purcheses[date.getDate()]) {
-        price = purcheses[date.getDate()]
+      if (purchases[date.getDate()]) {
+        price = purchases[date.getDate()]
       }else{
         price=0
       }
-      data.push({ name: date.getDate(), purcheses: price })
+      data.push({ name: date.getDate()+'/'+(date.getMonth()+1), purchases: price })
     }
     this.setState({ data })
   }
@@ -43,7 +43,7 @@ export default class Graph extends PureComponent {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="purcheses" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="purchases" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
     );
   }

@@ -109,31 +109,33 @@ class Dashboard extends Component {
         let gameList
         if (this.props.loggedInUser) {
             gameList = (<>
+            
+                <strong className="content-container dashboard-header flex justify-center">Your uploaded games</strong>
                 <div className='add-button-container'>
                     <Link to='/edit'>Add a game</Link>
                 </div>
-                <div>game list</div>
                 <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
                 </Modal>}</>
-
             )
         }
-        return (<div className="content-container dashboard container">
-            <h1>Dashboard</h1>
-            {!this.props.games.length && <h1>Publish games to see more</h1>}
-            {!this.props.loggedInUser && <h3>This is just a demo of the publisher page sign
-             in to see your publisher page with
+        return (<div className="container">
+            <div className="dashboard">
+                <strong className="container dashboard-header flex justify-center">Dashboard</strong>
+                {!this.props.games.length && <h1>Publish games to see more</h1>}
+                {!this.props.loggedInUser && <h3>This is just a demo of the publisher page sign
+                 in to see your publisher page with
                     your published games</h3>}
-            <div className='flex space-evenly'>
-                <InfoCard data={monthMoneySum}>Money earned this Month:</InfoCard>
-                <InfoCard data={downloadsByMonth}>Downloads this Month:</InfoCard>
-                <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
-            </div>
-            <div className="charts-container flex">
-                <AreaChart games={this.props.games} orderDates={orders} />
-                <PieChart user={this.props.loggedInUser} games={this.props.games} sumOfGames={sumOfGames} />
+                <div className='flex space-evenly'>
+                    <InfoCard data={monthMoneySum}>Money earned this Month:</InfoCard>
+                    <InfoCard data={downloadsByMonth}>Downloads this Month:</InfoCard>
+                    <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
+                </div>
+                <div className="charts-container flex">
+                    <AreaChart games={this.props.games} orderDates={orders} />
+                    <PieChart user={this.props.loggedInUser} games={this.props.games} sumOfGames={sumOfGames} />
+                </div>
             </div>
             {gameList}
         </div>
