@@ -1,4 +1,12 @@
 .dashboard {
-    background-color: rgba($color: #ffffff, $alpha: 0.7);
-    color: black;
+  background-color: rgba($color: #ffffff, $alpha: 0.7);
+  color: black;
+  padding: 20px 30px;
+  .cards-container {
+    background-color: none;
+  }
+}
+.dashboard-header {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
