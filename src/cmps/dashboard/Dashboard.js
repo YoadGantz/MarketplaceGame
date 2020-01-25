@@ -115,14 +115,12 @@ class Dashboard extends Component {
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
                 </Modal>}</>
-
             )
         }
         return (<div className="content-container dashboard container">
-            <h1>Dashboard</h1>
             <div className='flex space-evenly'>
-                <InfoCard data={monthMoneySum}>Money earned this Month:</InfoCard>
-                <InfoCard data={downloadsByMonth}>Downloads this Month:</InfoCard>
+                <InfoCard data={monthMoneySum}>Money earned this month:</InfoCard>
+                <InfoCard data={downloadsByMonth}>Downloads this month:</InfoCard>
                 <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
             </div>
             <div className="charts-container flex">

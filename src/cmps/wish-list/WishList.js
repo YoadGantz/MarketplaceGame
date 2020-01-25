@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import history from '../../history'
-
 
 import { updateUser } from '../../actions/userActions'
 import { loadGames } from '../../actions/gameActions'
