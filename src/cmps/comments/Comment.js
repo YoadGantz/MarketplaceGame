@@ -33,7 +33,7 @@ export default class Comment extends Component {
         <div className='social-content-container'>
           {commentMap}
         </div>
-        <h3>New Comment</h3>
+        <h3>Add a Comment</h3>
         <textarea
           type="text"
           name="text"

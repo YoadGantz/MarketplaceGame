@@ -7,12 +7,12 @@ export default class Review extends Component {
 
     const { reviews, user } = this.props;
     return (
-      <div className='review-container' >
+      <div className='reviews-container' >
         <ul className='social-content-container '>
           {" "}
           {reviews.map(review => {
             return (
-              <div key={review.text}>
+              <div className='review-container' key={review.text}>
                 <p>{review.user.userName}</p>
                 <p>{review.text}</p>
                 {review.rating === 'like' ? <img alt='like' src="https://img.icons8.com/ultraviolet/40/000000/good-quality.png" />

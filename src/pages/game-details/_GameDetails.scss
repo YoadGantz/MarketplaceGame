@@ -8,16 +8,28 @@
 }
 
 .social-content-container {
-  max-height: 250px;
+  max-height: 300px;
   overflow: overlay;
   & img {
     width: auto;
   }
 }
 
-.review-container {
+.reviews-container {
+  padding: 0;
+  border-radius: 8px;
   & img {
     width: auto;
+  }
+  & button{
+    width: 70px;
+    height: 40px;
+    border: blue;
+  }
+
+  & .review-container{
+  background-color: #1d7096;
+  margin-bottom: 10px;
   }
 }
 .like-img {
