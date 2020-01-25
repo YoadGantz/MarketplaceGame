@@ -1,0 +1,14 @@
+@import '../../assets/styles/setup/variables';
+
+.info-card {
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: $clr4;
+    justify-content: space-around;
+    border: 2px solid black;
+    .data {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+}

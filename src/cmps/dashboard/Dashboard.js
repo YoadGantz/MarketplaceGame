@@ -49,7 +49,7 @@ class Dashboard extends Component {
         const downloadsSum = await UtilService.getGraphsDetails(this.props.games, 'games', 7)
         const downloadsByWeek = downloadsSum.reduce((acc, gameSum) => {
             return acc += gameSum
-        }, 0)
+        }, 0).toLocaleString()
         this.setState({ downloadsByWeek })
     }
 
@@ -57,10 +57,10 @@ class Dashboard extends Component {
         const sumOfGames = await UtilService.getSum(this.props.games)
         const monthMoneySum = sumOfGames.sum.reduce((acc, gameSum) => {
             return acc += gameSum
-        }, 0)
+        }, 0).toLocaleString()
         const downloadsByMonth = sumOfGames.downloadsByGame.reduce((acc, gameSum) => {
             return acc += gameSum
-        }, 0)
+        }, 0).toLocaleString()
         this.setState({ sumOfGames: sumOfGames.sum, monthMoneySum, downloadsByMonth })
     }
 
@@ -118,16 +118,16 @@ class Dashboard extends Component {
 
             )
         }
-        return (<div className="content-container container">
+        return (<div className="content-container dashboard container">
             <h1>Dashboard</h1>
             {!this.props.games.length && <h1>Publish games to see more</h1>}
             {!this.props.loggedInUser && <h3>This is just a demo of the publisher page sign
              in to see your publisher page with
                     your published games</h3>}
             <div className='flex space-evenly'>
-                <InfoCard> Money Earned This Month: {monthMoneySum}</InfoCard>
-                <InfoCard>Downloads By Month : {downloadsByMonth}</InfoCard>
-                <InfoCard> Downloads By Week : {downloadsByWeek}</InfoCard>
+                <InfoCard data={monthMoneySum}>Money earned this Month:</InfoCard>
+                <InfoCard data={downloadsByMonth}>Downloads this Month:</InfoCard>
+                <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
             </div>
             <div className="charts-container flex">
                 <AreaChart games={this.props.games} orderDates={orders} />

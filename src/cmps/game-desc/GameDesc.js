@@ -59,7 +59,7 @@ export default class GameDesc extends Component {
     const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)
     return (
-      <div>
+      <div className="desc flex column">
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
         <div className='game-description'>
           <p > {description}</p>
@@ -67,11 +67,11 @@ export default class GameDesc extends Component {
           <p> Publisher: {publisherName}</p>
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
-          <div className='flex justify-between'>
-            {priceOrPlay}
-            <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-              full_heart : empty_heart} />
-          </div>
+        </div>
+        <div className="flex space-between">
+          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+            full_heart : empty_heart} />
+          {priceOrPlay}
         </div>
       </div>)
   }
