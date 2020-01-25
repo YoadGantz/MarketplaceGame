@@ -58,7 +58,7 @@ class ShoppingCart extends Component {
             {(this.state.games && this.state.games.length) ?
                 <div className="modal-content">
                     <GameList user={this.props.user} onUpdateUser={this.onUpdateUser} onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
-                    <button className="cla-btn" onClick={this.onBuyClick}>Checkout</button>
+                    <button className="cla-btn flex" onClick={this.onBuyClick}>Checkout</button>
                 </div>
                 : <h3 className="flex column totally-center">Your shopping cart is empty</h3>}
         </div>
