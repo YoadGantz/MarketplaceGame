@@ -23,7 +23,7 @@ export default class PieCharts extends PureComponent {
       if (!sum[i]) return
       if (!this.props.user && i > 3) return
       gameTitles.push(game.title)
-      data.push({ fill: colors[i], name: game.title, value: sum[i] })
+      data.push({ fill: colors[i], name: game.title, value:sum[i]})
     })
     this.setState({ data, gameTitles })
   }
@@ -36,7 +36,7 @@ export default class PieCharts extends PureComponent {
 
     return (
       <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`$${(percent * 100).toFixed(0)}`}
+        {`${(percent * 100).toFixed(0)}%`}
       </text>
     );
   };
@@ -56,7 +56,7 @@ export default class PieCharts extends PureComponent {
             outerRadius={100}
             fill="#8884d8"
             labelLine={false}
-            label = {this.renderCustomizedLabel}/>
+            label={this.renderCustomizedLabel} />
           <Tooltip />
         </PieChart>
         <table>

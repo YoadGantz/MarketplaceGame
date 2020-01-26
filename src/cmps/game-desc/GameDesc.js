@@ -16,6 +16,15 @@ export default class GameDesc extends Component {
     this.setPublisherName(game.publisher)
     this.purchaseCheck()
   }
+  componentDidUpdate= (prevProps)=>{
+    const { game } = this.props
+    if (game.title!==prevProps.game.title){
+      this.setOrderCount(game)
+      this.setGameRating(game)
+      this.setPublisherName(game.publisher)
+      this.purchaseCheck()
+    }
+  }
 
   setOrderCount = async (game) => {
     const orderCount = await UtilService.getGraphsDetails([game])
@@ -68,7 +77,7 @@ export default class GameDesc extends Component {
           <p> Rating: {rating}</p>
           <p> Downloads last month :{orderCount}   </p>
         </div>
-        <div className="flex space-between">
+        <div className="flex space-between wish-btn">
           <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
             full_heart : empty_heart} />
           {priceOrPlay}

@@ -38,8 +38,48 @@
       margin-bottom: 8px;
     }
   }
-  .preview-btn {
-    color: black;
+  .play-btn {
+    background-color: darken($clr2, 25%);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: montserrat;
+    font-size: 1rem;
+    transition: background-color 0.4s;
+    align-self: flex-end;
+
+    &:hover {
+      background-color: darken($clr2, 20%);
+    }
+  }
+  .dsh-btn-container {
+    width: 100%;
+  }
+
+  .delete-btn {
+    background-color: darken($clr2, 25%);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-family: montserrat;
+    font-size: 1rem;
+    transition: background-color 0.4s;
+    align-self: flex-end;
+
+    &:hover {
+      background-color: darken($clr2, 20%);
+    }
+  }
+  .edit-btn {
+    background-color: darken($clr2, 25%);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: montserrat;
+    font-size: 1rem;
+    transition: background-color 0.4s;
+    align-self: flex-end;
+
+    &:hover {
+      background-color: darken($clr2, 20%);
+    }
   }
 }
 

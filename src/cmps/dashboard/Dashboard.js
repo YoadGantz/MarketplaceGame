@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import './_DashBoard.scss'
 import UtilService from '../../services/UtilService';
 import GameService from '../../services/GameService'
 import { loadGames } from '../../actions/gameActions';
@@ -15,6 +14,8 @@ import PieChart from '../charts/PieChart';
 import InfoCard from '../infocard/InfoCard';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
+
+import './_Dashboard.scss'
 class Dashboard extends Component {
     state = {
         orders: null,
@@ -108,31 +109,28 @@ class Dashboard extends Component {
         const { orders, sumOfGames, monthMoneySum, downloadsByMonth, downloadsByWeek } = this.state
         let gameList
         if (this.props.loggedInUser) {
-            gameList = (<>
-                <strong className="content-container dashboard-header flex justify-center">Your uploaded games</strong>
-                <Link to='/edit'>Add a game</Link>
+            gameList = (<div className="games-container flex column totally-center">
+                <h3 className="games-header">Your uploaded games</h3>
+                <div className='publish-button'>
+                    <Link to='/edit'>Publish a game</Link>
+                </div>
                 <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
-                </Modal>}</>
+                </Modal>}</div>
             )
         }
-        return (<div className="container">
-            <div className="dashboard">
-                <strong className="container dashboard-header flex justify-center">Dashboard</strong>
-                {!this.props.games.length && <h1>Publish games to see more</h1>}
-                {!this.props.loggedInUser && <h3>This is just a demo of the publisher page sign
-                 in to see your publisher page with
-                    your published games</h3>}
-                <div className='flex space-evenly'>
-                    <InfoCard data={monthMoneySum}>Money earned this Month:</InfoCard>
-                    <InfoCard data={downloadsByMonth}>Downloads this Month:</InfoCard>
-                    <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
-                </div>
-                <div className="charts-container flex">
-                    <AreaChart games={this.props.games} orderDates={orders} />
-                    <PieChart user={this.props.loggedInUser} games={this.props.games} sumOfGames={sumOfGames} />
-                </div>
+        return (<div className="container dashboard-container flex column align-center">
+            {!this.props.games.length && <h3 className="dashboard-header">Publish games to see more</h3>}
+            {!this.props.loggedInUser && <h3 className="dashboard-header">This is a demo of the dashboard, login to see your data</h3>}
+            <div className='flex info-cards-container'>
+                <InfoCard data={monthMoneySum}>Earned this month:</InfoCard>
+                <InfoCard data={downloadsByMonth}>Downloads this month:</InfoCard>
+                <InfoCard data={downloadsByWeek}>Downloads this week:</InfoCard>
+            </div>
+            <div className="charts-container flex wrap totally-center">
+                <AreaChart games={this.props.games} orderDates={orders} />
+                <PieChart user={this.props.loggedInUser} games={this.props.games} sumOfGames={sumOfGames} />
             </div>
             {gameList}
         </div>

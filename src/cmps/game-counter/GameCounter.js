@@ -8,7 +8,7 @@ class GameCounter extends Component {
     }
 
     render() {
-        return <div style={{ color: "white" }}>{this.props.cart.length}</div>
+        return <div  style={{ alignSelf:"center",color: "white" }}>{this.props.cart.length}</div>
     }
 }
 
