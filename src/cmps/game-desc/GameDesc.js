@@ -62,7 +62,7 @@ export default class GameDesc extends Component {
 
   render() {
     const { game, user } = this.props
-    const { thumbnail, description, publishedAt, price } = game
+    const { thumbnail, description, publishedAt, price,_id } = game
     const { publisherName, rating, orderCount, isOwned } = this.state
     const priceOrPlay = isOwned ? <button className='btn'>Play</button> :
       <button type="primary" className='buy-btn' onClick={this.onAddToCart}> {price}$ Add to cart </button>
@@ -85,7 +85,7 @@ export default class GameDesc extends Component {
         </div>
         <p className="description full">{description}</p>
         <div className="flex space-between wish-btn">
-          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />
+          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === _id) ? full_heart : empty_heart} />
           <button>{priceOrPlay}</button>
         </div>
       </div>)

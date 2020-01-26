@@ -7,8 +7,13 @@ import { loadGame, updateGame, updateComments } from "../../actions/gameActions"
 import { updateUser } from '../../actions/userActions';
 import { addGameToCart } from '../../actions/cartActions';
 
+import Notification from '../../cmps/helpers/Notification'
+import GameMedia from '../../cmps/game-media/GameMedia';
+import GameDesc from '../../cmps/game-desc/GameDesc';
+import Comments from '../../cmps/comments/Comment';
+import Review from '../../cmps/review/Review';
+import Modal from '../../cmps/modal/Modal'
 import './_GameDetails.scss';
-import GameDetailsPage from "./game-details-page/GameDetailsPage";
 
 class GameDetails extends Component {
   state = {
@@ -84,11 +89,33 @@ class GameDetails extends Component {
   };
 
   render() {
+    if (!this.props.game) return <h1>Loading</h1>;
+    const { loggedInUser, game: { title, reviews, mediaUrls, tags, comments } } = this.props
+    const { modalTxt, currMediaUrl, toggleModal } = this.state
+    let mainMedia;
+    currMediaUrl.includes(".mp4") ?
+      mainMedia = <iframe title="video" src={`${currMediaUrl}?#t=0&#autoplay=1&mute=1`} allowFullScreen='allowfullscreen' volume={0} className="game-main-thumbnail" />
+      : mainMedia = <img src={currMediaUrl} alt="" className="game-main-thumbnail" />
     return (
-      <GameDetailsPage onThumbNailPhotoClick={this.onThumbNailPhotoClick}
-        onToggleModal={this.onToggleModal} toggleWishedGame={this.toggleWishedGame}
-        game={this.props.game} currMediaUrl={this.state.currMediaUrl} modalTxt={this.state.modalTxt}
-        onAddToCart={this.onAddToCart} onAddCommentOrReview={this.onAddCommentOrReview} user={this.props.loggedInUser} />
+      <div className="container content-container" >
+        {toggleModal && <Modal><Notification modalTxt={modalTxt} toggleModal={this.onToggleModal} /></Modal>}
+        <h1>{title}</h1>
+        <div className="grid game-main-content-container ">
+          {mainMedia}
+          <div className="flex game-choose-thumbnail-container">
+            <GameMedia onThumbNailPhotoClick={this.onThumbNailPhotoClick} mediaUrls={mediaUrls} />
+          </div>
+          <GameDesc user={loggedInUser} onToggleWishedGame={this.toggleWishedGame} onAddToCart={this.onAddToCart} game={this.props.game} />
+        </div>
+        <h2>Tags:</h2>
+        {tags.map(tag => {
+          return <span className="tag" key={tag}>{tag} </span>;
+        })}
+        <h2>Reviews :</h2>
+        <Review user={loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
+        <h2>Comments :</h2>
+        <Comments user={loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
+      </div>
     )
   }
 }
