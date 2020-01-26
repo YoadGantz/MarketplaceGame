@@ -18,6 +18,7 @@ class GameDetails extends Component {
   };
 
   componentDidMount = async () => {
+    window.scrollTo(0,0);
     const { id } = this.props.match.params
     await this.props.loadGame(id)
     this.setState({ currMediaUrl: this.props.game.mediaUrls[0] });

@@ -35,7 +35,7 @@ class HomePage extends Component {
 
 
   render() {
-    const { mostDownloadGames, mostRecentGames, highestRatingGames } = this.state
+    const { mostDownloadGames: mostPopular, mostRecentGames: recentGames, highestRatingGames: topRated } = this.state
     return (
       <div className="homepage-container content-container container full">
         <div className="hero-text flex column totally-center">
@@ -43,12 +43,17 @@ class HomePage extends Component {
           <p>The ultimate destination for buying, discussing, and playing games</p>
           <Link to="/game" onClick={this.on} className="hero-btn">To the shop</Link>
         </div>
-        Most Popular
-      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostDownloadGames} />
-        Recent Released
-      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostRecentGames} />
-        Highest Rating
-      <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={highestRatingGames} />
+        <div className="popular"><p>Most Popular</p>
+          <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostPopular} />
+        </div>
+        <div className="recent">
+          <p>Recently Released</p>
+          <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={recentGames} />
+        </div>
+        <div className="top-rated">
+          <p>Top Rating</p>
+          <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={topRated} />
+        </div>
       </div>)
   }
 }

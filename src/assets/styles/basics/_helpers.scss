@@ -89,7 +89,7 @@
   font-size: 1rem;
   flex: 1;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   padding-left: 1rem;
   padding-right: 1rem;
   min-height: 40px;
@@ -150,5 +150,18 @@
   }
   @include for-normal-layout {
     background-color: #0f9c14;
+  }
+}
+
+.btn{
+  background-color: darken($clr2, 25%);
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-family: montserrat;
+  font-size: 1rem;
+  transition: background-color 0.4s;
+
+  &:hover {
+    background-color: darken($clr2, 20%);
   }
 }
