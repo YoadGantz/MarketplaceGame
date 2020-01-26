@@ -48,52 +48,47 @@
     display: none;
   }
 }
-.nav-link-container{
+.nav-link-container {
   @include for-normal-layout {
-   flex-direction: row-reverse;
+    flex-direction: row-reverse;
   }
-img{
-  width: 30px;
-}
-div{
-  margin-inline-end: 7px;
-}
-
-
-.nav-bar-menu {
-  display: none;
-  background-color: #1f2335c7;
-  width: 150px;
-  align-items: center;
-  z-index: 5000;
-  margin-left: 10px;
-
-  & img {
-    width: 40px;
+  img {
+    width: 30px;
+  }
+  div {
+    margin-inline-end: 7px;
   }
 
-  #menu:checked ~ & {
-    right: 0;
-    top: 59px;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-  }
-
-  @include for-normal-layout {
-    width: auto;
-    background-color: inherit;
-    display: flex;
-    flex-direction: row;
-    position: relative;
+  .nav-bar-menu {
+    display: none;
+    background-color: lighten(#242944f8, 10%);
+    width: 250px;
+    align-items: center;
+    z-index: 5000;
+    margin-left: 10px;
 
     #menu:checked ~ & {
-      top: unset;
-      right: unset;
-      position: relative;
+      right: 0;
+      top: 59px;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @include for-normal-layout {
+      width: auto;
+      background-color: inherit;
       display: flex;
       flex-direction: row;
+      position: relative;
+
+      #menu:checked ~ & {
+        top: unset;
+        right: unset;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+      }
     }
   }
-}
 }

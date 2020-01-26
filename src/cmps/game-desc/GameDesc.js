@@ -55,6 +55,8 @@ export default class GameDesc extends Component {
     }
     if (isPurchased.length) {
       return this.setState({ isOwned: true })
+    } else {
+      return this.setState({ isOwned: false })
     }
   }
 

@@ -64,7 +64,7 @@ class GamePreview extends Component {
                     <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
                 </div>
                 <section className="details-container">
-                    <div className="flex">
+                    <div className="flex align-center">
                         <strong className="full game-title" title={game.title}>{game.title}</strong>
                         {isProfile && isDashboard && <p className="price">${game.price}</p>}
                         {!isProfile &&

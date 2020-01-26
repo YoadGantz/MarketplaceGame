@@ -4,4 +4,13 @@
   overflow: overlay;
   height: 300px;
   padding: 0;
+
+  & button{
+    border-radius: 8px;
+  padding: 10px 15px;
+  font-family: montserrat;
+  font-size: 1rem;
+  transition: background-color 0.4s;
+  }
 }
+ 
