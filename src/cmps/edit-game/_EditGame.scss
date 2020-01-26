@@ -1,33 +1,32 @@
+.edit-container {
+  background-image: url("../../assets/images/background_spotlight.jpg");
+  background-color: #f2f5fa;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 80%;
+  margin: auto;
+  padding-block-start: 100px;
+  & textarea {
+    width: 50%;
+  }
 
-
-.edit-container{
-    background-image: url("../../assets/images/background_spotlight.jpg");
-   background-color:  #f2f5fa;
-   background-repeat: no-repeat;
-   background-size: cover;
-   width: 80%;
-   margin: auto;
-   & textarea{
-       width: 50%;
-   }
-
-   & .media-container{
+  & .media-container {
     width: 250px;
     object-fit: cover;
     border: 1px solid black;
-    & img{
-        width: 90%;
-    } 
-    & iframe{
-        width: 235px;
+    & img {
+      width: 90%;
+    }
+    & iframe {
+      width: 235px;
     }
     transition: 0.8s;
-   }
-   & .tag-container{
+  }
+  & .tag-container {
     display: inline-block;
     line-height: 19px;
     padding: 0 7px;
-    background-color: rgba( 103, 193, 245, 0.2 );
+    background-color: rgba(103, 193, 245, 0.2);
     box-shadow: none;
     margin-right: 2px;
     border-radius: 2px;
@@ -37,6 +36,5 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
-   }
+  }
 }
