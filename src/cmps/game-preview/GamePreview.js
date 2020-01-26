@@ -64,7 +64,7 @@ class GamePreview extends Component {
                     <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
                 </div>
                 <section className="details-container">
-                    <div className="flex">
+                    <div className="flex align-center">
                         <strong className="full">{game.title}</strong>
                         {!isProfile &&
                             <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?

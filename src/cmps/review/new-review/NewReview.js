@@ -22,6 +22,7 @@ export default class NewReview extends Component {
         return (
             <div>
                 <h3>Add a review</h3>
+                <div className='flex align-center'>
                 <textarea
                     type="text"
                     name="text"
@@ -37,7 +38,8 @@ export default class NewReview extends Component {
                 <label htmlFor='dislike' className='dislike-img pointer' name='rating'>
                     <img alt='dislike' src="https://img.icons8.com/ultraviolet/40/000000/poor-quality.png" />
                 </label>
-                <button  className='btn' onClick={this.onAddReview}>Add Review</button>
+                <button  className='add-button' onClick={this.onAddReview}>Add Review</button>
+                </div>
             </div>
         )
     }

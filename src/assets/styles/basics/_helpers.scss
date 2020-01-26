@@ -54,6 +54,9 @@
   &.space-evenly {
     justify-content: space-evenly;
   }
+  &.flex-end{
+    justify-content: flex-end;
+  }
 }
 
 .totally-center {
@@ -140,7 +143,7 @@
 }
 
 .cla-btn {
-  
+
   background-color: #00ba06;
   padding: 10px 40px;
   font-size: 1rem;

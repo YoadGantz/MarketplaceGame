@@ -16,9 +16,9 @@ export default class GameDesc extends Component {
     this.setPublisherName(game.publisher)
     this.purchaseCheck()
   }
-  componentDidUpdate= (prevProps)=>{
+  componentDidUpdate = (prevProps) => {
     const { game } = this.props
-    if (game.title!==prevProps.game.title){
+    if (game.title !== prevProps.game.title) {
       this.setOrderCount(game)
       this.setGameRating(game)
       this.setPublisherName(game.publisher)
@@ -53,6 +53,8 @@ export default class GameDesc extends Component {
     }
     if (isPurchesed.length) {
       return this.setState({ isOwned: true })
+    } else {
+      return this.setState({ isOwned: false })
     }
   }
 
