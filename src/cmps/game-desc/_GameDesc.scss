@@ -1,0 +1,26 @@
+.desc-container {
+  .game-thumbnail {
+    margin-block-end: 10px;
+  }
+  .details {
+    margin-block-end: 10px;
+  }
+  .publisher {
+    font-size: 1.1rem;
+    text-decoration: underline;
+    min-width: 80px;
+  }
+  .published {
+    font-size: 0.85rem;
+  }
+
+  .rating-downloads {
+    margin-block-end: 10px;
+    > * {
+      display: block;
+    }
+  }
+  .description {
+    margin-block-end: 15px;
+  }
+}

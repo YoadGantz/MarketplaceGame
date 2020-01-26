@@ -6,6 +6,8 @@ import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import OrderService from "../../services/OrderService";
 
+import './_GameDesc.scss'
+
 export default class GameDesc extends Component {
   state = { orderCount: '', rating: '', publisherName: '', isOwned: false }
 
@@ -16,9 +18,9 @@ export default class GameDesc extends Component {
     this.setPublisherName(game.publisher)
     this.purchaseCheck()
   }
-  componentDidUpdate= (prevProps)=>{
+  componentDidUpdate = (prevProps) => {
     const { game } = this.props
-    if (game.title!==prevProps.game.title){
+    if (game.title !== prevProps.game.title) {
       this.setOrderCount(game)
       this.setGameRating(game)
       this.setPublisherName(game.publisher)
@@ -60,24 +62,29 @@ export default class GameDesc extends Component {
     const { game, user } = this.props
     const { thumbnail, description, publishedAt, price } = game
     const { publisherName, rating, orderCount, isOwned } = this.state
-    const priceOrPlay = isOwned ? <button>Play</button> :
+    const priceOrPlay = isOwned ? <button className='btn'>Play</button> :
       <button type="primary" className='buy-btn' onClick={this.onAddToCart}> {price}$ Add to cart </button>
     const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)
     return (
-      <div className="desc flex column">
+      <div className="desc desc-container flex column">
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
-        <div className='game-description'>
-          <p > {description}</p>
-          <p> Published at: {publishedDate}</p>
-          <p> Publisher: {publisherName}</p>
-          <p> Rating: {rating}</p>
-          <p> Downloads last month :{orderCount}   </p>
+        <table className="details">
+          <tbody>
+            <tr>
+              <td className="publisher">{publisherName}</td>
+              <td className="published">{publishedDate}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="rating-downloads">
+          <p className="rating">Rating: {rating}</p>
+          <p className="downloads">Last month downloads: {orderCount}</p>
         </div>
+        <p className="description full">{description}</p>
         <div className="flex space-between wish-btn">
-          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-            full_heart : empty_heart} />
-          {priceOrPlay}
+          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ? full_heart : empty_heart} />
+          <button>{priceOrPlay}</button>
         </div>
       </div>)
   }
