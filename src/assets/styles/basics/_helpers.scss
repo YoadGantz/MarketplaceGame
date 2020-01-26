@@ -51,9 +51,10 @@
   &.space-evenly {
     justify-content: space-evenly;
   }
-  &.space-around{
+  &.space-around {
     justify-content: space-around;
-  &.flex-end{
+  }
+  &.flex-end {
     justify-content: flex-end;
   }
 }
@@ -123,7 +124,7 @@
   max-width: 100%;
   background-color: #1f2335c7;
   top: 59px;
-  right:0;
+  right: 0;
   @include for-normal-layout {
     height: 50%;
   }
@@ -142,12 +143,11 @@
 }
 
 .cla-btn {
-
   background-color: #00ba06;
   padding: 10px 40px;
   font-size: 1rem;
   border-radius: 8px;
-  &:hover{
+  &:hover {
     background-color: #00ba06;
   }
   @include for-normal-layout {
@@ -155,7 +155,7 @@
   }
 }
 
-.btn{
+.btn {
   background-color: darken($clr2, 25%);
   border-radius: 8px;
   padding: 10px 15px;
