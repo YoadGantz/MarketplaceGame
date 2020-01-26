@@ -22,6 +22,7 @@ class ProfilePage extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0,0);
     if (this.props.loggedInUser && this.props.loggedInUser.userName) this.setState({ user: this.props.loggedInUser })
   }
 

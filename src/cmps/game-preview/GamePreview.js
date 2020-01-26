@@ -65,7 +65,7 @@ class GamePreview extends Component {
                 </div>
                 <section className="details-container">
                     <div className="flex">
-                        <strong className="full">{game.title}</strong>
+                        <strong className="full game-title" title={game.title}>{game.title}</strong>
                         {isProfile && isDashboard && <p className="price">${game.price}</p>}
                         {!isProfile &&
                             <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
@@ -75,7 +75,7 @@ class GamePreview extends Component {
                     <div className="flex space-between">
                         {!isProfile && <p className="price">${game.price}</p>}
                         {!isProfile &&
-                            <p className="rating">{review}( {game.reviews.length} )</p>}
+                            <p className="rating">{review} ({game.reviews.length})</p>}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
                             <button className="play-btn" onClick={this.onPlayClick}>Play</button>}

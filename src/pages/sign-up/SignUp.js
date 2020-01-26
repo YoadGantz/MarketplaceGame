@@ -17,6 +17,10 @@ class SignUp extends Component {
     }
   };
 
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+
   addMediaAndTags = async ev => {
     const imgUrl = await MediaUploadService(ev.target.files);
     return this.setState({ imgUrl: imgUrl[0] })

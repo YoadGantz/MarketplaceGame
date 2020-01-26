@@ -14,6 +14,9 @@ class Login extends Component {
       password: ''
     }
   };
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
 
   loginHandleChange = ev => {
     const { name, value } = ev.target;

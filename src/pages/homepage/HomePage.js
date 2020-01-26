@@ -16,6 +16,7 @@ class HomePage extends Component {
   }
 
   async componentDidMount() {
+    window.scrollTo(0,0);
     await this.props.loadGames()
     this.setGames('mostDownloadGames')
     this.setGames('mostRecentGames')
