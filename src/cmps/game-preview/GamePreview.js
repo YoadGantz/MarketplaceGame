@@ -66,10 +66,10 @@ class GamePreview extends Component {
                 <section className="details-container">
                     <div className="flex">
                         <strong className="full">{game.title}</strong>
+                        {isProfile && isDashboard && <p className="price">${game.price}</p>}
                         {!isProfile &&
                             <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-                        full_heart : empty_heart} />}
-                        {isProfile && isDashboard && <button onClick={this.onRemoveGame}>X</button>}
+                                full_heart : empty_heart} />}
                     </div>
                     <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
