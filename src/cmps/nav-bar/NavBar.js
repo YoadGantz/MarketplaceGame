@@ -32,9 +32,20 @@ class NavBar extends Component {
           </Link>
         </div>
         <input type='checkbox' className='hidden' id='menu' />
-        <label className='nav-bar-hamburger' htmlFor='menu'>
+        <div className='flex nav-link-container'>
+        <div className='flex'>
+        <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")}>
+            <img alt="" src={wishlistImg} />
+          </div>
+          <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")}>
+            <GameCounter />
+            <img alt="" src={shoppingCartImg} />
+          </div>
+        </div>
+        <label className='nav-bar-hamburger pointer' htmlFor='menu'>
           ☰
           </label>
+    
         <div className=' nav-bar-menu'>
           <NavLink to="/" exact className="nav-link flex align-center" activeClassName="active" >
             Homepage
@@ -47,13 +58,7 @@ class NavBar extends Component {
         </NavLink>
           {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
             : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="">Logout</NavLink>}
-          <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")}>
-            <img alt="" src={wishlistImg} />
-          </div>
-          <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")}>
-            <GameCounter />
-            <img alt="" src={shoppingCartImg} />
-          </div>
+        </div>
         </div>
       </nav >
 

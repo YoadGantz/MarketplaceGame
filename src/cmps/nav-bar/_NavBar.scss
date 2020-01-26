@@ -41,11 +41,24 @@
 
 .nav-bar-hamburger {
   font-size: 30px;
+  align-self: center;
   display: flex;
+  margin-inline-end: 7px;
   @include for-normal-layout {
     display: none;
   }
 }
+.nav-link-container{
+  @include for-normal-layout {
+   flex-direction: row-reverse;
+  }
+img{
+  width: 30px;
+}
+div{
+  margin-inline-end: 7px;
+}
+
 
 .nav-bar-menu {
   display: none;
@@ -53,6 +66,7 @@
   width: 150px;
   align-items: center;
   z-index: 5000;
+  margin-left: 10px;
 
   & img {
     width: 40px;
@@ -81,4 +95,5 @@
       flex-direction: row;
     }
   }
+}
 }
