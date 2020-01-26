@@ -47,24 +47,21 @@ export default class GameDesc extends Component {
   }
 
   purchaseCheck = async () => {
-    let isPurchesed = []
+    let isPurchased = []
     if (this.props.user) {
-      isPurchesed = await OrderService.query({ orderBy: this.props.user._id, gameId: this.props.game._id })
+      isPurchased = await OrderService.query({ orderBy: this.props.user._id, gameId: this.props.game._id })
     }
-    if (isPurchesed.length) {
+    if (isPurchased.length) {
       return this.setState({ isOwned: true })
     }
   }
-
-
-
 
   render() {
     const { game, user } = this.props
     const { thumbnail, description, publishedAt, price } = game
     const { publisherName, rating, orderCount, isOwned } = this.state
     const priceOrPlay = isOwned ? <button>Play</button> :
-      <button type="primary" className='game-buy-button' onClick={this.onAddToCart}> {price}$ Add to cart </button>
+      <button type="primary" className='buy-btn' onClick={this.onAddToCart}> {price}$ Add to cart </button>
     const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)
     return (
@@ -84,5 +81,4 @@ export default class GameDesc extends Component {
         </div>
       </div>)
   }
-
 }

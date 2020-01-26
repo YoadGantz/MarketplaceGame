@@ -24,6 +24,7 @@
     position: relative;
     padding: 10px 20px;
     border: 1px $clr6 solid;
+    border-radius: 8px;
     transition: padding-inline-end, 0.5s;
     &:hover {
       padding-inline-end: 40px;

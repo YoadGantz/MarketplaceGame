@@ -15,7 +15,7 @@ import InfoCard from '../infocard/InfoCard';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
 
-import './_Dashboard.scss'
+import './_DashBoard.scss'
 class Dashboard extends Component {
     state = {
         orders: null,
@@ -119,9 +119,13 @@ class Dashboard extends Component {
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
                 </Modal>}</div>
             )
+            if (!this.props.games.length) {
+                return <div className="container dashboard-container flex column align-center">
+                    <h3 className="dashboard-header">Publish games to see more</h3>
+                </div>
+            }
         }
         return (<div className="container dashboard-container flex column align-center">
-            {!this.props.games.length && <h3 className="dashboard-header">Publish games to see more</h3>}
             {!this.props.loggedInUser && <h3 className="dashboard-header">This is a demo of the dashboard, login to see your data</h3>}
             <div className='flex info-cards-container'>
                 <InfoCard data={monthMoneySum}>Earned this month:</InfoCard>

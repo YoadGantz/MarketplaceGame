@@ -52,7 +52,7 @@ class Login extends Component {
           onChange={this.loginHandleChange} placeholder="User name" />
         <input className="login-input input" type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
-        <button className="btn">Login</button>
+        <button className="login-btn btn">Login</button>
         <p>Not with us yet ?</p>
         <button className="join-btn" onClick={() => history.push('/sign-up')}>Join</button>
       </form>

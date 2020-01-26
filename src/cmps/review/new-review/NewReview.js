@@ -37,7 +37,7 @@ export default class NewReview extends Component {
                 <label htmlFor='dislike' className='dislike-img pointer' name='rating'>
                     <img alt='dislike' src="https://img.icons8.com/ultraviolet/40/000000/poor-quality.png" />
                 </label>
-                <button  onClick={this.onAddReview}>Add Review</button>
+                <button  className='btn' onClick={this.onAddReview}>Add Review</button>
             </div>
         )
     }
