@@ -47,11 +47,11 @@ export default class GameDesc extends Component {
   }
 
   purchaseCheck = async () => {
-    let isPurchesed = []
+    let isPurchased = []
     if (this.props.user) {
-      isPurchesed = await OrderService.query({ orderBy: this.props.user._id, gameId: this.props.game._id })
+      isPurchased = await OrderService.query({ orderBy: this.props.user._id, gameId: this.props.game._id })
     }
-    if (isPurchesed.length) {
+    if (isPurchased.length) {
       return this.setState({ isOwned: true })
     } else {
       return this.setState({ isOwned: false })
@@ -83,5 +83,4 @@ export default class GameDesc extends Component {
         </div>
       </div>)
   }
-
 }

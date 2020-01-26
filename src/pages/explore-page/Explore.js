@@ -14,6 +14,7 @@ class Explore extends Component {
     state = { games: null, isAscending: false }
 
     componentDidMount = async () => {
+        window.scrollTo(0,0);
         this.onFilterBy()
     }
 

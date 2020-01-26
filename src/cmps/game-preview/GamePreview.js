@@ -65,17 +65,17 @@ class GamePreview extends Component {
                 </div>
                 <section className="details-container">
                     <div className="flex align-center">
-                        <strong className="full">{game.title}</strong>
+                        <strong className="full game-title" title={game.title}>{game.title}</strong>
+                        {isProfile && isDashboard && <p className="price">${game.price}</p>}
                         {!isProfile &&
                             <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-                        full_heart : empty_heart} />}
-                        {isProfile && isDashboard && <button onClick={this.onRemoveGame}>X</button>}
+                                full_heart : empty_heart} />}
                     </div>
                     <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
                         {!isProfile && <p className="price">${game.price}</p>}
                         {!isProfile &&
-                            <p className="rating">{review}( {game.reviews.length} )</p>}
+                            <p className="rating">{review} ({game.reviews.length})</p>}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
                             <button className="play-btn btn" onClick={this.onPlayClick}>Play</button>}

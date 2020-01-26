@@ -7,8 +7,8 @@ class PlayGame extends Component {
     state = { comments: null }
 
     componentDidMount() {
-        let userName = 'Guest'
-        if (this.props.loggedInUser) userName = this.props.loggedInUser.userName
+        window.scrollTo(0,0);
+        let userName = (this.props.loggedInUser) ? this.props.loggedInUser.userName : 'Guest';
         SocketService.setup()
         SocketService.emit('chat room', this.props.match.params.id);
         SocketService.emit('user joined', { text: `${userName} has joined the chat` });

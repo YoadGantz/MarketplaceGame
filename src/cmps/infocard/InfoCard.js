@@ -8,7 +8,7 @@ export default function InfoCard(props) {
                 {props.children}
             </p>
             <p className="data">
-                {props.children.includes('Money') && '$'}{props.data}
+                {props.children.includes('Earned') && '$'}{props.data}
             </p>
         </div>)
 
