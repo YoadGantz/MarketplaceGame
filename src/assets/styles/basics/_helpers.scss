@@ -60,6 +60,9 @@
   &.align-end{
     align-items: flex-end;
   }
+  &.align-self-end{
+    align-self: flex-end
+  }
 }
 
 .absolute{
