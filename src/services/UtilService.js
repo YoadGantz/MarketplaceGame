@@ -4,13 +4,21 @@ export default {
     sortByDownloads,
     getGraphsDetails,
     getGameRating,
-    objectIdByTime,
+    dateByMillisecond,
     dateFromObjectId,
     formatDate,
     getSum,
     sortByPrice,
     formatGameRating
 }
+
+function dateFromObjectId(objectId) {
+    const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000)
+    return date
+};
+
+
+
 
 function getGameRating(game) {
     const { reviews } = game
@@ -25,12 +33,12 @@ function getGameRating(game) {
     return rating
 }
 
-function objectIdByTime(time) {
+function dateByMillisecond(time) {
     let date = new Date()
     if (time) {
         date.setDate(date.getDate() - time);
     }
-    return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000"
+    return date.getTime()
 }
 
 async function getSum(games) {
@@ -91,10 +99,6 @@ function sortByPrice(games, isAscending) {
     return sortedGames
 }
 
-function dateFromObjectId(objectId) {
-    const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000)
-    return date
-};
 
 function formatDate(date) {
     const year = date.getFullYear()
@@ -107,26 +111,27 @@ function formatDate(date) {
     return fullDate
 }
 
-async function getGraphsDetails(games, type, date = 31) {
+async function getGraphsDetails(games, type, time = 31) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
     const ordersByGame = []
     games.forEach((game) => {
         prms.push(OrderService.query({
-            lastMonthId: objectIdByTime(date),
+            lastMonthId: dateByMillisecond(time),
             gameIds: game._id
         }))
         gameByNameOrder.push(game.title)
         ordersByGame.push(0)
     })
     const gameOrders = await Promise.all(prms)
-
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
-            const currOrderDate = dateFromObjectId(order.createdAt).getDate()
+            const date = new Date(order.createdAt / 1)
+            let currOrderDate = date.getDate()
+            currOrderDate += `/${date.getMonth() + 1}`
             let num = ordersBy[currOrderDate]
-            if (num && idx===0)return
+            if (num && idx === 0) return
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }

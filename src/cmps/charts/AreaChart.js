@@ -15,16 +15,17 @@ export default class Graph extends PureComponent {
   setData = (purchases) => {
     const data = []
     if (!this.props.games.length) return
-    for (let i = 30; i >= 0; i--) {
+    for (let i = 31; i >= 0; i--) {
       let date = new Date()
       date.setDate(date.getDate() - i)
+      const formatDate = `${date.getDate()}/${date.getMonth() + 1}`
       let price
-      if (purchases[date.getDate()]) {
-        price = purchases[date.getDate()]
+      if (purchases[formatDate]) {
+        price = purchases[formatDate]
       } else {
         price = 0
       }
-      data.push({ name: date.getDate() + '/' + (date.getMonth() + 1), purchases: price })
+      data.push({ name: formatDate, purchases: price })
     }
     this.setState({ data })
   }

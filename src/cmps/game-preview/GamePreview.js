@@ -14,16 +14,22 @@ import remove_from_cart from '../../assets/icons/remove_from_cart.png'
 import trash_bin from '../../assets/icons/bin.svg'
 import edit_img from '../../assets/icons/edit.svg'
 import play_img from '../../assets/icons/play.svg'
+import TinyAreaChart from '../charts/TinyAreaChart'
 
 class GamePreview extends Component {
     state = {
         publisherName: '',
+        gameOrders: null
+
     }
     async componentDidMount() {
         const { game } = this.props
         const publisher = await UserService.getById(game.publisher)
         const publisherName = publisher.userName
         this.setState({ publisherName })
+        if (this.props.isDashboard) {
+            this.dashboardChart()
+        }
     }
 
     onOpenDetails = (gameId) => {
@@ -45,6 +51,12 @@ class GamePreview extends Component {
         history.push(`/play/${this.props.game._id}`)
     }
 
+    dashboardChart = async () => {
+
+        const gameOrders = await UtilService.getGraphsDetails([this.props.game])
+        this.setState({ gameOrders })
+    }
+
     toggleWishedGame = (ev) => {
         const { user, game } = this.props
         ev.stopPropagation();
@@ -61,10 +73,12 @@ class GamePreview extends Component {
 
     render() {
         const { game, user, isProfile, isDashboard, isCart } = this.props
+        const { gameOrders } = this.state
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
             <li className={isDashboard ? "game-card" : "game-card"} onClick={() => this.onOpenDetails(game._id)}>
-                {!isDashboard && <div className="img-container"><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div>}
+                {!isDashboard ? <div className="img-container"><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div> :
+                    <TinyAreaChart game={game} gameOrders={gameOrders} />}
                 <section className="details-container flex column">
                     <div className="full">
                         <div className="flex align-center">
