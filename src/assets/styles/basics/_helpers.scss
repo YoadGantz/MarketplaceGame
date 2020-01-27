@@ -59,6 +59,10 @@
   }
 }
 
+.absolute{
+position: absolute;
+}
+
 .totally-center {
   display: flex;
   align-items: center;
@@ -139,31 +143,5 @@
   overflow: auto;
   @include for-normal-layout {
     padding: 20px 20px 20px 20px;
-  }
-}
-
-.cla-btn {
-  background-color: #00ba06;
-  padding: 10px 40px;
-  font-size: 1rem;
-  border-radius: 8px;
-  &:hover {
-    background-color: #00ba06;
-  }
-  @include for-normal-layout {
-    background-color: #0f9c14;
-  }
-}
-
-.btn {
-  background-color: darken($clr2, 25%);
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-family: montserrat;
-  font-size: 1rem;
-  transition: background-color 0.4s;
-
-  &:hover {
-    background-color: darken($clr2, 20%);
   }
 }

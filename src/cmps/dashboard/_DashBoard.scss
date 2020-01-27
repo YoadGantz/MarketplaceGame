@@ -35,17 +35,11 @@
     .publish-button {
       background-color: darken($clr2, 20%);
       color: $clr6;
-      border-radius: 8px;
-      padding: 12px 12px;
-      max-width: 150px;
-      font-family: montserrat;
-      font-size: 1rem;
       align-self: flex-end;
-      transition: background-color 0.4s;
       margin-inline-end: 20px;
 
       &:hover {
-        background-color: darken($clr2, 10%);
+        background-color: lighten($clr2, 5%);
       }
     }
   }

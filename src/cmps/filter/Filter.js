@@ -19,15 +19,14 @@ export default class Filter extends Component {
         this.setState({ [name]: value }, () => this.props.onFilterBy(this.state))
     }
 
-
     render() {
         const { sortByPrice, sortByDownloads } = this.props
-        return <div className="search-container">
-            <input className="search-input input" name='title' type="search" placeholder="Search" onChange={this.onFilterBy} />
-            <input className="search-input input" name='tag' type='text' placeholder='Search by Tags' onChange={this.onFilterBy} />
-            <span>Sort by </span>
-            <button className='btn' onClick={sortByDownloads}> Popular </button>
-            <button className='btn' onClick={sortByPrice}>  Price</button>
+        return <div className="search-container totally-center">
+            <input className="search-input input" results name='title' type="search" placeholder="Search by title" onChange={this.onFilterBy} />
+            <input className="search-input input" results name='tag' type='text' placeholder='Search by tags' onChange={this.onFilterBy} />
+            <span>Sort by: </span>
+            <button className='btn filter-btn' onClick={sortByDownloads}>Popular</button>
+            <button className='btn filter-btn' onClick={sortByPrice}>Price</button>
         </div>
     }
 }

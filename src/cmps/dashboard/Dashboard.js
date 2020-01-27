@@ -14,6 +14,7 @@ import PieChart from '../charts/PieChart';
 import InfoCard from '../infocard/InfoCard';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
+
 import './_Dashboard.scss'
 
 
@@ -113,7 +114,7 @@ class Dashboard extends Component {
         if (this.props.loggedInUser) {
             gameList = (<div className="games-container flex column totally-center">
                 <h3 className="games-header">Your uploaded games</h3>
-                <div className='publish-button'>
+                <div className='publish-button btn'>
                     <Link to='/edit'>Publish a game</Link>
                 </div>
                 <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />

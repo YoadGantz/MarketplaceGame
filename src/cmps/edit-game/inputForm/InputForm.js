@@ -6,7 +6,7 @@ import TagList from '../tag-list/TagList';
 
 export default function InputForm(props) {
     const { inputChange, addMediaAndTags, onSubmit, removeMediaAndTags,
-        form: { price, publishedAt, title, mediaUrls, tags, thumbnail, description } } = props
+        form: { price, publishedAt, title, mediaUrls, tags, thumbnail, description, loading } } = props
     let addedTags;
     let addedUrls;
     let addedThumbnail
@@ -20,7 +20,8 @@ export default function InputForm(props) {
         addedThumbnail = <Thumbnail thumbnail={thumbnail} removeMediaAndTags={removeMediaAndTags} />
     }
 
-    return <div className="edit-container">
+    return <div className="edit-container content-container">
+        {loading && <div className='loader'></div>}
         <p> Title : </p>
         <input type="text" onChange={inputChange} value={title} placeholder="title" name="title" />
         <p>Publish Date</p>

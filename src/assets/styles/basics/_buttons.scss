@@ -1,0 +1,28 @@
+.cla-btn {
+  background-color: #00ba06;
+  padding: 10px 40px;
+  font-size: 1rem;
+  border-radius: 8px;
+  &:hover {
+    background-color: #00ba06;
+  }
+  @include for-normal-layout {
+    background-color: #0f9c14;
+  }
+}
+
+.btn {
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-family: montserrat;
+  font-size: 1rem;
+  transition: background-color 0.4s;
+  
+  img {
+    width: 25px;
+  }
+
+  &:hover {
+    background-color: $clr2;
+  }
+}
