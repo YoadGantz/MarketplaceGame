@@ -1,24 +1,64 @@
 @import "../setup/mixins.scss";
 @import "../setup/variables.scss";
 
-
 .container {
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 10px;
   @include for-narrow-layout {
-      max-width: $mobile-breakpoint;
+    max-width: $mobile-breakpoint;
   }
   @include for-normal-layout {
-      max-width: $narrow-breakpoint;
+    max-width: $narrow-breakpoint;
   }
   @include for-wide-layout {
-      max-width: $normal-breakpoint;
+    max-width: $normal-breakpoint;
   }
 }
 
 // GRIDS
+.hp-cards-container {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  max-height: 480px;
+  > *:first-child {
+    grid-area: first-card;
+    display: flex;
+    .img-container {
+      height: 100%;
+      width:67%;
+      img {
+        height: 100%;
+      }
+    }
+    .details-container {
+      width: 33%;
+    }
+  }
+  >*:not(:first-child){
+    .img-container {
+      height:160px;
+      img {
+        height: 100%;
+      }
+    }
+  }
+  > *:nth-child(2) {
+    grid-area: second-card;
+  }
+  > *:nth-child(3) {
+    grid-area: third-card;
+  }
+  > *:last-child {
+    grid-area: last-card;
+  }
+  grid-template-areas:
+    "first-card first-card first-card"
+    "second-card third-card last-card";
+}
 
 .cards-container {
   display: grid;
@@ -27,6 +67,6 @@
   padding: 0;
 }
 
-.content-container{
+.content-container {
   padding-top: 60px;
 }

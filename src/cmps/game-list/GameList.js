@@ -3,17 +3,21 @@ import React from 'react'
 
 export default function GameList(props) {
     const { games, user } = props;
-    return <ul className="cards-container clean-list container">
+    return <ul className={props.isHomepage ? "hp-cards-container clean-list container" : "cards-container clean-list container"}>
         {games?.map((game) => {
-            return <GamePreview key={game._id} onRemoveFromCart={props.onRemoveFromCart} isCart={props.isCart}
-                history={props.history}
-                isProfile={props.isProfile}
-                isDashboard={props.isDashboard}
-                user={user}
-                onUpdateUser={props.onUpdateUser}
-                onRemoveGame={props.onRemoveGame}
-                game={game}>
-            </GamePreview>
+            return (
+                <GamePreview
+                    game={game}
+                    user={user}
+                    key={game._id}
+                    isCart={props.isCart}
+                    isProfile={props.isProfile}
+                    isHomepage={props.isHomepage}
+                    isDashboard={props.isDashboard}
+                    onUpdateUser={props.onUpdateUser}
+                    onRemoveGame={props.onRemoveGame}
+                    onRemoveFromCart={props.onRemoveFromCart}>
+                </GamePreview>)
         })}
     </ul >
 }

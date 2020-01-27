@@ -42,9 +42,9 @@ async function getSum(games) {
 }
 
 async function sortGames(games, sortBy) {
-    if (sortBy === 'mostDownloadGames') {
+    if (sortBy === 'mostPopular') {
         return sortByDownloads(games)
-    } else if (sortBy === 'mostRecentGames') {
+    } else if (sortBy === 'recentGames') {
         return _sortByRecency(games)
     } else {
         return _sortByRating(games)

@@ -10,24 +10,24 @@ import GameList from '../../cmps/game-list/GameList'
 import './_HomePage.scss'
 class HomePage extends Component {
   state = {
-    mostDownloadGames: [],
-    mostRecentGames: [],
-    highestRatingGames: []
+    mostPopular: [],
+    recentGames: [],
+    topRated: []
   }
 
   async componentDidMount() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     await this.props.loadGames()
-    this.setGames('mostDownloadGames')
-    this.setGames('mostRecentGames')
-    this.setGames('highestRatingGames')
+    this.setGames('mostPopular')
+    this.setGames('recentGames')
+    this.setGames('topRated')
   }
 
   onUpdateUser = async (updatedUser) => {
     this.props.updateUser(updatedUser)
   }
 
-  setGames = async (sortBy, num = 3) => {
+  setGames = async (sortBy, num = 4) => {
     const games = [...this.props.games]
     const sortedGames = await UtilService.sortGames(games, sortBy)
     sortedGames.splice(num, games.length)
@@ -36,7 +36,7 @@ class HomePage extends Component {
 
 
   render() {
-    const { mostDownloadGames: mostPopular, mostRecentGames: recentGames, highestRatingGames: topRated } = this.state
+    const { mostPopular, recentGames, topRated } = this.state
     return (
       <div className="homepage-container content-container container full">
         <div className="hero-text flex column totally-center">
@@ -44,16 +44,16 @@ class HomePage extends Component {
           <p>The ultimate destination for buying, discussing, and playing games</p>
           <Link to="/game" onClick={this.on} className="hero-btn">To the shop</Link>
         </div>
-        <div className="popular"><p>Most Popular</p>
-          <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostPopular} />
+        <div><p className="heading">Most Popular</p>
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostPopular} />
         </div>
-        <div className="recent">
-          <p>Recently Released</p>
-          <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={recentGames} />
+        <div>
+          <p className="heading">Recently Released</p>
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={recentGames} />
         </div>
-        <div className="top-rated">
-          <p>Top Rating</p>
-          <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={topRated} />
+        <div>
+          <p className="heading">Top Rated</p>
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={topRated} />
         </div>
       </div>)
   }

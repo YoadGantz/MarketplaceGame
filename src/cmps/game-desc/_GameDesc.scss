@@ -1,3 +1,5 @@
+@import "../../assets/styles/setup/variables.scss";
+
 .desc-container {
   .game-thumbnail {
     margin-block-end: 10px;
@@ -22,5 +24,14 @@
   }
   .description {
     margin-block-end: 15px;
+  }
+
+  .play-btn {
+    img {
+      width: 35px;
+    }
+    &:hover {
+      background-color: lighten($clr2, 20%);
+    }
   }
 }

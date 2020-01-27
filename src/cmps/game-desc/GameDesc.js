@@ -1,12 +1,12 @@
 import React, { Component } from "react";
+import OrderService from "../../services/OrderService";
 import UtilService from "../../services/UtilService";
 import UserService from "../../services/UserService";
 
+import './_GameDesc.scss'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
-import OrderService from "../../services/OrderService";
-
-import './_GameDesc.scss'
+import play_img from '../../assets/icons/play.svg'
 
 export default class GameDesc extends Component {
   state = { orderCount: '', rating: '', publisherName: '', isOwned: false }
@@ -62,9 +62,9 @@ export default class GameDesc extends Component {
 
   render() {
     const { game, user } = this.props
-    const { thumbnail, description, publishedAt, price,_id } = game
+    const { thumbnail, description, publishedAt, price, _id } = game
     const { publisherName, rating, orderCount, isOwned } = this.state
-    const priceOrPlay = isOwned ? <button className='btn'>Play</button> :
+    const priceOrPlay = isOwned ? <button className="btn play-btn"><img alt="play" title="Play" src={play_img} /></button> :
       <button type="primary" className='buy-btn' onClick={this.onAddToCart}> {price}$ Add to cart </button>
     const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)
@@ -84,8 +84,8 @@ export default class GameDesc extends Component {
           <p className="downloads">Last month downloads: {orderCount}</p>
         </div>
         <p className="description full">{description}</p>
-        <div className="flex space-between wish-btn">
-          <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === _id) ? full_heart : empty_heart} />
+        <div className="flex space-between">
+          <img alt="like" className="wish-btn" title="Wish list" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === _id) ? full_heart : empty_heart} />
           <div>{priceOrPlay}</div>
         </div>
       </div>)
