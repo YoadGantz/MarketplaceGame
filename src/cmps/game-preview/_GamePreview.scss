@@ -41,9 +41,15 @@
   .game-title {
     margin-inline-end: 10px;
   }
- 
+
   .dsh-btn-container {
     width: 100%;
+  }
+  .play-btn-container {
+    width: 100%;
+    img {
+      width: 30px;
+    }
   }
 }
 

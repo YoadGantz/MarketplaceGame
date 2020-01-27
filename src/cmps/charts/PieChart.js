@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Tooltip } from 'recharts';
+import { PieChart, Pie, Tooltip} from 'recharts';
 
 import './_charts.scss'
 
@@ -36,6 +36,7 @@ export default class PieCharts extends PureComponent {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    console.log(midAngle);
 
     return (
       <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">

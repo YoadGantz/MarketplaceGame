@@ -62,10 +62,8 @@ class GamePreview extends Component {
         const { game, user, isProfile, isDashboard, isCart } = this.props
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
-            <li className="game-card" onClick={() => this.onOpenDetails(game._id)}>
-                <div className="img-container">
-                    <img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img>
-                </div>
+            <li className={isDashboard? "game-card" : "game-card"} onClick={() => this.onOpenDetails(game._id)}>
+                { !isDashboard && <div className="img-container"><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div>}
                 <section className="details-container">
                     <div className="flex align-center">
                         <strong className="full game-title" title={game.title}>{game.title}</strong>
@@ -80,11 +78,11 @@ class GamePreview extends Component {
                         {!isProfile &&
                             <p className="rating">{review} ({game.reviews.length})</p>}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
-                        {isProfile && !isDashboard &&
-                            <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img}/></button>}
+                        {isProfile && !isDashboard && <div className="play-btn-container flex flex-end">
+                            <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img} /></button></div>}
                         {isProfile && isDashboard && <div className="dsh-btn-container flex space-between">
-                            <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img}/></button>
-                            {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin}/></button>}
+                            <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>
+                            {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin} /></button>}
                         </div>}
                     </div>
                 </section >
