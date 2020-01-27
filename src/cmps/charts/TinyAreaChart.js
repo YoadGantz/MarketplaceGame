@@ -20,7 +20,7 @@ export default class TinyAreaChart extends PureComponent {
         for (let i = 30; i >= 0; i--) {
             let date = new Date()
             date.setDate(date.getDate() - i)
-            const formatDate=`${date.getDate()}/${date.getMonth()+1}`
+            const formatDate = `${date.getDate()}/${date.getMonth() + 1}`
             let orderCount
             if (gameOrders[formatDate]) {
                 orderCount = gameOrders[formatDate]

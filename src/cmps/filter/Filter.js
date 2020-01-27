@@ -27,7 +27,6 @@ export default class Filter extends Component {
         return <div className="search-container align-center flex">
             <input className="search-input input" value={this.state[this.state.filterBy]}
                 type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
-            <div className='flex column'>
                 <input className='hidden' name='filterBy' onChange={this.inputChange} defaultChecked id='title' value='title' type='radio' />
                 <label className='btn title-btn pointer' htmlFor='title'>
                     title
@@ -36,7 +35,6 @@ export default class Filter extends Component {
                 <label className='btn tag-btn pointer' htmlFor='tag'>
                     tag
              </label>
-            </div>
             <span>Sort by: </span>
             <button className='btn filter-btn' onClick={sortByDownloads}>Popular</button>
             <button className='btn filter-btn' onClick={sortByPrice}>Price</button>

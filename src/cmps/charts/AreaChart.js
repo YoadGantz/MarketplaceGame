@@ -18,11 +18,11 @@ export default class Graph extends PureComponent {
     for (let i = 31; i >= 0; i--) {
       let date = new Date()
       date.setDate(date.getDate() - i)
-      const formatDate=`${date.getDate()}/${date.getMonth()+1}`
+      const formatDate = `${date.getDate()}/${date.getMonth() + 1}`
       let price
       if (purchases[formatDate]) {
         price = purchases[formatDate]
-      } else{
+      } else {
         price = 0
       }
       data.push({ name: formatDate, purchases: price })

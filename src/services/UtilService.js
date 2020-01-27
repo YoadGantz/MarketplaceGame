@@ -4,8 +4,8 @@ export default {
     sortByDownloads,
     getGraphsDetails,
     getGameRating,
-      dateByMillisecond,
-     dateFromObjectId,
+    dateByMillisecond,
+    dateFromObjectId,
     formatDate,
     getSum,
     sortByPrice,
@@ -15,16 +15,10 @@ export default {
 function dateFromObjectId(objectId) {
     const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000)
     return date
-  };
+};
 
-function MiliseccondByDate(time) {
-    let date = new Date()
-    if (date) {
-        date.setDate(date.getDate() - time);
-    }
-    return date.getTime()
-  };
-  
+
+
 
 function getGameRating(game) {
     const { reviews } = game
@@ -44,7 +38,7 @@ function dateByMillisecond(time) {
     if (time) {
         date.setDate(date.getDate() - time);
     }
-    return date
+    return date.getTime()
 }
 
 async function getSum(games) {
@@ -117,14 +111,14 @@ function formatDate(date) {
     return fullDate
 }
 
-async function getGraphsDetails(games, type, date = 31) {
+async function getGraphsDetails(games, type, time = 31) {
     const prms = []
     const ordersBy = {}
     const gameByNameOrder = []
     const ordersByGame = []
     games.forEach((game) => {
         prms.push(OrderService.query({
-            lastMonthId: MiliseccondByDate(date),
+            lastMonthId: dateByMillisecond(time),
             gameIds: game._id
         }))
         gameByNameOrder.push(game.title)
@@ -133,11 +127,11 @@ async function getGraphsDetails(games, type, date = 31) {
     const gameOrders = await Promise.all(prms)
     gameOrders.forEach((orders, i) => {
         return orders.forEach((order, idx) => {
-            const date = new Date(order.createdAt / 1 )
+            const date = new Date(order.createdAt / 1)
             let currOrderDate = date.getDate()
-            currOrderDate+=`/${date.getMonth()+1}`
+            currOrderDate += `/${date.getMonth() + 1}`
             let num = ordersBy[currOrderDate]
-            if (num && idx===0)return
+            if (num && idx === 0) return
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }

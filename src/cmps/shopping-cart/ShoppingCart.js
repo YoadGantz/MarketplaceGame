@@ -16,7 +16,7 @@ class ShoppingCart extends Component {
     state = {
         games: null,
         gamesIds: null,
-        sum:null
+        sum: null
     }
 
     componentDidMount() {
@@ -30,8 +30,8 @@ class ShoppingCart extends Component {
             gamesToRender = await GameService.query({ shoppingCartIds: gamesIds })
         }
         this.setState({ gamesIds, games: gamesToRender })
-        if (gamesIds){
-        this.getSum()
+        if (gamesIds) {
+            this.getSum()
         }
     }
 
@@ -45,7 +45,7 @@ class ShoppingCart extends Component {
     }
 
     onBuyClick = () => {
-        if (!this.props.user) {history.push('/login'); return}
+        if (!this.props.user) { history.push('/login'); return }
 
         const order = {
             createdAt: UtilService.dateByMillisecond(),
@@ -56,11 +56,11 @@ class ShoppingCart extends Component {
         this.props.clearCart()
         this.loadGames()
     }
-    getSum= () =>{
-      const sum=  this.state.games.reduce((acc,currGame)=>{
-          return  acc+= currGame.price
-        },0)
-        this.setState({sum})
+    getSum = () => {
+        const sum = this.state.games.reduce((acc, currGame) => {
+            return acc += currGame.price
+        }, 0)
+        this.setState({ sum })
     }
 
     render() {
@@ -69,8 +69,8 @@ class ShoppingCart extends Component {
                 <div className="modal-content">
                     <GameList user={this.props.user} onUpdateUser={this.onUpdateUser} onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
                     <div className='flex justify-center align-center'>
-                      <div>${this.state.sum}</div>
-                    <button className="pointer cla-btn" onClick={this.onBuyClick}>Purchase</button>
+                        <div>${this.state.sum}</div>
+                        <button className="pointer cla-btn" onClick={this.onBuyClick}>Purchase</button>
                     </div>
                 </div>
                 : <h3 className="flex column totally-center">Your shopping cart is empty</h3>}
