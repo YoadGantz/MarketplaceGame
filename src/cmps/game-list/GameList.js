@@ -3,8 +3,8 @@ import React from 'react'
 import ModalGamePreview from '../modal-game-preview/ModalGamePreview';
 
 export default function GameList(props) {
-    const { games, user ,isModal} = props;
-    return <ul className="cards-container clean-list container">
+    const { games, user, isModal } = props;
+    return <ul className={props.isHomepage ? "hp-cards-container clean-list container" : "cards-container clean-list container"}>
         {games?.map((game) => {
             if (isModal) {
                 return <ModalGamePreview
@@ -17,16 +17,15 @@ export default function GameList(props) {
                 />
             }
             return <GamePreview
-                key={game._id}
-                onRemoveFromCart={props.onRemoveFromCart}
-                isCart={props.isCart}
-                history={props.history}
-                isProfile={props.isProfile}
-                isDashboard={props.isDashboard}
+                game={game}
                 user={user}
+                key={game._id}
+                isProfile={props.isProfile}
+                isHomepage={props.isHomepage}
+                isDashboard={props.isDashboard}
                 onUpdateUser={props.onUpdateUser}
                 onRemoveGame={props.onRemoveGame}
-                game={game}>
+                >
             </GamePreview>
         })}
     </ul >

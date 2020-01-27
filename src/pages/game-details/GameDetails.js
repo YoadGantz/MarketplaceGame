@@ -15,6 +15,7 @@ import Review from '../../cmps/review/Review';
 import Modal from '../../cmps/modal/Modal'
 import './_GameDetails.scss';
 
+
 class GameDetails extends Component {
   state = {
     currMediaUrl: '',

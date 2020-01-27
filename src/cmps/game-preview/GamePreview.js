@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import history from '../../history'
 
 import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
@@ -32,11 +33,11 @@ class GamePreview extends Component {
     }
 
     onOpenDetails = (gameId) => {
-        this.props.history.push(`/game/${gameId}`)
+        history.push(`/game/${gameId}`)
     }
     onOpenEdit = (ev) => {
         ev.stopPropagation()
-        this.props.history.push(`/edit/${this.props.game._id}`)
+        history.push(`/edit/${this.props.game._id}`)
     }
 
     onRemoveFromCart = (ev) => {
@@ -47,7 +48,7 @@ class GamePreview extends Component {
 
     onPlayClick = (ev) => {
         ev.stopPropagation()
-        this.props.history.push(`/play/${this.props.game._id}`)
+        history.push(`/play/${this.props.game._id}`)
     }
 
     dashboardChart = async () => {
@@ -77,15 +78,17 @@ class GamePreview extends Component {
             <li className={isDashboard ? "game-card" : "game-card"} onClick={() => this.onOpenDetails(game._id)}>
                 {!isDashboard ? <div className="img-container"><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div> :
                     <TinyAreaChart game={game} gameOrders={gameOrders} />}
-                <section className="details-container">
-                    <div className="flex align-center">
-                        <strong className="full game-title" title={game.title}>{game.title}</strong>
-                        {isProfile && isDashboard && <p className="price">${game.price}</p>}
-                        {!isProfile &&
-                            <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
-                                full_heart : empty_heart} />}
+                <section className="details-container flex column">
+                    <div className="full">
+                        <div className="flex align-center">
+                            <strong className="full game-title" title={game.title}>{game.title}</strong>
+                            {isProfile && isDashboard && <p className="price">${game.price}</p>}
+                            {!isProfile &&
+                                <img alt="like" className="like-icon" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+                                    full_heart : empty_heart} />}
+                        </div>
+                        <strong className="publisher">{this.state.publisherName}</strong>
                     </div>
-                    <strong className="publisher">{this.state.publisherName}</strong>
                     <div className="flex space-between">
                         {!isProfile && <p className="price">${game.price}</p>}
                         {!isProfile &&
