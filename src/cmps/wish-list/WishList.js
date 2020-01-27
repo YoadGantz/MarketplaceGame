@@ -22,7 +22,7 @@ class WishList extends Component {
             let wishedGames = games.filter(game => user.wishedGames.includes(game._id))
             return <div className="modal">
                 <div className="modal-content">
-                    <GameList history={this.props.history} user={user} onUpdateUser={this.onUpdateUser} games={wishedGames}></GameList>
+                    <GameList isModal={true} isWishList={true} history={this.props.history} user={user} onUpdateUser={this.onUpdateUser} games={wishedGames}></GameList>
                 </div>
             </div>
         }

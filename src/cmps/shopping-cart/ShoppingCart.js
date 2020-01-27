@@ -30,7 +30,7 @@ class ShoppingCart extends Component {
             gamesToRender = await GameService.query({ shoppingCartIds: gamesIds })
         }
         this.setState({ gamesIds, games: gamesToRender })
-        if (gamesIds) {
+        if (this.state.games) {
             this.getSum()
         }
     }
@@ -67,9 +67,9 @@ class ShoppingCart extends Component {
         return <div className="modal totally-center">
             {(this.state.games && this.state.games.length) ?
                 <div className="modal-content">
-                    <GameList user={this.props.user} onUpdateUser={this.onUpdateUser} onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
-                    <div className='flex justify-center align-center'>
-                        <div>${this.state.sum}</div>
+                    <GameList isModal={true} user={this.props.user} onUpdateUser={this.onUpdateUser} onRemoveFromCart={this.onRemoveFromCart} isCart={true} games={this.state.games} history={this.props.history}></GameList>
+                    <div className='flex justify-center align-center space-between '>
+                        <div className='money-sum'> total: ${this.state.sum}</div>
                         <button className="pointer cla-btn" onClick={this.onBuyClick}>Purchase</button>
                     </div>
                 </div>

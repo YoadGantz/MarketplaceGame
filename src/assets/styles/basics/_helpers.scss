@@ -57,6 +57,9 @@
   &.flex-end {
     justify-content: flex-end;
   }
+  &.align-end{
+    align-items: flex-end;
+  }
 }
 
 .absolute{
@@ -124,7 +127,7 @@ position: absolute;
   position: fixed;
   height: 90%;
   max-height: 100%;
-  width: 340px;
+  width: 350px;
   max-width: 100%;
   background-color: #1f2335c7;
   top: 59px;
@@ -142,6 +145,6 @@ position: absolute;
   height: 100%;
   overflow: auto;
   @include for-normal-layout {
-    padding: 20px 20px 20px 20px;
+    padding: 15px
   }
 }
