@@ -5,12 +5,14 @@ import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
 import { removeGameFromCart } from '../../actions/cartActions'
 
+import './_GamePreview.scss'
 
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.png'
-
-import './_GamePreview.scss'
+import trash_bin from '../../assets/icons/bin.svg'
+import edit_img from '../../assets/icons/edit.svg'
+import play_img from '../../assets/icons/play.svg'
 
 class GamePreview extends Component {
     state = {
@@ -55,6 +57,7 @@ class GamePreview extends Component {
         }
         this.props.onUpdateUser(updatedUser)
     }
+
     render() {
         const { game, user, isProfile, isDashboard, isCart } = this.props
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
@@ -78,10 +81,10 @@ class GamePreview extends Component {
                             <p className="rating">{review} ({game.reviews.length})</p>}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
-                            <button className="play-btn btn" onClick={this.onPlayClick}>Play</button>}
+                            <button className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img}/></button>}
                         {isProfile && isDashboard && <div className="dsh-btn-container flex space-between">
-                            <button className="btn" onClick={this.onOpenEdit}>Edit</button>
-                            {isDashboard && <button className="btn" onClick={this.onRemoveGame}>X</button>}
+                            <button className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img}/></button>
+                            {isDashboard && <button className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin}/></button>}
                         </div>}
                     </div>
                 </section >
