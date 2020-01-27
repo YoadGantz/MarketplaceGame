@@ -3,8 +3,43 @@
 .search-container {
   padding-top: 20px;
   margin-block-end: 20px;
+
+ & select{
+  background-color: $clr2;
+  }
   .search-input {
     margin-inline-end: 20px;
+  }
+
+  .title-btn{
+    width: 50px;
+    margin-inline-start: 10px;
+    filter: grayscale(1);
+    background-color: $clr2;
+  }
+  .tag-btn{
+    width: 50px;
+    margin-inline-start: 10px;
+    margin-inline-end: 10px;
+    filter: grayscale(1);
+    background-color: $clr2;
+
+  }
+
+  #title:checked ~ .title-btn{
+    filter: grayscale(0);
+    background-color: $clr2;
+    &:hover {
+      background-color: lighten($clr2, 20%);
+    }
+  }
+
+  #tag:checked ~ .tag-btn{
+    filter: grayscale(0);
+    background-color: $clr2;
+    &:hover {
+      background-color: lighten($clr2, 20%);
+    }
   }
   .filter-btn {
     margin-inline-start: 10px;
