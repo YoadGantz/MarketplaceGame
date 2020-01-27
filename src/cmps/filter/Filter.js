@@ -21,7 +21,6 @@ export default class Filter extends Component {
         this.props.onFilterBy(this.state)
     }
 
-
     render() {
         const { sortByPrice, sortByDownloads } = this.props
         const { filterBy } = this.state

@@ -1,2 +1,20 @@
-.recharts-wrapper {
+.chart {
+  max-width: 500px;
+  .legend {
+    align-self: flex-end;
+    .legend-item:not(:last-child) {
+      margin-inline-end: 10px;
+    }
+    .title {
+      font-size: 0.875rem;
+      max-width: 100px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+  .chart-title {
+    font-size: 1.3rem;
+    margin-block-end: 10px;
+  }
 }
