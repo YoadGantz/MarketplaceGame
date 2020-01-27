@@ -7,7 +7,7 @@ export default function MediaUrlsList(props) {
         <div className="media-container flex" key={url}>
           <iframe src={url} allowFullScreen='allowfullscreen' title='video' alt={url} />
           <span
-            className="pointer"
+            className="pointer absolute"
             onClick={() => props.removeMediaAndTags("mediaUrls", idx)}
           >
             X
@@ -19,7 +19,7 @@ export default function MediaUrlsList(props) {
       <div className="media-container  flex" key={url}>
         <img src={url} alt={url} />
         <span
-          className="pointer"
+          className="pointer absolute"
           onClick={() => props.removeMediaAndTags("mediaUrls", idx)}
         >
           X
