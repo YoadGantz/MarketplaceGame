@@ -14,6 +14,7 @@ import PieChart from '../charts/PieChart';
 import InfoCard from '../infocard/InfoCard';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
+
 import './_Dashboard.scss'
 
 

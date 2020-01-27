@@ -1,14 +1,16 @@
+@import "../../assets/styles/setup/variables.scss";
+
 .search-container {
   padding-top: 20px;
-  margin-bottom: 20px;
+  margin-block-end: 20px;
   .search-input {
-    margin-right: 20px;
+    margin-inline-end: 20px;
   }
-  button {
+  .filter-btn {
     margin-inline-start: 10px;
-    background-color: lighten(#183348, 0%);
+    background-color: $clr2;
+    &:hover {
+      background-color: lighten($clr2, 20%);
+    }
   }
-}
-button:hover {
-  background-color: lighten(#183348, 20%);
 }
