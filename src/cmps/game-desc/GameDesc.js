@@ -86,7 +86,7 @@ export default class GameDesc extends Component {
         <p className="description full">{description}</p>
         <div className="flex space-between wish-btn">
           <img alt="like" className="like-icon" onClick={this.props.onToggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === _id) ? full_heart : empty_heart} />
-          <button>{priceOrPlay}</button>
+          <div>{priceOrPlay}</div>
         </div>
       </div>)
   }

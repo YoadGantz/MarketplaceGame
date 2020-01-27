@@ -1,4 +1,10 @@
+@import '../../assets/styles/setup/_mixins.scss';
+@import '../../assets/styles/setup/variables.scss';
+
+
 .social-content-container {
+  margin-bottom: 10px;
+
   border-radius: 8px;
   max-height: 260px;
   overflow: overlay;
@@ -12,5 +18,36 @@
   font-size: 1rem;
   transition: background-color 0.4s;
   }
+  & textarea{
+    width: 100%;
+  }
 }
  
+.comments-container{
+  width: 100%;
+
+  textarea{
+    width: 50%;
+    font-family: inherit;
+  }
+  @include for-normal-layout {
+    width: 50%;
+}
+}
+
+.game-content-container{
+  flex-direction: column;
+  iframe{
+    width: 100%;
+  }
+  textarea{
+    resize: none;
+    width: 100%;
+    font-family: inherit;
+  }
+
+  @include for-normal-layout {
+      flex-direction: row;
+  }
+  
+}
