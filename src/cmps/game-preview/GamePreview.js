@@ -83,7 +83,8 @@ class GamePreview extends Component {
                         <div className={isModal ?"flex align-center column" : "flex align-center"}>
                             <strong className={isModal ? 'title':"full game-title"} title={game.title}>{game.title}</strong>
                             {isProfile && isDashboard && <p className="price">${game.price}</p>}
-                            {!isProfile &&
+                            
+                            {!isProfile && !isModal&&
                                 <img alt="like" className={isModal ? 'flex align-self-end like-icon' :"like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
                                     full_heart : empty_heart} />}
                         </div>
@@ -100,7 +101,11 @@ class GamePreview extends Component {
                         {isProfile && isDashboard && <div className="dsh-btn-container flex space-between">
                             <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>
                             {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin} /></button>}
+                           
                         </div>}
+                        {isModal&&
+                                <img alt="like" className={isModal ? 'flex align-self-end like-icon' :"like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
+                                    full_heart : empty_heart} />}
                     </div>
                 </section >
             </li >
