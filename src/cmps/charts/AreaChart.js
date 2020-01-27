@@ -19,7 +19,6 @@ export default class Graph extends PureComponent {
       let date = new Date()
       date.setDate(date.getDate() - i)
       const formatDate=`${date.getDate()}/${date.getMonth()+1}`
-      console.log(purchases)
       let price
       if (purchases[formatDate]) {
         price = purchases[formatDate]
