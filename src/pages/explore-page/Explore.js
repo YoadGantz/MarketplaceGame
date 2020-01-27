@@ -14,7 +14,7 @@ class Explore extends Component {
     state = { games: null, isAscending: false }
 
     componentDidMount = async () => {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         this.onFilterBy()
     }
 
@@ -23,8 +23,8 @@ class Explore extends Component {
     }
 
     onFilterBy = async (filterBy) => {
-       await this.props.loadGames(filterBy)
-       this.setState({ games: this.props.games })
+        await this.props.loadGames(filterBy)
+        this.setState({ games: this.props.games })
     }
 
     sortByDownloads = async () => {

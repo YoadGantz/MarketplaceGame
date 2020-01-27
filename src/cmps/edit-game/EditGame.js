@@ -15,7 +15,8 @@ class EditGame extends Component {
     price: "",
     publishedAt: '',
     tags: null,
-    currTag: ''
+    currTag: '',
+    loading: false
   };
 
   componentDidMount = async () => {
@@ -43,6 +44,7 @@ class EditGame extends Component {
     if (!newGame.thumbnail) return
     if (this.props.match.params.id) {
       delete newGame.currTag
+      delete newGame.loading
       const game = await GameService.update(newGame)
       return this.props.history.push(`/game/${game._id}`)
     }
@@ -51,6 +53,7 @@ class EditGame extends Component {
     newGame.comments = []
     newGame.reviews = []
     delete newGame.currTag
+    delete newGame.loading
     const game = await GameService.add(newGame)
     return this.props.history.push(`/game/${game._id}`)
   }
@@ -58,12 +61,13 @@ class EditGame extends Component {
   addMediaAndTags = async ev => {
     const fieldName = ev.target.name
     if (fieldName !== "tags") {
+      this.setState({ loading: true })
       const urls = await MediaUploadService(ev.target.files);
       if (fieldName === 'thumbnail') {
-        return this.setState({ thumbnail: urls[0] })
+        return this.setState({ thumbnail: urls[0], loading: false })
       }
       return this.setState(prevState => ({
-        mediaUrls: [...prevState.mediaUrls, ...urls]
+        mediaUrls: [...prevState.mediaUrls, ...urls], loading: false
       }));
     }
     if (!this.state.currTag) return
