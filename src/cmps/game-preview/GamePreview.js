@@ -75,7 +75,7 @@ class GamePreview extends Component {
         const { gameOrders } = this.state
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
-            <li className={isDashboard ? "game-card" : isModal ? 'flex modal-game-container' : 'game-card' } onClick={() => this.onOpenDetails(game._id)}>
+            <li className={isDashboard ? "game-card flex column dsh-game-card" : isModal ? 'flex modal-game-container' : 'game-card' } onClick={() => this.onOpenDetails(game._id)}>
                 {!isDashboard ? <div className={isModal ? '':"img-container"}><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div> :
                     <TinyAreaChart game={game} gameOrders={gameOrders} />}
                 <section className="details-container flex column">

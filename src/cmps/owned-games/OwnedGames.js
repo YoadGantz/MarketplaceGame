@@ -49,7 +49,7 @@ class OwnedGames extends Component {
     render() {
         const { games } = this.state
         return (
-            <div className="content-container container">
+            <div className="container">
                 <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy}></Filter>
                 <GameList isProfile={true} history={this.props.history} games={games}></GameList>
             </div>

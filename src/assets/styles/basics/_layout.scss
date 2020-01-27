@@ -23,7 +23,7 @@
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  max-height: 480px;
+  max-height: 500px;
   > *:first-child {
     grid-area: first-card;
     display: flex;
@@ -40,7 +40,6 @@
   }
   >*:not(:first-child){
     .img-container {
-      height:160px;
       img {
         height: 100%;
       }
