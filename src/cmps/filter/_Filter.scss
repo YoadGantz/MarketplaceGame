@@ -5,6 +5,8 @@
   margin-block-end: 20px;
   .search-input {
     margin-inline-end: 20px;
+    max-width: 200px;
+    color:$clr6;
   }
   .filter-btn {
     margin-inline-start: 10px;

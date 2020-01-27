@@ -81,10 +81,10 @@ class GamePreview extends Component {
                             <p className="rating">{review} ({game.reviews.length})</p>}
                         {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard &&
-                            <button className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img}/></button>}
+                            <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img}/></button>}
                         {isProfile && isDashboard && <div className="dsh-btn-container flex space-between">
-                            <button className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img}/></button>
-                            {isDashboard && <button className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin}/></button>}
+                            <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img}/></button>
+                            {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin}/></button>}
                         </div>}
                     </div>
                 </section >
