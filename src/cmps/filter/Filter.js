@@ -22,8 +22,8 @@ export default class Filter extends Component {
     render() {
         const { sortByPrice, sortByDownloads } = this.props
         return <div className="search-container totally-center">
-            <input className="search-input input" results name='title' type="search" placeholder="Search by title" onChange={this.onFilterBy} />
-            <input className="search-input input" results name='tag' type='text' placeholder='Search by tags' onChange={this.onFilterBy} />
+            <input className="search-input input" name='title' type="search" placeholder="Search by title" onChange={this.onFilterBy} />
+            <input className="search-input input" name='tag' type='text' placeholder='Search by tags' onChange={this.onFilterBy} />
             <span>Sort by: </span>
             <button className='btn filter-btn' onClick={sortByDownloads}>Popular</button>
             <button className='btn filter-btn' onClick={sortByPrice}>Price</button>
