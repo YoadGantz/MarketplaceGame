@@ -47,25 +47,16 @@ class ModalGamePreview extends Component {
                         <img alt="like" className="modal-buttons pointer" onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === _id) ?
                             full_heart : empty_heart} />}
                    <p>${price}</p>
-
                 </div>
             </div>
-
-
-
         </div>)
-
-
     }
 }
-
-
 
 const mapStateToProps = state => {
     return {
         cart: state.cartStore.cart,
         user: state.userStore.loggedInUser
-
     };
 };
 

@@ -13,7 +13,6 @@ export default class TinyAreaChart extends PureComponent {
         }
     }
 
-
     setData = (gameOrders) => {
         const data = []
         if (!this.props.game) return
