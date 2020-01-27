@@ -1,7 +1,14 @@
 .search-container {
   padding-top: 20px;
   margin-bottom: 20px;
-    .search-input {
+  .search-input {
     margin-right: 20px;
   }
+  button {
+    margin-inline-start: 10px;
+    background-color: lighten(#183348, 0%);
+  }
+}
+button:hover {
+  background-color: lighten(#183348, 20%);
 }

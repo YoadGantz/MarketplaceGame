@@ -34,7 +34,7 @@ export default class Comment extends Component {
           {commentMap}
         </div>
         <h3>Add a Comment</h3>
-        <div className='flex new-comment-container'>
+        <div className='flex new-comment-container align-center'>
         <textarea
           type="text"
           name="text"
@@ -42,7 +42,7 @@ export default class Comment extends Component {
           onChange={this.inputChange}
           placeholder="write your text"
         />
-        <button className='add-button' onClick={this.onAddComment} type='primary'>Add comment</button>
+        <button className='add-button' onClick={this.onAddComment} type='primary'>Add Comment</button>
         </div>
       </div>
     );
