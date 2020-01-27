@@ -52,7 +52,6 @@ class GamePreview extends Component {
     }
 
     dashboardChart = async () => {
-
         const gameOrders = await UtilService.getGraphsDetails([this.props.game])
         this.setState({ gameOrders })
     }
