@@ -1,50 +1,49 @@
 @import "../../assets/styles/setup/variables.scss";
 
 .search-container {
-  padding-top: 20px;
-  margin-block-end: 20px;
+  padding-block-start: 30px;
+  margin-block-end: 30px;
+  > *:not(:last-child) {
+    margin-inline-end: 10px;
+  }
 
- & select{
-  background-color: $clr2;
+  & select {
+    background-color: $clr2;
   }
   .search-input {
-    margin-inline-end: 10px;
+    background-color: $clr2;
     max-width: 200px;
-    color:$clr6;
-    font-family:inherit;
+    color: $clr6;
+    font-family: inherit;
+    padding: 11px 10px;
   }
 
-  .title-btn{
-    width: 50px;
+  .title-btn {
     filter: grayscale(1);
     background-color: $clr2;
+    padding: 7px 10px;
   }
-  .tag-btn{
-    width: 50px;
-    margin-inline-start: 10px;
-    margin-inline-end: 10px;
-    filter: grayscale(1);
-    background-color: $clr2;
-
-  }
-
-  #title:checked ~ .title-btn{
+  #title:checked ~ .title-btn {
     filter: grayscale(0);
-    background-color: $clr2;
+    background-color: lighten($clr2, 20%);
     &:hover {
       background-color: lighten($clr2, 20%);
     }
   }
-
-  #tag:checked ~ .tag-btn{
-    filter: grayscale(0);
+  .tag-btn {
+    filter: grayscale(1);
     background-color: $clr2;
+    padding: 7px 10px;
+  }
+
+  #tag:checked ~ .tag-btn {
+    filter: grayscale(0);
+    background-color: lighten($clr2, 20%);
     &:hover {
       background-color: lighten($clr2, 20%);
     }
   }
   .filter-btn {
-    margin-inline-start: 10px;
     background-color: $clr2;
     &:hover {
       background-color: lighten($clr2, 20%);
