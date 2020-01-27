@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Tooltip } from 'recharts';
+
+import './_charts.scss'
+
 export default class PieCharts extends PureComponent {
   state = {
     data: [{ fill: '#16578F', name: 'publish Games', value: 1 }],
@@ -23,7 +26,7 @@ export default class PieCharts extends PureComponent {
       if (!sum[i]) return
       if (!this.props.user && i > 3) return
       gameTitles.push(game.title)
-      data.push({ fill: colors[i], name: game.title, value:sum[i]})
+      data.push({ fill: colors[i], name: game.title, value: sum[i] })
     })
     this.setState({ data, gameTitles })
   }
@@ -45,32 +48,32 @@ export default class PieCharts extends PureComponent {
     const { data, gameTitles, colors } = this.state
 
     return (
-      <div>
-        <PieChart width={400} height={400}>
-          <Pie
-            dataKey="value"
-            isAnimationActive={true}
-            data={data}
-            cx={200}
-            cy={200}
-            outerRadius={100}
-            fill="#8884d8"
-            labelLine={false}
-            label={this.renderCustomizedLabel} />
-          <Tooltip />
-        </PieChart>
-        <table>
-          <tbody>
+      <div className="flex column chart align-center">
+        <strong className="chart-title">Income distribution per game</strong>
+        <div className="flex column align-center">
+          <PieChart width={250} height={250}>
+            <Pie
+              dataKey="value"
+              isAnimationActive={true}
+              data={data}
+              cx={100}
+              cy={100}
+              outerRadius={100}
+              fill="#8884d8"
+              labelLine={false}
+              label={this.renderCustomizedLabel} />
+            <Tooltip />
+          </PieChart>
+          <div className="legend flex wrap">
             {gameTitles && gameTitles.map((title, i) => {
-              return <tr key={title}>
-                <td className="menu-color" style={{ background: colors[i], width: "20px" }}>
-                </td>
-                <td>{title}</td>
-              </tr>
+              return <div className="legend-item flex" key={title}>
+                <div className="menu-color" style={{ background: colors[i], width: "20px", height: "20px" }}></div>
+                <div className="title">{title}</div>
+              </div>
             })}
-          </tbody>
-        </table>
+          </div>
+        </div >
       </div >
-    );
+    )
   }
 }
