@@ -8,11 +8,20 @@
 }
 
 .social-content-container {
+  margin-bottom: 10px;
   max-height: 300px;
   overflow: overlay;
   & textarea{
-    height: 47px;
+    height: 60px;
     width: 40%;
+    resize: none;
+    background-color: #336895;
+    color: white;
+    border: #2196F3;
+    border-radius: 5px;
+  }
+  & div{
+    margin-top: 5px;
   }
   
   & img {
@@ -28,14 +37,26 @@
   font-family: montserrat;
   font-size: 1rem;
   transition: background-color 0.4s;
+  width: 150px;
+  height: 50px;
   &:hover {
     background-color: lighten(#183348, 40%);
   }
 }
 .new-comment-container{
+  margin-bottom: 10px;
+  margin-top: 10px;
   textarea{
-    height: 47px;
+    height: 60px;
     width: 40%;
+    resize: none;
+    background-color: darken(#336895,30%);
+    color: white;
+    border: #2196F3;
+    border-radius: 5px;
+    font-family: inherit;
+    margin-inline-end: 5px;
+
   }
 }
 
@@ -43,8 +64,16 @@
   padding: 0;
   border-radius: 8px;
   textarea{
-    height: 47px;
+    height: 60px;
     width: 40%;
+    resize: none;
+    background-color: darken(#336895,30%);
+    color: white;
+    border: #2196F3;
+    border-radius: 5px;
+    font-family: inherit;
+    margin-inline-end: 5px;
+
   }
   & img{
     width: 50px;
@@ -71,9 +100,11 @@
 }
 .like-img {
   filter: grayscale(1);
+  margin-inline-end: 5px;
 }
 .dislike-img {
   filter: grayscale(1);
+  margin-inline-end: 5px;
 }
 
 #like:checked ~ .like-img {

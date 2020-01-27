@@ -21,8 +21,8 @@ export default class NewReview extends Component {
         const { text } = this.state
         return (
             <div>
-                <h3>Add a review</h3>
-                <div className='flex align-center'>
+                <h3>Add a Review</h3>
+                <div className='new-comment-container flex align-center'>
                 <textarea
                     type="text"
                     name="text"
