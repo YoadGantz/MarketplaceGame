@@ -7,6 +7,7 @@ import './_GameDesc.scss'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import play_img from '../../assets/icons/play.svg'
+import history from "../../history";
 
 export default class GameDesc extends Component {
   state = { orderCount: '', rating: '', publisherName: '', isOwned: false }
@@ -60,11 +61,15 @@ export default class GameDesc extends Component {
     }
   }
 
+  onPlayClikc = () => {
+    history.push(`/play/${this.props.game._id}`)
+  }
+
   render() {
     const { game, user } = this.props
     const { thumbnail, description, publishedAt, price, _id } = game
     const { publisherName, rating, orderCount, isOwned } = this.state
-    const priceOrPlay = isOwned ? <button className="btn play-btn"><img alt="play" title="Play" src={play_img} /></button> :
+    const priceOrPlay = isOwned ? <button onClick={this.onPlayClikc} className="btn play-btn"><img alt="play" title="Play" src={play_img} /></button> :
       <button type="primary" className='buy-btn' onClick={this.onAddToCart}> {price}$ Add to cart </button>
     const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)

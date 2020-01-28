@@ -36,7 +36,7 @@ export default class Filter extends Component {
                 Tag
              </label>
             <span>Sort by: </span>
-            <button className='btn filter-btn' onClick={sortByDownloads}>Popular</button>
+            <button className='btn filter-btn' onClick={sortByDownloads}>Popularity</button>
             <button className='btn filter-btn' onClick={sortByPrice}>Price</button>
         </div>
     }
