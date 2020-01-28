@@ -71,18 +71,19 @@ class GamePreview extends Component {
     }
 
     render() {
-        const { game, user, isProfile, isDashboard, isModal, isCart } = this.props
+        const { game, user, isProfile, isDashboard, isModal, isWishList } = this.props
         const { gameOrders } = this.state
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
             <li className={isDashboard ? "game-card flex column dsh-game-card" : isModal ? 'flex modal-game-container' : 'game-card'} onClick={() => this.onOpenDetails(game._id)}>
                 {!isDashboard ? <div className={isModal ? '' : "img-container"}><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div> :
-                    <TinyBarChart game={game} gameOrders={gameOrders} />}
+                    <TinyAreaChart game={game} gameOrders={gameOrders} />}
                 <section className="details-container flex column">
                     <div className="full">
-                        <div className={isModal || isDashboard ? "flex align-center column" : "flex align-center"}>
+                        <div className={isModal ? "flex align-center column" : "flex align-center"}>
                             <strong className={isModal || isDashboard ? 'title' : "full game-title"} title={game.title}>{game.title}</strong>
                             {isProfile && isDashboard && <p className="price">${game.price}</p>}
+
                             {!isProfile && !isModal &&
                                 <img alt="like" className={isModal ? 'flex align-self-end like-icon' : "like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
                                     full_heart : empty_heart} />}
@@ -94,14 +95,14 @@ class GamePreview extends Component {
                         {!isProfile && <p className="price">${game.price}</p>}
                         {!isProfile && !isModal &&
                             <p className="rating">{review} ({game.reviews.length})</p>}
-                        {isCart && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
+                        {isModal && !isWishList && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard && <div className="play-btn-container flex flex-end">
                             <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img} /></button></div>}
                         {isProfile && isDashboard && <div className="dsh-btn-container flex flex-end">
                             <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>
                             {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin} /></button>}
                         </div>}
-                        {isModal &&
+                        {isWishList &&
                             <img alt="like" className={isModal ? 'flex align-self-end like-icon' : "like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
                                 full_heart : empty_heart} />}
                     </div>
