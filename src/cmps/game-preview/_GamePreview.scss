@@ -16,10 +16,7 @@
     filter: brightness(2);
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
+    padding: 10px 15px;
   }
   .price {
     font-weight: bold;
@@ -42,15 +39,6 @@
     margin-inline-end: 10px;
   }
 
-  .dsh-btn-container {
-    width: 100%;
-    > * {
-      padding: 5px 5px;
-    }
-    :first-child {
-      margin-inline-end: 5px;
-    }
-  }
   .play-btn-container {
     width: 100%;
     img {
@@ -63,25 +51,67 @@
   width: 25px;
 }
 
-.modal-game-container {
-  background-image: url(/static/media/background_spotlight.f4f0b632.jpg);
-  filter: brightness(2);
-  background-repeat: no-repeat;
-  background-size: cover;
-  .game-thumbnail {
-    width: 100%;
-    height: 100%;
-  }
-  .title {
-    max-width: 14ch;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-}
 .dsh-game-card {
-  border: 1px solid rgba(255, 255, 255, 0.527);
+  border: 1px solid rgba(255, 255, 255, 0.842);
+  .details-container {
+    background-color: lighten(#3878a7,10%);
+    background-image: none;
+    filter: none;
+    padding: 10px 15px;
+    color: $clr6;
+    strong {
+      white-space: normal;
+      overflow: visible;
+    }
+    :nth-child(1) {
+      :first-child {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  .dsh-btn-container {
+    width: 100%;
+    justify-content: flex-start;
+    > * {
+      padding: 5px 5px;
+    }
+    :hover {
+      background-color: #517692;
+    }
+  }
 }
 
-.money-sum{
-  margin-inline-start: 20px;
+.modal-card {
+  .short-title {
+    max-width: 22ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size:0.9rem;
+  }
+  .details-container {
+    background-image: url(/static/media/background_spotlight.f4f0b632.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 80%;
+    :first-child {
+      > * {
+        align-items: flex-start;
+        margin-inline-start: 5px;
+      }
+    }
+    >*:nth-child(2) {
+      margin-inline-start: 9px;
+      margin-inline-end: 8px;
+      margin-block-end:3px;
+    }
+  }
+  .img-container {
+    width: 35%;
+    .game-thumbnail {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }

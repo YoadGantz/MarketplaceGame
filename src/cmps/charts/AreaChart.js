@@ -46,10 +46,9 @@ export default class Graph extends PureComponent {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="purchases" stroke="#8884d8" fill="#8884d8" />
+          <Area type="monotone" dataKey="purchases" stroke="#517692" fill="#6899bc" />
         </AreaChart>
       </div>
     );
   }
 }
-

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, } from 'recharts';
 
 export default class Example extends Component {
 
@@ -35,16 +33,18 @@ export default class Example extends Component {
     render() {
         const { data } = this.state
         return (
-            <BarChart
-                width={300}
-                height={150}
-                data={data}
-                margin={{ top: 5, right: 0, left: 0, bottom: 5 }}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar stroke="#8884d8" dataKey="sum" fill="#8884d8" />
-            </BarChart>
+            <div className="flex column chart align-center">
+                <strong className="small-chart-title">Income distribution per day</strong>
+                <BarChart
+                    width={200}
+                    height={150}
+                    data={data}
+                    margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+                    <XAxis dataKey="name" />
+                    <Tooltip />
+                    <Bar stroke="#45667d" dataKey="sum" fill="#5c88a7" />
+                </BarChart>
+            </div>
         );
     }
 }

@@ -7,9 +7,8 @@ export default class PieCharts extends PureComponent {
   state = {
     data: [{ fill: '#16578F', name: 'publish Games', value: 1 }],
     gameTitles: null,
-    colors: ['#16578F', '#5F89D3', '#A45FC1',
-      '#4C96D7', 'lightblue', 'red', '#023436', '#FFC09F',
-      '#ADF7B6', '#D10000', '#65AFFF', '#274060']
+    colors: ['#6899bc', '#517692','#3a5568','#81b2d5','#2e4453',
+      '#1b2a49', '#465881', '#00909e', '#c9d1d3']
   }
 
   componentDidUpdate(prevprops) {

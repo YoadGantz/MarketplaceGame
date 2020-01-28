@@ -111,10 +111,10 @@ class Dashboard extends Component {
         let gameList
         if (this.props.loggedInUser) {
             gameList = (<div className="games-container flex column totally-center">
-                <h3 className="games-header">Your uploaded games</h3>
-                <div className='publish-button btn'>
+                <h3 className="data-header">Per Game</h3>
+                {/* <div className='publish-button btn'>
                     <Link to='/edit'>Publish a game</Link>
-                </div>
+                </div> */}
                 <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
                 {this.state.modalType === 'confirmDelete' && <Modal >
                     <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
@@ -127,7 +127,7 @@ class Dashboard extends Component {
             }
         }
         return (<div className="container dashboard-container flex column align-center">
-            {!this.props.loggedInUser && <h3 className="dashboard-header">This is a demo of the dashboard, login to see your data</h3>}
+            {!this.props.loggedInUser ? <h3 className="dashboard-header">This is a demo of the dashboard, login to see your data</h3> : <h3 className="data-header">For All Games</h3>}
             <div className='flex info-cards-container'>
                 <InfoCard data={monthMoneySum}>Earned this month:</InfoCard>
                 <InfoCard data={downloadsByMonth}>Downloads this month:</InfoCard>

@@ -1,7 +1,6 @@
-import { createBrowserHistory } from 'history';
+import history from '../history';
 import Axios from 'axios';
 
-const history = createBrowserHistory();
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
     : '//localhost:3030/api/'

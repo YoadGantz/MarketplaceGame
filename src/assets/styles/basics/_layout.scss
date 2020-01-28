@@ -29,7 +29,7 @@
     display: flex;
     .img-container {
       height: 100%;
-      width:67%;
+      width: 67%;
       img {
         height: 100%;
       }
@@ -38,7 +38,7 @@
       width: 33%;
     }
   }
-  >*:not(:first-child){
+  > *:not(:first-child) {
     .img-container {
       img {
         height: 100%;
@@ -66,6 +66,11 @@
   padding: 0;
 }
 
+.modal-cards {
+  >*{
+    margin-block-end: 10px;
+  }
+}
 .content-container {
   padding-top: 60px;
 }
