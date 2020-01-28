@@ -31,34 +31,34 @@ class NavBar extends Component {
             <img alt="logo" src="/navbar-logo.png" />
           </Link>
         </div>
-        <input type='checkbox' className='hidden' id='menu' />
-        <div className='flex nav-link-container'>
-        <div className='flex'>
-        <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")}>
-            <img alt="" src={wishlistImg} />
+        <input type="checkbox" className="hidden" id="menu" />
+        <div className="flex nav-link-container">
+          <div className="flex">
+            <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")}>
+              <img alt="" src={wishlistImg} />
+            </div>
+            <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")}>
+              <GameCounter />
+              <img alt="" src={shoppingCartImg} />
+            </div>
           </div>
-          <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")}>
-            <GameCounter />
-            <img alt="" src={shoppingCartImg} />
-          </div>
-        </div>
-        <label className='nav-bar-hamburger pointer' htmlFor='menu'>
-          ☰
+          <label className="nav-bar-hamburger pointer" htmlFor="menu">
+            ☰
           </label>
-    
-        <div className=' nav-bar-menu'>
-          <NavLink to="/" exact className="nav-link flex align-center" activeClassName="active" >
-            Homepage
+
+          <div className="nav-bar-menu">
+            <NavLink to="/" exact className="nav-link flex align-center" activeClassName="devactive" >
+              Homepage
         </NavLink>
-          <NavLink to="/game" exact className="nav-link flex align-center" activeClassName="active" >
-            Explore
+            <NavLink to="/game" exact className="nav-link flex align-center" activeClassName="active" >
+              Explore
         </NavLink>
-          <NavLink to={`/user/${userName || 'guest'}`} exact className="nav-link flex align-center" activeClassName="active"  >
-            Profile
+            <NavLink to={`/user/${userName || 'guest'}`} exact className="nav-link flex align-center" activeClassName="active"  >
+              Profile
         </NavLink>
-          {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
-            : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="">Logout</NavLink>}
-        </div>
+            {(!loggedInUser || !loggedInUser.userName) ? <NavLink to="/login" exact className="nav-link flex align-center" activeClassName="active" >Login</NavLink>
+              : <NavLink onClick={this.doLogOut} to="/" exact className="nav-link flex align-center" activeClassName="">Logout</NavLink>}
+          </div>
         </div>
       </nav >
 
