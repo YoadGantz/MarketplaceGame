@@ -44,6 +44,12 @@
 
   .dsh-btn-container {
     width: 100%;
+    > * {
+      padding: 5px 5px;
+    }
+    :first-child {
+      margin-inline-end: 5px;
+    }
   }
   .play-btn-container {
     width: 100%;
@@ -57,23 +63,23 @@
   width: 25px;
 }
 
-.modal-game-container{
+.modal-game-container {
   background-image: url(/static/media/background_spotlight.f4f0b632.jpg);
   filter: brightness(2);
   background-repeat: no-repeat;
   background-size: cover;
-  .game-thumbnail{
-      width: 100%;
-      height: 100%;
+  .game-thumbnail {
+    width: 100%;
+    height: 100%;
   }
-  .title{
-      max-width: 14ch;
-      overflow: hidden;
-      white-space: nowrap;
+  .title {
+    max-width: 14ch;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 .dsh-game-card {
-border:1px solid rgba(255, 255, 255, 0.527);
+  border: 1px solid rgba(255, 255, 255, 0.527);
 }
 
 .money-sum{

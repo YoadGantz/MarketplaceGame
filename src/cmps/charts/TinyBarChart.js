@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
-    AreaChart, Area, XAxis, YAxis, Tooltip,
+    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
+export default class Example extends Component {
 
-export default class TinyAreaChart extends PureComponent {
     state = { data: [] }
 
     componentDidUpdate(prevprops) {
@@ -35,19 +35,16 @@ export default class TinyAreaChart extends PureComponent {
     render() {
         const { data } = this.state
         return (
-            <AreaChart className="tiny-chart"
-                width={250}
+            <BarChart
+                width={300}
                 height={150}
                 data={data}
-                margin={{
-                    top: 5, right: 0, left: 0, bottom: 5,
-                }}
-            >
+                margin={{ top: 5, right: 0, left: 0, bottom: 5 }}>
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Area type="monotone" dataKey="sum" stroke="#8884d8" fill="#8884d8" />
-            </AreaChart>
+                <Bar stroke="#8884d8" dataKey="sum" fill="#8884d8" />
+            </BarChart>
         );
     }
 }

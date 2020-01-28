@@ -5,6 +5,7 @@ import history from '../../history'
 import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
 import { removeGameFromCart } from '../../actions/cartActions'
+import TinyBarChart from '../charts/TinyBarChart'
 
 import './_GamePreview.scss'
 
@@ -14,7 +15,6 @@ import remove_from_cart from '../../assets/icons/remove_from_cart.png'
 import trash_bin from '../../assets/icons/bin.svg'
 import edit_img from '../../assets/icons/edit.svg'
 import play_img from '../../assets/icons/play.svg'
-import TinyAreaChart from '../charts/TinyAreaChart'
 
 class GamePreview extends Component {
     state = {
@@ -71,7 +71,7 @@ class GamePreview extends Component {
     }
 
     render() {
-        const { game, user, isProfile, isDashboard, isModal, isCart, isWishList } = this.props
+        const { game, user, isProfile, isDashboard, isModal, isWishList } = this.props
         const { gameOrders } = this.state
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
@@ -81,14 +81,14 @@ class GamePreview extends Component {
                 <section className="details-container flex column">
                     <div className="full">
                         <div className={isModal ? "flex align-center column" : "flex align-center"}>
-                            <strong className={isModal ? 'title' : "full game-title"} title={game.title}>{game.title}</strong>
+                            <strong className={isModal || isDashboard ? 'title' : "full game-title"} title={game.title}>{game.title}</strong>
                             {isProfile && isDashboard && <p className="price">${game.price}</p>}
 
                             {!isProfile && !isModal &&
                                 <img alt="like" className={isModal ? 'flex align-self-end like-icon' : "like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
                                     full_heart : empty_heart} />}
                         </div>
-                        {!isModal &&
+                        {!isModal && !isDashboard &&
                             <strong className="publisher">{this.state.publisherName}</strong>}
                     </div>
                     <div className="flex space-between">
@@ -98,7 +98,7 @@ class GamePreview extends Component {
                         {isModal && !isWishList && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard && <div className="play-btn-container flex flex-end">
                             <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img} /></button></div>}
-                        {isProfile && isDashboard && <div className="dsh-btn-container flex space-between">
+                        {isProfile && isDashboard && <div className="dsh-btn-container flex flex-end">
                             <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>
                             {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin} /></button>}
                         </div>}
