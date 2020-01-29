@@ -1,67 +1,73 @@
-@import '../../assets/styles/setup/_mixins.scss';
-@import '../../assets/styles/setup/variables.scss';
-
+@import "../../assets/styles/setup/_mixins.scss";
+@import "../../assets/styles/setup/variables.scss";
 
 .social-content-container {
   margin-bottom: 10px;
-
-
   border-radius: 8px;
   max-height: 55vh;
   overflow: overlay;
   height: 66vh;
   padding: 15px;
   height: 300px;
-    max-height: 300px;
-    color: white;
-
+  max-height: 300px;
+  color: white;
 
   @include for-normal-layout {
-    height: 410px;
+    height: 450px;
     max-height: 525px;
-
-}
-
-  & button{
-    border-radius: 8px;
-  padding: 10px 15px;
-  font-family: montserrat;
-  font-size: 1rem;
-  transition: background-color 0.4s;
   }
-  & textarea{
+
+
+  & textarea {
     width: 100%;
+    font-family: montserrat;
   }
 }
- 
-.comments-container{
+
+.play-container {
+  padding-top: 100px;
+}
+
+.comments-container {
   background-color: #0c1823;
 
-  width: 50%;
-  height: 66vh;
+  .add-button {
+    border-radius: 8px;
+    padding: 7px 15px;
+    font-family: montserrat;
+    font-size: 1rem;
+    transition: background-color 0.4s;
+    width: 170px;
+  }
+  width: auto;
 
-  textarea{
+  textarea {
     width: 50%;
-    background-color: lighten(#0c1823,20%);
+    background-color: lighten(#0c1823, 20%);
     font-family: inherit;
     border-radius: 10px;
   }
-
+  & .new-comment-container {
+    margin-bottom: 0;
+  }
 }
 
-.game-content-container{
+.game-content-container {
   flex-direction: column;
-  iframe{
+  & iframe {
     height: 66vh;
+    width: 100%;
+    @include for-normal-layout {
+      width: 90%;
+    }
   }
-  textarea{
+  textarea {
     resize: none;
     width: 100%;
     font-family: inherit;
   }
 
   @include for-normal-layout {
-      flex-direction: row;
+    flex-direction: row;
   }
-  
 }

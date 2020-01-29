@@ -22,11 +22,19 @@
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  max-height: 500px;
+  grid-template-rows: 0.6fr 1fr;
+  max-height: 508px;
   > *:first-child {
     grid-area: first-card;
     display: flex;
+    strong {
+      text-overflow: normal;
+      white-space: normal;
+      overflow: hidden;
+    }
+    .like-icon {
+      align-self: flex-start;
+    }
     .img-container {
       height: 100%;
       width: 67%;
@@ -67,7 +75,7 @@
 }
 
 .modal-cards {
-  >*{
+  > * {
     margin-block-end: 10px;
   }
 }

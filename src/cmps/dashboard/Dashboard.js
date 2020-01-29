@@ -16,6 +16,7 @@ import ConfirmDelete from '../helpers/ConfirmDelete'
 
 import './_Dashboard.scss'
 
+
 class Dashboard extends Component {
     state = {
         orders: null,
