@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-
-
 function IsUserLoggedIn(props) {
     if (props.loggedInUser) {
         if (props.loggedInUser.userName){
@@ -14,7 +12,6 @@ function IsUserLoggedIn(props) {
         }
     }
     return null
-
 }
 
 const mapStateToProps = state => {
