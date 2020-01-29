@@ -24,7 +24,8 @@ export default class Filter extends Component {
     render() {
         const { sortByPrice, sortByDownloads } = this.props
         const { filterBy } = this.state
-        return <div className="search-container totally-center">
+        return <div className="search-container totally-center flex wrap">
+            <div className='flex'>
             <input className="search-input input" value={this.state[this.state.filterBy]}
                 type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
             <input className='hidden' name='filterBy' onChange={this.inputChange} defaultChecked id='title' value='title' type='radio' />
@@ -35,9 +36,12 @@ export default class Filter extends Component {
             <label className='btn tag-btn pointer' htmlFor='tag'>
                 Tag
              </label>
+             </div>
+             <div className='flex align-center'>
             <span>Sort by: </span>
             <button className='btn filter-btn' onClick={sortByDownloads}>Popularity</button>
             <button className='btn filter-btn' onClick={sortByPrice}>Price</button>
+            </div>
         </div>
     }
 }

@@ -1,32 +1,34 @@
 @import "../../assets/styles/setup/_mixins.scss";
 @import "../../assets/styles/setup/variables.scss";
 
-.social-content-container {
-  margin-bottom: 10px;
-  border-radius: 8px;
-  max-height: 55vh;
-  overflow: overlay;
-  height: 66vh;
-  padding: 15px;
-  height: 300px;
-  max-height: 300px;
-  color: white;
 
-  @include for-normal-layout {
-    height: 450px;
-    max-height: 525px;
-  }
-
-
-  & textarea {
-    width: 100%;
-    font-family: montserrat;
-  }
-}
 
 .play-container {
   padding-top: 100px;
+  .social-content-container {
+    margin-bottom: 10px;
+    border-radius: 8px;
+    max-height: 55vh;
+    overflow: overlay;
+    height: 66vh;
+    padding: 15px;
+    height: 300px;
+    max-height: 300px;
+    color: white;
+  
+    @include for-normal-layout {
+      height: 57.5vh;
+      max-height: 57.5vh;
+    }
+  
+    & textarea {
+      width: 100%;
+      font-family: montserrat;
+    }
+  }
 }
+
+ 
 
 .comments-container {
   background-color: #0c1823;
@@ -49,6 +51,9 @@
   }
   & .new-comment-container {
     margin-bottom: 0;
+  }
+  @include for-normal-layout {
+    height: 66vh;
   }
 }
 

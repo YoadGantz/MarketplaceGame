@@ -46,7 +46,4 @@ export default function InputForm(props) {
         <div className="flex">{addedTags}</div>
         <button onClick={onSubmit}>Submit</button>
     </div>
-
-
-
 }
