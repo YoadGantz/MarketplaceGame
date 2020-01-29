@@ -14,7 +14,6 @@ export default function GameList(props) {
                 isHomepage={props.isHomepage}
                 isDashboard={props.isDashboard}
                 onUpdateUser={props.onUpdateUser}
-                onRemoveGame={props.onRemoveGame}
                 onRemoveFromCart={props.onRemoveFromCart}
                 isWishList={props.isWishList}
             >

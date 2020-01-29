@@ -1,30 +1,64 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import history from '../../history'
 
 import GameService from '../../services/GameService';
 import MediaUploadService from '../../services/MediaUploadService';
 
-import './_EditGame.scss';
+import Modal from '../modal/Modal'
+import ConfirmDelete from '../helpers/ConfirmDelete'
 import InputForm from './inputForm/InputForm';
+
+import './_EditGame.scss';
+
 class EditGame extends Component {
   state = {
-    title: "",
-    description: "",
-    thumbnail: "",
+    title: '',
+    description: '',
+    thumbnail: '',
     mediaUrls: [],
-    price: "",
+    price: '',
     publishedAt: '',
     tags: null,
     currTag: '',
-    loading: false
+    loading: false,
+    modalType: '',
+    toggleModal: false,
   };
 
   componentDidMount = async () => {
-    const params = this.props.match.params.id
-    if (params) {
-      const game = await GameService.getById(params)
+    const gameId = this.props.match.params.id
+    if (gameId) {
+      const game = await GameService.getById(gameId)
       const publishedAt = this.getDateInput(game.publishedAt)
       this.setState({ ...game, publishedAt })
+    }
+  }
+
+  onRemoveGame = async () => {
+    this.setState({
+      toggleModal: true
+    })
+    this.onToggleModal('confirmDelete')
+  }
+
+  removeGame = async () => {
+    this.setState(prevState => { return { toggleModal: !prevState.toggleModal, modalType: '' } })
+    try {
+      await GameService.remove(this.state._id)
+      history.push(`/user/${this.props.loggedInUser.userName}`)
+    } catch{
+      console.log('cant remove game')
+    }
+  }
+
+  onToggleModal = (modalType) => {
+    if (!this.state.toggleModal) {
+      this.setState({ modalType, toggleModal: true });
+    } else if (modalType === this.state.modalType) {
+      this.setState(prevState => { return { toggleModal: !prevState.toggleModal, modalType: '' } })
+    } else {
+      this.setState({ modalType })
     }
   }
 
@@ -39,7 +73,6 @@ class EditGame extends Component {
   onSubmit = async () => {
     const newGame = { ...this.state }
     newGame.publishedAt = new Date(newGame.publishedAt).getTime()
-    console.log(newGame)
     if (!newGame.mediaUrls) return
     if (!newGame.thumbnail) return
     if (this.props.match.params.id) {
@@ -93,8 +126,15 @@ class EditGame extends Component {
   };
 
   render() {
-    return <InputForm removeMediaAndTags={this.removeMediaAndTags} inputChange={this.inputChange}
-      onSubmit={this.onSubmit} addMediaAndTags={this.addMediaAndTags} form={this.state} />
+    return (
+      <div>
+        <InputForm onRemoveGame={this.onRemoveGame} removeMediaAndTags={this.removeMediaAndTags} inputChange={this.inputChange}
+          onSubmit={this.onSubmit} addMediaAndTags={this.addMediaAndTags} form={this.state} />
+        {this.state.modalType === 'confirmDelete' && <Modal >
+          <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
+        </Modal>}
+      </div>
+    )
   }
 }
 

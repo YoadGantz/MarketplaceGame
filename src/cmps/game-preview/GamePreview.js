@@ -12,23 +12,23 @@ import './_GamePreview.scss'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.svg'
-import trash_bin from '../../assets/icons/bin.svg'
 import edit_img from '../../assets/icons/edit.svg'
 import play_img from '../../assets/icons/play.svg'
 
 class GamePreview extends Component {
+
     state = {
         publisherName: '',
         gameOrders: null
-
     }
+
     async componentDidMount() {
         const { game } = this.props
         const publisher = await UserService.getById(game.publisher)
         const publisherName = publisher.userName
         this.setState({ publisherName })
         if (this.props.isDashboard) {
-            this.dashboardChart()
+            this.getDetailsForChart()
         }
     }
 
@@ -51,7 +51,7 @@ class GamePreview extends Component {
         history.push(`/play/${this.props.game._id}`)
     }
 
-    dashboardChart = async () => {
+    getDetailsForChart = async () => {
         const gameOrders = await UtilService.getGraphsDetails([this.props.game])
         this.setState({ gameOrders })
     }
@@ -98,10 +98,7 @@ class GamePreview extends Component {
                         {isModal && !isWishList && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard && <div className="play-btn-container flex flex-end">
                             <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img} /></button></div>}
-                        {isProfile && isDashboard && <div className="dsh-btn-container flex ">
-                            <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>
-                            {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin} /></button>}
-                        </div>}
+                        {isProfile && isDashboard && <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>}
                         {isWishList &&
                             <img alt="like" className={isModal ? 'flex align-self-end like-icon' : "like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
                                 full_heart : empty_heart} />}

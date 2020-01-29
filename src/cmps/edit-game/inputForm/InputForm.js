@@ -2,10 +2,10 @@ import React from "react";
 import MediaUrlsList from '../media-url-list/MediaUrlList';
 import Thumbnail from '../thumbnail/Thumbnail';
 import TagList from '../tag-list/TagList';
-
+import trash_bin from '../../../assets/icons/bin.svg';
 
 export default function InputForm(props) {
-    const { inputChange, addMediaAndTags, onSubmit, removeMediaAndTags,
+    const { onRemoveGame, inputChange, addMediaAndTags, onSubmit, removeMediaAndTags,
         form: { price, publishedAt, title, mediaUrls, tags, thumbnail, description, loading } } = props
     let addedTags;
     let addedUrls;
@@ -44,6 +44,7 @@ export default function InputForm(props) {
             Add Tag
           </button>
         <div className="flex">{addedTags}</div>
+        <button title="Delete" className="btn" onClick={onRemoveGame}><img alt="" src={trash_bin} /></button>
         <button onClick={onSubmit}>Submit</button>
     </div>
 
