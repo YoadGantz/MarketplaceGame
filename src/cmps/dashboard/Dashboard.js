@@ -14,7 +14,8 @@ import InfoCard from '../infocard/InfoCard';
 
 import ConfirmDelete from '../helpers/ConfirmDelete'
 
-import './_Dashboard.scss'
+import './_DashBoard.scss'
+
 
 class Dashboard extends Component {
     state = {
