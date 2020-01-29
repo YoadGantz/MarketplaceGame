@@ -20,51 +20,56 @@
 // GRIDS
 .hp-cards-container {
   display: grid;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.6fr 1fr;
-  max-height: 508px;
-  > *:first-child {
-    grid-area: first-card;
-    display: flex;
-    strong {
-      text-overflow: normal;
-      white-space: normal;
-      overflow: hidden;
-    }
-    .like-icon {
-      align-self: flex-start;
-    }
-    .img-container {
-      height: 100%;
-      width: 67%;
-      img {
+  gap: 20px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  @include for-normal-layout {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.6fr 1fr;
+    gap: 10px;
+    max-height: 508px;
+    > *:first-child {
+      grid-area: first-card;
+      display: flex;
+      strong {
+        text-overflow: normal;
+        white-space: normal;
+        overflow: hidden;
+      }
+      .like-icon {
+        align-self: flex-start;
+      }
+      .img-container {
         height: 100%;
+        width: 67%;
+        img {
+          height: 100%;
+        }
+      }
+      .details-container {
+        width: 33%;
       }
     }
-    .details-container {
-      width: 33%;
-    }
-  }
-  > *:not(:first-child) {
-    .img-container {
-      img {
-        height: 100%;
+    > *:not(:first-child) {
+      .img-container {
+        img {
+          height: 100%;
+        }
       }
     }
+    > *:nth-child(2) {
+      grid-area: second-card;
+    }
+    > *:nth-child(3) {
+      grid-area: third-card;
+    }
+    > *:last-child {
+      grid-area: last-card;
+    }
+    grid-template-areas:
+      "first-card first-card first-card"
+      "second-card third-card last-card";
   }
-  > *:nth-child(2) {
-    grid-area: second-card;
-  }
-  > *:nth-child(3) {
-    grid-area: third-card;
-  }
-  > *:last-child {
-    grid-area: last-card;
-  }
-  grid-template-areas:
-    "first-card first-card first-card"
-    "second-card third-card last-card";
 }
 
 .cards-container {
