@@ -26,7 +26,7 @@ export default class Filter extends Component {
         const { filterBy } = this.state
         return <div className="search-container totally-center">
             <input className="search-input input" value={this.state[this.state.filterBy]}
-                type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
+                type="text" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
             <input className='hidden' name='filterBy' onChange={this.inputChange} defaultChecked id='title' value='title' type='radio' />
             <label className='btn title-btn pointer' htmlFor='title'>
                 Title
