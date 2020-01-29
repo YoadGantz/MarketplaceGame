@@ -12,10 +12,11 @@ class Login extends Component {
     loginCred: {
       userName: '',
       password: ''
-    }
+    },
+    isIncorrectInput: false
   };
   componentDidMount() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   loginHandleChange = ev => {
@@ -37,9 +38,11 @@ class Login extends Component {
     const userCreds = { userName, password };
 
     try {
+      debugger;
       await this.props.login(userCreds);
       this.setState({ loginCred: { userName: '', password: '' } }, () => history.push('/'));
     } catch (err) {
+      this.setState({ isIncorrectInput: true })
       console.log('Had issues while logging in ')
     }
   };
@@ -52,6 +55,7 @@ class Login extends Component {
           onChange={this.loginHandleChange} placeholder="User name" />
         <input className="login-input input" type="password" name="password" value={this.state.loginCred.password}
           onChange={this.loginHandleChange} placeholder="Password" />
+        {this.state.isIncorrectInput && <strong className="wrong-input">Wrong username/password please try again.</strong>}
         <button className="login-btn btn">Login</button>
         <p>Not with us yet ?</p>
         <button className="join-btn" onClick={() => history.push('/sign-up')}>Join</button>
@@ -60,7 +64,7 @@ class Login extends Component {
 
     return (
       <div className="login-container content-container flex column justify-center align-center container">
-        <img className="login-logo" alt="logo" src="/logo.png" width="100px"/>
+        <img className="login-logo" alt="logo" src="/logo.png" width="100px" />
         {(!loggedInUser || !loggedInUser.userName) && loginSection}
       </div>
     );
