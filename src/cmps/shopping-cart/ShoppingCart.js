@@ -44,7 +44,7 @@ class ShoppingCart extends Component {
         this.loadGames()
     }
 
-    onBuyClick = () => {
+    onBuyClick = async () => {
         if (!this.props.user) { history.push('/login'); return }
 
         const order = {
@@ -52,9 +52,10 @@ class ShoppingCart extends Component {
             orderBy: this.props.user._id,
             gameIds: this.state.gamesIds
         }
-        OrderService.add(order)
+        await OrderService.add(order)
         this.props.clearCart()
-        this.loadGames()
+        this.props.toggleModal('shoppingCart')
+        history.push(`/user/${this.props.user.userName}`)
     }
     getSum = () => {
         const sum = this.state.games.reduce((acc, currGame) => {

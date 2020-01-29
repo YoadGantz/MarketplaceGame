@@ -54,7 +54,7 @@ export default class App extends Component {
                <Footer></Footer>
             </Router>
             {this.state.toggleModal && <Modal>
-               {(this.state.modalType === 'wishlist') ? <WishList /> : <ShoppingCart />}
+               {(this.state.modalType === 'wishlist') ? <WishList /> : <ShoppingCart toggleModal={this.toggleModal}/>}
             </Modal>}
          </React.Fragment>
       )

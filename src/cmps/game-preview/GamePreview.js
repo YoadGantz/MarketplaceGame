@@ -4,7 +4,7 @@ import history from '../../history'
 
 import UtilService from '../../services/UtilService'
 import UserService from '../../services/UserService'
-import { removeGameFromCart } from '../../actions/cartActions'
+import { removeGameFromCart, addGameToCart } from '../../actions/cartActions'
 import TinyBarChart from '../charts/TinyBarChart'
 
 import './_GamePreview.scss'
@@ -14,12 +14,15 @@ import empty_heart from '../../assets/icons/empty_heart.svg'
 import remove_from_cart from '../../assets/icons/remove_from_cart.svg'
 import edit_img from '../../assets/icons/edit.svg'
 import play_img from '../../assets/icons/play.svg'
-
+import Modal from '../modal/Modal'
+import Notification from '../helpers/Notification'
 class GamePreview extends Component {
 
     state = {
         publisherName: '',
-        gameOrders: null
+        gameOrders: null,
+        toggleModal: false,
+        modalTxt: ''
     }
 
     async componentDidMount() {
@@ -70,9 +73,31 @@ class GamePreview extends Component {
         this.props.onUpdateUser(updatedUser)
     }
 
+    onAddToCart = (ev) => {
+        ev.stopPropagation();
+        try {
+            this.props.addGameToCart(this.props.game._id)
+            this.setState({
+                modalTxt: 'Game has been added to the cart',
+                toggleModal: true
+            }, this.onToggleModal())
+        } catch {
+            this.setState({
+                modalTxt: 'Game is already in the cart',
+                toggleModal: true
+            }, this.onToggleModal())
+        }
+    };
+
+    onToggleModal = () => {
+        setTimeout(() => {
+            this.setState(prevState => ({ toggleModal: !prevState.toggleModal }))
+        }, 2000)
+    }
+
     render() {
         const { game, user, isProfile, isDashboard, isModal, isWishList } = this.props
-        const { gameOrders } = this.state
+        const { gameOrders, toggleModal, modalTxt } = this.state
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
             <li className={isDashboard ? "game-card flex column dsh-game-card" : isModal ? "modal-card flex modal-game-container" : "game-card"} onClick={() => this.onOpenDetails(game._id)}>
@@ -91,17 +116,22 @@ class GamePreview extends Component {
                         {!isModal && !isDashboard &&
                             <strong className="publisher">{this.state.publisherName}</strong>}
                     </div>
-                    <div className="flex space-between">
+                    <div className="flex space-between align-end">
                         {!isProfile && <p className="price">${game.price}</p>}
                         {!isProfile && !isModal &&
                             <p className="rating">{review} ({game.reviews.length})</p>}
-                        {isModal && !isWishList && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
+                        {isModal && !isWishList && <img alt="remove" src={remove_from_cart} className="pointer like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard && <div className="play-btn-container flex flex-end">
                             <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img} /></button></div>}
                         {isProfile && isDashboard && <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>}
                         {isWishList &&
                             <img alt="like" className={isModal ? 'flex align-self-end like-icon' : "like-icon"} onClick={this.toggleWishedGame} src={user && user.wishedGames.find(wishedGame => wishedGame === game._id) ?
                                 full_heart : empty_heart} />}
+                        {isWishList &&
+
+                            <button type="primary" className='buy-btn' onClick={this.onAddToCart}>Add to cart </button>}
+                        {toggleModal && <Modal><Notification modalTxt={modalTxt} toggleModal={this.onToggleModal} /></Modal>}
+
                     </div>
                 </section >
             </li >
@@ -117,6 +147,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     removeGameFromCart,
+    addGameToCart
 };
 
 export default connect(

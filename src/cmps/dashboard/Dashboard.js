@@ -81,9 +81,6 @@ class Dashboard extends Component {
         if (this.props.loggedInUser) {
             gameList = (<div className="games-container flex column totally-center">
                 <h3 className="data-header">Per Game</h3>
-                {/* <div className='publish-button btn'>
-                    <Link to='/edit'>Publish a game</Link>
-                </div> */}
                 <GameList isDashboard={true} isProfile={true} games={this.props.games} />
             </div>
             )

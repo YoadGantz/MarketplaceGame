@@ -47,7 +47,4 @@ export default function InputForm(props) {
         <button title="Delete" className="btn" onClick={onRemoveGame}><img alt="" src={trash_bin} /></button>
         <button onClick={onSubmit}>Submit</button>
     </div>
-
-
-
 }
