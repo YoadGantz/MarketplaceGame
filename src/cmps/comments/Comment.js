@@ -33,16 +33,18 @@ export default class Comment extends Component {
         <div className='social-content-container'>
           {commentMap}
         </div>
-        <h3>Add a Comment</h3>
-        <div className='flex new-comment-container align-center'>
-        <textarea
-          type="text"
-          name="text"
-          value={text}
-          onChange={this.inputChange}
-          placeholder="write your text"
-        />
-        <button className='add-button' onClick={this.onAddComment} type='primary'>Add Comment</button>
+        <div>
+          <h3>Add a Comment</h3>
+          <div className='flex new-comment-container align-center'>
+            <textarea
+              type="text"
+              name="text"
+              value={text}
+              onChange={this.inputChange}
+              placeholder="write your text"
+            />
+            <button className='add-button' onClick={this.onAddComment} type='primary'>Add Comment</button>
+          </div>
         </div>
       </div>
     );

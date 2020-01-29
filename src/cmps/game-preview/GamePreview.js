@@ -11,7 +11,7 @@ import './_GamePreview.scss'
 
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
-import remove_from_cart from '../../assets/icons/remove_from_cart.png'
+import remove_from_cart from '../../assets/icons/remove_from_cart.svg'
 import trash_bin from '../../assets/icons/bin.svg'
 import edit_img from '../../assets/icons/edit.svg'
 import play_img from '../../assets/icons/play.svg'
@@ -75,13 +75,13 @@ class GamePreview extends Component {
         const { gameOrders } = this.state
         const review = UtilService.formatGameRating((UtilService.getGameRating(game)))
         return (
-            <li className={isDashboard ? "game-card flex column dsh-game-card" : isModal ? 'flex modal-game-container' : 'game-card'} onClick={() => this.onOpenDetails(game._id)}>
-                {!isDashboard ? <div className={isModal ? '' : "img-container"}><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div> :
+            <li className={isDashboard ? "game-card flex column dsh-game-card" : isModal ? "modal-card flex modal-game-container" : "game-card"} onClick={() => this.onOpenDetails(game._id)}>
+                {!isDashboard ? <div className={"img-container"}><img alt="thumbnail" className="game-thumbnail" src={game.thumbnail}></img></div> :
                     <TinyBarChart game={game} gameOrders={gameOrders} />}
                 <section className="details-container flex column">
                     <div className="full">
                         <div className={isModal ? "flex align-center column" : "flex align-center"}>
-                            <strong className={isModal || isDashboard ? 'title' : "full game-title"} title={game.title}>{game.title}</strong>
+                            <strong className={isModal || isDashboard ? 'short-title' : "full game-title"} title={game.title}>{game.title}</strong>
                             {isProfile && isDashboard && <p className="price">${game.price}</p>}
 
                             {!isProfile && !isModal &&
@@ -98,7 +98,7 @@ class GamePreview extends Component {
                         {isModal && !isWishList && <img alt="remove" src={remove_from_cart} className="like-icon" onClick={this.onRemoveFromCart} />}
                         {isProfile && !isDashboard && <div className="play-btn-container flex flex-end">
                             <button title="Play" className="play-btn btn" onClick={this.onPlayClick}><img alt="" src={play_img} /></button></div>}
-                        {isProfile && isDashboard && <div className="dsh-btn-container flex flex-end">
+                        {isProfile && isDashboard && <div className="dsh-btn-container flex ">
                             <button title="Edit" className="btn" onClick={this.onOpenEdit}><img alt="" src={edit_img} /></button>
                             {isDashboard && <button title="Delete" className="btn" onClick={this.onRemoveGame}><img alt="" src={trash_bin} /></button>}
                         </div>}
