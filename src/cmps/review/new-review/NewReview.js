@@ -21,7 +21,6 @@ export default class NewReview extends Component {
         const { text } = this.state
         return (
             <div>
-                <h3>Add a Review</h3>
                 <div className='new-comment-container flex align-center'>
                 <textarea
                     type="text"
@@ -38,7 +37,7 @@ export default class NewReview extends Component {
                 <label htmlFor='dislike' className='dislike-img pointer' name='rating'>
                     <img alt='dislike' src="https://img.icons8.com/ultraviolet/40/000000/poor-quality.png" />
                 </label>
-                <button  className='add-button' onClick={this.onAddReview}>Add Review</button>
+                <button  className='add-button' onClick={this.onAddReview}>Add a Review</button>
                 </div>
             </div>
         )
