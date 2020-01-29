@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Tooltip} from 'recharts';
+import { PieChart, Pie, Tooltip } from 'recharts';
 
 import './_charts.scss'
 
@@ -7,7 +7,7 @@ export default class PieCharts extends PureComponent {
   state = {
     data: [{ fill: '#16578F', name: 'publish Games', value: 1 }],
     gameTitles: null,
-    colors: ['#6899bc', '#517692','#3a5568','#81b2d5','#2e4453',
+    colors: ['#6899bc', '#517692', '#3a5568', '#81b2d5', '#2e4453',
       '#1b2a49', '#465881', '#00909e', '#c9d1d3']
   }
 

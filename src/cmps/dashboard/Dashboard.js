@@ -3,16 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import UtilService from '../../services/UtilService';
-import GameService from '../../services/GameService'
 import { loadGames } from '../../actions/gameActions';
 
 import GameList from '../game-list/GameList';
-import Modal from '../modal/Modal'
 import AreaChart from '../charts/AreaChart';
 import PieChart from '../charts/PieChart';
-import InfoCard from '../infocard/InfoCard';
-
-import ConfirmDelete from '../helpers/ConfirmDelete'
+import InfoCard from '../info-card/InfoCard';
 
 import './_Dashboard.scss'
 
@@ -23,23 +19,10 @@ class Dashboard extends Component {
         filterBy: {
             _id: '',
         },
-        modalType: '',
-        toggleModal: false,
-        currGameId: '',
         sumOfGames: [],
         monthMoneySum: null,
         downloadsByMonth: null,
         downloadsByWeek: null
-    }
-
-    onToggleModal = (modalType) => {
-        if (!this.state.toggleModal) {
-            this.setState({ modalType, toggleModal: true });
-        } else if (modalType === this.state.modalType) {
-            this.setState(prevState => { return { toggleModal: !prevState.toggleModal, modalType: '' } })
-        } else {
-            this.setState({ modalType })
-        }
     }
 
     getGraphsDetails = async () => {
@@ -92,33 +75,14 @@ class Dashboard extends Component {
         this.getMonthInfo()
     }
 
-    onRemoveGame = async (gameId) => {
-        this.setState({
-            toggleModal: true,
-            currGameId: gameId
-        })
-        this.onToggleModal('confirmDelete')
-    }
-
-    removeGame = async () => {
-        this.setState(prevState => { return { toggleModal: !prevState.toggleModal, modalType: '' } })
-        await GameService.remove(this.state.currGameId)
-        this.props.loadGames()
-    }
-
     render() {
         const { orders, sumOfGames, monthMoneySum, downloadsByMonth, downloadsByWeek } = this.state
         let gameList
         if (this.props.loggedInUser) {
             gameList = (<div className="games-container flex column totally-center">
                 <h3 className="data-header">Per Game</h3>
-                {/* <div className='publish-button btn'>
-                    <Link to='/edit'>Publish a game</Link>
-                </div> */}
-                <GameList onRemoveGame={this.onRemoveGame} history={this.props.history} isDashboard={true} isProfile={true} games={this.props.games} />
-                {this.state.modalType === 'confirmDelete' && <Modal >
-                    <ConfirmDelete modalType={this.modalType} modalAction={this.removeGame} toggleModal={this.onToggleModal} />
-                </Modal>}</div>
+                <GameList isDashboard={true} isProfile={true} games={this.props.games} />
+            </div>
             )
             if (!this.props.games.length) {
                 return <div className="container dashboard-container flex column align-center">

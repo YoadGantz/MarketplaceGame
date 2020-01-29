@@ -25,16 +25,7 @@
     > *:not(:last-child) {
       margin-block-end: 20px;
     }
-    .publish-button {
-      background-color: darken($clr2, 20%);
-      color: $clr6;
-      align-self: flex-end;
-      margin-inline-end: 20px;
-
-      &:hover {
-        background-color: lighten($clr2, 5%);
-      }
-    }
+   
   }
 
   .data-header {
