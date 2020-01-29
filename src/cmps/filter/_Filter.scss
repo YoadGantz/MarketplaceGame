@@ -16,12 +16,15 @@
     color: $clr6;
     font-family: inherit;
     padding: 11px 10px;
+    margin-inline-end: 5px;
   }
 
   .title-btn {
     filter: grayscale(1);
     background-color: $clr2;
     padding: 7px 10px;
+    margin-inline-end: 5px;
+
   }
   #title:checked ~ .title-btn {
     filter: grayscale(0);
@@ -34,6 +37,8 @@
     filter: grayscale(1);
     background-color: $clr2;
     padding: 7px 10px;
+    margin-inline-end: 5px;
+
   }
 
   #tag:checked ~ .tag-btn {
@@ -45,6 +50,9 @@
   }
   .filter-btn {
     background-color: $clr2;
+    margin-inline-end: 5px;
+    margin-inline-start: 5px;
+    
     &:hover {
       background-color: lighten($clr2, 20%);
     }

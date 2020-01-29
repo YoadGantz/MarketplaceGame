@@ -39,7 +39,6 @@ class EditGame extends Component {
   onSubmit = async () => {
     const newGame = { ...this.state }
     newGame.publishedAt = new Date(newGame.publishedAt).getTime()
-    console.log(newGame)
     if (!newGame.mediaUrls) return
     if (!newGame.thumbnail) return
     if (this.props.match.params.id) {
