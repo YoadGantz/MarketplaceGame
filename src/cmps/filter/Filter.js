@@ -55,9 +55,7 @@ export default class Filter extends Component {
             <label className='btn price-btn pointer' htmlFor='price'>
                 Price
              </label>
-            <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down}/></button>
-            {/* <button className='btn filter-btn' onClick={sortByDownloads}>Popularity</button>
-            <button className='btn filter-btn' onClick={sortByPrice}>Price</button> */}
+            <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down} /></button>
         </div>
     }
 }

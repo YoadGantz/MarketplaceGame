@@ -48,7 +48,7 @@ class NavBar extends Component {
           </label>
 
           <div className="nav-bar-menu">
-            <NavLink to="/" exact className="nav-link flex align-center" activeClassName="devactive" >
+            <NavLink to="/" exact className="nav-link flex align-center" activeClassName="active" >
               Homepage
         </NavLink>
             <NavLink to="/game" exact className="nav-link flex align-center" activeClassName="active" >

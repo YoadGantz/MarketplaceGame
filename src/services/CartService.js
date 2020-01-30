@@ -19,7 +19,8 @@ function addToCart(item) {
             StorageService.saveToStorage('cart', cartItems)
             return 'success'
         }else {
-            throw 'Already in the cart'
+            const err = 'Already in the cart'
+            throw err
         }
     } catch (err) {
         console.log('Already in the cart')
