@@ -38,7 +38,6 @@ class Login extends Component {
     const userCreds = { userName, password };
 
     try {
-      debugger;
       await this.props.login(userCreds);
       this.setState({ loginCred: { userName: '', password: '' } }, () => history.push('/'));
     } catch (err) {
@@ -58,7 +57,7 @@ class Login extends Component {
         {this.state.isIncorrectInput && <strong className="wrong-input">Wrong username/password please try again.</strong>}
         <button className="login-btn btn">Login</button>
         <p>Not with us yet ?</p>
-        <button className="join-btn" onClick={() => history.push('/sign-up')}>Join</button>
+        <button className="login-btn btn" onClick={() => history.push('/sign-up')}>Join</button>
       </form>
     );
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import history from '../../history';
 
+import './_SignUp.scss'
 import MediaUploadService from '../../services/MediaUploadService';
 import { signUp } from '../../actions/userActions';
 
@@ -14,16 +15,19 @@ class SignUp extends Component {
       password: '',
       about: '',
       imgUrl: ''
-    }
+    },
+    isLoadingImg: false
+
   };
 
   componentDidMount() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   addMediaAndTags = async ev => {
+    this.setState({ isLoadingImg: true })
     const imgUrl = await MediaUploadService(ev.target.files);
-    return this.setState({ imgUrl: imgUrl[0] })
+    return this.setState({ imgUrl: imgUrl[0], isLoadingImg: false })
   }
 
   signUpHandleChange = ev => {
@@ -56,40 +60,42 @@ class SignUp extends Component {
   };
 
   render() {
-    const { imgUrl } = this.state
+    const { imgUrl, isLoadingImg } = this.state
     const { loggedInUser } = this.props
     let imgPreview = ''
     if (imgUrl) {
       imgPreview = <div className="media-container">
-        <img src={imgUrl} alt="" />
+        <img src={imgUrl} className='signup-img' alt="" />
         <span className="pointer"
           onClick={this.removeImg}>X</span>
       </div>
     }
     const signUpSection = (
-      <form onSubmit={this.doSignUp}>
-        <input type="text" name="fullName" value={this.state.signUpCred.fullName}
+      <form className='signup-form flex column align-center' onSubmit={this.doSignUp}>
+        <input type="text" className='input' name="fullName" value={this.state.signUpCred.fullName}
           onChange={this.signUpHandleChange} placeholder="Full Name" />
         <br />
-        <input type="text" name="userName" value={this.state.signUpCred.userName}
+        <input type="text" className='input' name="userName" value={this.state.signUpCred.userName}
           onChange={this.signUpHandleChange} placeholder="UserName" />
         <br />
-        <input type="password" name="password" value={this.state.signUpCred.password}
+        <input type="password" className='input' name="password" value={this.state.signUpCred.password}
           onChange={this.signUpHandleChange} placeholder="Password" />
         <br />
-        <input type="text" name="about" value={this.state.signUpCred.about}
+        <input type="text" className='input' name="about" value={this.state.signUpCred.about}
           onChange={this.signUpHandleChange} placeholder="About" />
         <br />
-        <input type="file" name="imgUrl" placeholder="Profile Image"
+        <input type="file" className='input pointer' name="imgUrl" placeholder="Profile Image"
           onChange={this.addMediaAndTags} />
         {imgPreview}
         <br />
-        {(imgPreview && <button>Join</button>)}
+        {(imgPreview && <button className='signup-btn'>Join</button>)}
       </form>
     );
 
     return (
-      <div className='content-container'>
+      <div className='content-container signup-container flex column align-center'>
+          <img className="signup-logo" alt="logo" src="/logo.png" width="100px" />
+        {isLoadingImg && <div className='loader'></div>}
         {(!loggedInUser || !loggedInUser.userName) && signUpSection}
       </div>
     )
