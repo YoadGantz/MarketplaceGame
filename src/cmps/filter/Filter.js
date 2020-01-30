@@ -36,7 +36,6 @@ export default class Filter extends Component {
     }
 
     render() {
-        const { sortByPrice, sortByDownloads } = this.props
         const { filterBy } = this.state
         return <div className="search-container totally-center">
             <input className="search-input input" value={this.state[this.state.filterBy]}
@@ -58,9 +57,7 @@ export default class Filter extends Component {
             <label className='btn price-btn pointer' htmlFor='price'>
                 Price
              </label>
-            <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down}/></button>
-            {/* <button className='btn filter-btn' onClick={sortByDownloads}>Popularity</button>
-            <button className='btn filter-btn' onClick={sortByPrice}>Price</button> */}
+            <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down} /></button>
         </div>
     }
 }

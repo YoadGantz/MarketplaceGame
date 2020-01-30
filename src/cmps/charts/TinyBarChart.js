@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, } from 'recharts';
+import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 
 export default class Example extends Component {
 
