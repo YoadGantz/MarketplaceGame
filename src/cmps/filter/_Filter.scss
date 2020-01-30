@@ -1,10 +1,16 @@
 @import "../../assets/styles/setup/variables.scss";
+@import "../../assets/styles/basics/layout.scss";
 
 .search-container {
   padding-block-start: 30px;
   margin-block-end: 30px;
+  align-items: flex-start;
   > *:not(:last-child) {
     margin-inline-end: 10px;
+    margin-block-end: 10px;
+    @include for-narrow-layout {
+      margin-block-end: 0;
+    }
   }
 
   & select {
@@ -18,43 +24,41 @@
     padding: 11px 10px;
     margin-inline-end: 5px;
   }
-
+  .order-btn {
+    background-color: $clr5;
+    padding: 5px;
+    
+  }
   .title-btn {
-    filter: grayscale(1);
-    background-color: $clr2;
+    background-color: $clr5;
     padding: 7px 10px;
     margin-inline-end: 5px;
-
   }
   #title:checked ~ .title-btn {
-    filter: grayscale(0);
-    background-color: lighten($clr2, 20%);
-    &:hover {
-      background-color: lighten($clr2, 20%);
-    }
+    background-color: $clr2;
   }
   .tag-btn {
-    filter: grayscale(1);
-    background-color: $clr2;
+    background-color: $clr5;
     padding: 7px 10px;
     margin-inline-end: 5px;
-
   }
-
   #tag:checked ~ .tag-btn {
-    filter: grayscale(0);
-    background-color: lighten($clr2, 20%);
-    &:hover {
-      background-color: lighten($clr2, 20%);
-    }
-  }
-  .filter-btn {
     background-color: $clr2;
+  }
+  .popularity-btn {
+    background-color: $clr5;
+    padding: 7px 10px;
     margin-inline-end: 5px;
-    margin-inline-start: 5px;
-    
-    &:hover {
-      background-color: lighten($clr2, 20%);
-    }
+  }
+  #popularity:checked ~ .popularity-btn {
+    background-color: $clr2;
+  }
+  .price-btn {
+    background-color: $clr5;
+    padding: 7px 10px;
+    margin-inline-end: 5px;
+  }
+  #price:checked ~ .price-btn {
+    background-color: $clr2;
   }
 }

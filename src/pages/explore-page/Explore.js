@@ -11,7 +11,7 @@ import UtilService from '../../services/UtilService';
 import './_Explore.scss'
 
 class Explore extends Component {
-    state = { games: null, isAscending: false }
+    state = { games: null }
 
     componentDidMount = async () => {
         window.scrollTo(0, 0);
@@ -22,20 +22,31 @@ class Explore extends Component {
         this.props.updateUser(updatedUser)
     }
 
-    onFilterBy = async (filterBy) => {
-        await this.props.loadGames(filterBy)
-        this.setState({ games: this.props.games })
+    onFilterBy = async (filterBy = {}) => {
+        console.log(filterBy);
+        
+        filterBy.gamesIds = this.state.gamesIds
+        await this.props.loadGames({ ...filterBy, shoppingCartIds: this.state.gamesIds })
+        if (filterBy.sortBy === 'popularity') {
+            this.sortByDownloads(filterBy.isAscending)
+        } else if (filterBy.sortBy === 'price') {
+            this.sortByPrice(filterBy.isAscending)
+        } else {
+            this.setState({ games: this.props.games })
+        }
     }
 
-    sortByDownloads = async () => {
+    sortByDownloads = async (isAscending) => {
         let games = [...this.props.games]
-        games = await UtilService.sortByDownloads(games, this.state.isAscending)
-        this.setState((prevState) => ({ games, isAscending: !prevState.isAscending }))
+        games = await UtilService.sortByDownloads(games, isAscending)
+        this.setState({ games })
     }
-    sortByPrice = () => {
+    sortByPrice = (isAscending) => {
+        console.log(isAscending);
+        
         let games = [...this.props.games]
-        games = UtilService.sortByPrice(games, this.state.isAscending)
-        this.setState((prevState) => ({ games, isAscending: !prevState.isAscending }))
+        games = UtilService.sortByPrice(games, isAscending)
+        this.setState({ games })
     }
 
     render() {

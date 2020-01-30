@@ -38,7 +38,6 @@ class Login extends Component {
     const userCreds = { userName, password };
 
     try {
-      debugger;
       await this.props.login(userCreds);
       this.setState({ loginCred: { userName: '', password: '' } }, () => history.push('/'));
     } catch (err) {
