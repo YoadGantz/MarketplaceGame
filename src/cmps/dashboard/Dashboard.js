@@ -10,7 +10,7 @@ import AreaChart from '../charts/AreaChart';
 import PieChart from '../charts/PieChart';
 import InfoCard from '../info-card/InfoCard';
 
-import './_DashBoard.scss'
+import './_Dashboard.scss'
 
 
 class Dashboard extends Component {
