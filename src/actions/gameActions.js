@@ -18,8 +18,6 @@ function setGame(game) {
 
 
 export function loadGames(filterBy) {
-    console.log('filter in action', filterBy);
-    
     return async dispatch => {
         try {
             const games = await GameService.query(filterBy);

@@ -23,7 +23,6 @@ class Explore extends Component {
     }
 
     onFilterBy = async (filterBy = {}) => {
-        console.log(filterBy);
         const games = await this.props.loadGames({ ...filterBy })
         if (filterBy.sortBy) {
             const sortedGames = await UtilService.sortGames(games, filterBy.sortBy, filterBy.isAscending)
