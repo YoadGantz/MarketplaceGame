@@ -24,35 +24,21 @@ class Explore extends Component {
 
     onFilterBy = async (filterBy = {}) => {
         console.log(filterBy);
-        
+
         filterBy.gamesIds = this.state.gamesIds
-        await this.props.loadGames({ ...filterBy, shoppingCartIds: this.state.gamesIds })
-        if (filterBy.sortBy === 'popularity') {
-            this.sortByDownloads(filterBy.isAscending)
-        } else if (filterBy.sortBy === 'price') {
-            this.sortByPrice(filterBy.isAscending)
+        await this.props.loadGames({ ...filterBy })
+        if (filterBy.sortBy) {
+            const sortedGames = await UtilService.sortGames(this.state.games, filterBy.sortBy, filterBy.isAscending)
+            this.setState({ games: sortedGames })
         } else {
             this.setState({ games: this.props.games })
         }
     }
 
-    sortByDownloads = async (isAscending) => {
-        let games = [...this.props.games]
-        games = await UtilService.sortByDownloads(games, isAscending)
-        this.setState({ games })
-    }
-    sortByPrice = (isAscending) => {
-        console.log(isAscending);
-        
-        let games = [...this.props.games]
-        games = UtilService.sortByPrice(games, isAscending)
-        this.setState({ games })
-    }
-
     render() {
         const { games } = this.state
         return <div className="content-container flex column container align-center">
-            <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy} />
+            <Filter onFilterBy={this.onFilterBy} />
             <GameList history={this.props.history} user={this.props.user} onUpdateUser={this.onUpdateUser} games={games} />
         </div>
     }

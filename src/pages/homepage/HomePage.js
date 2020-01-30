@@ -10,17 +10,17 @@ import GameList from '../../cmps/game-list/GameList'
 import './_HomePage.scss'
 class HomePage extends Component {
   state = {
-    mostPopular: [],
-    recentGames: [],
-    topRated: []
+    popularity: [],
+    releaseDate: [],
+    rating: []
   }
 
   async componentDidMount() {
     window.scrollTo(0, 0);
     await this.props.loadGames()
-    this.setGames('mostPopular')
-    this.setGames('recentGames')
-    this.setGames('topRated')
+    this.setGames('popularity')
+    this.setGames('releaseDate')
+    this.setGames('rating')
   }
 
   onUpdateUser = async (updatedUser) => {
@@ -36,7 +36,7 @@ class HomePage extends Component {
 
 
   render() {
-    const { mostPopular, recentGames, topRated } = this.state
+    const { popularity, releaseDate, rating } = this.state
     return (
       <div className="homepage-container content-container container full">
         <div className="hero-text flex column totally-center">
@@ -45,15 +45,15 @@ class HomePage extends Component {
           <Link to="/game" onClick={this.on} className="hero-btn">To the shop</Link>
         </div>
         <div><p className="heading">Most Popular</p>
-          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={mostPopular} />
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={popularity} />
         </div>
         <div>
           <p className="heading">Recently Released</p>
-          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={recentGames} />
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={releaseDate} />
         </div>
         <div>
           <p className="heading">Top Rated</p>
-          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={topRated} />
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={rating} />
         </div>
       </div>)
   }
