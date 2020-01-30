@@ -11,6 +11,8 @@ export default {
 // const gGames = createGames();
 
 function query(filterBy = '') {
+  console.log(filterBy);
+  
   const games = HttpService.get('game', '', filterBy);
   return games
 }

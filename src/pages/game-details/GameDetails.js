@@ -115,7 +115,7 @@ class GameDetails extends Component {
         <h2>Reviews :</h2>
         <Review user={loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} reviews={reviews} />
         <h2>Comments :</h2>
-        <Comments user={loggedInUser} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
+        <Comments user={loggedInUser} isDetails={true} onAddCommentOrReview={this.onAddCommentOrReview} comments={comments} />
       </div>
     )
   }

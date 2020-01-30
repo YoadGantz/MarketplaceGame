@@ -35,6 +35,7 @@ class NavBar extends Component {
         <div className="flex nav-link-container">
           <div className="flex">
             <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("wishlist")}>
+            <GameCounter isWishList={true} />
               <img alt="" src={wishlistImg} />
             </div>
             <div className="nav-link flex align-center" onClick={() => this.props.toggleModal("shoppingCart")}>

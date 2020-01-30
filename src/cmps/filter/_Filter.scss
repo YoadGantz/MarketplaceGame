@@ -50,6 +50,7 @@
     background-color: $clr2;
   }
   .sort-by-title {
+    margin-block-end: 10px;
     margin-inline-end: 10px;
   }
   @include for-wide-layout {
