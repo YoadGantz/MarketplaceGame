@@ -1,0 +1,49 @@
+@import "../../assets/styles/setup/variables.scss";
+
+
+.signup-container {
+    .signup-logo {
+        width: 150px;
+        margin-block-end: 20px;
+      }
+    .signup-img {
+      width: 50px;
+      margin-block-end: 20px;
+     
+    }
+    .signup-form {
+      > *:not(:last-child) {
+      }
+      .signup-btn {
+        background-color: #83519b;
+        font-family: inherit;
+        font-size: 1.1rem;
+        color: $clr6;
+        position: relative;
+        padding: 10px 20px;
+        border: 1px $clr6 solid;
+      }
+    }
+   
+  }
+  
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
