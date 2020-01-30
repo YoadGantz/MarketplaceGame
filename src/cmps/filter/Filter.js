@@ -20,8 +20,6 @@ export default class Filter extends Component {
             return this.setState({ title: '', tag: '', filterBy: ev.target.value }, () => this.onFilterBy())
         }
         if (fieldName === 'sortBy') {
-            console.log('got here');
-
             return this.setState({ sortBy: ev.target.value }, this.onFilterBy);
         }
         this.setState({ [this.state.filterBy]: ev.target.value }, this.onFilterBy);
@@ -36,7 +34,6 @@ export default class Filter extends Component {
     }
 
     render() {
-        const { sortByPrice, sortByDownloads } = this.props
         const { filterBy } = this.state
         return <div className="search-container totally-center">
             <input className="search-input input" value={this.state[this.state.filterBy]}
