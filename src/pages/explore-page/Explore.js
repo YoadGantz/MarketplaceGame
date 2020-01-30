@@ -23,8 +23,6 @@ class Explore extends Component {
     }
 
     onFilterBy = async (filterBy = {}) => {
-        console.log(filterBy);
-        
         filterBy.gamesIds = this.state.gamesIds
         await this.props.loadGames({ ...filterBy, shoppingCartIds: this.state.gamesIds })
         if (filterBy.sortBy === 'popularity') {
@@ -42,8 +40,6 @@ class Explore extends Component {
         this.setState({ games })
     }
     sortByPrice = (isAscending) => {
-        console.log(isAscending);
-        
         let games = [...this.props.games]
         games = UtilService.sortByPrice(games, isAscending)
         this.setState({ games })

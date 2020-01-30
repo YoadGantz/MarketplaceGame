@@ -20,8 +20,6 @@ export default class Filter extends Component {
             return this.setState({ title: '', tag: '', filterBy: ev.target.value }, () => this.onFilterBy())
         }
         if (fieldName === 'sortBy') {
-            console.log('got here');
-
             return this.setState({ sortBy: ev.target.value }, this.onFilterBy);
         }
         this.setState({ [this.state.filterBy]: ev.target.value }, this.onFilterBy);
