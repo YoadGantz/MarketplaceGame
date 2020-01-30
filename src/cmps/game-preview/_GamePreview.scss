@@ -44,7 +44,19 @@
   }
 
   .play-btn-container {
-    width: 100%;
+    border-radius: 8px;
+    padding: 10px 10px;
+    transition: background-color 0.4s;
+    margin-inline-start: 5px;
+    background-color: #17591a;
+    border-radius: 8px;
+    button{
+      font-size: 1.0rem;
+      font-family: montserrat;
+    }
+    &:hover{
+      background-color: #1c6621;
+    }
     img {
       width: 30px;
     }

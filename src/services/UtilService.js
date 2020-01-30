@@ -57,7 +57,6 @@ async function sortGames(games, sortBy) {
     } else {
         return _sortByRating(games)
     }
-
 }
 
 async function _sortByRecency(games) {
@@ -135,12 +134,16 @@ async function getGraphsDetails(games, type, time = 31) {
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }
-            if (!num) return ordersBy[currOrderDate] = 1
+            if (!num) {
+                ordersBy[gameByNameOrder[i]] = 1
+                return ordersBy[currOrderDate] = 1
+            }
             ordersBy[gameByNameOrder[i]] = idx
             return ordersBy[currOrderDate] = num + 1
         })
     })
     if (type === 'games') return ordersByGame
+
     return ordersBy
 }
 

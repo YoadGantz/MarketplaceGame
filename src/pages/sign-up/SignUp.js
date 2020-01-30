@@ -87,7 +87,7 @@ class SignUp extends Component {
         <input type="file" className='hidden' name="imgUrl" placeholder="Profile Image"
           onChange={this.addMediaAndTags} id='upload' />
         <label htmlFor='upload' className='input pointer upload-button flex' >
-      <img src='https://pngimage.net/wp-content/uploads/2018/06/png-upload-4.png' />
+      <img alt='' src='https://pngimage.net/wp-content/uploads/2018/06/png-upload-4.png' />
         Upload Img</label>
         {imgPreview}
         <br />

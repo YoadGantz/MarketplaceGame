@@ -60,10 +60,14 @@ class OwnedGames extends Component {
         const { games } = this.state
         return (
             <div className="flex column align-center container">
-                <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy}></Filter>
+               {this.props.user?this.props.user.userName?
                 <div className='publish-button btn'>
-                    <Link to='/edit'>Publish a game</Link>
+                <Link to='/edit'>Publish a game</Link> 
                 </div>
+                :'' 
+                :''}    
+                <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy}></Filter>
+               
                 <GameList isProfile={true} history={this.props.history} games={games}></GameList>
             </div>
         )
