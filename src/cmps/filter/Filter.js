@@ -36,26 +36,38 @@ export default class Filter extends Component {
     render() {
         const { filterBy } = this.state
         return <div className="search-container totally-center">
-            <input className="search-input input" value={this.state[this.state.filterBy]}
-                type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
-            <input className='hidden' name='filterBy' onChange={this.inputChange} defaultChecked id='title' value='title' type='radio' />
-            <label className='btn title-btn pointer' htmlFor='title'>
-                Title
+            <div className="totally-center">
+                <input className="search-input input" value={this.state[this.state.filterBy]}
+                    type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
+                <input className='hidden' name='filterBy' onChange={this.inputChange} defaultChecked id='title' value='title' type='radio' />
+                <label className='btn title-btn pointer' htmlFor='title'>
+                    Title
              </label>
-            <input className='hidden' onChange={this.inputChange} name='filterBy' id='tag' value='tag' type='radio' />
-            <label className='btn tag-btn pointer' htmlFor='tag'>
-                Tag
+                <input className='hidden' onChange={this.inputChange} name='filterBy' id='tag' value='tag' type='radio' />
+                <label className='btn tag-btn pointer' htmlFor='tag'>
+                    Tag
              </label>
-            <span>Sort by: </span>
-            <input className='hidden' name='sortBy' onClick={this.inputChange} id='popularity' value='popularity' type='radio' />
-            <label className='btn popularity-btn pointer' htmlFor='popularity'>
-                Popularity
+            </div>
+            <div className="totally-center flex wrap">
+                <span className="sort-by-title">Sort by: </span>
+                <input className='hidden' name='sortBy' onClick={this.inputChange} id='popularity' value='popularity' type='radio' />
+                <label className='btn popularity-btn pointer' htmlFor='popularity'>
+                    Popularity
              </label>
-            <input className='hidden' onClick={this.inputChange} name='sortBy' id='price' value='price' type='radio' />
-            <label className='btn price-btn pointer' htmlFor='price'>
-                Price
+                <input className='hidden' onClick={this.inputChange} name='sortBy' id='price' value='price' type='radio' />
+                <label className='btn price-btn pointer' htmlFor='price'>
+                    Price
              </label>
-            <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down} /></button>
+                <input className='hidden' name='sortBy' onClick={this.inputChange} id='releaseDate' value='releaseDate' type='radio' />
+                <label className='btn releaseDate-btn pointer' htmlFor='releaseDate'>
+                    Release Date
+             </label>
+                <input className='hidden' name='sortBy' onClick={this.inputChange} id='rating' value='rating' type='radio' />
+                <label className='btn rating-btn pointer' htmlFor='rating'>
+                    Rating
+             </label>
+                <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down} /></button>
+            </div>
         </div>
     }
 }
