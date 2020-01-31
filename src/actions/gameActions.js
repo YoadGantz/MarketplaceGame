@@ -14,16 +14,12 @@ function setGame(game) {
     }
 }
 
-
-
-
 export function loadGames(filterBy) {
     return async dispatch => {
         try {
             const games = await GameService.query(filterBy);
             dispatch(setGames(games));
             return games
-
         } catch (err) {
             console.log('Had issues getting games', err);
         }
@@ -41,6 +37,7 @@ export function loadGame(id) {
         }
     };
 }
+
 export function updateGame(newGame) {
     return async dispatch => {
         try {
@@ -51,6 +48,7 @@ export function updateGame(newGame) {
         }
     };
 }
+
 export function updateComments(newGame) {
     return  dispatch => {
         try {
