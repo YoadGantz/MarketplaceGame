@@ -48,24 +48,29 @@ export default class Filter extends Component {
                     Tag
              </label>
             </div>
-            <div className="totally-center flex wrap">
-                <span className="sort-by-title">Sort by: </span>
-                <input className='hidden' name='sortBy' onClick={this.inputChange} id='popularity' value='popularity' type='radio' />
-                <label className='btn popularity-btn pointer' htmlFor='popularity'>
-                    Popularity
+            <div className='flex'>
+                <div className='flex column'>
+                    <input className='hidden' id='sortBy' type='checkbox' />
+                    <label htmlFor='sortBy' className="btn sort-by-title pointer">Sort by </label>
+                    <div className="totally-center sort-by-inputs hidden  wrap">
+                        <input className='hidden' onClick={this.inputChange} name='sortBy' id='price' value='price' type='radio' />
+                        <label className='pointer' htmlFor='price'>
+                            Price
              </label>
-                <input className='hidden' onClick={this.inputChange} name='sortBy' id='price' value='price' type='radio' />
-                <label className='btn price-btn pointer' htmlFor='price'>
-                    Price
+                        <input className='hidden' name='sortBy' onClick={this.inputChange} id='rating' value='rating' type='radio' />
+                        <label className='pointer' htmlFor='rating'>
+                            Rating
              </label>
-                <input className='hidden' name='sortBy' onClick={this.inputChange} id='releaseDate' value='releaseDate' type='radio' />
-                <label className='btn releaseDate-btn pointer' htmlFor='releaseDate'>
-                    Release Date
+                        <input className='hidden' name='sortBy' onClick={this.inputChange} id='popularity' value='popularity' type='radio' />
+                        <label className='pointer' htmlFor='popularity'>
+                            Popularity
              </label>
-                <input className='hidden' name='sortBy' onClick={this.inputChange} id='rating' value='rating' type='radio' />
-                <label className='btn rating-btn pointer' htmlFor='rating'>
-                    Rating
+                        <input className='hidden' name='sortBy' onClick={this.inputChange} id='releaseDate' value='releaseDate' type='radio' />
+                        <label className=' pointer' htmlFor='releaseDate'>
+                            Release Date
              </label>
+                    </div>
+                </div>
                 <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down} /></button>
             </div>
         </div>

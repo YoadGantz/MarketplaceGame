@@ -50,10 +50,32 @@
     background-color: $clr2;
   }
   .sort-by-title {
+    width: 132px;
     margin-block-end: 10px;
     margin-inline-end: 10px;
+    background-color: #3878a7;
+    &::after {
+      content: " ⬇";
+      margin-inline-start: 30px;
+    }
   }
   @include for-wide-layout {
     flex-direction: row;
+  }
+}
+#sortBy:checked ~ .sort-by-inputs {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  background-color: rgba(31, 35, 53, 0.98);
+  margin-block-start: 45px;
+  margin-inline-start: 2px;
+}
+
+#sortBy:checked ~ .sort-by-title {
+  &::after {
+    content: "⬆";
   }
 }
