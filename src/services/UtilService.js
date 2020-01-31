@@ -57,7 +57,10 @@ async function sortGames(games, sortBy, isAscending) {
         return _sortByRating(games, isAscending)
     } else if (sortBy === 'price') {
         return _sortByPrice(games, isAscending)
+    }else{
+        return games
     }
+    
 }
 
 async function _sortByRecency(games, isAscending = false) {

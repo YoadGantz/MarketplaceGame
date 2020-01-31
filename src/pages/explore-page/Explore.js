@@ -15,7 +15,9 @@ class Explore extends Component {
 
     componentDidMount = async () => {
         window.scrollTo(0, 0);
-        this.onFilterBy()
+        const query=window.location.search
+        const filterBy = {sortBy:new URLSearchParams(query).get('sortBy')}
+        this.onFilterBy(filterBy)
     }
 
     onUpdateUser = async (updatedUser) => {
