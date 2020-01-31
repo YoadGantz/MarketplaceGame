@@ -2,7 +2,7 @@
 @import "../../assets/styles/basics/helpers.scss";
 @import "../../assets/styles/setup/mixins.scss";
 .nav-bar {
-  z-index: 1;
+  z-index: 2;
   background-color: rgba(0, 0, 0, 0.849);
   position: fixed;
   width: 100%;
@@ -64,7 +64,6 @@
     background-color: lighten(#242944f8, 10%);
     width: 250px;
     align-items: center;
-    z-index: 5000;
     margin-left: 10px;
 
     #menu:checked ~ & {

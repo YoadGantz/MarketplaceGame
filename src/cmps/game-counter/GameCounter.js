@@ -7,14 +7,18 @@ class GameCounter extends Component {
         this.props.loadCart()
     }
 
+
     render() {
-        return <p  style={{ alignSelf:"center",color: "white" }}>{this.props.cart.length}</p>
+        const { isWishList } = this.props
+        return isWishList ? <p style={{marginInlineEnd:'3px', alignSelf: "center", color: "white" }}>{this.props.user ? this.props.user.wishedGames.length : 0}</p>
+                         : <p style={{ alignSelf: "center", color: "white" }}>{this.props.cart.length}</p>
     }
 }
 
 const mapStateToProps = state => {
     return {
-        cart: state.cartStore.cart
+        cart: state.cartStore.cart,
+        user: state.userStore.loggedInUser
     };
 };
 

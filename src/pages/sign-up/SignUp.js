@@ -84,8 +84,11 @@ class SignUp extends Component {
         <input type="text" className='input' name="about" value={this.state.signUpCred.about}
           onChange={this.signUpHandleChange} placeholder="About" />
         <br />
-        <input type="file" className='input pointer' name="imgUrl" placeholder="Profile Image"
-          onChange={this.addMediaAndTags} />
+        <input type="file" className='hidden' name="imgUrl" placeholder="Profile Image"
+          onChange={this.addMediaAndTags} id='upload' />
+        <label htmlFor='upload' className='input pointer upload-button flex' >
+      <img alt='' src='https://pngimage.net/wp-content/uploads/2018/06/png-upload-4.png' />
+        Upload Img</label>
         {imgPreview}
         <br />
         {(imgPreview && <button className='signup-btn'>Join</button>)}
@@ -94,7 +97,7 @@ class SignUp extends Component {
 
     return (
       <div className='content-container signup-container flex column align-center'>
-          <img className="signup-logo" alt="logo" src="/logo.png" width="100px" />
+        <img className="signup-logo" alt="logo" src="/logo.png" width="100px" />
         {isLoadingImg && <div className='loader'></div>}
         {(!loggedInUser || !loggedInUser.userName) && signUpSection}
       </div>

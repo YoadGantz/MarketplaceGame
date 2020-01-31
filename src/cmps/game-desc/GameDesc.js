@@ -6,7 +6,6 @@ import UserService from "../../services/UserService";
 import './_GameDesc.scss'
 import full_heart from '../../assets/icons/full_heart.svg'
 import empty_heart from '../../assets/icons/empty_heart.svg'
-import play_img from '../../assets/icons/play.svg'
 import history from "../../history";
 
 export default class GameDesc extends Component {
@@ -30,8 +29,8 @@ export default class GameDesc extends Component {
   }
 
   setOrderCount = async (game) => {
-    const orderCount = await UtilService.getGraphsDetails([game])
-    this.setState({ orderCount: orderCount[game.title] })
+    const orderCount = await UtilService.getSum([game])
+    this.setState({ orderCount: orderCount.downloadsByGame })
   }
 
   onAddToCart = () => {
@@ -69,8 +68,8 @@ export default class GameDesc extends Component {
     const { game, user } = this.props
     const { thumbnail, description, publishedAt, price, _id } = game
     const { publisherName, rating, orderCount, isOwned } = this.state
-    const priceOrPlay = isOwned ? <button onClick={this.onPlayClikc} className="btn play-btn"><img alt="play" title="Play" src={play_img} /></button> :
-      <button type="primary" className='buy-btn' onClick={this.onAddToCart}> {price}$ Add to cart </button>
+    const priceOrPlay = isOwned ? <button onClick={this.onPlayClikc} className="play-btn-container">Play</button> :
+      <button type="primary" className='buy-btn' onClick={this.onAddToCart}>${price} Add to Cart </button>
     const date = new Date(publishedAt / 1)
     const publishedDate = UtilService.formatDate(date)
     return (

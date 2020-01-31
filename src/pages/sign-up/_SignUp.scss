@@ -11,9 +11,15 @@
       margin-block-end: 20px;
      
     }
-    .signup-form {
-      > *:not(:last-child) {
+    .upload-button{
+      padding: 10px;
+      img{
+        width: 25px;
+        margin-inline-end: 5px;
       }
+      
+    }
+    .signup-form {
       .signup-btn {
         background-color: #83519b;
         font-family: inherit;

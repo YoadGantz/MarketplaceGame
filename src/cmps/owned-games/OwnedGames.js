@@ -29,41 +29,28 @@ class OwnedGames extends Component {
             this.setState({ games, gamesIds })
         }
     }
-
     onFilterBy = async (filterBy = {}) => {
         if (!this.state.gamesIds.length) return
         filterBy.gamesIds = this.state.gamesIds
         await this.props.loadGames({ ...filterBy, shoppingCartIds: this.state.gamesIds })
-        this.setState({ games: this.props.games }, () => {
-            if (filterBy.sortBy === 'popularity') {
-                this.sortByDownloads()
-            } else if (filterBy.sortBy === 'price') {
-                this.sortByPrice()
-            }
-        })
+        if (filterBy.sortBy) {
+            const sortedGames = await UtilService.sortGames(this.state.games, filterBy.sortBy, filterBy.isAscending)
+            this.setState({ games: sortedGames })
+        } else {
+            this.setState({ games: this.props.games })
+        }
     }
-
-    sortByDownloads = async () => {
-        if (!this.state.gamesIds.length) return
-        let games = [...this.state.games]
-        games = await UtilService.sortByDownloads(games, this.state.isAscending)
-        this.setState((prevState) => ({ games, isAscending: !prevState.isAscending }))
-    }
-    sortByPrice = () => {
-        if (!this.state.gamesIds.length) return
-        let games = [...this.state.games]
-        games = UtilService.sortByPrice(games, this.state.isAscending)
-        this.setState((prevState) => ({ games, isAscending: !prevState.isAscending }))
-    }
-
     render() {
         const { games } = this.state
         return (
             <div className="flex column align-center container">
-                <Filter sortByPrice={this.sortByPrice} sortByDownloads={this.sortByDownloads} onFilterBy={this.onFilterBy}></Filter>
-                <div className='publish-button btn'>
-                    <Link to='/edit'>Publish a game</Link>
-                </div>
+                <Filter onFilterBy={this.onFilterBy}></Filter>
+                {this.props.user ? this.props.user.userName ?
+                    <div className='publish-button btn'>
+                        <Link to='/edit'>Publish a game</Link>
+                    </div>
+                    : ''
+                    : ''}
                 <GameList isProfile={true} history={this.props.history} games={games}></GameList>
             </div>
         )

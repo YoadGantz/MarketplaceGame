@@ -8,7 +8,6 @@ export default {
     dateFromObjectId,
     formatDate,
     getSum,
-    sortByPrice,
     formatGameRating
 }
 
@@ -49,28 +48,39 @@ async function getSum(games) {
     return { sum, downloadsByGame }
 }
 
-async function sortGames(games, sortBy) {
-    if (sortBy === 'mostPopular') {
-        return sortByDownloads(games)
-    } else if (sortBy === 'recentGames') {
-        return _sortByRecency(games)
-    } else {
-        return _sortByRating(games)
+async function sortGames(games, sortBy, isAscending) {
+    if (sortBy === 'popularity') {
+        return sortByDownloads(games, isAscending)
+    } else if (sortBy === 'releaseDate') {
+        return _sortByRecency(games, isAscending)
+    } else if (sortBy === 'rating') {
+        return _sortByRating(games, isAscending)
+    } else if (sortBy === 'price') {
+        return _sortByPrice(games, isAscending)
+    }else{
+        return games
     }
-
+    
 }
 
-async function _sortByRecency(games) {
+async function _sortByRecency(games, isAscending = false) {
     const sortedGames = games.sort((game1, game2) => {
-        return game2.publishedAt - game1.publishedAt
+        if (isAscending) {
+            return game1.publishedAt < game2.publishedAt ? -1 : game1.publishedAt > game2.publishedAt ? 0 : 1
+        }
+        return game1.publishedAt > game2.publishedAt ? -1 : game1.publishedAt < game2.publishedAt ? 0 : 1
+   
     })
     return sortedGames
 }
 
-async function _sortByRating(games) {
+async function _sortByRating(games, isAscending = false) {
     games.forEach(game => game.totalRating = getGameRating(game))
     const sortedGames = games.sort((game1, game2) => {
-        return game2.totalRating - game1.totalRating
+        if (isAscending) {
+            return game1.totalRating < game2.totalRating ? -1 : game1.totalRating > game2.totalRating ? 0 : 1
+        }
+        return game1.totalRating > game2.totalRating ? -1 : game1.totalRating < game2.totalRating ? 0 : 1
     })
     return sortedGames
 }
@@ -89,7 +99,7 @@ async function sortByDownloads(games, isAscending = false) {
     return sortedGames
 }
 
-function sortByPrice(games, isAscending) {
+function _sortByPrice(games, isAscending) {
     const sortedGames = games.sort((game1, game2) => {
         if (isAscending) {
             return game2.price > game1.price ? -1 : game2.price < game1.price ? 0 : 1
@@ -135,12 +145,16 @@ async function getGraphsDetails(games, type, time = 31) {
             if (type === 'games') {
                 return ordersByGame[i] += 1
             }
-            if (!num) return ordersBy[currOrderDate] = 1
+            if (!num) {
+                ordersBy[gameByNameOrder[i]] = 1
+                return ordersBy[currOrderDate] = 1
+            }
             ordersBy[gameByNameOrder[i]] = idx
             return ordersBy[currOrderDate] = num + 1
         })
     })
     if (type === 'games') return ordersByGame
+
     return ordersBy
 }
 

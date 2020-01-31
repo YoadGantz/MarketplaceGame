@@ -9,7 +9,7 @@
   }
   .publisher {
     font-size: 1.1rem;
-    text-decoration: underline;
+    font-family:montserrat-bold ,montserrat;
     min-width: 80px;
   }
   .published {
@@ -26,12 +26,18 @@
     margin-block-end: 15px;
   }
 
-  .play-btn {
-    img {
-      width: 35px;
+  .play-btn-container {
+    border-radius: 8px;
+    padding: 12px 18px;
+    transition: background-color 0.4s;
+    margin-inline-start: 5px;
+    background-color: #207924;
+    border-radius: 8px;
+      font-size: 1.2rem;
+      font-family: montserrat;
+    &:hover{
+      background-color: #23862a;
     }
-    &:hover {
-      background-color: lighten($clr2, 20%);
-    }
+   
   }
 }
