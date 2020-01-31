@@ -71,7 +71,7 @@ export default class Filter extends Component {
              </label>
                     </div>
                 </div>
-                <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src={this.state.isAscending ? arrow_up : arrow_down} /></button>
+                <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src='https://image.flaticon.com/icons/svg/2413/2413274.svg' /></button>
             </div>
         </div>
     }
