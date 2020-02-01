@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import arrow_up from '../../assets/icons/arrow_up.svg'
-import arrow_down from '../../assets/icons/arrow_down.svg'
 
 import './_Filter.scss'
 

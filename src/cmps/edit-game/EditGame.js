@@ -19,7 +19,7 @@ class EditGame extends Component {
     mediaUrls: [],
     price: '',
     publishedAt: '',
-    tags: null,
+    tags: [],
     currTag: '',
     loading: false,
     modalType: '',
