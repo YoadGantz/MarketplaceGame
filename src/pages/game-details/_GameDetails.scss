@@ -30,34 +30,25 @@
   }
 }
 
-.add-button {
-  background-color: lighten(#183348, 20%);
-  border-radius: 8px;
-  padding: 8px 15px;
-  font-family: montserrat;
-  font-size: 1rem;
-  transition: background-color 0.4s;
-  width: 150px;
-  height: 50px;
-  &:hover {
-    background-color: lighten(#183348, 40%);
-  }
-}
-
 .new-comment-container {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-block-end:10px;
   textarea {
     height: 60px;
-    width: 40%;
     resize: none;
-    background-color: darken(#336895, 30%);
-    color: white;
-    border: #2196f3;
-    border-radius: 5px;
     font-family: inherit;
-    margin-inline-end: 5px;
+    background-color: $clr2;
+    color: $clr6;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-inline-start:10px;
+    margin-inline-end:10px;
+    padding-block-start:10px;
   }
+  ::placeholder {
+    color: rgb(241, 236, 236);
+  }
+  
 }
 
 .reviews-container {
@@ -68,11 +59,14 @@
     width: 40%;
     resize: none;
     background-color: darken(#336895, 30%);
-    color: white;
-    border: #2196f3;
+    color: $clr6;
     border-radius: 5px;
     font-family: inherit;
-    margin-inline-end: 5px;
+    margin-inline-start:10px;
+    margin-inline-end:10px;
+  }
+  ::placeholder {
+    color: rgb(241, 236, 236);
   }
   & img {
     width: 50px;

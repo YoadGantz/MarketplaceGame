@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SocketService from "../../services/SocketService";
-import Comments from "../../cmps/comments/Comment";
+import Comment from "../../cmps/comments/Comment";
 import './_PlayGame.scss'
 
 class PlayGame extends Component {
@@ -32,16 +32,17 @@ class PlayGame extends Component {
 
     render() {
         const { comments } = this.state
-        let addedComments
-        const logInMsg = !this.props.loggedInUser ? 'Buy the game to enjoy the game fully' : '';
-        addedComments = <Comments user={this.props.loggedInUser} onAddCommentOrReview={this.sendComment} comments={comments} />
-        return (<div className=' container play-container'>
-            <h3>{logInMsg}</h3>
-            <div className='game-content-container flex'>
-                <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameBorder="0" scrolling="no" width="1000" height="635" allowFullScreen></iframe>
-                <div className='comments-container'>{addedComments}</div>
+        const logInMsg = !this.props.loggedInUser ? 'Buy the game to enjoy it fully' : ''; 
+
+        return (
+            <div className="container content-container play-container">
+                <h3>{logInMsg}</h3>
+                <div className="game-content-container flex">
+                    <iframe title="play" src="https://www.gameflare.com/embed/cartoon-strike/" frameBorder="0" scrolling="no" width="1000" height="635" allowFullScreen></iframe>
+                    <div className="comments-container"><Comment user={this.props.loggedInUser} onAddCommentOrReview={this.sendComment} comments={comments} /></div>
+                </div>
             </div>
-        </div>)
+        )
     }
 }
 

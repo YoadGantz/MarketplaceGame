@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 
-import arrow_up from '../../assets/icons/arrow_up.svg'
-import arrow_down from '../../assets/icons/arrow_down.svg'
-
 import './_Filter.scss'
+import up_down_arrows from '../../assets/icons/up_down_arrows.svg'
 
 export default class Filter extends Component {
     state = {
@@ -34,45 +32,38 @@ export default class Filter extends Component {
     }
 
     render() {
-        const { filterBy } = this.state
-        return <div className="search-container totally-center">
-            <div className="totally-center">
-                <input className="search-input input" value={this.state[filterBy]}
-                    type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
-                <input className='hidden' name='filterBy' onChange={this.inputChange} defaultChecked id='title' value='title' type='radio' />
-                <label className='btn title-btn pointer' htmlFor='title'>
-                    Title
-             </label>
-                <input className='hidden' onChange={this.inputChange} name='filterBy' id='tag' value='tag' type='radio' />
-                <label className='btn tag-btn pointer' htmlFor='tag'>
-                    Tag
-             </label>
-            </div>
-            <div className='flex'>
-                <div className='flex column'>
-                    <input className='hidden' id='sortBy' type='checkbox' />
-                    <label htmlFor='sortBy' className="btn sort-by-title pointer">Sort by </label>
-                    <div className="totally-center sort-by-inputs hidden  wrap">
-                        <input className='hidden' onClick={this.inputChange} name='sortBy' id='price' value='price' type='radio' />
-                        <label className='pointer' htmlFor='price'>
-                            Price
-             </label>
-                        <input className='hidden' name='sortBy' onClick={this.inputChange} id='rating' value='rating' type='radio' />
-                        <label className='pointer' htmlFor='rating'>
-                            Rating
-             </label>
-                        <input className='hidden' name='sortBy' onClick={this.inputChange} id='popularity' value='popularity' type='radio' />
-                        <label className='pointer' htmlFor='popularity'>
-                            Popularity
-             </label>
-                        <input className='hidden' name='sortBy' onClick={this.inputChange} id='releaseDate' value='releaseDate' type='radio' />
-                        <label className=' pointer' htmlFor='releaseDate'>
-                            Release Date
-             </label>
-                    </div>
+        const { filterBy, sortBy } = this.state
+        return (
+            <div className="search-filter-container totally-center">
+                <div className="search-container flex">
+                    <input className="search-input input" value={this.state[filterBy]}
+                        type="search" placeholder={`Search by ${filterBy}`} onChange={this.inputChange} />
+                    <input className="hidden" name="filterBy" onChange={this.inputChange} defaultChecked id="title" value="title" type="radio" />
+                    <label className="btn title-btn pointer" htmlFor="title"> Title</label>
+                    <input className="hidden" onChange={this.inputChange} name="filterBy" id="tag" value="tag" type="radio" />
+                    <label className="btn tag-btn pointer" htmlFor="tag"> Tag </label>
                 </div>
-                <button className='btn order-btn' onClick={this.changeOrder}><img alt="" src='https://image.flaticon.com/icons/svg/2413/2413274.svg' /></button>
+                <div className="filter-container flex justify-center">
+                    <label htmlFor="sortBy" className="btn sort-by pointer">{sortBy !== '' ? sortBy : "Sort by"}</label>
+                    <input className="hidden" id="sortBy" type="checkbox" />
+                    <div className="sort-by-inputs hidden wrap">
+                        <label className="pointer" htmlFor="releaseDate">Release Date
+                        <input className="hidden" name="sortBy" onClick={this.inputChange} id="releaseDate" value="ReleaseDate" type="radio" />
+                        </label>
+                        <label className="pointer" htmlFor="popularity">Popularity
+                        <input className="hidden" name="sortBy" onClick={this.inputChange} id="popularity" value="Popularity" type="radio" />
+                        </label>
+                        <label className="pointer" htmlFor="rating">Rating
+                        <input className="hidden" name="sortBy" onClick={this.inputChange} id="rating" value="Rating" type="radio" />
+                        </label>
+                        <label className="pointer" htmlFor='price'>Price
+                        <input className="hidden" onClick={this.inputChange} name="sortBy" id="price" value="Price" type="radio" />
+                        </label>
+                    </div>
+                    <button className="btn order-btn" onClick={this.changeOrder}><img alt="" src={up_down_arrows} /></button>
+                </div>
             </div>
-        </div>
+
+        )
     }
 }

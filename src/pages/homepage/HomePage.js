@@ -10,17 +10,17 @@ import GameList from '../../cmps/game-list/GameList'
 import './_HomePage.scss'
 class HomePage extends Component {
   state = {
-    popularity: [],
-    releaseDate: [],
-    rating: []
+    Popularity: [],
+    ReleaseDate: [],
+    Rating: []
   }
 
   async componentDidMount() {
     window.scrollTo(0, 0);
     await this.props.loadGames()
-    this.setGames('popularity')
-    this.setGames('releaseDate')
-    this.setGames('rating')
+    this.setGames('Popularity')
+    this.setGames('ReleaseDate')
+    this.setGames('Rating')
   }
 
   onUpdateUser = async (updatedUser) => {
@@ -36,7 +36,7 @@ class HomePage extends Component {
 
 
   render() {
-    const { popularity, releaseDate, rating } = this.state
+    const { Popularity, ReleaseDate, Rating } = this.state
     return (
       <div className="homepage-container content-container container full">
         <div className="hero-text flex column totally-center">
@@ -49,21 +49,21 @@ class HomePage extends Component {
           <p >Most Popular</p>
           <Link to='/game?sortBy=popularity'>See More →</Link>
           </div>
-          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={popularity} />
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={Popularity} />
         </div>
         <div>
         <div className="flex  heading space-between">
           <p >Recently Released</p>
           <Link to='/game?sortBy=releaseDate'>See More →</Link>
           </div>
-          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={releaseDate} />
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={ReleaseDate} />
         </div>
         <div>
         <div className="flex  heading space-between">
           <p>Top Rated</p>
           <Link to='/game?sortBy=rating'>See More →</Link>
           </div>
-          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={rating} />
+          <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={Rating} />
         </div>
       </div>)
   }

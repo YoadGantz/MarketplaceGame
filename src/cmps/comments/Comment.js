@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import send_img from '../../assets/icons/send.svg'
+
 export default class Comment extends Component {
   state = { text: "" };
   inputChange = ev => {
@@ -29,21 +31,14 @@ export default class Comment extends Component {
       );
     })
     return (
-      <div>
+      <div className="comment">
         <div className='social-content-container'>
           {commentMap}
         </div>
-        <div>
-          <div className='flex new-comment-container align-center'>
-            <textarea
-              type="text"
-              name="text"
-              value={text}
-              onChange={this.inputChange}
-              placeholder="write your text"
-            />
-            <button className='add-button' onClick={this.onAddComment} type='primary'>{this.props.isDetails?'Add A Comment':'send'}</button>
-          </div>
+        <div className='flex new-comment-container'>
+          <textarea className="full" type="text" name="text" value={text} onChange={this.inputChange}
+            placeholder="Write here" />
+          <button className='add-button btn' onClick={this.onAddComment} type='primary'><img alt="send" src={send_img} /></button>
         </div>
       </div>
     );

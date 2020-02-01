@@ -49,13 +49,13 @@ async function getSum(games) {
 }
 
 async function sortGames(games, sortBy, isAscending) {
-    if (sortBy === 'popularity') {
+    if (sortBy === 'Popularity') {
         return sortByDownloads(games, isAscending)
-    } else if (sortBy === 'releaseDate') {
+    } else if (sortBy === 'ReleaseDate') {
         return _sortByRecency(games, isAscending)
-    } else if (sortBy === 'rating') {
+    } else if (sortBy === 'Rating') {
         return _sortByRating(games, isAscending)
-    } else if (sortBy === 'price') {
+    } else if (sortBy === 'Price') {
         return _sortByPrice(games, isAscending)
     }else{
         return games

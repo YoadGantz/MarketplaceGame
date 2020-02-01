@@ -1,78 +1,62 @@
 @import "../../assets/styles/setup/_mixins.scss";
 @import "../../assets/styles/setup/variables.scss";
 
-
-
 .play-container {
-  padding-top: 100px;
-  .social-content-container {
-    margin-bottom: 10px;
-    border-radius: 8px;
-    max-height: 55vh;
-    overflow: overlay;
-    height: 66vh;
-    padding: 15px;
-    height: 300px;
-    max-height: 300px;
-    color: white;
-  
-    @include for-normal-layout {
-      height: 57.5vh;
-      max-height: 57.5vh;
-    }
-  
-    & textarea {
+  > *:first-child {
+    margin-block-start: 20px;
+    margin-block-end: 20px;
+    text-align: center;
+  }
+
+  .game-content-container {
+    flex-direction: column;
+    & iframe {
+      height: 66vh;
       width: 100%;
-      font-family: montserrat;
+      @include for-normal-layout {
+        width: 90%;
+      }
     }
-  }
-}
 
- 
-
-.comments-container {
-  background-color: #0c1823;
-
-  .add-button {
-    border-radius: 8px;
-    padding: 7px 15px;
-    font-family: montserrat;
-    font-size: 1rem;
-    transition: background-color 0.4s;
-    width: 170px;
-  }
-  width: auto;
-
-  textarea {
-    width: 50%;
-    background-color: lighten(#0c1823, 20%);
-    font-family: inherit;
-    border-radius: 10px;
-  }
-  & .new-comment-container {
-    margin-bottom: 0;
-  }
-  @include for-normal-layout {
-    height: 66vh;
-  }
-}
-
-.game-content-container {
-  flex-direction: column;
-  & iframe {
-    height: 66vh;
-    width: 100%;
     @include for-normal-layout {
-      width: 90%;
+      flex-direction: row;
     }
-  }
-  textarea {
-    resize: none;
-    width: 100%;
-    font-family: inherit;
-  }
 
-  @include for-normal-layout {
-    flex-direction: row;
+    .comments-container {
+      background-color: $clr5;
+
+      .social-content-container {
+        padding: 15px;
+        margin-block-end: 10px;
+        overflow: overlay;
+        color: white;
+        max-height: 300px;
+        @include for-normal-layout {
+          height: 57.5vh;
+          max-height: 57.5vh;
+        }
+      }
+
+      textarea {
+        text-align: center;
+        font-family: inherit;
+        resize: none;
+        font-size: 1rem;
+        background-color: $clr2;
+        border-radius: 8px;
+        min-width: 230px;
+      }
+
+      ::placeholder {
+        color: rgb(241, 236, 236);
+      }
+
+      >*:last-child {
+        margin-inline-end: 10px;
+      }
+      @include for-normal-layout {
+        height: 66vh;
+      }
+    }
   }
 }
