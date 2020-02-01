@@ -70,7 +70,7 @@ class Dashboard extends Component {
         } else {
             this.props.loadGames()
         }
-        await this.getGraphsDetails()
+         this.getGraphsDetails()
         this.getWeekInfo()
         this.getMonthInfo()
     }
