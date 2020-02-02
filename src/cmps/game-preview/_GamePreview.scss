@@ -46,16 +46,16 @@
   .play-btn-container {
     border-radius: 8px;
     padding: 10px 10px;
-    transition: background-color 0.4s;
+    transition: background-color 0.3s;
     margin-inline-start: 5px;
-    background-color: #17591a;
+    background-color: darken(complement(#2052d0), 20%);
     border-radius: 8px;
     button{
       font-size: 1.0rem;
       font-family: montserrat;
     }
     &:hover{
-      background-color: #1c6621;
+      background-color: darken(#0f9c14, 10%);
     }
     img {
       width: 30px;
