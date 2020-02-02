@@ -16,7 +16,8 @@ export default class Filter extends Component {
     componentDidMount() {
         const query = window.location.search
         const sortBy = new URLSearchParams(query).get('sortBy')
-        this.setState({ sortBy })
+        console.log(sortBy)
+        this.setState({ sortBy: sortBy || 'Sort By:' })
     }
 
     inputChange = ev => {
