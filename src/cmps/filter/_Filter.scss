@@ -38,33 +38,39 @@
     background-color: $clr2;
   }
   .filter-container {
-    > *:not(:last-child) {
-      margin-inline-end: 8px;
-    }
+   
     .sort-by {
+      margin-inline-end: 8px;
       min-width: 146px;
       background-color: $clr2;
       position: relative;
+      text-align: left;
       &::after {
         content: " ⬇";
         position: absolute;
         right: 10px;
       }
     }
-    #sortBy:checked ~ .sort-by-inputs {
+     .sort-by-inputs {
+       text-align: left;
       display: flex;
       flex-direction: column;
       position: absolute;
       z-index: 1;
       width: 146px;
-      left: 53.6%;
-      top: 15%;
+      margin-block-start: 39px;
+      padding-block-start: 4px;
       background-color: rgba(31, 35, 53, 0.98);
       padding-inline-start: 5px;
       border-radius: 0 0 8px 8px;
+      .sort-by-button{
+        font-size: 0.9rem;
+        margin-block-end: 4px;
+        text-align: left;
+      }
     }
 
-    #sortBy:checked ~ .sort-by {
+     .sort-by-checked {
       &::after {
         content: "⬆";
       }

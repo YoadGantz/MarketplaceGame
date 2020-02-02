@@ -9,18 +9,19 @@ export default class Filter extends Component {
         tag: '',
         filterBy: 'title',
         sortBy: '',
-        isAscending: false
+        isAscending: false,
+        isShown:false
     }
 
     inputChange = ev => {
-        let fieldName = ev.target.name;
-        if (fieldName === 'filterBy') {
-            return this.setState({ title: '', tag: '', filterBy: ev.target.value }, () => this.onFilterBy())
+        let {name,value} = ev.target;
+        if (name === 'filterBy') {
+            return this.setState({ title: '', tag: '', filterBy: value }, () => this.onFilterBy())
         }
-        if (fieldName === 'sortBy') {
-            return this.setState({ sortBy: ev.target.value }, this.onFilterBy);
+        if (name === 'sortBy') {
+            return this.setState(prevState=>({ sortBy: value,isShown:!prevState.isShown }), this.onFilterBy);
         }
-        this.setState({ [this.state.filterBy]: ev.target.value }, this.onFilterBy);
+        this.setState({ [this.state.filterBy]: value }, this.onFilterBy);
     };
 
     onFilterBy = () => {
@@ -32,7 +33,7 @@ export default class Filter extends Component {
     }
 
     render() {
-        const { filterBy, sortBy } = this.state
+        const { filterBy, sortBy,isShown } = this.state
         return (
             <div className="search-filter-container totally-center">
                 <div className="search-container flex">
@@ -43,22 +44,26 @@ export default class Filter extends Component {
                     <input className="hidden" onChange={this.inputChange} name="filterBy" id="tag" value="tag" type="radio" />
                     <label className="btn tag-btn pointer" htmlFor="tag"> Tag </label>
                 </div>
-                <div className="filter-container flex justify-center">
-                    <label htmlFor="sortBy" className="btn sort-by pointer">{sortBy !== '' ? sortBy : "Sort by"}</label>
-                    <input className="hidden" id="sortBy" type="checkbox" />
-                    <div className="sort-by-inputs hidden wrap">
-                        <label className="pointer" htmlFor="releaseDate">Release Date
-                        <input className="hidden" name="sortBy" onClick={this.inputChange} id="releaseDate" value="ReleaseDate" type="radio" />
-                        </label>
-                        <label className="pointer" htmlFor="popularity">Popularity
-                        <input className="hidden" name="sortBy" onClick={this.inputChange} id="popularity" value="Popularity" type="radio" />
-                        </label>
-                        <label className="pointer" htmlFor="rating">Rating
-                        <input className="hidden" name="sortBy" onClick={this.inputChange} id="rating" value="Rating" type="radio" />
-                        </label>
-                        <label className="pointer" htmlFor='price'>Price
-                        <input className="hidden" onClick={this.inputChange} name="sortBy" id="price" value="Price" type="radio" />
-                        </label>
+                <div className='flex'>
+                    <div className="filter-container flex column ">
+                        <button htmlFor="sortBy" onClick={()=>this.setState(prevState=>({isShown:!prevState.isShown}))} className={isShown? "btn sort-by pointer sort-by-checked": "btn sort-by pointer"}>
+                            {sortBy !== '' ? sortBy === "ReleaseDate" ? "Release Date" : sortBy : "Sort by"}
+                            </button>
+                       {isShown && <div className="sort-by-inputs">
+                            <button className="pointer sort-by-button" name="sortBy" onClick={this.inputChange} value="ReleaseDate" >
+                                Release Date
+                            </button>
+                            <button className="pointer sort-by-button" name="sortBy" onClick={this.inputChange} value="Popularity" >
+                                Popularity
+                        </button>
+                            <button className="pointer sort-by-button" name="sortBy" onClick={this.inputChange} value="Rating"  >
+                                Rating
+                        </button>
+                            <button className="pointer sort-by-button" onClick={this.inputChange} name="sortBy" value="Price">
+                                Price
+                        </button>
+                        </div>
+    }
                     </div>
                     <button className="btn order-btn" onClick={this.changeOrder}><img alt="" src={up_down_arrows} /></button>
                 </div>
