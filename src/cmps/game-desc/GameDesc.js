@@ -75,9 +75,9 @@ export default class GameDesc extends Component {
     return (
       <div className="desc desc-container flex column">
         <img alt="" className="game-thumbnail" src={thumbnail}></img>
-        <div className="details flex space-between">
-              <td className="publisher">{publisherName}</td>
-              <td className="published">{publishedDate}</td>
+        <div className="details flex space-between align-center">
+              <p className="publisher">{publisherName}</p>
+              <p className="published">{publishedDate}</p>
         </div>
         <div className="rating-downloads">
           <p className="rating">Rating: {rating}</p>

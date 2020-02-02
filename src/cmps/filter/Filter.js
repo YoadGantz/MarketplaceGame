@@ -10,16 +10,22 @@ export default class Filter extends Component {
         filterBy: 'title',
         sortBy: '',
         isAscending: false,
-        isShown:false
+        isShown: false
+    }
+
+    componentDidMount() {
+        const query = window.location.search
+        const sortBy = new URLSearchParams(query).get('sortBy')
+        this.setState({ sortBy })
     }
 
     inputChange = ev => {
-        let {name,value} = ev.target;
+        let { name, value } = ev.target;
         if (name === 'filterBy') {
             return this.setState({ title: '', tag: '', filterBy: value }, () => this.onFilterBy())
         }
         if (name === 'sortBy') {
-            return this.setState(prevState=>({ sortBy: value,isShown:!prevState.isShown }), this.onFilterBy);
+            return this.setState(prevState => ({ sortBy: value, isShown: !prevState.isShown }), this.onFilterBy);
         }
         this.setState({ [this.state.filterBy]: value }, this.onFilterBy);
     };
@@ -33,7 +39,7 @@ export default class Filter extends Component {
     }
 
     render() {
-        const { filterBy, sortBy,isShown } = this.state
+        const { filterBy, sortBy, isShown } = this.state
         return (
             <div className="search-filter-container totally-center">
                 <div className="search-container flex">
@@ -46,10 +52,10 @@ export default class Filter extends Component {
                 </div>
                 <div className='flex'>
                     <div className="filter-container flex column ">
-                        <button htmlFor="sortBy" onClick={()=>this.setState(prevState=>({isShown:!prevState.isShown}))} className={isShown? "btn sort-by pointer sort-by-checked": "btn sort-by pointer"}>
+                        <button htmlFor="sortBy" onClick={() => this.setState(prevState => ({ isShown: !prevState.isShown }))} className={isShown ? "btn sort-by pointer sort-by-checked" : "btn sort-by pointer"}>
                             {sortBy !== '' ? sortBy === "ReleaseDate" ? "Release Date" : sortBy : "Sort by"}
-                            </button>
-                       {isShown && <div className="sort-by-inputs">
+                        </button>
+                        {isShown && <div className="sort-by-inputs">
                             <button className="pointer sort-by-button" name="sortBy" onClick={this.inputChange} value="ReleaseDate" >
                                 Release Date
                             </button>
@@ -63,7 +69,7 @@ export default class Filter extends Component {
                                 Price
                         </button>
                         </div>
-    }
+                        }
                     </div>
                     <button className="btn order-btn" onClick={this.changeOrder}><img alt="" src={up_down_arrows} /></button>
                 </div>

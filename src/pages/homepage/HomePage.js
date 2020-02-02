@@ -47,21 +47,21 @@ class HomePage extends Component {
         <div>
           <div className="flex  heading space-between">
           <p >Most Popular</p>
-          <Link to='/game?sortBy=popularity'>See More →</Link>
+          <Link to='/game?sortBy=Popularity'>See More →</Link>
           </div>
           <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={Popularity} />
         </div>
         <div>
         <div className="flex  heading space-between">
           <p >Recently Released</p>
-          <Link to='/game?sortBy=releaseDate'>See More →</Link>
+          <Link to='/game?sortBy=ReleaseDate'>See More →</Link>
           </div>
           <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={ReleaseDate} />
         </div>
         <div>
         <div className="flex  heading space-between">
           <p>Top Rated</p>
-          <Link to='/game?sortBy=rating'>See More →</Link>
+          <Link to='/game?sortBy=Rating'>See More →</Link>
           </div>
           <GameList isHomepage={true} user={this.props.user} onUpdateUser={this.onUpdateUser} games={Rating} />
         </div>
