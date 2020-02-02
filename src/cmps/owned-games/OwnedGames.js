@@ -45,13 +45,13 @@ class OwnedGames extends Component {
         return (
             <div className="flex column align-center container">
                 <Filter onFilterBy={this.onFilterBy}></Filter>
+                <GameList isProfile={true} history={this.props.history} games={games}></GameList>
                 {this.props.user ? this.props.user.userName ?
                     <div className='publish-button btn'>
                         <Link to='/edit'>Publish a game</Link>
                     </div>
                     : ''
                     : ''}
-                <GameList isProfile={true} history={this.props.history} games={games}></GameList>
             </div>
         )
     }

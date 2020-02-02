@@ -9,7 +9,7 @@
   }
   .publisher {
     font-size: 1.1rem;
-    font-family:montserrat-bold ,montserrat;
+    font-family: montserrat-bold, montserrat;
     min-width: 80px;
   }
   .published {
@@ -28,16 +28,15 @@
 
   .play-btn-container {
     border-radius: 8px;
-    padding: 12px 18px;
+    padding: 8px 14px;
     transition: background-color 0.3s;
     margin-inline-start: 5px;
     background-color: complement(#2052d0);
     border-radius: 8px;
-      font-size: 1.2rem;
-      font-family: montserrat;
-    &:hover{
-      background-color: #23862a;
+    font-size: 1.2rem;
+    font-family: montserrat;
+    &:hover {
+      background-color: lighten(complement(#2052d0), 10%);
     }
-   
   }
 }

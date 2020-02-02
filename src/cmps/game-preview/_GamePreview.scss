@@ -55,7 +55,7 @@
       font-family: montserrat;
     }
     &:hover{
-      background-color: darken(#0f9c14, 10%);
+      background-color: darken(complement(#2052d0), 15%);
     }
     img {
       width: 30px;
