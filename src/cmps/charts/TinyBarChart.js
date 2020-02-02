@@ -24,7 +24,7 @@ export default class Example extends Component {
             } else {
                 orderCount = 0
             }
-            data.push({ name: formatDate, income: this.props.game.price * orderCount })
+            data.push({ name: formatDate, sum: this.props.game.price * orderCount })
         }
         this.setState({ data })
     }
@@ -42,7 +42,7 @@ export default class Example extends Component {
                     margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
                     <XAxis dataKey="name" />
                     <Tooltip />
-                    <Bar stroke="#45667d" dataKey="Income" fill="#5c88a7" />
+                    <Bar stroke="#45667d" dataKey="sum" fill="#5c88a7" />
                 </BarChart>
             </div>
         );
